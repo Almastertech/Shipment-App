@@ -1,0 +1,58 @@
+import 'package:country_picker/country_picker.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'components/connectivity_banner.dart';
+import 'injection.dart';
+import 'l10n/app_localizations.dart';
+import 'localization/controllers/localization_controller.dart';
+import 'themes/app_themes.dart';
+import 'themes/theme_controller.dart';
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final localizationController = context.watch<LocalizationController>();
+    final themeController = context.watch<ThemeController>();
+    final router = getIt<GoRouter>();
+
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp.router(
+          onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+          debugShowCheckedModeBanner: false,
+          routerConfig: router,
+          locale:
+              DevicePreview.locale(context) ?? localizationController.locale,
+          supportedLocales: localizationController.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            CountryLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          themeMode: themeController.themeMode,
+          theme: AppThemes.light,
+          darkTheme: AppThemes.dark,
+          builder: (context, child) {
+            return DevicePreview.appBuilder(
+              context,
+              ConnectivityBanner(
+                child: child ?? const SizedBox.shrink(),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}

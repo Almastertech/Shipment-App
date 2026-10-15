@@ -1,0 +1,2311 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations_ar.dart';
+import 'app_localizations_en.dart';
+
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
+///
+/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'l10n/app_localizations.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// property.
+abstract class AppLocalizations {
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
+    Locale('en')
+  ];
+
+  /// No description provided for @appTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get appTitle;
+
+  /// No description provided for @onboardingProtectionLead.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable'**
+  String get onboardingProtectionLead;
+
+  /// No description provided for @onboardingProtectionHighlight.
+  ///
+  /// In en, this message translates to:
+  /// **'shipment protection'**
+  String get onboardingProtectionHighlight;
+
+  /// No description provided for @onboardingProtectionTail.
+  ///
+  /// In en, this message translates to:
+  /// **'before checkout'**
+  String get onboardingProtectionTail;
+
+  /// No description provided for @onboardingTrackingLead.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your'**
+  String get onboardingTrackingLead;
+
+  /// No description provided for @onboardingTrackingHighlight.
+  ///
+  /// In en, this message translates to:
+  /// **'shipment'**
+  String get onboardingTrackingHighlight;
+
+  /// No description provided for @onboardingTrackingTail.
+  ///
+  /// In en, this message translates to:
+  /// **'from dispatch to delivery'**
+  String get onboardingTrackingTail;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip intro'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get onboardingStart;
+
+  /// No description provided for @loginMethodHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help?'**
+  String get loginMethodHelp;
+
+  /// No description provided for @loginMethodHelpMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact our support team for help signing in.'**
+  String get loginMethodHelpMessage;
+
+  /// No description provided for @loginMethodTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How would you like to sign in?'**
+  String get loginMethodTitle;
+
+  /// No description provided for @loginMethodSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the same contact details you entered when you purchased shipment protection.'**
+  String get loginMethodSubtitle;
+
+  /// No description provided for @loginMethodPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get loginMethodPhone;
+
+  /// No description provided for @loginMethodPhoneDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll send a verification code to the phone number linked to your account.'**
+  String get loginMethodPhoneDescription;
+
+  /// No description provided for @loginMethodEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get loginMethodEmail;
+
+  /// No description provided for @loginMethodEmailDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll send a verification code to the email linked to your account.'**
+  String get loginMethodEmailDescription;
+
+  /// No description provided for @loginMethodContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get loginMethodContinue;
+
+  /// No description provided for @loginPhoneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number'**
+  String get loginPhoneTitle;
+
+  /// No description provided for @loginPhoneSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the phone number you entered when you purchased shipment protection.'**
+  String get loginPhoneSubtitle;
+
+  /// No description provided for @loginPhoneFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get loginPhoneFieldLabel;
+
+  /// No description provided for @loginPhoneFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'5X XXX XXXX'**
+  String get loginPhoneFieldHint;
+
+  /// No description provided for @loginPhoneFieldHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll send a one-time verification code to your number.'**
+  String get loginPhoneFieldHelper;
+
+  /// No description provided for @loginEmailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address'**
+  String get loginEmailTitle;
+
+  /// No description provided for @loginEmailSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the email address you entered when you purchased shipment protection.'**
+  String get loginEmailSubtitle;
+
+  /// No description provided for @loginEmailFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get loginEmailFieldLabel;
+
+  /// No description provided for @loginEmailFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'name@example.com'**
+  String get loginEmailFieldHint;
+
+  /// No description provided for @loginEmailFieldHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll send a one-time verification code to your email.'**
+  String get loginEmailFieldHelper;
+
+  /// No description provided for @loginPhoneInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number for this country.'**
+  String get loginPhoneInvalid;
+
+  /// No description provided for @otpDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to {contact}'**
+  String otpDestination(String contact);
+
+  /// No description provided for @countryPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a country code'**
+  String get countryPickerTitle;
+
+  /// No description provided for @countryPickerSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by country or calling code'**
+  String get countryPickerSearchHint;
+
+  /// No description provided for @countryPickerEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No countries found'**
+  String get countryPickerEmpty;
+
+  /// No description provided for @sampleFeatureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample Feature'**
+  String get sampleFeatureTitle;
+
+  /// No description provided for @sampleFeatureSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reusable list, details, and state handling'**
+  String get sampleFeatureSubtitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search items'**
+  String get searchHint;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @noItemsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No items found'**
+  String get noItemsTitle;
+
+  /// No description provided for @noItemsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Try changing the search query or pull to refresh.'**
+  String get noItemsDescription;
+
+  /// No description provided for @genericError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get genericError;
+
+  /// No description provided for @detailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get detailsTitle;
+
+  /// No description provided for @changeTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle theme'**
+  String get changeTheme;
+
+  /// No description provided for @switchLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch language'**
+  String get switchLanguage;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @loginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get loginTitle;
+
+  /// No description provided for @loginSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a starter login screen. Replace it with your domain auth flow.'**
+  String get loginSubtitle;
+
+  /// No description provided for @signInDemo.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with demo account'**
+  String get signInDemo;
+
+  /// No description provided for @openOtpDemo.
+  ///
+  /// In en, this message translates to:
+  /// **'Open OTP demo'**
+  String get openOtpDemo;
+
+  /// No description provided for @otpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter verification code'**
+  String get otpTitle;
+
+  /// No description provided for @otpSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to your number'**
+  String get otpSubtitle;
+
+  /// No description provided for @otpHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get otpHint;
+
+  /// No description provided for @otpResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get otpResend;
+
+  /// No description provided for @otpResendCountdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code in {time}'**
+  String otpResendCountdown(String time);
+
+  /// No description provided for @otpVerificationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The code is incorrect. Try again.'**
+  String get otpVerificationFailed;
+
+  /// No description provided for @otpSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification successful'**
+  String get otpSuccessTitle;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome. Your shipments are waiting.'**
+  String get welcomeTitle;
+
+  /// No description provided for @welcomeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We found your shipment protection. You can now follow its details and everything related to it from one place.'**
+  String get welcomeDescription;
+
+  /// No description provided for @welcomeContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Haseen'**
+  String get welcomeContinue;
+
+  /// No description provided for @homeGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening, {name} 👋'**
+  String homeGreeting(String name);
+
+  /// No description provided for @homeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your shipments today'**
+  String get homeTitle;
+
+  /// No description provided for @homeActiveShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Your active shipments'**
+  String get homeActiveShipments;
+
+  /// No description provided for @myShipmentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage for damage, loss and delays on merchant shipments'**
+  String get myShipmentsSubtitle;
+
+  /// No description provided for @myShipmentsActiveTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Active 2'**
+  String get myShipmentsActiveTab;
+
+  /// No description provided for @myShipmentsDeliveredTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered 1'**
+  String get myShipmentsDeliveredTab;
+
+  /// No description provided for @homeActiveClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Your active claims'**
+  String get homeActiveClaims;
+
+  /// No description provided for @homeSeeAllShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get homeSeeAllShipments;
+
+  /// No description provided for @homeShipmentMerchant.
+  ///
+  /// In en, this message translates to:
+  /// **'Noon store'**
+  String get homeShipmentMerchant;
+
+  /// No description provided for @homeShipmentProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart watch - Gold Edition'**
+  String get homeShipmentProduct;
+
+  /// No description provided for @homeShipmentPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 480'**
+  String get homeShipmentPrice;
+
+  /// No description provided for @homeShipmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shipment is on its way'**
+  String get homeShipmentTitle;
+
+  /// No description provided for @homeShipmentStepOrdered.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed'**
+  String get homeShipmentStepOrdered;
+
+  /// No description provided for @homeShipmentStepInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'In transit'**
+  String get homeShipmentStepInTransit;
+
+  /// No description provided for @homeShipmentStepDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get homeShipmentStepDelivered;
+
+  /// No description provided for @homeShipmentView.
+  ///
+  /// In en, this message translates to:
+  /// **'View shipment'**
+  String get homeShipmentView;
+
+  /// No description provided for @homeShipmentProtection.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected by Haseen'**
+  String get homeShipmentProtection;
+
+  /// No description provided for @homeShipmentDeliveryStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'In transit'**
+  String get homeShipmentDeliveryStatus;
+
+  /// No description provided for @homeShipmentExpectedDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated delivery'**
+  String get homeShipmentExpectedDelivery;
+
+  /// No description provided for @homeShipmentExpectedDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday, October 1'**
+  String get homeShipmentExpectedDate;
+
+  /// No description provided for @homeShipmentTrackingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking number'**
+  String get homeShipmentTrackingLabel;
+
+  /// No description provided for @homeShipmentTrackingNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'#HS-2048'**
+  String get homeShipmentTrackingNumber;
+
+  /// No description provided for @homeShipmentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View details'**
+  String get homeShipmentDetails;
+
+  /// No description provided for @shipmentDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment details'**
+  String get shipmentDetailsTitle;
+
+  /// No description provided for @shipmentProtectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment protection'**
+  String get shipmentProtectionTitle;
+
+  /// No description provided for @shipmentProtectionCoveredBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected by Haseen'**
+  String get shipmentProtectionCoveredBy;
+
+  /// No description provided for @shipmentProtectionValueLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage value'**
+  String get shipmentProtectionValueLabel;
+
+  /// No description provided for @shipmentProtectionValue.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 480'**
+  String get shipmentProtectionValue;
+
+  /// No description provided for @shipmentProtectionStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get shipmentProtectionStatusLabel;
+
+  /// No description provided for @shipmentProtectionStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get shipmentProtectionStatus;
+
+  /// No description provided for @shipmentProtectionRemainingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim window (12 days)'**
+  String get shipmentProtectionRemainingLabel;
+
+  /// No description provided for @shipmentProtectionRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Not activated'**
+  String get shipmentProtectionRemaining;
+
+  /// No description provided for @shipmentProtectionClaimAction.
+  ///
+  /// In en, this message translates to:
+  /// **'File a claim'**
+  String get shipmentProtectionClaimAction;
+
+  /// No description provided for @shipmentTimelineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment journey'**
+  String get shipmentTimelineTitle;
+
+  /// No description provided for @shipmentTimelineOrdered.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed'**
+  String get shipmentTimelineOrdered;
+
+  /// No description provided for @shipmentTimelineShipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipped'**
+  String get shipmentTimelineShipped;
+
+  /// No description provided for @shipmentTimelineInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'In transit'**
+  String get shipmentTimelineInTransit;
+
+  /// No description provided for @shipmentTimelineDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get shipmentTimelineDelivered;
+
+  /// No description provided for @shipmentTimelineOrderDate.
+  ///
+  /// In en, this message translates to:
+  /// **'October 1'**
+  String get shipmentTimelineOrderDate;
+
+  /// No description provided for @shipmentDetailsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment information'**
+  String get shipmentDetailsSectionTitle;
+
+  /// No description provided for @shipmentDetailsExpectedDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated delivery'**
+  String get shipmentDetailsExpectedDelivery;
+
+  /// No description provided for @shipmentDetailsExpectedDeliveryValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Noon store'**
+  String get shipmentDetailsExpectedDeliveryValue;
+
+  /// No description provided for @shipmentDetailsOrderDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Order date'**
+  String get shipmentDetailsOrderDate;
+
+  /// No description provided for @shipmentDetailsOrderDateValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday, October 1'**
+  String get shipmentDetailsOrderDateValue;
+
+  /// No description provided for @shipmentDetailsProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get shipmentDetailsProduct;
+
+  /// No description provided for @shipmentDetailsProductValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Wireless Pro earbuds'**
+  String get shipmentDetailsProductValue;
+
+  /// No description provided for @shipmentDetailsAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery address'**
+  String get shipmentDetailsAddress;
+
+  /// No description provided for @shipmentDetailsAddressValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Yasmin District, Riyadh'**
+  String get shipmentDetailsAddressValue;
+
+  /// No description provided for @shipmentDetailsQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get shipmentDetailsQuantity;
+
+  /// No description provided for @shipmentDetailsQuantityValue.
+  ///
+  /// In en, this message translates to:
+  /// **'1'**
+  String get shipmentDetailsQuantityValue;
+
+  /// No description provided for @homeQuickGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick guide'**
+  String get homeQuickGuide;
+
+  /// No description provided for @homeQuickGuideAction.
+  ///
+  /// In en, this message translates to:
+  /// **'How does protection work?'**
+  String get homeQuickGuideAction;
+
+  /// No description provided for @homeRequestNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'HS-2048#'**
+  String get homeRequestNumber;
+
+  /// No description provided for @homeRequestType.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim'**
+  String get homeRequestType;
+
+  /// No description provided for @homeRequestRemainingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Within 3 days'**
+  String get homeRequestRemainingTime;
+
+  /// No description provided for @homeRequestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your claim is under review'**
+  String get homeRequestTitle;
+
+  /// No description provided for @homeRequestDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Our team is reviewing your claim for a men\'s fragrance from Nice One. We will let you know as soon as a decision is made.'**
+  String get homeRequestDescription;
+
+  /// No description provided for @homeRequestStepReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get homeRequestStepReceived;
+
+  /// No description provided for @homeRequestStepReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get homeRequestStepReview;
+
+  /// No description provided for @homeRequestStepDecision.
+  ///
+  /// In en, this message translates to:
+  /// **'Decision'**
+  String get homeRequestStepDecision;
+
+  /// No description provided for @homeRequestStepCompensation.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation'**
+  String get homeRequestStepCompensation;
+
+  /// No description provided for @homeRequestAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim value:'**
+  String get homeRequestAmountLabel;
+
+  /// No description provided for @homeRequestAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 480'**
+  String get homeRequestAmount;
+
+  /// No description provided for @homeRequestAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Track claim'**
+  String get homeRequestAction;
+
+  /// No description provided for @homeHowItWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'How it works'**
+  String get homeHowItWorks;
+
+  /// No description provided for @mainBannerGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Haseen 👋'**
+  String get mainBannerGreeting;
+
+  /// No description provided for @mainBannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your purchases are protected with Haseen'**
+  String get mainBannerTitle;
+
+  /// No description provided for @mainBannerDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'When you shop with a partner store, your shipment appears here automatically. Protected from order to doorstep.'**
+  String get mainBannerDescription;
+
+  /// No description provided for @mainBannerAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore partner stores'**
+  String get mainBannerAction;
+
+  /// No description provided for @homeStepOneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Step one'**
+  String get homeStepOneLabel;
+
+  /// No description provided for @homeStepOneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop from a partner store'**
+  String get homeStepOneTitle;
+
+  /// No description provided for @homeStepOneDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Haseen protection at checkout.'**
+  String get homeStepOneDescription;
+
+  /// No description provided for @homeStepTwoLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Step two'**
+  String get homeStepTwoLabel;
+
+  /// No description provided for @homeStepTwoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shipment is protected automatically'**
+  String get homeStepTwoTitle;
+
+  /// No description provided for @homeStepTwoDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Track its status here, moment by moment.'**
+  String get homeStepTwoDescription;
+
+  /// No description provided for @homeStepThreeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Step three'**
+  String get homeStepThreeLabel;
+
+  /// No description provided for @homeStepThreeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Make a claim in a few steps'**
+  String get homeStepThreeTitle;
+
+  /// No description provided for @homeStepThreeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'If it is damaged or lost, we will help quickly.'**
+  String get homeStepThreeDescription;
+
+  /// No description provided for @secondaryBannerEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'How does protection work?'**
+  String get secondaryBannerEyebrow;
+
+  /// No description provided for @secondaryBannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get to know Haseen shipment protection'**
+  String get secondaryBannerTitle;
+
+  /// No description provided for @secondaryBannerDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage for damage, loss and delays on eligible merchant shipments.'**
+  String get secondaryBannerDescription;
+
+  /// No description provided for @secondaryBannerAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit the blog'**
+  String get secondaryBannerAction;
+
+  /// No description provided for @bottomNavHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get bottomNavHome;
+
+  /// No description provided for @bottomNavShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'My shipments'**
+  String get bottomNavShipments;
+
+  /// No description provided for @bottomNavOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get bottomNavOrders;
+
+  /// No description provided for @bottomNavStores.
+  ///
+  /// In en, this message translates to:
+  /// **'Merchant'**
+  String get bottomNavStores;
+
+  /// No description provided for @bottomNavProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get bottomNavProfile;
+
+  /// No description provided for @otpPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Your verification code is valid for a limited time. Never share it with anyone.'**
+  String get otpPrivacyNotice;
+
+  /// No description provided for @otpChangePhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Change phone number'**
+  String get otpChangePhone;
+
+  /// No description provided for @otpChangeEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Change email address'**
+  String get otpChangeEmail;
+
+  /// No description provided for @startAutofill.
+  ///
+  /// In en, this message translates to:
+  /// **'Start SMS autofill'**
+  String get startAutofill;
+
+  /// No description provided for @verifyOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify code'**
+  String get verifyOtp;
+
+  /// No description provided for @otpInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid code'**
+  String get otpInvalid;
+
+  /// No description provided for @otpVerifiedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Code captured successfully.'**
+  String get otpVerifiedMessage;
+
+  /// No description provided for @otpAutofillUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Autofill unavailable on this device.'**
+  String get otpAutofillUnavailable;
+
+  /// No description provided for @itemDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get itemDetails;
+
+  /// No description provided for @loadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
+
+  /// No description provided for @continueAsGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as guest'**
+  String get continueAsGuest;
+
+  /// No description provided for @offlineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You are offline'**
+  String get offlineBanner;
+
+  /// No description provided for @protectedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected action'**
+  String get protectedAction;
+
+  /// No description provided for @authRequiredAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in to perform this action.'**
+  String get authRequiredAction;
+
+  /// No description provided for @protectedActionCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected action completed for item {itemId}.'**
+  String protectedActionCompleted(String itemId);
+
+  /// No description provided for @promoBannerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Limited offer: free delivery on eligible orders.'**
+  String get promoBannerMessage;
+
+  /// No description provided for @clearSearchHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear history'**
+  String get clearSearchHistory;
+
+  /// No description provided for @recentlyViewedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recently viewed item ids'**
+  String get recentlyViewedTitle;
+
+  /// No description provided for @refreshSkippedWhileLoadingMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh is temporarily disabled while loading more items.'**
+  String get refreshSkippedWhileLoadingMore;
+
+  /// No description provided for @uiKitShowcase.
+  ///
+  /// In en, this message translates to:
+  /// **'UI Kit Showcase'**
+  String get uiKitShowcase;
+
+  /// No description provided for @apiMonitor.
+  ///
+  /// In en, this message translates to:
+  /// **'API Monitor'**
+  String get apiMonitor;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsMarkAllRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all read'**
+  String get notificationsMarkAllRead;
+
+  /// No description provided for @notificationsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet.'**
+  String get notificationsEmpty;
+
+  /// No description provided for @apiMonitorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'API Monitor'**
+  String get apiMonitorTitle;
+
+  /// No description provided for @apiMonitorRecentRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Requests'**
+  String get apiMonitorRecentRequests;
+
+  /// No description provided for @apiMonitorSlowestRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Slowest Requests'**
+  String get apiMonitorSlowestRequests;
+
+  /// No description provided for @apiMonitorFailedRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed Requests'**
+  String get apiMonitorFailedRequests;
+
+  /// No description provided for @apiMonitorNoRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No records yet.'**
+  String get apiMonitorNoRecords;
+
+  /// No description provided for @navigationErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Navigation Error'**
+  String get navigationErrorTitle;
+
+  /// No description provided for @routeMissingItemId.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing item id in route.'**
+  String get routeMissingItemId;
+
+  /// No description provided for @errorOfflineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get errorOfflineTitle;
+
+  /// No description provided for @errorOfflineMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again.'**
+  String get errorOfflineMessage;
+
+  /// No description provided for @errorUnauthorizedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in required'**
+  String get errorUnauthorizedTitle;
+
+  /// No description provided for @errorUnauthorizedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in to continue.'**
+  String get errorUnauthorizedMessage;
+
+  /// No description provided for @errorForbiddenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Access denied'**
+  String get errorForbiddenTitle;
+
+  /// No description provided for @errorForbiddenMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission for this action.'**
+  String get errorForbiddenMessage;
+
+  /// No description provided for @errorNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not found'**
+  String get errorNotFoundTitle;
+
+  /// No description provided for @errorNotFoundMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested data was not found.'**
+  String get errorNotFoundMessage;
+
+  /// No description provided for @errorValidationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid input'**
+  String get errorValidationTitle;
+
+  /// No description provided for @errorValidationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please review your input and try again.'**
+  String get errorValidationMessage;
+
+  /// No description provided for @errorServerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Server unavailable'**
+  String get errorServerTitle;
+
+  /// No description provided for @errorServerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We are having trouble right now. Please try again later.'**
+  String get errorServerMessage;
+
+  /// No description provided for @errorGenericTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get errorGenericTitle;
+
+  /// No description provided for @errorGenericMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again.'**
+  String get errorGenericMessage;
+
+  /// No description provided for @validationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required.'**
+  String get validationRequired;
+
+  /// No description provided for @validationEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address.'**
+  String get validationEmail;
+
+  /// No description provided for @validationPasswordWeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must include upper/lower letters and numbers.'**
+  String get validationPasswordWeak;
+
+  /// No description provided for @validationMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at least {min} characters.'**
+  String validationMinLength(int min);
+
+  /// No description provided for @validationMaxLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at most {max} characters.'**
+  String validationMaxLength(int max);
+
+  /// No description provided for @validationPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get validationPhone;
+
+  /// No description provided for @validationNumericRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Value must be between {min} and {max}.'**
+  String validationNumericRange(String min, String max);
+
+  /// No description provided for @validationMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Values do not match.'**
+  String get validationMismatch;
+
+  /// No description provided for @uiKitLocaleSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Localization & Direction'**
+  String get uiKitLocaleSectionTitle;
+
+  /// No description provided for @uiKitLocaleSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview locale and text direction behavior'**
+  String get uiKitLocaleSectionSubtitle;
+
+  /// No description provided for @uiKitLocaleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Locale'**
+  String get uiKitLocaleLabel;
+
+  /// No description provided for @uiKitDirectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Direction'**
+  String get uiKitDirectionLabel;
+
+  /// No description provided for @uiKitDirectionRtl.
+  ///
+  /// In en, this message translates to:
+  /// **'RTL'**
+  String get uiKitDirectionRtl;
+
+  /// No description provided for @uiKitDirectionLtr.
+  ///
+  /// In en, this message translates to:
+  /// **'LTR'**
+  String get uiKitDirectionLtr;
+
+  /// No description provided for @uiKitStorybookControlsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Storybook Controls'**
+  String get uiKitStorybookControlsTitle;
+
+  /// No description provided for @uiKitStorybookControlsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview components under different viewport/text-direction settings'**
+  String get uiKitStorybookControlsSubtitle;
+
+  /// No description provided for @uiKitViewportLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Viewport'**
+  String get uiKitViewportLabel;
+
+  /// No description provided for @uiKitViewportAdaptive.
+  ///
+  /// In en, this message translates to:
+  /// **'Adaptive'**
+  String get uiKitViewportAdaptive;
+
+  /// No description provided for @uiKitViewportPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get uiKitViewportPhone;
+
+  /// No description provided for @uiKitViewportTablet.
+  ///
+  /// In en, this message translates to:
+  /// **'Tablet'**
+  String get uiKitViewportTablet;
+
+  /// No description provided for @uiKitViewportDesktop.
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop'**
+  String get uiKitViewportDesktop;
+
+  /// No description provided for @uiKitTextScaleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Text scale'**
+  String get uiKitTextScaleLabel;
+
+  /// No description provided for @uiKitRtlPreviewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Force RTL preview'**
+  String get uiKitRtlPreviewLabel;
+
+  /// No description provided for @uiKitRtlPreviewHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this to test mirrored layouts without changing app language'**
+  String get uiKitRtlPreviewHelp;
+
+  /// No description provided for @uiKitButtonsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttons'**
+  String get uiKitButtonsSectionTitle;
+
+  /// No description provided for @uiKitButtonsSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary, secondary, danger, link, and icon buttons'**
+  String get uiKitButtonsSectionSubtitle;
+
+  /// No description provided for @uiKitPrimaryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary'**
+  String get uiKitPrimaryAction;
+
+  /// No description provided for @uiKitLoadingAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get uiKitLoadingAction;
+
+  /// No description provided for @uiKitSecondaryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get uiKitSecondaryAction;
+
+  /// No description provided for @uiKitTextLinkAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Text link'**
+  String get uiKitTextLinkAction;
+
+  /// No description provided for @uiKitLikeTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Like'**
+  String get uiKitLikeTooltip;
+
+  /// No description provided for @uiKitInputsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inputs'**
+  String get uiKitInputsSectionTitle;
+
+  /// No description provided for @uiKitInputsSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Text, password, search, and dropdown fields'**
+  String get uiKitInputsSectionSubtitle;
+
+  /// No description provided for @uiKitNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get uiKitNameLabel;
+
+  /// No description provided for @uiKitNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name'**
+  String get uiKitNameHint;
+
+  /// No description provided for @uiKitPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get uiKitPasswordLabel;
+
+  /// No description provided for @uiKitPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get uiKitPasswordHint;
+
+  /// No description provided for @uiKitShowPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get uiKitShowPassword;
+
+  /// No description provided for @uiKitHidePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get uiKitHidePassword;
+
+  /// No description provided for @uiKitClearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get uiKitClearSearch;
+
+  /// No description provided for @uiKitRoleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get uiKitRoleLabel;
+
+  /// No description provided for @uiKitRoleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select role'**
+  String get uiKitRoleHint;
+
+  /// No description provided for @uiKitRoleUser.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get uiKitRoleUser;
+
+  /// No description provided for @uiKitRoleAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get uiKitRoleAdmin;
+
+  /// No description provided for @uiKitRoleReviewer.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewer'**
+  String get uiKitRoleReviewer;
+
+  /// No description provided for @uiKitStatesSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'State Surfaces'**
+  String get uiKitStatesSectionTitle;
+
+  /// No description provided for @uiKitStatesSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview loading/empty/error/content states'**
+  String get uiKitStatesSectionSubtitle;
+
+  /// No description provided for @uiKitStateLoadingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get uiKitStateLoadingLabel;
+
+  /// No description provided for @uiKitStateEmptyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty'**
+  String get uiKitStateEmptyLabel;
+
+  /// No description provided for @uiKitStateErrorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get uiKitStateErrorLabel;
+
+  /// No description provided for @uiKitStateContentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get uiKitStateContentLabel;
+
+  /// No description provided for @uiKitStateContentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Content state'**
+  String get uiKitStateContentTitle;
+
+  /// No description provided for @uiKitStateContentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the normal content presentation state.'**
+  String get uiKitStateContentMessage;
+
+  /// No description provided for @uiKitMediaSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Media & Skeletons'**
+  String get uiKitMediaSectionTitle;
+
+  /// No description provided for @uiKitMediaSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Network image wrapper and loading placeholders'**
+  String get uiKitMediaSectionSubtitle;
+
+  /// No description provided for @uiKitNetworkImageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'AppNetworkImage'**
+  String get uiKitNetworkImageLabel;
+
+  /// No description provided for @uiKitSkeletonCardLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Card skeleton'**
+  String get uiKitSkeletonCardLabel;
+
+  /// No description provided for @uiKitSkeletonListLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'List skeleton'**
+  String get uiKitSkeletonListLabel;
+
+  /// No description provided for @uiKitSkeletonDetailsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Details skeleton'**
+  String get uiKitSkeletonDetailsLabel;
+
+  /// No description provided for @uiKitLayoutSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout Components'**
+  String get uiKitLayoutSectionTitle;
+
+  /// No description provided for @uiKitLayoutSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Card, list tile, and divider patterns'**
+  String get uiKitLayoutSectionSubtitle;
+
+  /// No description provided for @uiKitListItemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AppListTile Item'**
+  String get uiKitListItemTitle;
+
+  /// No description provided for @uiKitListItemSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reusable list tile with theme defaults'**
+  String get uiKitListItemSubtitle;
+
+  /// No description provided for @uiKitThemeTokensTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme tokens applied'**
+  String get uiKitThemeTokensTitle;
+
+  /// No description provided for @uiKitThemeTokensSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Spacing and radius from centralized tokens'**
+  String get uiKitThemeTokensSubtitle;
+
+  /// No description provided for @uiKitFeedbackSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback & Navigation'**
+  String get uiKitFeedbackSectionTitle;
+
+  /// No description provided for @uiKitFeedbackSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dialogs, sheets, toasts, and bottom navigation template'**
+  String get uiKitFeedbackSectionSubtitle;
+
+  /// No description provided for @uiKitShowToastAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show toast'**
+  String get uiKitShowToastAction;
+
+  /// No description provided for @uiKitShowDialogAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show confirm dialog'**
+  String get uiKitShowDialogAction;
+
+  /// No description provided for @uiKitShowBottomSheetAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show bottom sheet'**
+  String get uiKitShowBottomSheetAction;
+
+  /// No description provided for @uiKitShowSelectionSheetAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show selection sheet'**
+  String get uiKitShowSelectionSheetAction;
+
+  /// No description provided for @uiKitShowConfirmationSheetAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show confirmation sheet'**
+  String get uiKitShowConfirmationSheetAction;
+
+  /// No description provided for @uiKitOpenBottomNavDemoAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Open bottom-nav demo'**
+  String get uiKitOpenBottomNavDemoAction;
+
+  /// No description provided for @uiKitBottomNavTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom Navigation Template'**
+  String get uiKitBottomNavTitle;
+
+  /// No description provided for @uiKitHomeTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get uiKitHomeTab;
+
+  /// No description provided for @uiKitOrdersTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get uiKitOrdersTab;
+
+  /// No description provided for @uiKitProfileTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get uiKitProfileTab;
+
+  /// No description provided for @uiKitStatusSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Status Banners'**
+  String get uiKitStatusSectionTitle;
+
+  /// No description provided for @uiKitStatusSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inline banners for success/warning/info'**
+  String get uiKitStatusSectionSubtitle;
+
+  /// No description provided for @uiKitSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get uiKitSuccessTitle;
+
+  /// No description provided for @uiKitSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully.'**
+  String get uiKitSuccessMessage;
+
+  /// No description provided for @uiKitWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get uiKitWarningTitle;
+
+  /// No description provided for @uiKitWarningMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Using stale cached data while offline.'**
+  String get uiKitWarningMessage;
+
+  /// No description provided for @uiKitInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get uiKitInfoTitle;
+
+  /// No description provided for @uiKitInfoMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap action to open informational bottom sheet.'**
+  String get uiKitInfoMessage;
+
+  /// No description provided for @uiKitLearnMoreAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn more'**
+  String get uiKitLearnMoreAction;
+
+  /// No description provided for @uiKitInfoSheetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a reusable inline status banner.'**
+  String get uiKitInfoSheetMessage;
+
+  /// No description provided for @uiKitPermissionsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Permissions'**
+  String get uiKitPermissionsSectionTitle;
+
+  /// No description provided for @uiKitPermissionsSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Graceful behavior when providers are unconfigured'**
+  String get uiKitPermissionsSectionSubtitle;
+
+  /// No description provided for @uiKitPermissionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission'**
+  String get uiKitPermissionLabel;
+
+  /// No description provided for @uiKitCheckAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get uiKitCheckAction;
+
+  /// No description provided for @uiKitRequestAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Request'**
+  String get uiKitRequestAction;
+
+  /// No description provided for @uiKitNoDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'No details.'**
+  String get uiKitNoDetails;
+
+  /// No description provided for @uiKitPermissionResultPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission result'**
+  String get uiKitPermissionResultPrefix;
+
+  /// No description provided for @uiKitBottomSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom Sheet Title'**
+  String get uiKitBottomSheetTitle;
+
+  /// No description provided for @uiKitBottomSheetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a reusable bottom sheet wrapper.'**
+  String get uiKitBottomSheetMessage;
+
+  /// No description provided for @uiKitConfirmActionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Action'**
+  String get uiKitConfirmActionTitle;
+
+  /// No description provided for @uiKitConfirmActionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This dialog is part of the shared UI kit.'**
+  String get uiKitConfirmActionMessage;
+
+  /// No description provided for @uiKitSelectionSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose one action'**
+  String get uiKitSelectionSheetTitle;
+
+  /// No description provided for @uiKitArchiveAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get uiKitArchiveAction;
+
+  /// No description provided for @uiKitPinAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Pin'**
+  String get uiKitPinAction;
+
+  /// No description provided for @uiKitDeleteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get uiKitDeleteAction;
+
+  /// No description provided for @uiKitSelectedPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected'**
+  String get uiKitSelectedPrefix;
+
+  /// No description provided for @uiKitDestructiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm destructive action'**
+  String get uiKitDestructiveTitle;
+
+  /// No description provided for @uiKitDestructiveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get uiKitDestructiveMessage;
+
+  /// No description provided for @openDemandsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'File a claim'**
+  String get openDemandsTitle;
+
+  /// No description provided for @openDemandsStepLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get openDemandsStepLocation;
+
+  /// No description provided for @openDemandsStepEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence'**
+  String get openDemandsStepEvidence;
+
+  /// No description provided for @openDemandsStepReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get openDemandsStepReview;
+
+  /// No description provided for @openDemandsLocationBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable location'**
+  String get openDemandsLocationBadge;
+
+  /// No description provided for @openDemandsLocationHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'We need your current location'**
+  String get openDemandsLocationHeading;
+
+  /// No description provided for @openDemandsLocationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your location helps us verify the claim details and supports the review team when assessing your claim. It is used only for this claim.'**
+  String get openDemandsLocationDescription;
+
+  /// No description provided for @openDemandsAllowLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow location'**
+  String get openDemandsAllowLocation;
+
+  /// No description provided for @openDemandsNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get openDemandsNotNow;
+
+  /// No description provided for @openDemandsLocationGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission granted.'**
+  String get openDemandsLocationGranted;
+
+  /// No description provided for @openDemandsLocationDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was not granted.'**
+  String get openDemandsLocationDenied;
+
+  /// No description provided for @openDemandsLocationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Location access is not configured on this device yet.'**
+  String get openDemandsLocationUnavailable;
+
+  /// No description provided for @openDemandsLocationDisabledBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is disabled'**
+  String get openDemandsLocationDisabledBadge;
+
+  /// No description provided for @openDemandsLocationDeclinedHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sharing your location may affect your claim assessment'**
+  String get openDemandsLocationDeclinedHeading;
+
+  /// No description provided for @openDemandsLocationDeclinedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Location information helps clarify the circumstances of your claim. Without it, the Haseen review team may have less information, but you can still complete your claim normally.'**
+  String get openDemandsLocationDeclinedDescription;
+
+  /// No description provided for @openDemandsContinueWithoutLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue without location'**
+  String get openDemandsContinueWithoutLocation;
+
+  /// No description provided for @demandDetailsLocationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Location unavailable; noted in your claim'**
+  String get demandDetailsLocationUnavailable;
+
+  /// No description provided for @demandDetailsLocationAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Location recorded for this claim'**
+  String get demandDetailsLocationAvailable;
+
+  /// No description provided for @demandDetailsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Let’s document the shipment condition'**
+  String get demandDetailsHeading;
+
+  /// No description provided for @demandDetailsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A few photos and a short video help us document the shipment clearly. We’ll guide you through each step.'**
+  String get demandDetailsDescription;
+
+  /// No description provided for @demandDetailsEvidenceDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Label and documents'**
+  String get demandDetailsEvidenceDocuments;
+
+  /// No description provided for @demandDetailsEvidencePackaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging and item'**
+  String get demandDetailsEvidencePackaging;
+
+  /// No description provided for @demandDetailsEvidenceDamageVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Short video of the damaged areas'**
+  String get demandDetailsEvidenceDamageVideo;
+
+  /// No description provided for @demandDetailsOnePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'1 photo'**
+  String get demandDetailsOnePhoto;
+
+  /// No description provided for @demandDetailsAboutTenSeconds.
+  ///
+  /// In en, this message translates to:
+  /// **'About 10 seconds'**
+  String get demandDetailsAboutTenSeconds;
+
+  /// No description provided for @demandDetailsOptionalImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional photos (optional*)'**
+  String get demandDetailsOptionalImages;
+
+  /// No description provided for @demandDetailsAddImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a photo'**
+  String get demandDetailsAddImage;
+
+  /// No description provided for @demandDetailsStartDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Start documentation'**
+  String get demandDetailsStartDocumentation;
+
+  /// No description provided for @demandDetailsContinueDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue documentation'**
+  String get demandDetailsContinueDocumentation;
+
+  /// No description provided for @demandDetailsNextReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: Review claim'**
+  String get demandDetailsNextReview;
+
+  /// No description provided for @demandDetailsRetake.
+  ///
+  /// In en, this message translates to:
+  /// **'Retake'**
+  String get demandDetailsRetake;
+
+  /// No description provided for @demandDetailsReviewComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim review will be available when the claims flow is enabled.'**
+  String get demandDetailsReviewComingSoon;
+
+  /// No description provided for @demandDetailsUploadComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments will be available when claim uploads are enabled.'**
+  String get demandDetailsUploadComingSoon;
+
+  /// No description provided for @cameraPermissionHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'We need camera access'**
+  String get cameraPermissionHeading;
+
+  /// No description provided for @cameraPermissionDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We only use the camera to document the shipment condition for your claim. Enable camera access in your app or device settings, then try again.'**
+  String get cameraPermissionDescription;
+
+  /// No description provided for @cameraPermissionDeniedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera access was denied. Enable it in app settings, then return and try again.'**
+  String get cameraPermissionDeniedDescription;
+
+  /// No description provided for @cameraCaptureFailedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t open the camera. Check that it is available and try again.'**
+  String get cameraCaptureFailedDescription;
+
+  /// No description provided for @cameraPermissionAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow camera'**
+  String get cameraPermissionAllow;
+
+  /// No description provided for @cameraPermissionOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get cameraPermissionOpenSettings;
+
+  /// No description provided for @cameraGuideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Photograph the label and documents'**
+  String get cameraGuideTitle;
+
+  /// No description provided for @cameraGuideQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What to capture?'**
+  String get cameraGuideQuestion;
+
+  /// No description provided for @cameraGuideDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment label, tracking number, and any included documents'**
+  String get cameraGuideDocuments;
+
+  /// No description provided for @cameraGuidePackaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging and product from clear angles'**
+  String get cameraGuidePackaging;
+
+  /// No description provided for @cameraGuideDamage.
+  ///
+  /// In en, this message translates to:
+  /// **'A short video showing the damaged areas'**
+  String get cameraGuideDamage;
+
+  /// No description provided for @cameraGuideReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get cameraGuideReady;
+
+  /// No description provided for @cameraCapture.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture'**
+  String get cameraCapture;
+
+  /// No description provided for @cameraFlash.
+  ///
+  /// In en, this message translates to:
+  /// **'Flash'**
+  String get cameraFlash;
+
+  /// No description provided for @cameraSwitch.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch camera'**
+  String get cameraSwitch;
+
+  /// No description provided for @cameraRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording'**
+  String get cameraRecording;
+
+  /// No description provided for @cameraCaptureError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t start the camera. Check permission and try again.'**
+  String get cameraCaptureError;
+
+  /// No description provided for @cameraRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get cameraRetry;
+
+  /// No description provided for @cameraPhotoLooksClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo looks clear ✓'**
+  String get cameraPhotoLooksClear;
+
+  /// No description provided for @cameraUsePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Use photo'**
+  String get cameraUsePhoto;
+
+  /// No description provided for @cameraRetakePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Retake photo'**
+  String get cameraRetakePhoto;
+
+  /// No description provided for @cameraExitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to exit?'**
+  String get cameraExitTitle;
+
+  /// No description provided for @cameraExitDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'The evidence and information you added to this claim won\'t be saved. You\'ll need to start again later.'**
+  String get cameraExitDescription;
+
+  /// No description provided for @cameraContinueClaim.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue claim'**
+  String get cameraContinueClaim;
+
+  /// No description provided for @cameraExitClaim.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get cameraExitClaim;
+
+  /// No description provided for @cameraVideoLooksClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Video looks clear ✓'**
+  String get cameraVideoLooksClear;
+
+  /// No description provided for @cameraUseVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Use video'**
+  String get cameraUseVideo;
+
+  /// No description provided for @cameraRetakeVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Retake video'**
+  String get cameraRetakeVideo;
+
+  /// No description provided for @cameraPhotoCaptured.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo captured and added to the claim.'**
+  String get cameraPhotoCaptured;
+
+  /// No description provided for @navigationBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get navigationBack;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+}
+
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
+  }
+
+  throw FlutterError(
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
+}
