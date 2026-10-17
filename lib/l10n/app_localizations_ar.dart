@@ -482,6 +482,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeRequestAction => 'كمل المطالبة';
 
   @override
+  String get homeSecondaryRequestEta => 'خلال ٢-٣ أيام';
+
+  @override
+  String get homeSecondaryRequestDescription =>
+      'نتابع صورة وتفاصيل مطالبتك، وسنخبرك بأي تحديث قريبًا.';
+
+  @override
+  String get homeSecondaryRequestAmountLabel => 'قيمة الطلب';
+
+  @override
+  String get homeSecondaryRequestAction => 'تابع المطالبة';
+
+  @override
   String get homeHowItWorks => 'كيف يبدأ الأمر';
 
   @override

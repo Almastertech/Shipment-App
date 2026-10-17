@@ -7,7 +7,7 @@ import '../../components/app_scaffold.dart';
 import '../../components/custom_secondary_banner.dart';
 import '../../components/custom_shipment_info_card.dart';
 import '../../components/layout/custom_bottom_nav_bar.dart';
-import '../../components/request_custom_card.dart';
+import '../../components/secondary_request_custom_card.dart';
 import '../../components/section_title.dart';
 import '../../components/shipment_card_widget.dart';
 import '../../core/resources/app_colors.dart';
@@ -110,22 +110,22 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: AppSpacing.tokenM),
-            RequestCustomCard(
+            SecondaryRequestCustomCard(
               requestNumber: l10n.homeRequestNumber,
               requestType: l10n.homeRequestType,
-              remainingTimeLabel: l10n.homeRequestRemainingTime,
+              remainingTimeLabel: l10n.homeSecondaryRequestEta,
               title: l10n.homeRequestTitle,
-              description: l10n.homeRequestDescription,
+              description: l10n.homeSecondaryRequestDescription,
               progressSteps: <String>[
                 l10n.homeRequestStepReceived,
                 l10n.homeRequestStepReview,
                 l10n.homeRequestStepDecision,
                 l10n.homeRequestStepCompensation,
               ],
-              activeStepIndex: 1,
-              amountLabel: l10n.homeRequestAmountLabel,
+              activeStepIndex: 2,
+              amountLabel: l10n.homeSecondaryRequestAmountLabel,
               amount: l10n.homeRequestAmount,
-              actionLabel: l10n.homeRequestAction,
+              actionLabel: l10n.homeSecondaryRequestAction,
               onTap: () {},
             ),
             const SizedBox(height: AppSpacing.tokenL),

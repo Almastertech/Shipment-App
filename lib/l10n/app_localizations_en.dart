@@ -491,6 +491,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeRequestAction => 'Continue claim';
 
   @override
+  String get homeSecondaryRequestEta => 'Within 2–3 days';
+
+  @override
+  String get homeSecondaryRequestDescription =>
+      'We are reviewing your claim details and will share an update soon.';
+
+  @override
+  String get homeSecondaryRequestAmountLabel => 'Claim value';
+
+  @override
+  String get homeSecondaryRequestAction => 'Track claim';
+
+  @override
   String get homeHowItWorks => 'How it works';
 
   @override

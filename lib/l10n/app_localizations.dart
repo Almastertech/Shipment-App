@@ -992,6 +992,30 @@ abstract class AppLocalizations {
   /// **'Continue claim'**
   String get homeRequestAction;
 
+  /// No description provided for @homeSecondaryRequestEta.
+  ///
+  /// In en, this message translates to:
+  /// **'Within 2–3 days'**
+  String get homeSecondaryRequestEta;
+
+  /// No description provided for @homeSecondaryRequestDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We are reviewing your claim details and will share an update soon.'**
+  String get homeSecondaryRequestDescription;
+
+  /// No description provided for @homeSecondaryRequestAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim value'**
+  String get homeSecondaryRequestAmountLabel;
+
+  /// No description provided for @homeSecondaryRequestAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Track claim'**
+  String get homeSecondaryRequestAction;
+
   /// No description provided for @homeHowItWorks.
   ///
   /// In en, this message translates to:
