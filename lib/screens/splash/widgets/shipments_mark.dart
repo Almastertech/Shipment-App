@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:shipments/core/resources/app_images.dart';
 import 'package:shipments/screens/splash/widgets/animated_logo.dart';
 
 class ShipmentsMark extends StatelessWidget {
@@ -19,7 +19,7 @@ class ShipmentsMark extends StatelessWidget {
             left: 0,
             child: AnimatedLogoPart(
               animation: animation,
-              assetName: 'Vector 1.svg',
+              assetName: AppImages.vector,
               width: 100,
               height: 71,
               beginVerticalOffset: -6,
@@ -31,7 +31,7 @@ class ShipmentsMark extends StatelessWidget {
             left: 7.75,
             child: AnimatedLogoPart(
               animation: animation,
-              assetName: 'Rectangle 1.svg',
+              assetName: AppImages.rectangle,
               width: 84.5,
               height: 44,
               beginVerticalOffset: 6,

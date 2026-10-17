@@ -6,10 +6,12 @@ import 'package:shipments/screens/splash/widgets/shipments_mark.dart';
 import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
 import '../../core/resources/app_colors.dart';
+import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../core/startup/startup_flow.dart';
 import '../../injection.dart';
+import '../../l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -47,56 +49,121 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     final purple = AppColors.primitives.primary;
-    const foreground = Color(0xFFFFFFFF);
+    final yellow = AppColors.primitives.accent01.shade300;
+    final l10n = AppLocalizations.of(context)!;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: purple.shade900,
+        statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: purple.shade900,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarContrastEnforced: false,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: AppScaffold(
         backgroundColor: purple.shade900,
         padding: EdgeInsets.zero,
+        safeArea: false,
         dismissKeyboardOnTap: false,
-        body: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [purple.shade800, purple.shade900],
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(
+              AppImages.splash,
+              fit: BoxFit.cover,
+              alignment: Alignment.center,
             ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ShipmentsMark(animation: _logoController),
-                const SizedBox(height: AppSpacing.tokenM),
-                AppText(
-                  'حصين',
-                  variant: AppTextVariant.headlineLarge,
-                  style: AppTypography.buyerMobile.display.toTextStyle(
-                    color: foreground,
-                  ),
-                  textAlign: TextAlign.center,
+            DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    purple.shade900.withValues(alpha: .48),
+                    purple.shade900.withValues(alpha: .60),
+                    purple.shade900.withValues(alpha: .84),
+                  ],
+                  stops: const [0, .48, 1],
                 ),
-                const SizedBox(height: AppSpacing.tokenS),
-                FadeTransition(
-                  opacity: _logoController,
-                  child: AppText(
-                    'منتجاتك.. في أيدٍ آمنة',
-                    variant: AppTextVariant.bodyLarge,
-                    style: AppTypography.buyerMobile.bodyLarge.toTextStyle(
-                      color: foreground,
+              ),
+            ),
+            SafeArea(
+              child: Stack(
+                children: [
+                  Center(
+                    child: Transform.translate(
+                      offset: const Offset(0, -12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ShipmentsMark(animation: _logoController),
+                          const SizedBox(height: AppSpacing.tokenM),
+                          AppText(
+                            l10n.splashBrand,
+                            variant: AppTextVariant.headlineLarge,
+                            textAlign: TextAlign.center,
+                            style: AppTypography.buyerMobile.h1.toTextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: AppSpacing.tokenM),
+                          AppText(
+                            l10n.splashTagline,
+                            variant: AppTextVariant.bodyMedium,
+                            textAlign: TextAlign.center,
+                            style: AppTypography.buyerMobile.label.toTextStyle(
+                              color: yellow,
+                            ),
+                          ),
+                          const SizedBox(height: AppSpacing.tokenM),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              for (var index = 0; index < 9; index++)
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.only(
+                                    start: AppSpacing.tokenXs,
+                                  ),
+                                  child: Transform.rotate(
+                                    angle: .785,
+                                    child: Container(
+                                      width: 8,
+                                      height: 8,
+                                      color: index.isEven
+                                          ? yellow
+                                          : AppColors
+                                              .primitives.neutral.shade400,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-              ],
+                  PositionedDirectional(
+                    start: AppSpacing.tokenL,
+                    end: AppSpacing.tokenL,
+                    bottom: AppSpacing.tokenL,
+                    child: FadeTransition(
+                      opacity: _logoController,
+                      child: AppText(
+                        l10n.splashFooter,
+                        variant: AppTextVariant.bodySmall,
+                        textAlign: TextAlign.center,
+                        style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                          color: AppColors.primitives.neutral.shade200,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

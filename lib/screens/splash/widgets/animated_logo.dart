@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shipments/core/resources/app_images.dart';
 
 class AnimatedLogoPart extends StatelessWidget {
-  const AnimatedLogoPart({super.key, 
+  const AnimatedLogoPart({
+    super.key,
     required this.animation,
     required this.assetName,
     required this.width,
@@ -25,7 +24,7 @@ class AnimatedLogoPart extends StatelessWidget {
     return AnimatedBuilder(
       animation: animation,
       child: SvgPicture.asset(
-        AppImages.svg(assetName),
+        assetName,
         width: width,
         height: height,
       ),
