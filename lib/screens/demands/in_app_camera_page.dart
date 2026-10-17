@@ -473,6 +473,7 @@ class _InAppCameraPageState extends State<InAppCameraPage>
               else
                 const ColoredBox(color: _background),
               if (!_hasCapturedMedia &&
+                  !_showGuide &&
                   controller != null &&
                   controller.value.isInitialized)
                 const _CameraFramingOverlay(),
