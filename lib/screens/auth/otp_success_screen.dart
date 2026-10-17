@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
 import '../../core/resources/app_colors.dart';
+import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 
@@ -21,7 +22,6 @@ class OtpSuccessScreen extends StatefulWidget {
 class _OtpSuccessScreenState extends State<OtpSuccessScreen>
     with TickerProviderStateMixin {
   late final AnimationController _circleController;
-  late final AnimationController _progressController;
   Timer? _completionTimer;
 
   @override
@@ -30,10 +30,6 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
     _circleController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 700),
-    )..forward();
-    _progressController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
     )..forward();
     _completionTimer = Timer(const Duration(seconds: 3), () {
       if (mounted) widget.onComplete?.call();
@@ -44,7 +40,6 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
   void dispose() {
     _completionTimer?.cancel();
     _circleController.dispose();
-    _progressController.dispose();
     super.dispose();
   }
 
@@ -58,13 +53,15 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
       backgroundColor: primary.shade900,
       body: Stack(
         children: [
-          PositionedDirectional(
-            top: 80,
-            end: 38,
-            child: Transform.rotate(
-              angle: .785,
-              child: Container(width: 18, height: 18, color: primary.shade500),
+          Positioned.fill(
+            child: Image.asset(
+              AppImages.splash,
+              fit: BoxFit.cover,
+              alignment: Alignment.center,
             ),
+          ),
+          Positioned.fill(
+            child: ColoredBox(color: primary.shade900.withValues(alpha: .78)),
           ),
           Center(
             child: Column(
@@ -75,30 +72,46 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
                     parent: _circleController,
                     curve: Curves.easeOutBack,
                   ),
-                  child: Container(
-                    width: 140,
-                    height: 140,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: yellow.withValues(alpha: .18),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: yellow,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.check_rounded,
-                        color: primary.shade900,
-                        size: 52,
-                      ),
+                  child: SizedBox.square(
+                    dimension: 176,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          width: 176,
+                          height: 176,
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: .08),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        Container(
+                          width: 146,
+                          height: 146,
+                          decoration: BoxDecoration(
+                            color: yellow.withValues(alpha: .2),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        Container(
+                          width: 112,
+                          height: 112,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: yellow,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.check_rounded,
+                            color: primary.shade900,
+                            size: 54,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSpacing.tokenL),
+                const SizedBox(height: AppSpacing.token2Xl),
                 AppText.localized(
                   (l10n) => l10n.otpSuccessTitle,
                   variant: AppTextVariant.headlineMedium,
@@ -107,7 +120,7 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.tokenS),
+                const SizedBox(height: AppSpacing.tokenXs),
                 AppText.localized(
                   (l10n) => l10n.otpSuccessMessage,
                   variant: AppTextVariant.bodyMedium,
@@ -117,20 +130,48 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
                   ),
                 ),
                 const SizedBox(height: AppSpacing.tokenL),
-                SizedBox(
-                  width: 96,
-                  height: 4,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(999),
-                    child: AnimatedBuilder(
-                      animation: _progressController,
-                      builder: (context, child) => LinearProgressIndicator(
-                        value: _progressController.value,
-                        backgroundColor: AppColors.primitives.neutral.shade700,
-                        color: yellow,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final color in [
+                      yellow,
+                      AppColors.primitives.neutral.shade400,
+                      yellow,
+                      AppColors.primitives.neutral.shade400,
+                      yellow,
+                      AppColors.primitives.neutral.shade400,
+                      yellow,
+                    ])
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(
+                          start: AppSpacing.tokenS,
+                        ),
+                        child: Transform.rotate(
+                          angle: .785,
+                          child: Container(width: 8, height: 8, color: color),
+                        ),
                       ),
-                    ),
-                  ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.token5Xl),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (var index = 0; index < 3; index++)
+                      Container(
+                        width: 9,
+                        height: 9,
+                        margin: const EdgeInsetsDirectional.symmetric(
+                          horizontal: AppSpacing.tokenXs,
+                        ),
+                        decoration: BoxDecoration(
+                          color: index == 0
+                              ? yellow
+                              : AppColors.primitives.neutral.shade500,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                  ],
                 ),
               ],
             ),

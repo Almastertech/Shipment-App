@@ -204,7 +204,7 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.otpSuccess,
         builder: (context, state) => OtpSuccessScreen(
-          onComplete: () => context.go(AppRoutes.welcome),
+          onComplete: () => context.go(AppRoutes.accountNotFound),
         ),
       ),
       GoRoute(

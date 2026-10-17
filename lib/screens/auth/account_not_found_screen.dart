@@ -21,116 +21,174 @@ class AccountNotFoundScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final primary = AppColors.primitives.primary;
     final neutral = AppColors.primitives.neutral;
-    final yellow = AppColors.primitives.accent01;
+    final yellow = AppColors.primitives.accent01.shade300;
+
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image.asset(AppImages.splash, fit: BoxFit.cover),
+        Image.asset(
+          AppImages.splash,
+          fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
+        ),
         DecoratedBox(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                primary.shade900.withValues(alpha: .35),
-                primary.shade900,
+                primary.shade900.withValues(alpha: .34),
+                primary.shade900.withValues(alpha: .76),
               ],
             ),
           ),
         ),
         AppScaffold(
-          backgroundColor: Colors.transparent,
+          safeArea: false,
           padding: EdgeInsets.zero,
+          backgroundColor: Colors.transparent,
           body: Column(
             children: [
-              const Spacer(),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: neutral.shade100,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(AppRadius.token2Xl),
+              Expanded(
+                flex: 4,
+                child: SafeArea(
+                  bottom: false,
+                  child: Align(
+                    alignment: AlignmentDirectional.topStart,
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.tokenL),
+                      child: IconButton(
+                        onPressed: () => context.go(AppRoutes.loginMethod),
+                        icon: Icon(
+                          Directionality.of(context) == TextDirection.rtl
+                              ? Icons.arrow_forward_rounded
+                              : Icons.arrow_back_rounded,
+                        ),
+                        color: Colors.white,
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.white.withValues(alpha: .2),
+                          fixedSize: const Size(40, 40),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.tokenL,
-                  AppSpacing.token5Xl,
-                  AppSpacing.tokenL,
-                  AppSpacing.tokenL,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
+              ),
+              Expanded(
+                flex: 6,
+                child: Stack(
+                  clipBehavior: Clip.none,
                   children: [
-                    Center(
+                    Positioned.fill(
                       child: Container(
-                        width: 56,
-                        height: 56,
                         decoration: BoxDecoration(
-                          color: yellow.shade300,
-                          borderRadius: BorderRadius.circular(AppRadius.tokenL),
+                          color: neutral.shade100,
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(AppRadius.token2Xl),
+                          ),
                         ),
-                        padding: const EdgeInsets.all(AppSpacing.tokenM),
-                        child: SvgPicture.asset(
-                          AppImages.search,
-                          colorFilter: ColorFilter.mode(
-                            primary.shade900,
-                            BlendMode.srcIn,
+                        child: SafeArea(
+                          top: false,
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                              AppSpacing.tokenL,
+                              AppSpacing.token5Xl,
+                              AppSpacing.tokenL,
+                              AppSpacing.tokenL,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                AppText(
+                                  l10n.accountNotFoundTitle,
+                                  variant: AppTextVariant.headlineMedium,
+                                  textAlign: TextAlign.start,
+                                  style:
+                                      AppTypography.buyerMobile.h2.toTextStyle(
+                                    color: neutral.shade900,
+                                  ),
+                                ),
+                                const SizedBox(height: AppSpacing.tokenS),
+                                AppText(
+                                  l10n.accountNotFoundBody,
+                                  variant: AppTextVariant.bodySmall,
+                                  textAlign: TextAlign.start,
+                                  style: AppTypography.buyerMobile.bodySmall
+                                      .toTextStyle(color: neutral.shade700),
+                                ),
+                                const SizedBox(height: AppSpacing.token3Xl),
+                                _AdviceRow(
+                                  icon: Icons.mail_outline_rounded,
+                                  label: l10n.accountNotFoundCheckEmail,
+                                ),
+                                const SizedBox(height: AppSpacing.tokenS),
+                                _AdviceRow(
+                                  icon: Icons.refresh_rounded,
+                                  label: l10n.accountNotFoundTryOtherMethod,
+                                  onTap: () =>
+                                      context.go(AppRoutes.loginMethod),
+                                ),
+                                const Spacer(),
+                                PrimaryButton(
+                                  label: l10n.accountNotFoundTryAgain,
+                                  onPressed: () =>
+                                      context.go(AppRoutes.loginMethod),
+                                  style: ElevatedButton.styleFrom(
+                                    minimumSize: const Size.fromHeight(50),
+                                    backgroundColor: primary.shade500,
+                                    foregroundColor: Colors.white,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        AppRadius.tokenFull,
+                                      ),
+                                    ),
+                                    textStyle: AppTypography.buyerMobile.button
+                                        .toTextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                const SizedBox(height: AppSpacing.tokenS),
+                                PrimaryButton(
+                                  label: l10n.accountNotFoundSupport,
+                                  onPressed: () => _showSupport(context, l10n),
+                                  style: ElevatedButton.styleFrom(
+                                    minimumSize: const Size.fromHeight(50),
+                                    backgroundColor: primary.shade500,
+                                    foregroundColor: Colors.white,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        AppRadius.tokenFull,
+                                      ),
+                                    ),
+                                    textStyle: AppTypography.buyerMobile.button
+                                        .toTextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.tokenL),
-                    AppText(
-                      l10n.accountNotFoundTitle,
-                      variant: AppTextVariant.headlineSmall,
-                      textAlign: TextAlign.center,
-                      style: AppTypography.buyerMobile.h2.toTextStyle(
-                        color: primary.shade900,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.tokenS),
-                    AppText(
-                      l10n.accountNotFoundBody,
-                      variant: AppTextVariant.bodySmall,
-                      textAlign: TextAlign.center,
-                      style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                        color: neutral.shade600,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.tokenL),
-                    _ContactOption(
-                      icon: Icons.phone_iphone_rounded,
-                      label: l10n.accountNotFoundPhone,
-                      onTap: () => context.go(
-                        AppRoutes.login,
-                        extra: 'phone',
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.tokenS),
-                    _ContactOption(
-                      icon: Icons.mail_outline_rounded,
-                      label: l10n.accountNotFoundEmail,
-                      onTap: () => context.go(
-                        AppRoutes.login,
-                        extra: 'email',
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.tokenL),
-                    PrimaryButton(
-                      label: l10n.accountNotFoundTryAgain,
-                      onPressed: () => context.go(AppRoutes.loginMethod),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(52),
-                        backgroundColor: primary.shade500,
-                        foregroundColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
+                    PositionedDirectional(
+                      top: -36,
+                      start: AppSpacing.tokenL,
+                      child: Container(
+                        width: 72,
+                        height: 72,
+                        decoration: BoxDecoration(
+                          color: yellow,
                           borderRadius:
                               BorderRadius.circular(AppRadius.token2Xl),
                         ),
-                        textStyle: AppTypography.buyerMobile.button.toTextStyle(
-                          color: Colors.white,
+                        padding: const EdgeInsets.all(AppSpacing.tokenL),
+                        child: SvgPicture.asset(
+                          AppImages.search,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.black,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),
@@ -143,51 +201,78 @@ class AccountNotFoundScreen extends StatelessWidget {
       ],
     );
   }
+
+  void _showSupport(BuildContext context, AppLocalizations l10n) {
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: AppText(l10n.loginMethodHelp),
+        content: AppText(l10n.loginMethodHelpMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: AppText(l10n.close),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class _ContactOption extends StatelessWidget {
-  const _ContactOption({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
+class _AdviceRow extends StatelessWidget {
+  const _AdviceRow({required this.icon, required this.label, this.onTap});
 
   final IconData icon;
   final String label;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final neutral = AppColors.primitives.neutral;
+    final child = Container(
+      height: 52,
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.tokenM),
+      decoration: BoxDecoration(
+        color: neutral.shade200,
+        borderRadius: BorderRadius.circular(AppRadius.tokenXl),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              size: 18,
+              color: AppColors.primitives.primary.shade500,
+            ),
+          ),
+          const SizedBox(width: AppSpacing.tokenS),
+          Expanded(
+            child: AppText(
+              label,
+              variant: AppTextVariant.bodySmall,
+              textAlign: TextAlign.start,
+              style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                color: neutral.shade900,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (onTap == null) return child;
     return Material(
-      color: neutral.shade200,
-      borderRadius: BorderRadius.circular(AppRadius.tokenXl),
+      color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppRadius.tokenXl),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.tokenM),
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                size: 20,
-                color: AppColors.primitives.primary.shade500,
-              ),
-              const SizedBox(width: AppSpacing.tokenM),
-              Expanded(
-                child: AppText(
-                  label,
-                  variant: AppTextVariant.bodyMedium,
-                  style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
-                    color: neutral.shade800,
-                  ),
-                ),
-              ),
-              Icon(Icons.chevron_right_rounded, color: neutral.shade600),
-            ],
-          ),
-        ),
+        child: child,
       ),
     );
   }
