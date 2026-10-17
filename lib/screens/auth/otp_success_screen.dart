@@ -50,71 +50,92 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
 
   @override
   Widget build(BuildContext context) {
-    final tokens = AppColors.semantic;
     final primary = AppColors.primitives.primary;
+    final yellow = AppColors.primitives.accent01.shade300;
 
     return AppScaffold(
       padding: EdgeInsets.zero,
-      backgroundColor: tokens.background.primary,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ScaleTransition(
-              scale: CurvedAnimation(
-                parent: _circleController,
-                curve: Curves.easeOutBack,
-              ),
-              child: Container(
-                width: 140,
-                height: 140,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: primary.shade200,
-                  shape: BoxShape.circle,
-                ),
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: primary.shade500,
-                    shape: BoxShape.circle,
+      backgroundColor: primary.shade900,
+      body: Stack(
+        children: [
+          PositionedDirectional(
+            top: 80,
+            end: 38,
+            child: Transform.rotate(
+              angle: .785,
+              child: Container(width: 18, height: 18, color: primary.shade500),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ScaleTransition(
+                  scale: CurvedAnimation(
+                    parent: _circleController,
+                    curve: Curves.easeOutBack,
                   ),
-                  child: const Icon(
-                    Icons.check_rounded,
+                  child: Container(
+                    width: 140,
+                    height: 140,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: yellow.withValues(alpha: .18),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: yellow,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.check_rounded,
+                        color: primary.shade900,
+                        size: 52,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.tokenL),
+                AppText.localized(
+                  (l10n) => l10n.otpSuccessTitle,
+                  variant: AppTextVariant.headlineMedium,
+                  textAlign: TextAlign.center,
+                  style: AppTypography.buyerMobile.h2.toTextStyle(
                     color: Colors.white,
-                    size: 52,
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.tokenL),
-            AppText.localized(
-              (l10n) => l10n.otpSuccessTitle,
-              variant: AppTextVariant.headlineMedium,
-              textAlign: TextAlign.center,
-              style: AppTypography.buyerMobile.h2.toTextStyle(
-                color: primary.shade500,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.tokenL),
-            SizedBox(
-              width: 96,
-              height: 4,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(999),
-                child: AnimatedBuilder(
-                  animation: _progressController,
-                  builder: (context, child) => LinearProgressIndicator(
-                    value: _progressController.value,
-                    backgroundColor: AppColors.primitives.neutral.shade200,
-                    color: primary.shade500,
+                const SizedBox(height: AppSpacing.tokenS),
+                AppText.localized(
+                  (l10n) => l10n.otpSuccessMessage,
+                  variant: AppTextVariant.bodyMedium,
+                  textAlign: TextAlign.center,
+                  style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
+                    color: AppColors.primitives.neutral.shade300,
                   ),
                 ),
-              ),
+                const SizedBox(height: AppSpacing.tokenL),
+                SizedBox(
+                  width: 96,
+                  height: 4,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(999),
+                    child: AnimatedBuilder(
+                      animation: _progressController,
+                      builder: (context, child) => LinearProgressIndicator(
+                        value: _progressController.value,
+                        backgroundColor: AppColors.primitives.neutral.shade700,
+                        color: yellow,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

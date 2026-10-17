@@ -10,6 +10,8 @@ import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
 import '../../components/feedback/toast_service.dart';
+import '../../components/layout/auth_hero.dart';
+import '../../components/layout/auth_screen_shell.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
@@ -20,11 +22,7 @@ import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({
-    super.key,
-    this.contact,
-    this.onVerify,
-  });
+  const OtpVerificationScreen({super.key, this.contact, this.onVerify});
 
   final String? contact;
   final Future<bool> Function(String code)? onVerify;
@@ -38,9 +36,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   late final FocusNode _pinFocusNode;
   late final _SmartAuthSmsRetriever _smsRetriever;
   Timer? _resendTimer;
-  int _resendSeconds = 18;
+  int _resendSeconds = 45;
   _OtpResultState _resultState = _OtpResultState.idle;
   bool _isVerifying = false;
+
+  bool get _isEmail => widget.contact?.contains('@') ?? false;
+  int get _codeLength => _isEmail ? 6 : 4;
+  int get _numericLimit => _isEmail ? 999999 : 9999;
 
   @override
   void initState() {
@@ -67,12 +69,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       _pinController.text.trim(),
       <Validator>[
         AppValidators.required(),
-        AppValidators.minLength(6),
-        AppValidators.maxLength(6),
-        AppValidators.numericRange(min: 0, max: 999999),
+        AppValidators.minLength(_codeLength),
+        AppValidators.maxLength(_codeLength),
+        AppValidators.numericRange(min: 0, max: _numericLimit),
       ],
     );
-
     if (!result.isValid) {
       setState(() => _resultState = _OtpResultState.failure);
       final failure = result.firstFailure;
@@ -85,21 +86,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
 
     setState(() => _isVerifying = true);
-    var isAccepted = true;
+    var accepted = true;
     try {
-      isAccepted =
+      accepted =
           await widget.onVerify?.call(_pinController.text.trim()) ?? true;
     } on Object {
-      isAccepted = false;
+      accepted = false;
     }
     if (!mounted) return;
-
     setState(() {
       _isVerifying = false;
       _resultState =
-          isAccepted ? _OtpResultState.success : _OtpResultState.failure;
+          accepted ? _OtpResultState.success : _OtpResultState.failure;
     });
-    if (isAccepted) context.go(AppRoutes.otpSuccess);
+    if (accepted) context.go(AppRoutes.otpSuccess);
   }
 
   void _resendCode() {
@@ -111,7 +111,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   void _startResendCountdown() {
     _resendTimer?.cancel();
-    _resendSeconds = 18;
+    _resendSeconds = _isEmail ? 18 : 45;
     _resendTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
@@ -126,17 +126,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     });
   }
 
-  String _formatCountdown() {
-    final seconds = _resendSeconds.toString().padLeft(2, '0');
-    return '00:$seconds';
-  }
+  String _formatCountdown() =>
+      '00:${_resendSeconds.toString().padLeft(2, '0')}';
 
   void _handleCodeChanged(String value) {
-    if (_resultState != _OtpResultState.idle) {
-      setState(() => _resultState = _OtpResultState.idle);
-    } else {
-      setState(() {});
-    }
+    setState(() {
+      if (_resultState != _OtpResultState.idle) {
+        _resultState = _OtpResultState.idle;
+      }
+    });
   }
 
   void _showHelp() {
@@ -146,10 +144,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       builder: (dialogContext) => AlertDialog(
         title: AppText(l10n.loginMethodHelp),
         content: AppText(l10n.loginMethodHelpMessage),
-        actions: <Widget>[
+        actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: AppText(l10n.itemDetails),
+            child: AppText(l10n.close),
           ),
         ],
       ),
@@ -164,7 +162,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final colors = AppColors.semantic;
-    final isEmail = widget.contact?.contains('@') ?? false;
+    final isEmail = _isEmail;
     final isSuccess = _resultState == _OtpResultState.success;
     final isFailure = _resultState == _OtpResultState.failure;
     final resultColor = isSuccess
@@ -174,215 +172,214 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         ? AppColors.primitives.success.shade100
         : AppColors.primitives.failure.shade100;
     final pinTheme = PinTheme(
-      width: 48,
+      width: isEmail ? 44 : 78,
       height: 56,
       textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
             color: isSuccess || isFailure ? resultColor : colors.text.primary,
             fontWeight: FontWeight.w600,
           ),
       decoration: BoxDecoration(
-        color: isSuccess || isFailure ? resultFill : colors.surface.secondary,
-        borderRadius: BorderRadius.circular(AppRadius.tokenXl),
-        border: isSuccess || isFailure ? Border.all(color: resultColor) : null,
+        color: isSuccess || isFailure
+            ? resultFill
+            : AppColors.primitives.neutral.shade200,
+        borderRadius: BorderRadius.circular(AppRadius.tokenL),
+        border: isSuccess || isFailure
+            ? Border.all(color: resultColor)
+            : Border.all(color: AppColors.primitives.neutral.shade200),
       ),
     );
+    final destination = widget.contact == null
+        ? l10n.otpSubtitle
+        : isEmail
+            ? l10n.otpEmailDestination(_maskedContact(widget.contact!))
+            : l10n.otpPhoneDestination(_maskedContact(widget.contact!));
 
     return AppScaffold(
+      safeArea: false,
       padding: EdgeInsets.zero,
-      backgroundColor: colors.background.primary,
+      backgroundColor: AppColors.primitives.neutral.shade100,
       dismissKeyboardOnTap: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.tokenM,
-              AppSpacing.tokenM,
-              AppSpacing.tokenM,
-              AppSpacing.tokenL,
-            ),
-            child: Row(
-              textDirection: Directionality.of(context),
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Material(
-                  color: colors.background.secondary,
-                  shape: const CircleBorder(),
-                  child: InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: () => context.pop(),
-                    child: SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: Icon(
-                        Icons.chevron_left,
-                        color: colors.text.link,
-                        size: 24,
+      body: AuthScreenShell(
+        hero: AuthHero(
+          helpLabel: l10n.loginMethodHelp,
+          title: l10n.otpTitle,
+          subtitle: destination,
+          onBack: () => context.pop(),
+          onHelp: _showHelp,
+        ),
+        content: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.tokenL,
+            AppSpacing.token3Xl,
+            AppSpacing.tokenL,
+            AppSpacing.tokenL,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AppText(
+                l10n.otpHint,
+                variant: AppTextVariant.titleSmall,
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: AppColors.primitives.neutral.shade900,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.tokenM),
+              Directionality(
+                textDirection: Directionality.of(context),
+                child: Pinput(
+                  length: _codeLength,
+                  controller: _pinController,
+                  focusNode: _pinFocusNode,
+                  smsRetriever: _smsRetriever,
+                  defaultPinTheme: pinTheme,
+                  separatorBuilder: (_) =>
+                      const SizedBox(width: AppSpacing.tokenS),
+                  showCursor: false,
+                  onChanged: _handleCodeChanged,
+                  focusedPinTheme: pinTheme.copyWith(
+                    decoration: pinTheme.decoration!.copyWith(
+                      border: Border.all(
+                        color: isSuccess || isFailure
+                            ? resultColor
+                            : AppColors.primitives.primary.shade500,
+                        width: 1.5,
                       ),
                     ),
                   ),
                 ),
-                TextButton(
-                  onPressed: _showHelp,
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    minimumSize: Size.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              if (isFailure) ...[
+                const SizedBox(height: AppSpacing.tokenS),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.tokenM,
+                    vertical: AppSpacing.tokenS,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primitives.failure.shade100,
+                    borderRadius: BorderRadius.circular(AppRadius.tokenL),
                   ),
                   child: AppText(
-                    l10n.loginMethodHelp,
+                    l10n.otpVerificationFailed,
                     variant: AppTextVariant.bodySmall,
-                    style: TextStyle(color: colors.text.link),
+                    textAlign: TextAlign.right,
+                    style: TextStyle(color: resultColor),
                   ),
                 ),
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.tokenM,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                AppText(
-                  l10n.otpTitle,
-                  variant: AppTextVariant.headlineSmall,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: colors.text.link,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.tokenXs),
-                AppText(
-                  widget.contact == null
-                      ? l10n.otpSubtitle
-                      : l10n.otpDestination(_maskedContact(widget.contact!)),
-                  variant: AppTextVariant.bodySmall,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: colors.text.secondary),
-                ),
-                const SizedBox(height: AppSpacing.tokenL),
-                Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Pinput(
-                    length: 6,
-                    controller: _pinController,
-                    focusNode: _pinFocusNode,
-                    smsRetriever: _smsRetriever,
-                    defaultPinTheme: pinTheme,
-                    separatorBuilder: (_) =>
-                        const SizedBox(width: AppSpacing.tokenS),
-                    showCursor: true,
-                    onChanged: _handleCodeChanged,
-                    focusedPinTheme: pinTheme.copyWith(
-                      decoration: pinTheme.decoration!.copyWith(
-                        border: Border.all(
-                          color: isSuccess || isFailure
-                              ? resultColor
-                              : colors.text.link,
-                          width: 1.5,
+              const SizedBox(height: AppSpacing.tokenM),
+              _resendSeconds > 0
+                  ? Row(
+                      textDirection: Directionality.of(context),
+                      children: [
+                        Icon(
+                          Icons.timer_outlined,
+                          size: 18,
+                          color: AppColors.primitives.neutral.shade600,
+                        ),
+                        const SizedBox(width: AppSpacing.tokenXs),
+                        Expanded(
+                          child: AppText(
+                            l10n.otpResendCountdown(_formatCountdown()),
+                            variant: AppTextVariant.bodySmall,
+                            textAlign:
+                                Directionality.of(context) == TextDirection.rtl
+                                    ? TextAlign.right
+                                    : TextAlign.left,
+                            style: TextStyle(color: colors.text.secondary),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Align(
+                      alignment: Directionality.of(context) == TextDirection.rtl
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: TextButton.icon(
+                        onPressed: _resendCode,
+                        icon: Icon(
+                          Icons.refresh_rounded,
+                          size: 18,
+                          color: AppColors.primitives.primary.shade500,
+                        ),
+                        label: AppText(
+                          l10n.otpResend,
+                          variant: AppTextVariant.bodySmall,
+                          style: TextStyle(
+                            color: AppColors.primitives.primary.shade500,
+                          ),
                         ),
                       ),
                     ),
-                    preFilledWidget: AppText(
-                      '–',
-                      variant: AppTextVariant.titleLarge,
-                      style: TextStyle(color: colors.text.disabled),
-                    ),
-                  ),
-                ),
-                if (isFailure) ...<Widget>[
-                  const SizedBox(height: AppSpacing.tokenS),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.tokenM,
-                      vertical: AppSpacing.tokenS,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.primitives.failure.shade100,
-                      borderRadius: BorderRadius.circular(AppRadius.tokenXl),
-                    ),
-                    child: AppText(
-                      l10n.otpVerificationFailed,
-                      variant: AppTextVariant.bodySmall,
-                      textAlign: TextAlign.end,
-                      style: TextStyle(color: resultColor),
-                    ),
-                  ),
-                ],
-                const SizedBox(height: AppSpacing.tokenS),
-                Align(
-                  alignment: Alignment.center,
-                  child: _resendSeconds > 0
-                      ? AppText(
-                          l10n.otpResendCountdown(_formatCountdown()),
-                          variant: AppTextVariant.bodySmall,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: colors.text.secondary),
-                        )
-                      : TextButton.icon(
-                          onPressed: _resendCode,
-                          icon: Icon(
-                            Icons.reply,
-                            size: 18,
-                            color: colors.text.link,
-                          ),
-                          label: AppText(
-                            l10n.otpResend,
-                            variant: AppTextVariant.bodySmall,
-                            style: TextStyle(color: colors.text.link),
-                          ),
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.tokenS,
-                            ),
-                          ),
-                        ),
-                ),
-              ],
-            ),
+            ],
           ),
-          const Spacer(),
-        ],
+        ),
       ),
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
-            AppSpacing.tokenM,
+            AppSpacing.tokenL,
             AppSpacing.tokenS,
-            AppSpacing.tokenM,
-            AppSpacing.tokenM,
+            AppSpacing.tokenL,
+            AppSpacing.tokenS,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              AppText(
-                l10n.otpPrivacyNotice,
-                variant: AppTextVariant.bodySmall,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: colors.text.disabled),
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.tokenM,
+                  vertical: AppSpacing.tokenS,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.primitives.neutral.shade200,
+                  borderRadius: BorderRadius.circular(AppRadius.tokenL),
+                ),
+                child: Row(
+                  textDirection: Directionality.of(context),
+                  children: [
+                    Icon(
+                      Icons.verified_user_outlined,
+                      size: 18,
+                      color: AppColors.primitives.primary.shade500,
+                    ),
+                    const SizedBox(width: AppSpacing.tokenS),
+                    Expanded(
+                      child: AppText(
+                        l10n.otpPrivacyNotice,
+                        variant: AppTextVariant.bodySmall,
+                        textAlign:
+                            Directionality.of(context) == TextDirection.rtl
+                                ? TextAlign.right
+                                : TextAlign.left,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: AppSpacing.tokenS),
+              const SizedBox(height: AppSpacing.tokenL),
               PrimaryButton(
-                label: l10n.loginMethodContinue,
-                onPressed: _pinController.text.length == 6 &&
+                label: l10n.otpVerify,
+                onPressed: _pinController.text.length == _codeLength &&
                         !isFailure &&
                         !_isVerifying
                     ? _verifyCode
                     : null,
                 isLoading: _isVerifying,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: colors.action.primary,
-                  foregroundColor: colors.text.inverse,
+                  backgroundColor: AppColors.primitives.primary.shade500,
+                  foregroundColor: Colors.white,
                   disabledBackgroundColor:
-                      AppColors.primitives.primary.shade300,
-                  disabledForegroundColor: colors.text.inverse,
+                      AppColors.primitives.neutral.shade300,
+                  disabledForegroundColor:
+                      AppColors.primitives.neutral.shade600,
                   elevation: 0,
-                  shadowColor: Colors.transparent,
                   minimumSize: const Size.fromHeight(52),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppRadius.tokenFull),
@@ -390,11 +387,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () => context.pop(),
+                onPressed: () => context.go(AppRoutes.login),
                 child: AppText(
-                  isEmail ? l10n.otpChangeEmail : l10n.otpChangePhone,
+                  l10n.otpChangePhone,
                   variant: AppTextVariant.bodyMedium,
-                  style: TextStyle(color: colors.text.link),
+                  style:
+                      TextStyle(color: AppColors.primitives.primary.shade500),
                 ),
               ),
             ],
@@ -408,14 +406,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     if (contact.contains('@')) {
       final parts = contact.split('@');
       final local = parts.first;
-      final visible = local.length > 2 ? local.substring(0, 2) : local[0];
-      return '$visible••••@${parts.last}';
+      final visible = local.length > 2 ? local.substring(0, 2) : local;
+      return '$visible***@${parts.last}';
     }
-
     try {
       final phone = PhoneNumber.parse(contact);
       if (phone.nsn.length < 5) return contact;
-      return '+${phone.countryCode} •••• ${phone.nsn.substring(phone.nsn.length - 4)}';
+      return phone.nsn.substring(phone.nsn.length - 4);
     } on PhoneNumberException {
       return contact;
     }
@@ -434,7 +431,7 @@ class _SmartAuthSmsRetriever implements SmsRetriever {
     try {
       await smartAuth.removeUserConsentApiListener();
     } on Object {
-      // SmartAuth might not be available on some platforms.
+      // SmartAuth might be unavailable on this platform.
     }
   }
 

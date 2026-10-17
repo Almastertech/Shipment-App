@@ -9,6 +9,8 @@ import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
 import '../../components/inputs/app_text_field.dart';
 import '../../components/inputs/country_code_picker.dart';
+import '../../components/layout/auth_hero.dart';
+import '../../components/layout/auth_screen_shell.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
@@ -116,139 +118,142 @@ class _LoginScreenState extends State<LoginScreen> {
         _isEmail ? l10n.loginEmailFieldHelper : l10n.loginPhoneFieldHelper;
 
     return AppScaffold(
+      safeArea: false,
+      padding: EdgeInsets.zero,
       backgroundColor: neutral.shade100,
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.tokenM,
-        AppSpacing.tokenM,
-        AppSpacing.tokenM,
-        AppSpacing.tokenL,
-      ),
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
-            AppSpacing.tokenM,
+            AppSpacing.tokenL,
             AppSpacing.tokenS,
-            AppSpacing.tokenM,
-            AppSpacing.tokenM,
+            AppSpacing.tokenL,
+            AppSpacing.tokenS,
           ),
-          child: PrimaryButton(
-            label: l10n.loginMethodContinue,
-            onPressed: isInputValid ? _continue : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: primary.shade500,
-              foregroundColor: neutral.shade100,
-              disabledBackgroundColor: primary.shade500,
-              disabledForegroundColor: neutral.shade100,
-              minimumSize: const Size.fromHeight(52),
-              padding: EdgeInsets.zero,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.token2Xl),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PrimaryButton(
+                label: l10n.loginSendCode,
+                onPressed: isInputValid ? _continue : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      isInputValid ? primary.shade500 : neutral.shade300,
+                  foregroundColor:
+                      isInputValid ? neutral.shade100 : neutral.shade600,
+                  disabledBackgroundColor: neutral.shade300,
+                  disabledForegroundColor: neutral.shade600,
+                  minimumSize: const Size.fromHeight(52),
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+                  ),
+                  textStyle: AppTypography.buyerMobile.button.toTextStyle(
+                    color: isInputValid ? neutral.shade100 : neutral.shade600,
+                  ),
+                ),
               ),
-              textStyle: AppTypography.buyerMobile.button.toTextStyle(
-                color: neutral.shade100,
+              const SizedBox(height: AppSpacing.tokenS),
+              AppText(
+                l10n.authPrivacyNotice,
+                variant: AppTextVariant.labelSmall,
+                textAlign: TextAlign.center,
+                style: AppTypography.buyerMobile.caption.toTextStyle(
+                  color: neutral.shade600,
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _AuthTopBar(
-              helpLabel: l10n.loginMethodHelp,
-              onBack: () => context.go(AppRoutes.loginMethod),
-              onHelp: () => _showHelp(context, l10n),
-            ),
-            const SizedBox(height: AppSpacing.tokenL),
-            AppText(
-              title,
-              variant: AppTextVariant.headlineMedium,
-              style: AppTypography.buyerMobile.h2.toTextStyle(
-                color: primary.shade500,
+      body: AuthScreenShell(
+        hero: AuthHero(
+          helpLabel: l10n.loginMethodHelp,
+          title: title,
+          subtitle: subtitle,
+          onBack: () => context.go(AppRoutes.loginMethod),
+          onHelp: () => _showHelp(context, l10n),
+        ),
+        content: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.tokenL,
+            AppSpacing.token2Xl,
+            AppSpacing.tokenL,
+            AppSpacing.tokenL,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AppText(
+                fieldLabel,
+                variant: AppTextVariant.labelMedium,
+                style: AppTypography.buyerMobile.label.toTextStyle(
+                  color: neutral.shade800,
+                ),
               ),
-              textAlign: TextAlign.start,
-            ),
-            const SizedBox(height: AppSpacing.tokenXs),
-            AppText(
-              subtitle,
-              variant: AppTextVariant.bodySmall,
-              style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                color: neutral.shade400,
-              ),
-              textAlign: TextAlign.start,
-            ),
-            const SizedBox(height: AppSpacing.tokenXl),
-            AppText(
-              fieldLabel,
-              variant: AppTextVariant.labelMedium,
-              style: AppTypography.buyerMobile.label.toTextStyle(
-                color: neutral.shade500,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.tokenS),
-            if (_isEmail)
-              _buildAppTextField(
-                hint: fieldHint,
-                keyboardType: TextInputType.emailAddress,
-                autofillHints: const <String>[AutofillHints.email],
-                textInputAction: TextInputAction.done,
-              )
-            else
-              Row(
-                textDirection: TextDirection.ltr,
-                children: <Widget>[
-                  Expanded(
-                    child: _buildAppTextField(
-                      hint: fieldHint,
-                      keyboardType: TextInputType.phone,
-                      autofillHints: const <String>[
-                        AutofillHints.telephoneNumberNational,
-                      ],
-                      textInputAction: TextInputAction.done,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'[0-9٠-٩۰-۹]'),
-                        ),
-                        LengthLimitingTextInputFormatter(15),
-                      ],
+              const SizedBox(height: AppSpacing.tokenS),
+              if (_isEmail)
+                _buildAppTextField(
+                  hint: fieldHint,
+                  keyboardType: TextInputType.emailAddress,
+                  autofillHints: const <String>[AutofillHints.email],
+                  textInputAction: TextInputAction.done,
+                )
+              else
+                Row(
+                  textDirection: TextDirection.ltr,
+                  children: <Widget>[
+                    Expanded(
+                      child: _buildAppTextField(
+                        hint: fieldHint,
+                        keyboardType: TextInputType.phone,
+                        autofillHints: const <String>[
+                          AutofillHints.telephoneNumberNational,
+                        ],
+                        textInputAction: TextInputAction.done,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9\u0660-\u0669\u06F0-\u06F9]'),
+                          ),
+                          LengthLimitingTextInputFormatter(15),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: AppSpacing.tokenS),
-                  CountryCodePicker(
-                    initialCountryCode: 'SA',
-                    width: 96,
-                    onChanged: (country) {
-                      setState(() {
-                        _selectedCountry = country;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            const SizedBox(height: AppSpacing.tokenS),
-            if (_inputController.text.trim().isNotEmpty && !isInputValid)
-              AppText(
-                _isEmail ? l10n.validationEmail : l10n.loginPhoneInvalid,
-                variant: AppTextVariant.bodySmall,
-                style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                  color: AppColors.primitives.failure.shade500,
+                    const SizedBox(width: AppSpacing.tokenS),
+                    CountryCodePicker(
+                      initialCountryCode: 'SA',
+                      width: 96,
+                      onChanged: (country) {
+                        setState(() {
+                          _selectedCountry = country;
+                        });
+                      },
+                    ),
+                  ],
                 ),
-                textAlign: TextAlign.start,
-              )
-            else
-              AppText(
-                fieldHelper,
-                variant: AppTextVariant.bodySmall,
-                style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                  color: neutral.shade400,
+              const SizedBox(height: AppSpacing.tokenS),
+              if (_inputController.text.trim().isNotEmpty && !isInputValid)
+                AppText(
+                  _isEmail ? l10n.validationEmail : l10n.loginPhoneInvalid,
+                  variant: AppTextVariant.bodySmall,
+                  style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                    color: AppColors.primitives.failure.shade500,
+                  ),
+                  textAlign: TextAlign.right,
+                )
+              else
+                AppText(
+                  fieldHelper,
+                  variant: AppTextVariant.bodySmall,
+                  style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                    color: neutral.shade600,
+                  ),
+                  textAlign: TextAlign.right,
                 ),
-                textAlign: TextAlign.start,
-              ),
-            const SizedBox(height: AppSpacing.token3Xl),
-          ],
+              const SizedBox(height: AppSpacing.token3Xl),
+            ],
+          ),
         ),
       ),
     );
@@ -266,21 +271,21 @@ class _LoginScreenState extends State<LoginScreen> {
     final inputTheme = Theme.of(context).copyWith(
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: neutral.shade200,
+        fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.tokenM,
           vertical: AppSpacing.tokenM,
         ),
         hintStyle: AppTypography.buyerMobile.bodySmall.toTextStyle(
-          color: neutral.shade300,
+          color: neutral.shade500,
         ),
         border: OutlineInputBorder(
           borderRadius: radius,
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: neutral.shade300),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: radius,
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: neutral.shade300),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: radius,
@@ -351,59 +356,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _AuthTopBar extends StatelessWidget {
-  const _AuthTopBar({
-    required this.helpLabel,
-    required this.onBack,
-    required this.onHelp,
-  });
-
-  final String helpLabel;
-  final VoidCallback onBack;
-  final VoidCallback onHelp;
-
-  @override
-  Widget build(BuildContext context) {
-    final primary = AppColors.primitives.primary;
-    final neutral = AppColors.primitives.neutral;
-    return Row(
-      textDirection: Directionality.of(context),
-      children: <Widget>[
-        IconButton(
-          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-          onPressed: onBack,
-          style: IconButton.styleFrom(
-            backgroundColor: neutral.shade200,
-            foregroundColor: primary.shade500,
-            fixedSize: const Size(40, 40),
-          ),
-          icon: const Icon(Icons.chevron_left_rounded),
-        ),
-        const Spacer(),
-        TextButton(
-          onPressed: onHelp,
-          style: TextButton.styleFrom(
-            foregroundColor: primary.shade500,
-            textStyle: AppTypography.buyerMobile.label.toTextStyle(
-              color: primary.shade500,
-            ),
-            padding: EdgeInsets.zero,
-            minimumSize: Size.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: AppText(
-            helpLabel,
-            variant: AppTextVariant.labelMedium,
-            style: AppTypography.buyerMobile.label.toTextStyle(
-              color: primary.shade500,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

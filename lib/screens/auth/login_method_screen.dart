@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
+import '../../components/layout/auth_hero.dart';
+import '../../components/layout/auth_screen_shell.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
@@ -28,93 +30,110 @@ class _LoginMethodScreenState extends State<LoginMethodScreen> {
     final neutral = AppColors.primitives.neutral;
 
     return AppScaffold(
+      safeArea: false,
+      padding: EdgeInsets.zero,
       backgroundColor: neutral.shade100,
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.tokenM,
-        AppSpacing.tokenM,
-        AppSpacing.tokenM,
-        AppSpacing.tokenL,
-      ),
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
-            AppSpacing.tokenM,
+            AppSpacing.tokenL,
             AppSpacing.tokenS,
-            AppSpacing.tokenM,
-            AppSpacing.tokenM,
+            AppSpacing.tokenL,
+            AppSpacing.tokenS,
           ),
-          child: PrimaryButton(
-            label: l10n.loginMethodContinue,
-            onPressed: _selectedMethod == null
-                ? null
-                : () => context.go(
-                      AppRoutes.login,
-                      extra: _selectedMethod!.name,
-                    ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  _selectedMethod == null ? primary.shade300 : primary.shade500,
-              foregroundColor: neutral.shade100,
-              disabledBackgroundColor: primary.shade300,
-              disabledForegroundColor: neutral.shade100,
-              minimumSize: const Size.fromHeight(52),
-              padding: EdgeInsets.zero,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.token2Xl),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PrimaryButton(
+                label: l10n.loginMethodContinue,
+                onPressed: _selectedMethod == null
+                    ? null
+                    : () => context.go(
+                          AppRoutes.login,
+                          extra: _selectedMethod!.name,
+                        ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _selectedMethod == null
+                      ? neutral.shade300
+                      : primary.shade500,
+                  foregroundColor: _selectedMethod == null
+                      ? neutral.shade600
+                      : neutral.shade100,
+                  disabledBackgroundColor: neutral.shade300,
+                  disabledForegroundColor: neutral.shade600,
+                  minimumSize: const Size.fromHeight(52),
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+                  ),
+                  textStyle: AppTypography.buyerMobile.button.toTextStyle(
+                    color: _selectedMethod == null
+                        ? neutral.shade600
+                        : neutral.shade100,
+                  ),
+                ),
               ),
-              textStyle: AppTypography.buyerMobile.button.toTextStyle(
-                color: neutral.shade100,
+              const SizedBox(height: AppSpacing.tokenS),
+              AppText(
+                l10n.authPrivacyNotice,
+                variant: AppTextVariant.labelSmall,
+                textAlign: TextAlign.center,
+                style: AppTypography.buyerMobile.caption.toTextStyle(
+                  color: neutral.shade600,
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _TopBar(
-              helpLabel: l10n.loginMethodHelp,
-              onBack: () => context.go(AppRoutes.onboarding),
-              onHelp: () => _showHelp(context, l10n),
-            ),
-            const SizedBox(height: AppSpacing.tokenL),
-            AppText(
-              l10n.loginMethodTitle,
-              variant: AppTextVariant.headlineMedium,
-              style: AppTypography.buyerMobile.h2.toTextStyle(
-                color: primary.shade500,
+      body: AuthScreenShell(
+        hero: AuthHero(
+          helpLabel: l10n.loginMethodHelp,
+          title: l10n.loginMethodTitle,
+          subtitle: l10n.loginMethodSubtitle,
+          onBack: () => context.go(AppRoutes.onboarding),
+          onHelp: () => _showHelp(context, l10n),
+        ),
+        content: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.tokenL,
+            AppSpacing.token2Xl,
+            AppSpacing.tokenL,
+            AppSpacing.tokenL,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AppText(
+                l10n.loginMethodChooseTitle,
+                variant: AppTextVariant.titleMedium,
+                textAlign: TextAlign.right,
+                style: AppTypography.buyerMobile.h5.toTextStyle(
+                  color: neutral.shade700,
+                ),
               ),
-              textAlign: TextAlign.start,
-            ),
-            const SizedBox(height: AppSpacing.tokenXs),
-            AppText(
-              l10n.loginMethodSubtitle,
-              variant: AppTextVariant.bodySmall,
-              style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                color: neutral.shade400,
+              const SizedBox(height: AppSpacing.token2Xs),
+              _LoginMethodTile(
+                icon: Icons.phone_in_talk_outlined,
+                title: l10n.loginMethodPhone,
+                subtitle: l10n.loginMethodPhoneDescription,
+                selected: _selectedMethod == _LoginMethod.phone,
+                onTap: () =>
+                    setState(() => _selectedMethod = _LoginMethod.phone),
               ),
-              textAlign: TextAlign.start,
-            ),
-            const SizedBox(height: AppSpacing.tokenXl),
-            _LoginMethodTile(
-              icon: Icons.phone_iphone_rounded,
-              title: l10n.loginMethodPhone,
-              subtitle: l10n.loginMethodPhoneDescription,
-              selected: _selectedMethod == _LoginMethod.phone,
-              onTap: () => setState(() => _selectedMethod = _LoginMethod.phone),
-            ),
-            const SizedBox(height: AppSpacing.tokenS),
-            _LoginMethodTile(
-              icon: Icons.mail_outline_rounded,
-              title: l10n.loginMethodEmail,
-              subtitle: l10n.loginMethodEmailDescription,
-              selected: _selectedMethod == _LoginMethod.email,
-              onTap: () => setState(() => _selectedMethod = _LoginMethod.email),
-            ),
-          ],
+              const SizedBox(height: AppSpacing.tokenS),
+              _LoginMethodTile(
+                icon: Icons.mail_outline_rounded,
+                title: l10n.loginMethodEmail,
+                subtitle: l10n.loginMethodEmailDescription,
+                selected: _selectedMethod == _LoginMethod.email,
+                onTap: () =>
+                    setState(() => _selectedMethod = _LoginMethod.email),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -122,82 +141,23 @@ class _LoginMethodScreenState extends State<LoginMethodScreen> {
 
   void _showHelp(BuildContext context, AppLocalizations l10n) {
     final neutral = AppColors.primitives.neutral;
-
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: neutral.shade100,
-        title: AppText(
-          l10n.loginMethodHelp,
-          variant: AppTextVariant.titleLarge,
-        ),
+        title:
+            AppText(l10n.loginMethodHelp, variant: AppTextVariant.titleLarge),
         content: AppText(
           l10n.loginMethodHelpMessage,
           variant: AppTextVariant.bodyMedium,
         ),
-        actions: <Widget>[
+        actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: AppText(
-              l10n.close,
-              variant: AppTextVariant.labelLarge,
-            ),
+            child: AppText(l10n.close, variant: AppTextVariant.labelLarge),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _TopBar extends StatelessWidget {
-  const _TopBar({
-    required this.helpLabel,
-    required this.onBack,
-    required this.onHelp,
-  });
-
-  final String helpLabel;
-  final VoidCallback onBack;
-  final VoidCallback onHelp;
-
-  @override
-  Widget build(BuildContext context) {
-    final primary = AppColors.primitives.primary;
-    final neutral = AppColors.primitives.neutral;
-    return Row(
-      textDirection: Directionality.of(context),
-      children: <Widget>[
-        IconButton(
-          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-          onPressed: onBack,
-          style: IconButton.styleFrom(
-            backgroundColor: neutral.shade200,
-            foregroundColor: primary.shade500,
-            fixedSize: const Size(40, 40),
-          ),
-          icon: const Icon(Icons.chevron_left_rounded),
-        ),
-        const Spacer(),
-        TextButton(
-          onPressed: onHelp,
-          style: TextButton.styleFrom(
-            foregroundColor: primary.shade500,
-            textStyle: AppTypography.buyerMobile.label.toTextStyle(
-              color: primary.shade500,
-            ),
-            padding: EdgeInsets.zero,
-            minimumSize: Size.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: AppText(
-            helpLabel,
-            variant: AppTextVariant.labelMedium,
-            style: AppTypography.buyerMobile.label.toTextStyle(
-              color: primary.shade500,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -221,67 +181,62 @@ class _LoginMethodTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final primary = AppColors.primitives.primary;
     final neutral = AppColors.primitives.neutral;
-    final textDirection = Directionality.of(context);
-
+    final direction = Directionality.of(context);
     return Semantics(
       button: true,
       selected: selected,
       inMutuallyExclusiveGroup: true,
       label: '$title. $subtitle',
       child: Material(
-        color: neutral.shade200,
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: selected ? primary.shade500 : Colors.transparent,
-            width: 2,
+            color: selected ? primary.shade500 : neutral.shade300,
+            width: selected ? 1.5 : 1,
           ),
-          borderRadius: BorderRadius.circular(AppRadius.tokenXl),
+          borderRadius: BorderRadius.circular(AppRadius.token2Xl),
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          borderRadius: BorderRadius.circular(AppRadius.tokenXl),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.tokenM),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.tokenM,
+              vertical: AppSpacing.tokenS,
+            ),
             child: Row(
-              textDirection: TextDirection.ltr,
-              children: <Widget>[
+              children: [
                 Container(
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: selected ? primary.shade500 : neutral.shade100,
-                    borderRadius: BorderRadius.circular(AppRadius.tokenXl),
+                    color: neutral.shade200,
+                    borderRadius: BorderRadius.circular(AppRadius.tokenL),
                   ),
-                  child: Icon(
-                    icon,
-                    color: selected ? neutral.shade100 : primary.shade500,
-                    size: 22,
-                  ),
+                  child: Icon(icon, color: neutral.shade800, size: 24),
                 ),
                 const SizedBox(width: AppSpacing.tokenM),
                 Expanded(
                   child: Directionality(
-                    textDirection: textDirection,
+                    textDirection: direction,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
+                      children: [
                         AppText(
                           title,
-                          variant: AppTextVariant.titleMedium,
+                          variant: AppTextVariant.titleSmall,
                           style: AppTypography.buyerMobile.h5.toTextStyle(
-                            color: primary.shade500,
+                            color: neutral.shade900,
                           ),
-                          textAlign: TextAlign.start,
                         ),
+                        const SizedBox(height: AppSpacing.token2Xs),
                         AppText(
                           subtitle,
                           variant: AppTextVariant.bodySmall,
                           style:
                               AppTypography.buyerMobile.bodySmall.toTextStyle(
-                            color: neutral.shade400,
+                            color: neutral.shade600,
                           ),
-                          textAlign: TextAlign.start,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -289,7 +244,7 @@ class _LoginMethodTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.tokenS),
+                const SizedBox(width: AppSpacing.tokenM),
                 _SelectionIndicator(selected: selected),
               ],
             ),
@@ -309,22 +264,21 @@ class _SelectionIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final primary = AppColors.primitives.primary;
     final neutral = AppColors.primitives.neutral;
-
     return Container(
-      width: 20,
-      height: 20,
+      width: 22,
+      height: 22,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: selected ? primary.shade500 : neutral.shade300,
-          width: 1,
+          color: selected ? primary.shade500 : neutral.shade400,
+          width: 1.5,
         ),
       ),
       child: selected
           ? Container(
-              width: 8,
-              height: 8,
+              width: 10,
+              height: 10,
               decoration: BoxDecoration(
                 color: primary.shade500,
                 shape: BoxShape.circle,

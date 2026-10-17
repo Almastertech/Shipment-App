@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/app_scaffold.dart';
@@ -21,80 +20,132 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final colors = AppColors.semantic;
     final primary = AppColors.primitives.primary;
-
-    return AppScaffold(
-      padding: EdgeInsets.zero,
-      backgroundColor: colors.background.primary,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.tokenM,
+    final yellow = AppColors.primitives.accent01;
+    final neutral = AppColors.primitives.neutral;
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(AppImages.splash, fit: BoxFit.cover),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                primary.shade900.withValues(alpha: .58),
+                primary.shade900,
+              ],
+            ),
+          ),
+        ),
+        AppScaffold(
+          safeArea: false,
+          backgroundColor: Colors.transparent,
+          padding: const EdgeInsets.all(AppSpacing.tokenL),
+          body: Column(
+            children: [
+              const SizedBox(height: AppSpacing.token10Xl),
+              AppText(
+                l10n.welcomeTitle,
+                variant: AppTextVariant.headlineMedium,
+                textAlign: TextAlign.center,
+                style: AppTypography.buyerMobile.h2.toTextStyle(
+                  color: Colors.white,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    SvgPicture.asset(
-                      AppImages.svg('Logo.svg'),
-                      width: 100,
-                      height: 100,
-                      semanticsLabel: l10n.appTitle,
-                    ),
-                    const SizedBox(height: AppSpacing.tokenL),
-                    AppText.localized(
-                      (strings) => strings.welcomeTitle,
-                      variant: AppTextVariant.headlineMedium,
-                      textAlign: TextAlign.center,
-                      style: AppTypography.buyerMobile.h2.toTextStyle(
-                        color: primary.shade500,
+              ),
+              const SizedBox(height: AppSpacing.tokenM),
+              AppText(
+                l10n.welcomeDescription,
+                variant: AppTextVariant.bodyMedium,
+                textAlign: TextAlign.center,
+                style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
+                  color: neutral.shade200,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.all(AppSpacing.tokenM),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: .15),
+                  borderRadius: BorderRadius.circular(AppRadius.token2Xl),
+                  border: Border.all(color: Colors.white.withValues(alpha: .2)),
+                ),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(AppRadius.tokenL),
+                      child: Image.asset(
+                        AppImages.onboardingProtection,
+                        width: 72,
+                        height: 72,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.tokenM),
-                    AppText.localized(
-                      (strings) => strings.welcomeDescription,
-                      variant: AppTextVariant.bodyLarge,
-                      textAlign: TextAlign.center,
-                      style: AppTypography.buyerMobile.bodyLarge.toTextStyle(
-                        color: colors.text.secondary,
+                    const SizedBox(width: AppSpacing.tokenM),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppText(
+                            l10n.welcomeProductTitle,
+                            variant: AppTextVariant.titleSmall,
+                            style: AppTypography.buyerMobile.label.toTextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: AppSpacing.tokenS),
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: yellow.shade100,
+                              borderRadius: BorderRadius.circular(
+                                AppRadius.tokenFull,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.tokenS,
+                                vertical: AppSpacing.token2Xs,
+                              ),
+                              child: AppText(
+                                l10n.welcomeProtectionActive,
+                                variant: AppTextVariant.labelSmall,
+                                style:
+                                    AppTypography.buyerMobile.label.toTextStyle(
+                                  color: primary.shade800,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.tokenM,
-              AppSpacing.tokenM,
-              AppSpacing.tokenM,
-              AppSpacing.tokenM,
-            ),
-            child: PrimaryButton(
-              label: l10n.welcomeContinue,
-              onPressed: () async {
-                await getIt<SessionManager>().startGuestSession();
-                if (context.mounted) context.go(AppRoutes.home);
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(56),
-                backgroundColor: primary.shade500,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.tokenFull),
-                ),
-                textStyle: AppTypography.buyerMobile.button.toTextStyle(
-                  color: Colors.white,
+              const SizedBox(height: AppSpacing.token2Xl),
+              PrimaryButton(
+                label: l10n.welcomeContinue,
+                onPressed: () async {
+                  await getIt<SessionManager>().startGuestSession();
+                  if (context.mounted) context.go(AppRoutes.home);
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(56),
+                  backgroundColor: yellow.shade300,
+                  foregroundColor: primary.shade900,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+                  ),
+                  textStyle: AppTypography.buyerMobile.button.toTextStyle(
+                    color: primary.shade900,
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

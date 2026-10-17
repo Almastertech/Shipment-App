@@ -87,21 +87,24 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
               border: Border.all(color: colors.border.actionOutline),
             ),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(width: AppSpacing.md),
                 Text(
                   _selectedCountry.flagEmoji,
                   style: const TextStyle(fontSize: 14),
                 ),
                 const SizedBox(width: AppSpacing.tokenXs),
-                AppText(
-                  '+${_selectedCountry.phoneCode}',
-                  variant: AppTextVariant.bodySmall,
-                  style: TextStyle(color: colors.text.heading),
-                  textDirection: TextDirection.ltr,
+                Flexible(
+                  child: AppText(
+                    '+${_selectedCountry.phoneCode}',
+                    variant: AppTextVariant.bodySmall,
+                    style: TextStyle(color: colors.text.heading),
+                    textDirection: TextDirection.ltr,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                const SizedBox(width: AppSpacing.tokenXs),
               ],
             ),
           ),
