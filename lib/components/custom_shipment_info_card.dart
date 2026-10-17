@@ -192,7 +192,7 @@ class _ProductHeader extends StatelessWidget {
               ),
               AppText(
                 '$merchantName · $price',
-                variant: AppTextVariant.caption,
+                variant: AppTextVariant.bodySmall,
                 textAlign: TextAlign.start,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -281,7 +281,7 @@ class _ProtectionBadge extends StatelessWidget {
             const SizedBox(width: AppSpacing.token2Xs),
             AppText(
               label,
-              variant: AppTextVariant.caption,
+              variant: AppTextVariant.labelSmall,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppTypography.buyerMobile.caption.toTextStyle(
@@ -343,7 +343,7 @@ class _ShipmentTimeline extends StatelessWidget {
                       const SizedBox(height: AppSpacing.token2Xs),
                       AppText(
                         steps[index],
-                        variant: AppTextVariant.caption,
+                        variant: AppTextVariant.labelSmall,
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -394,7 +394,7 @@ class _DeliveryDate extends StatelessWidget {
             Flexible(
               child: AppText(
                 '$label · $date',
-                variant: AppTextVariant.caption,
+                variant: AppTextVariant.bodySmall,
                 textAlign: TextAlign.start,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
