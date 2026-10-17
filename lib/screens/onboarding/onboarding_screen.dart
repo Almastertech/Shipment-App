@@ -25,12 +25,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       title: OnboardingTitle.protection,
     ),
     OnboardingPageData(
-      imagePath: 'png/onBoarding2.png',
+      imagePath: 'png/onboarding2.png',
       title: OnboardingTitle.tracking,
     ),
     OnboardingPageData(
-      imagePath: 'png/onBoarding3.png',
-      title: OnboardingTitle.tracking,
+      imagePath: 'png/onboarding3.png',
+      title: OnboardingTitle.claim,
     ),
   ];
 

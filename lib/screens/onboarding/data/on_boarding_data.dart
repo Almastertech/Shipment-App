@@ -1,4 +1,3 @@
-
 class OnboardingPageData {
   const OnboardingPageData({
     required this.imagePath,
@@ -9,4 +8,4 @@ class OnboardingPageData {
   final OnboardingTitle title;
 }
 
-enum OnboardingTitle { protection, tracking }
+enum OnboardingTitle { protection, tracking, claim }

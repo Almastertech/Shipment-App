@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shipments/components/app_scaffold.dart';
 import 'package:shipments/components/app_text.dart';
@@ -12,7 +11,8 @@ import 'package:shipments/l10n/app_localizations.dart';
 import 'package:shipments/screens/onboarding/data/on_boarding_data.dart';
 
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({super.key, 
+  const OnboardingPage({
+    super.key,
     required this.page,
     required this.isLastPage,
     required this.onNext,
@@ -29,7 +29,9 @@ class OnboardingPage extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final actionColor = AppColors.primitives.primary.shade500;
     final foregroundColor = AppColors.primitives.neutral.shade100;
-    final headingColor = AppColors.primitives.neutral.shade500;
+    final headingColor = AppColors.primitives.neutral.shade900;
+    final subtitleColor = AppColors.primitives.neutral.shade600;
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
     final titleCopy = switch (page.title) {
       OnboardingTitle.protection => (
           l10n.onboardingProtectionLead,
@@ -41,34 +43,39 @@ class OnboardingPage extends StatelessWidget {
           l10n.onboardingTrackingHighlight,
           l10n.onboardingTrackingTail,
         ),
+      OnboardingTitle.claim => (
+          '',
+          l10n.onboardingClaimTitle,
+          '',
+        ),
+    };
+    final subtitle = switch (page.title) {
+      OnboardingTitle.protection => l10n.onboardingProtectionSubtitle,
+      OnboardingTitle.tracking => l10n.onboardingTrackingSubtitle,
+      OnboardingTitle.claim => l10n.onboardingClaimSubtitle,
     };
 
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Image.asset(
-          AppImages.image(page.imagePath),
-          fit: BoxFit.cover,
-          excludeFromSemantics: true,
-        ),
         AppScaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.primitives.neutral.shade100,
           safeArea: true,
           padding: EdgeInsets.zero,
           dismissKeyboardOnTap: false,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.tokenL,
-              AppSpacing.tokenM,
-              AppSpacing.tokenL,
               AppSpacing.tokenS,
+              AppSpacing.tokenL,
+              0,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const SizedBox(
-                  height: AppSpacing.tokenXs + AppSpacing.token6Xl,
-                ),
+                const SizedBox(height: AppSpacing.token2Xl),
+                const _OnboardingDiamonds(),
+                const SizedBox(height: AppSpacing.tokenS),
                 AppText.rich(
                   TextSpan(
                     children: <InlineSpan>[
@@ -86,11 +93,34 @@ class OnboardingPage extends StatelessWidget {
                   style: AppTypography.buyerMobile.display.toTextStyle(
                     color: headingColor,
                   ),
-                  textAlign: TextAlign.end,
+                  textAlign: isRtl ? TextAlign.right : TextAlign.center,
                   textDirection: Directionality.of(context),
-                  maxLines: 3,
+                  maxLines: isRtl ? 2 : 3,
                 ),
-                const Spacer(),
+                const SizedBox(height: AppSpacing.tokenXs),
+                AppText(
+                  subtitle,
+                  variant: AppTextVariant.bodyMedium,
+                  style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                    color: subtitleColor,
+                  ),
+                  textAlign: isRtl ? TextAlign.right : TextAlign.center,
+                  maxLines: 2,
+                ),
+                const SizedBox(height: AppSpacing.token5Xl),
+                Expanded(
+                  child: Center(
+                    child: Transform.scale(
+                      scaleX: 1.18,
+                      scaleY: 1.36,
+                      child: Image.asset(
+                        AppImages.image(page.imagePath),
+                        fit: BoxFit.contain,
+                        excludeFromSemantics: true,
+                      ),
+                    ),
+                  ),
+                ),
                 PrimaryButton(
                   label:
                       isLastPage ? l10n.onboardingStart : l10n.onboardingNext,
@@ -115,7 +145,8 @@ class OnboardingPage extends StatelessWidget {
                     onPressed: onSkip,
                     style: TextButton.styleFrom(
                       foregroundColor: actionColor,
-                      minimumSize: const Size.fromHeight(44),
+                      minimumSize: const Size.fromHeight(40),
+                      padding: EdgeInsets.zero,
                       textStyle: AppTypography.buyerMobile.label.toTextStyle(
                         color: actionColor,
                       ),
@@ -129,6 +160,7 @@ class OnboardingPage extends StatelessWidget {
                     ),
                   ),
                 ],
+                const SizedBox(height: AppSpacing.tokenXs),
               ],
             ),
           ),
@@ -138,3 +170,35 @@ class OnboardingPage extends StatelessWidget {
   }
 }
 
+class _OnboardingDiamonds extends StatelessWidget {
+  const _OnboardingDiamonds();
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = <Color>[
+      AppColors.primitives.accent01.shade300,
+      AppColors.primitives.primary.shade200,
+      AppColors.primitives.accent01.shade300,
+      AppColors.primitives.neutral.shade300,
+      AppColors.primitives.primary.shade300,
+      AppColors.primitives.accent01.shade300,
+      AppColors.primitives.neutral.shade400,
+    ];
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          for (final color in colors)
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 5),
+              child: Transform.rotate(
+                angle: .785,
+                child: Container(width: 8, height: 8, color: color),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
