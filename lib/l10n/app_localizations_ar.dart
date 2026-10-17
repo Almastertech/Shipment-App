@@ -445,20 +445,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeQuickGuideAction => 'كيف تعمل الحماية؟';
 
   @override
-  String get homeRequestNumber => 'HS-2048#';
+  String get homeRequestNumber => 'HS-2048';
 
   @override
   String get homeRequestType => 'مطالبة';
 
   @override
-  String get homeRequestRemainingTime => 'خلال ٣ أيام';
+  String get homeRequestRemainingTime => 'مطلوب منك';
 
   @override
-  String get homeRequestTitle => 'مطالباتك قيد المراجعة';
+  String get homeRequestTitle => 'عطر رجالي بقيمة ١٠٠ ر.س من نيس ون';
 
   @override
   String get homeRequestDescription =>
-      'يراجع فريقنا تفاصيل مطالبتك على عطر رجالي من نيس ون. سنعلمك فور صدور القرار.';
+      'صوّر المنتج والتغليف بوضوح عشان نكمل مراجعة مطالبتك بسرعة.';
 
   @override
   String get homeRequestStepReceived => 'استلام الطلب';
@@ -473,13 +473,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeRequestStepCompensation => 'تعويض';
 
   @override
-  String get homeRequestAmountLabel => 'قيمة المطالبة:';
+  String get homeRequestAmountLabel => 'قيمة الوثيقة';
 
   @override
   String get homeRequestAmount => '480 ر.س';
 
   @override
-  String get homeRequestAction => 'متابعة المطالبة';
+  String get homeRequestAction => 'كمل المطالبة';
 
   @override
   String get homeHowItWorks => 'كيف يبدأ الأمر';

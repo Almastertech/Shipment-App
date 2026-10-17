@@ -453,20 +453,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeQuickGuideAction => 'How does protection work?';
 
   @override
-  String get homeRequestNumber => 'HS-2048#';
+  String get homeRequestNumber => 'HS-2048';
 
   @override
   String get homeRequestType => 'Claim';
 
   @override
-  String get homeRequestRemainingTime => 'Within 3 days';
+  String get homeRequestRemainingTime => 'Action required';
 
   @override
-  String get homeRequestTitle => 'Your claim is under review';
+  String get homeRequestTitle =>
+      'Men\'s fragrance valued at SAR 100 from Nice One';
 
   @override
   String get homeRequestDescription =>
-      'Our team is reviewing your claim for a men\'s fragrance from Nice One. We will let you know as soon as a decision is made.';
+      'Please capture the product and packaging clearly so we can review your claim quickly.';
 
   @override
   String get homeRequestStepReceived => 'Received';
@@ -481,13 +482,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeRequestStepCompensation => 'Compensation';
 
   @override
-  String get homeRequestAmountLabel => 'Claim value:';
+  String get homeRequestAmountLabel => 'Shipment value';
 
   @override
   String get homeRequestAmount => 'SAR 480';
 
   @override
-  String get homeRequestAction => 'Track claim';
+  String get homeRequestAction => 'Continue claim';
 
   @override
   String get homeHowItWorks => 'How it works';

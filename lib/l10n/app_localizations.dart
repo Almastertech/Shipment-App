@@ -923,7 +923,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeRequestNumber.
   ///
   /// In en, this message translates to:
-  /// **'HS-2048#'**
+  /// **'HS-2048'**
   String get homeRequestNumber;
 
   /// No description provided for @homeRequestType.
@@ -935,19 +935,19 @@ abstract class AppLocalizations {
   /// No description provided for @homeRequestRemainingTime.
   ///
   /// In en, this message translates to:
-  /// **'Within 3 days'**
+  /// **'Action required'**
   String get homeRequestRemainingTime;
 
   /// No description provided for @homeRequestTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your claim is under review'**
+  /// **'Men\'s fragrance valued at SAR 100 from Nice One'**
   String get homeRequestTitle;
 
   /// No description provided for @homeRequestDescription.
   ///
   /// In en, this message translates to:
-  /// **'Our team is reviewing your claim for a men\'s fragrance from Nice One. We will let you know as soon as a decision is made.'**
+  /// **'Please capture the product and packaging clearly so we can review your claim quickly.'**
   String get homeRequestDescription;
 
   /// No description provided for @homeRequestStepReceived.
@@ -977,7 +977,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeRequestAmountLabel.
   ///
   /// In en, this message translates to:
-  /// **'Claim value:'**
+  /// **'Shipment value'**
   String get homeRequestAmountLabel;
 
   /// No description provided for @homeRequestAmount.
@@ -989,7 +989,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeRequestAction.
   ///
   /// In en, this message translates to:
-  /// **'Track claim'**
+  /// **'Continue claim'**
   String get homeRequestAction;
 
   /// No description provided for @homeHowItWorks.
