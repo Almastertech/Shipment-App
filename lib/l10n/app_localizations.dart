@@ -746,6 +746,48 @@ abstract class AppLocalizations {
   /// **'View details'**
   String get homeShipmentDetails;
 
+  /// No description provided for @homeCompactShipmentProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Wireless headphones'**
+  String get homeCompactShipmentProduct;
+
+  /// No description provided for @homeCompactShipmentMerchant.
+  ///
+  /// In en, this message translates to:
+  /// **'Jarir store'**
+  String get homeCompactShipmentMerchant;
+
+  /// No description provided for @homeCompactShipmentPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 320'**
+  String get homeCompactShipmentPrice;
+
+  /// No description provided for @homeCompactShipmentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get homeCompactShipmentStatus;
+
+  /// No description provided for @homeCompactShipmentDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrives Tuesday, October 5'**
+  String get homeCompactShipmentDelivery;
+
+  /// No description provided for @homeCompactShipmentTrackingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking:'**
+  String get homeCompactShipmentTrackingLabel;
+
+  /// No description provided for @homeCompactShipmentTrackingNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'HS-3107'**
+  String get homeCompactShipmentTrackingNumber;
+
   /// No description provided for @shipmentDetailsTitle.
   ///
   /// In en, this message translates to:

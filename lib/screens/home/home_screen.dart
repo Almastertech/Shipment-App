@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shipments/screens/home/widgets/home_header.dart';
+import 'package:shipments/screens/home/widgets/custom_home_info_card.dart';
 import 'package:shipments/screens/home/widgets/see_all_shipments_link.dart';
 
 import '../../components/app_scaffold.dart';
 import '../../components/custom_secondary_banner.dart';
-import '../../components/custom_shipment_info_card.dart';
 import '../../components/layout/custom_bottom_nav_bar.dart';
 import '../../components/secondary_request_custom_card.dart';
 import '../../components/section_title.dart';
@@ -78,28 +78,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: AppSpacing.tokenM),
-            CustomShipmentInfoCard(
-              productTitle: l10n.homeShipmentProduct,
-              merchantName: l10n.homeShipmentMerchant,
-              price: l10n.homeShipmentPrice,
-              protectionLabel: l10n.homeShipmentProtection,
-              deliveryStatus: l10n.homeShipmentDeliveryStatus,
-              expectedDeliveryLabel: l10n.homeShipmentExpectedDelivery,
-              expectedDeliveryDate: l10n.homeShipmentExpectedDate,
-              detailsActionLabel: l10n.homeShipmentDetails,
-              onDetails: () {},
-            ),
-            const SizedBox(height: AppSpacing.tokenS),
-            CustomShipmentInfoCard(
-              productTitle: l10n.homeShipmentProduct,
-              merchantName: l10n.homeShipmentMerchant,
-              price: l10n.homeShipmentPrice,
-              protectionLabel: l10n.homeShipmentProtection,
-              deliveryStatus: l10n.homeShipmentDeliveryStatus,
-              expectedDeliveryLabel: l10n.homeShipmentExpectedDelivery,
-              expectedDeliveryDate: l10n.homeShipmentExpectedDate,
-              detailsActionLabel: l10n.homeShipmentDetails,
-              onDetails: () {},
+            CustomHomeInfoCard(
+              productTitle: l10n.homeCompactShipmentProduct,
+              merchantName: l10n.homeCompactShipmentMerchant,
+              price: l10n.homeCompactShipmentPrice,
+              statusLabel: l10n.homeCompactShipmentStatus,
+              deliveryLabel: l10n.homeCompactShipmentDelivery,
+              trackingLabel: l10n.homeCompactShipmentTrackingLabel,
+              trackingNumber: l10n.homeCompactShipmentTrackingNumber,
+              onTap: () {},
             ),
             const SizedBox(height: AppSpacing.tokenL),
             SectionTitle(

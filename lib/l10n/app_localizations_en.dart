@@ -366,6 +366,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeShipmentDetails => 'View details';
 
   @override
+  String get homeCompactShipmentProduct => 'Wireless headphones';
+
+  @override
+  String get homeCompactShipmentMerchant => 'Jarir store';
+
+  @override
+  String get homeCompactShipmentPrice => 'SAR 320';
+
+  @override
+  String get homeCompactShipmentStatus => 'New';
+
+  @override
+  String get homeCompactShipmentDelivery => 'Arrives Tuesday, October 5';
+
+  @override
+  String get homeCompactShipmentTrackingLabel => 'Tracking:';
+
+  @override
+  String get homeCompactShipmentTrackingNumber => 'HS-3107';
+
+  @override
   String get shipmentDetailsTitle => 'Shipment details';
 
   @override

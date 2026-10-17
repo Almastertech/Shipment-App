@@ -358,6 +358,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeShipmentDetails => 'عرض التفاصيل';
 
   @override
+  String get homeCompactShipmentProduct => 'سماعات لاسلكية';
+
+  @override
+  String get homeCompactShipmentMerchant => 'متجر جرير';
+
+  @override
+  String get homeCompactShipmentPrice => '٣٢٠ ر.س';
+
+  @override
+  String get homeCompactShipmentStatus => 'جديد';
+
+  @override
+  String get homeCompactShipmentDelivery => 'توصلك الثلاثاء ٥ أكتوبر';
+
+  @override
+  String get homeCompactShipmentTrackingLabel => 'تتبع:';
+
+  @override
+  String get homeCompactShipmentTrackingNumber => 'HS-3107';
+
+  @override
   String get shipmentDetailsTitle => 'تفاصيل الشحنة';
 
   @override
