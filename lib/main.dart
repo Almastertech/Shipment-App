@@ -18,7 +18,7 @@ Future<void> main() async {
   await injection.init();
   runApp(
     DevicePreview(
-      enabled: kReleaseMode,
+      enabled: !kReleaseMode,
       builder: (context) => const GenerateMultiProvider(child: MyApp()),
     ),
   );
