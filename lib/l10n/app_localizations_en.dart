@@ -12,6 +12,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Shipments';
 
   @override
+  String get splashBrand => 'Haseen';
+
+  @override
+  String get splashTagline => 'Your products, in safe hands.';
+
+  @override
+  String get splashFooter =>
+      'Protect your shipment from the store to your door.';
+
+  @override
   String get onboardingProtectionLead => 'Enable';
 
   @override
@@ -234,18 +244,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpVerificationFailed => 'The code is incorrect. Try again.';
 
   @override
-  String get otpSuccessTitle => 'Verification successful';
+  String get otpSuccessTitle => 'Verified!';
 
   @override
   String get otpSuccessMessage =>
-      'Your identity is confirmed. We are finding your protection.';
+      'Just a moment while we take you to your shipment.';
 
   @override
   String get welcomeTitle => 'Welcome back, Abdullah 👋';
 
   @override
   String get welcomeDescription =>
-      'We found your protection. View its details and track your shipment to delivery.';
+      'Your shipment is protected. Track it here, and submit a claim if anything happens.';
 
   @override
   String get welcomeContinue => 'Enter Haseen';
@@ -254,14 +264,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeProductTitle => 'Smart watch — Gold edition';
 
   @override
-  String get welcomeProtectionActive => 'Haseen protection active';
+  String get welcomeProtectionActive => 'Haseen protection';
 
   @override
-  String get accountNotFoundTitle => 'We couldn\'t find protection';
+  String get accountNotFoundTitle => 'No protection found for these details';
 
   @override
   String get accountNotFoundBody =>
-      'Use the same phone number or email address you used when purchasing protection.';
+      'Check that you used the same phone number or email address that you entered when placing your order.';
 
   @override
   String get accountNotFoundPhone => 'Phone used at purchase';
@@ -270,7 +280,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountNotFoundEmail => 'Email used at purchase';
 
   @override
+  String get accountNotFoundCheckEmail =>
+      'Check the order confirmation email from the merchant';
+
+  @override
+  String get accountNotFoundTryOtherMethod =>
+      'Try the other method (phone or email)';
+
+  @override
   String get accountNotFoundTryAgain => 'Try different details';
+
+  @override
+  String get accountNotFoundSupport => 'Contact support';
 
   @override
   String homeGreeting(String name) {

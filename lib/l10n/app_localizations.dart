@@ -104,6 +104,24 @@ abstract class AppLocalizations {
   /// **'Shipments'**
   String get appTitle;
 
+  /// No description provided for @splashBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Haseen'**
+  String get splashBrand;
+
+  /// No description provided for @splashTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Your products, in safe hands.'**
+  String get splashTagline;
+
+  /// No description provided for @splashFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'Protect your shipment from the store to your door.'**
+  String get splashFooter;
+
   /// No description provided for @onboardingProtectionLead.
   ///
   /// In en, this message translates to:
@@ -503,13 +521,13 @@ abstract class AppLocalizations {
   /// No description provided for @otpSuccessTitle.
   ///
   /// In en, this message translates to:
-  /// **'Verification successful'**
+  /// **'Verified!'**
   String get otpSuccessTitle;
 
   /// No description provided for @otpSuccessMessage.
   ///
   /// In en, this message translates to:
-  /// **'Your identity is confirmed. We are finding your protection.'**
+  /// **'Just a moment while we take you to your shipment.'**
   String get otpSuccessMessage;
 
   /// No description provided for @welcomeTitle.
@@ -521,7 +539,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeDescription.
   ///
   /// In en, this message translates to:
-  /// **'We found your protection. View its details and track your shipment to delivery.'**
+  /// **'Your shipment is protected. Track it here, and submit a claim if anything happens.'**
   String get welcomeDescription;
 
   /// No description provided for @welcomeContinue.
@@ -539,19 +557,19 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeProtectionActive.
   ///
   /// In en, this message translates to:
-  /// **'Haseen protection active'**
+  /// **'Haseen protection'**
   String get welcomeProtectionActive;
 
   /// No description provided for @accountNotFoundTitle.
   ///
   /// In en, this message translates to:
-  /// **'We couldn\'t find protection'**
+  /// **'No protection found for these details'**
   String get accountNotFoundTitle;
 
   /// No description provided for @accountNotFoundBody.
   ///
   /// In en, this message translates to:
-  /// **'Use the same phone number or email address you used when purchasing protection.'**
+  /// **'Check that you used the same phone number or email address that you entered when placing your order.'**
   String get accountNotFoundBody;
 
   /// No description provided for @accountNotFoundPhone.
@@ -566,11 +584,29 @@ abstract class AppLocalizations {
   /// **'Email used at purchase'**
   String get accountNotFoundEmail;
 
+  /// No description provided for @accountNotFoundCheckEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the order confirmation email from the merchant'**
+  String get accountNotFoundCheckEmail;
+
+  /// No description provided for @accountNotFoundTryOtherMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Try the other method (phone or email)'**
+  String get accountNotFoundTryOtherMethod;
+
   /// No description provided for @accountNotFoundTryAgain.
   ///
   /// In en, this message translates to:
   /// **'Try different details'**
   String get accountNotFoundTryAgain;
+
+  /// No description provided for @accountNotFoundSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact support'**
+  String get accountNotFoundSupport;
 
   /// No description provided for @homeGreeting.
   ///

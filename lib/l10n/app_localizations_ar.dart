@@ -12,6 +12,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appTitle => 'Shipments';
 
   @override
+  String get splashBrand => 'حصين';
+
+  @override
+  String get splashTagline => 'منتجاتك.. في أيدٍ أمينة';
+
+  @override
+  String get splashFooter => 'حماية شحنتك من المتجر لين باب بيتك';
+
+  @override
   String get onboardingProtectionLead => 'قفل';
 
   @override
@@ -229,17 +238,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get otpVerificationFailed => 'الرمز غير صحيح. حاول مرة أخرى.';
 
   @override
-  String get otpSuccessTitle => 'تم التحقق بنجاح';
+  String get otpSuccessTitle => 'تم التحقق!';
 
   @override
-  String get otpSuccessMessage => 'تم تأكيد هويتك بنجاح، نبحث الآن عن حمايتك.';
+  String get otpSuccessMessage => 'لحظات ونوديك لشحنتك';
 
   @override
   String get welcomeTitle => 'هلا والله، عبدالله 👋';
 
   @override
   String get welcomeDescription =>
-      'لقينا حمايتك. استعرض تفاصيلها وتابع شحنتك لين توصل.';
+      'لقينا حماية شحنتك. تقدر الحين تتابعها، ولو صار شي تقدم مطالبتك من هنا.';
 
   @override
   String get welcomeContinue => 'ادخل حصين';
@@ -248,14 +257,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcomeProductTitle => 'ساعة ذكية — إصدار ذهبي';
 
   @override
-  String get welcomeProtectionActive => 'حماية حصين مفعّلة';
+  String get welcomeProtectionActive => 'حماية حصين';
 
   @override
-  String get accountNotFoundTitle => 'ما لقينا حماية بهالبيانات';
+  String get accountNotFoundTitle => 'ما لقينا حماية ببياناتك';
 
   @override
   String get accountNotFoundBody =>
-      'تأكد أنك تستخدم نفس رقم الجوال أو الإيميل اللي استخدمته وقت شراء الحماية.';
+      'تأكد أنك تستخدم نفس الجوال أو الإيميل اللي حطيته وقت الشراء من التاجر.';
 
   @override
   String get accountNotFoundPhone => 'رقم الجوال المستخدم عند الشراء';
@@ -264,7 +273,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get accountNotFoundEmail => 'الإيميل المستخدم عند الشراء';
 
   @override
+  String get accountNotFoundCheckEmail => 'شيك على رسالة تأكيد الطلب من التاجر';
+
+  @override
+  String get accountNotFoundTryOtherMethod =>
+      'جرب الطريقة الثانية (جوال أو إيميل)';
+
+  @override
   String get accountNotFoundTryAgain => 'جرب بيانات ثانية';
+
+  @override
+  String get accountNotFoundSupport => 'كلم الدعم';
 
   @override
   String homeGreeting(String name) {
