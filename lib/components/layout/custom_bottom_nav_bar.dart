@@ -195,7 +195,7 @@ class _SelectedNavDestination extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppRadius.tokenFull),
             border: Border.all(
               color: primaryColor,
-              width: AppSpacing.tokenXs,
+              width: AppSpacing.token3Xs,
             ),
           ),
           child: AnimatedSwitcher(
