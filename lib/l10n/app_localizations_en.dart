@@ -510,14 +510,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mainBannerGreeting => 'Welcome to Haseen 👋';
 
   @override
-  String get mainBannerTitle => 'Your purchases are protected with Haseen';
+  String get mainBannerTitle => 'Shop with Haseen protection';
 
   @override
   String get mainBannerDescription =>
-      'When you shop with a partner store, your shipment appears here automatically. Protected from order to doorstep.';
+      'Shop with our trusted partners and enjoy safe delivery with protection from checkout to your door.';
 
   @override
-  String get mainBannerAction => 'Explore partner stores';
+  String get mainBannerAction => 'Discover partner stores';
+
+  @override
+  String get mainBannerPartnerCount => '40+ partner stores';
 
   @override
   String get homeStepOneLabel => 'Step one';

@@ -1031,20 +1031,26 @@ abstract class AppLocalizations {
   /// No description provided for @mainBannerTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your purchases are protected with Haseen'**
+  /// **'Shop with Haseen protection'**
   String get mainBannerTitle;
 
   /// No description provided for @mainBannerDescription.
   ///
   /// In en, this message translates to:
-  /// **'When you shop with a partner store, your shipment appears here automatically. Protected from order to doorstep.'**
+  /// **'Shop with our trusted partners and enjoy safe delivery with protection from checkout to your door.'**
   String get mainBannerDescription;
 
   /// No description provided for @mainBannerAction.
   ///
   /// In en, this message translates to:
-  /// **'Explore partner stores'**
+  /// **'Discover partner stores'**
   String get mainBannerAction;
+
+  /// No description provided for @mainBannerPartnerCount.
+  ///
+  /// In en, this message translates to:
+  /// **'40+ partner stores'**
+  String get mainBannerPartnerCount;
 
   /// No description provided for @homeStepOneLabel.
   ///

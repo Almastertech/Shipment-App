@@ -501,14 +501,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mainBannerGreeting => 'مرحباً بك في حصين 👋';
 
   @override
-  String get mainBannerTitle => 'مشترياتك محمية مع حصين';
+  String get mainBannerTitle => 'مشترياتك بأمان مع حصين';
 
   @override
   String get mainBannerDescription =>
-      'عند الشراء من متجر شريك، تظهر شحنتك هنا تلقائيًا. محمية من لحظة الطلب حتى باب بيتك.';
+      'اشترِ من متاجرنا الشريكة، واستمتع بشحن آمن وحماية من لحظة الطلب حتى باب بيتك.';
 
   @override
-  String get mainBannerAction => 'استكشف المتاجر الشريكة';
+  String get mainBannerAction => 'اكتشف المتاجر الشريكة';
+
+  @override
+  String get mainBannerPartnerCount => '+40 متجر شريك';
 
   @override
   String get homeStepOneLabel => 'الخطوة الأولى';
