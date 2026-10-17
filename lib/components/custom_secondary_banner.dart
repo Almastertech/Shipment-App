@@ -1,129 +1,137 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../core/resources/app_colors.dart';
-import '../core/resources/app_images.dart';
 import '../core/resources/app_radius.dart';
 import '../core/resources/app_spacing.dart';
 import '../core/resources/app_typography.dart';
 import 'app_text.dart';
 import 'buttons/primary_button.dart';
 
+/// Compact protection information banner shown near the end of the home feed.
 class CustomSecondaryBanner extends StatelessWidget {
   const CustomSecondaryBanner({
     super.key,
-    required this.onBlogTap,
-    this.eyebrow = 'كيف تعمل الحماية؟',
-    this.title = 'تعرف على حماية حصين',
-    this.description = 'تغطية للتلف والفقدان والتأخير في شحنات التاجر المؤهلة.',
-    this.blogLabel = 'زيارة المدونة',
+    required this.title,
+    required this.description,
+    required this.actionLabel,
+    required this.onAction,
   });
 
-  final VoidCallback onBlogTap;
-  final String eyebrow;
   final String title;
   final String description;
-  final String blogLabel;
+  final String actionLabel;
+  final VoidCallback onAction;
 
   @override
   Widget build(BuildContext context) {
-    final accent = AppColors.primitives.accent01.shade500;
-    final white = AppColors.semantic.text.inverse;
+    final colors = AppColors.primitives;
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final height =
-            (constraints.maxWidth * 0.45).clamp(180.0, 220.0).toDouble();
+        final height = math
+            .max(82.0, constraints.maxWidth * .21)
+            .clamp(82.0, 104.0)
+            .toDouble();
 
         return ClipRRect(
           borderRadius: BorderRadius.circular(AppRadius.token2Xl),
           child: SizedBox(
             height: height,
-            width: double.infinity,
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                Image.asset(
-                  AppImages.secondaryBannerBackground,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                  filterQuality: FilterQuality.high,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: AlignmentDirectional.topStart,
+                  end: AlignmentDirectional.bottomEnd,
+                  colors: <Color>[
+                    colors.primary.shade600,
+                    colors.primary.shade700
+                  ],
                 ),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: AlignmentDirectional.centerEnd,
-                      end: AlignmentDirectional.centerStart,
-                      colors: <Color>[
-                        Colors.black.withValues(alpha: 0.12),
-                        Colors.black.withValues(alpha: 0.30),
+              ),
+              child: Stack(
+                children: <Widget>[
+                  PositionedDirectional(
+                    end: -38,
+                    top: -54,
+                    child: Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        color: colors.primary.shade500.withValues(alpha: .45),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.tokenM,
+                      vertical: AppSpacing.tokenS,
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              AppText(
+                                title,
+                                variant: AppTextVariant.titleSmall,
+                                textAlign: TextAlign.start,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTypography.buyerMobile.label
+                                    .toTextStyle(color: Colors.white),
+                              ),
+                              AppText(
+                                description,
+                                variant: AppTextVariant.bodySmall,
+                                textAlign: TextAlign.start,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTypography.buyerMobile.caption
+                                    .toTextStyle(
+                                  color: Colors.white.withValues(alpha: .78),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.tokenS),
+                        PrimaryButton(
+                          label: actionLabel,
+                          onPressed: onAction,
+                          fullWidth: false,
+                          iconOnTrailing: true,
+                          icon: Icon(
+                            Directionality.of(context) == TextDirection.rtl
+                                ? Icons.chevron_left_rounded
+                                : Icons.chevron_right_rounded,
+                            size: 18,
+                            color: colors.neutral.shade900,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: colors.accent01.shade300,
+                            foregroundColor: colors.neutral.shade900,
+                            minimumSize: const Size(0, 36),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.tokenS,
+                            ),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            visualDensity: VisualDensity.compact,
+                            elevation: 0,
+                            shape: const StadiumBorder(),
+                            textStyle: AppTypography.buyerMobile.labelSmall
+                                .toTextStyle(color: colors.neutral.shade900),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(AppSpacing.tokenM),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      AppText(
-                        eyebrow,
-                        variant: AppTextVariant.bodySmall,
-                        textAlign: TextAlign.start,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypography.buyerMobile.caption.toTextStyle(
-                          color: accent,
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.tokenXs),
-                      AppText(
-                        title,
-                        variant: AppTextVariant.titleLarge,
-                        textAlign: TextAlign.start,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypography.buyerMobile.h4.toTextStyle(
-                          color: white,
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.tokenXs),
-                      AppText(
-                        description,
-                        variant: AppTextVariant.bodySmall,
-                        textAlign: TextAlign.start,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                          color: white.withValues(alpha: 0.78),
-                        ),
-                      ),
-                      const Spacer(),
-                      PrimaryButton(
-                        label: blogLabel,
-                        onPressed: onBlogTap,
-                        fullWidth: false,
-                        iconOnTrailing: true,
-                        icon: Icon(
-                          Icons.chevron_right_rounded,
-                          size: 20,
-                          color: accent,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: accent,
-                          disabledBackgroundColor: Colors.transparent,
-                          elevation: 0,
-                          shadowColor: Colors.transparent,
-                          padding: EdgeInsets.zero,
-                          minimumSize: Size.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          visualDensity: VisualDensity.compact,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

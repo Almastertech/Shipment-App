@@ -1,11 +1,12 @@
-
 import 'package:flutter/material.dart';
-import 'package:shipments/components/app_text.dart';
-import 'package:shipments/core/resources/app_colors.dart';
-import 'package:shipments/core/resources/app_typography.dart';
+
+import '../../../components/app_text.dart';
+import '../../../core/resources/app_colors.dart';
+import '../../../core/resources/app_typography.dart';
 
 class SeeAllShipmentsLink extends StatelessWidget {
-  const SeeAllShipmentsLink({super.key, required this.label, required this.onTap});
+  const SeeAllShipmentsLink(
+      {super.key, required this.label, required this.onTap});
 
   final String label;
   final VoidCallback onTap;
@@ -22,21 +23,12 @@ class SeeAllShipmentsLink extends StatelessWidget {
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          AppText(
-            label,
-            variant: AppTextVariant.labelMedium,
-            style: AppTypography.buyerMobile.label.toTextStyle(
-              color: primary,
-            ),
-          ),
-          const Icon(
-            Icons.chevron_right_rounded,
-            size: 20,
-          ),
-        ],
+      child: AppText(
+        label,
+        variant: AppTextVariant.labelMedium,
+        style: AppTypography.buyerMobile.label.toTextStyle(
+          color: primary,
+        ),
       ),
     );
   }

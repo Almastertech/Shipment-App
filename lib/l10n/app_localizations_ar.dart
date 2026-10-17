@@ -291,7 +291,31 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get homeTitle => 'تتبع شحناتك اليوم';
+  String get homeTitle => 'شحناتك ماشية على خير';
+
+  @override
+  String get homeHeroGreeting => 'هلا والله 👋';
+
+  @override
+  String get homeUserName => 'عبدالله التميمي';
+
+  @override
+  String get homeHeroDescription => 'وحنا معك خطوة خطوة لين توصل باب بيتك';
+
+  @override
+  String get homeHeroShipmentDelivery => 'توصلك الجمعة، ١ أكتوبر';
+
+  @override
+  String get homeHeroShipmentAction => 'تابعها';
+
+  @override
+  String get homeShipmentStatusHeadline => 'حصين: بالطريق لك';
+
+  @override
+  String get homeMoreShipmentsTitle => 'شحناتك الثانية';
+
+  @override
+  String get homeSeeAll => 'شوف الكل';
 
   @override
   String get homeActiveShipments => 'شحناتك النشطة';
@@ -367,16 +391,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeCompactShipmentPrice => '٣٢٠ ر.س';
 
   @override
-  String get homeCompactShipmentStatus => 'جديد';
+  String get homeCompactShipmentStatus => 'يتجهز';
 
   @override
-  String get homeCompactShipmentDelivery => 'توصلك الثلاثاء ٥ أكتوبر';
+  String get homeCompactShipmentDelivery => 'توصلك الأحد ٥ أكتوبر';
 
   @override
   String get homeCompactShipmentTrackingLabel => 'تتبع:';
 
   @override
   String get homeCompactShipmentTrackingNumber => 'HS-3107';
+
+  @override
+  String get homeCompactShipment2Product => 'عطر رجالي 100 مل';
+
+  @override
+  String get homeCompactShipment2Merchant => 'متجر المجد للعود';
+
+  @override
+  String get homeCompactShipment2Price => '٦٥٠ ر.س';
+
+  @override
+  String get homeCompactShipment2Status => 'بالطريق';
+
+  @override
+  String get homeCompactShipment2Delivery => 'توصلك بكرة';
+
+  @override
+  String get homeCompactShipment2TrackingNumber => 'HS-2990';
 
   @override
   String get shipmentDetailsTitle => 'تفاصيل الشحنة';
@@ -475,7 +517,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeRequestRemainingTime => 'مطلوب منك';
 
   @override
-  String get homeRequestTitle => 'عطر رجالي بقيمة ١٠٠ ر.س من نيس ون';
+  String get homeRequestTitle => 'عطر رجالي 100 مل · نيس ون';
 
   @override
   String get homeRequestDescription =>
@@ -507,7 +549,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeSecondaryRequestDescription =>
-      'نتابع صورة وتفاصيل مطالبتك، وسنخبرك بأي تحديث قريبًا.';
+      'نراجع الحين صورة وتفاصيل مطالبتك، وما يحتاج منك شيء ثاني.';
 
   @override
   String get homeSecondaryRequestAmountLabel => 'قيمة الطلب';
@@ -565,14 +607,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get secondaryBannerEyebrow => 'كيف تعمل الحماية؟';
 
   @override
-  String get secondaryBannerTitle => 'تعرف على حماية حصين';
+  String get secondaryBannerTitle => 'وش تغطي حماية حصين؟';
 
   @override
   String get secondaryBannerDescription =>
-      'تغطية للتلف والفقدان والتأخير في شحنات التاجر المؤهلة.';
+      'التلف والفقدان والتأخير في شحنات التاجر المؤهلة.';
 
   @override
-  String get secondaryBannerAction => 'زيارة المدونة';
+  String get secondaryBannerAction => 'اقرأ أكثر';
 
   @override
   String get bottomNavHome => 'الرئيسية';

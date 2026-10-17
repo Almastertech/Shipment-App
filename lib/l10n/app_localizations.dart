@@ -617,8 +617,56 @@ abstract class AppLocalizations {
   /// No description provided for @homeTitle.
   ///
   /// In en, this message translates to:
-  /// **'Track your shipments today'**
+  /// **'Your shipment is in good hands'**
   String get homeTitle;
+
+  /// No description provided for @homeHeroGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello there 👋'**
+  String get homeHeroGreeting;
+
+  /// No description provided for @homeUserName.
+  ///
+  /// In en, this message translates to:
+  /// **'Abdullah Al Tamimi'**
+  String get homeUserName;
+
+  /// No description provided for @homeHeroDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We are with you every step of the way until it reaches your door.'**
+  String get homeHeroDescription;
+
+  /// No description provided for @homeHeroShipmentDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrives Friday, October 1'**
+  String get homeHeroShipmentDelivery;
+
+  /// No description provided for @homeHeroShipmentAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Track it'**
+  String get homeHeroShipmentAction;
+
+  /// No description provided for @homeShipmentStatusHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Haseen is on the way with you'**
+  String get homeShipmentStatusHeadline;
+
+  /// No description provided for @homeMoreShipmentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your other shipments'**
+  String get homeMoreShipmentsTitle;
+
+  /// No description provided for @homeSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get homeSeeAll;
 
   /// No description provided for @homeActiveShipments.
   ///
@@ -767,13 +815,13 @@ abstract class AppLocalizations {
   /// No description provided for @homeCompactShipmentStatus.
   ///
   /// In en, this message translates to:
-  /// **'New'**
+  /// **'Preparing'**
   String get homeCompactShipmentStatus;
 
   /// No description provided for @homeCompactShipmentDelivery.
   ///
   /// In en, this message translates to:
-  /// **'Arrives Tuesday, October 5'**
+  /// **'Arrives Sunday, October 5'**
   String get homeCompactShipmentDelivery;
 
   /// No description provided for @homeCompactShipmentTrackingLabel.
@@ -787,6 +835,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'HS-3107'**
   String get homeCompactShipmentTrackingNumber;
+
+  /// No description provided for @homeCompactShipment2Product.
+  ///
+  /// In en, this message translates to:
+  /// **'Men\'s fragrance, 100 ml'**
+  String get homeCompactShipment2Product;
+
+  /// No description provided for @homeCompactShipment2Merchant.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Majd Oud store'**
+  String get homeCompactShipment2Merchant;
+
+  /// No description provided for @homeCompactShipment2Price.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 650'**
+  String get homeCompactShipment2Price;
+
+  /// No description provided for @homeCompactShipment2Status.
+  ///
+  /// In en, this message translates to:
+  /// **'In transit'**
+  String get homeCompactShipment2Status;
+
+  /// No description provided for @homeCompactShipment2Delivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrives tomorrow'**
+  String get homeCompactShipment2Delivery;
+
+  /// No description provided for @homeCompactShipment2TrackingNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'HS-2990'**
+  String get homeCompactShipment2TrackingNumber;
 
   /// No description provided for @shipmentDetailsTitle.
   ///
@@ -983,7 +1067,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeRequestTitle.
   ///
   /// In en, this message translates to:
-  /// **'Men\'s fragrance valued at SAR 100 from Nice One'**
+  /// **'Men\'s fragrance, 100 ml · Nice One'**
   String get homeRequestTitle;
 
   /// No description provided for @homeRequestDescription.
@@ -1043,7 +1127,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeSecondaryRequestDescription.
   ///
   /// In en, this message translates to:
-  /// **'We are reviewing your claim details and will share an update soon.'**
+  /// **'We are reviewing your claim details. No further action is needed right now.'**
   String get homeSecondaryRequestDescription;
 
   /// No description provided for @homeSecondaryRequestAmountLabel.
@@ -1157,19 +1241,19 @@ abstract class AppLocalizations {
   /// No description provided for @secondaryBannerTitle.
   ///
   /// In en, this message translates to:
-  /// **'Get to know Haseen shipment protection'**
+  /// **'What does Haseen protection cover?'**
   String get secondaryBannerTitle;
 
   /// No description provided for @secondaryBannerDescription.
   ///
   /// In en, this message translates to:
-  /// **'Coverage for damage, loss and delays on eligible merchant shipments.'**
+  /// **'Damage, loss, and delays on eligible merchant shipments.'**
   String get secondaryBannerDescription;
 
   /// No description provided for @secondaryBannerAction.
   ///
   /// In en, this message translates to:
-  /// **'Visit the blog'**
+  /// **'Read more'**
   String get secondaryBannerAction;
 
   /// No description provided for @bottomNavHome.

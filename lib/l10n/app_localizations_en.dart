@@ -299,7 +299,32 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get homeTitle => 'Track your shipments today';
+  String get homeTitle => 'Your shipment is in good hands';
+
+  @override
+  String get homeHeroGreeting => 'Hello there 👋';
+
+  @override
+  String get homeUserName => 'Abdullah Al Tamimi';
+
+  @override
+  String get homeHeroDescription =>
+      'We are with you every step of the way until it reaches your door.';
+
+  @override
+  String get homeHeroShipmentDelivery => 'Arrives Friday, October 1';
+
+  @override
+  String get homeHeroShipmentAction => 'Track it';
+
+  @override
+  String get homeShipmentStatusHeadline => 'Haseen is on the way with you';
+
+  @override
+  String get homeMoreShipmentsTitle => 'Your other shipments';
+
+  @override
+  String get homeSeeAll => 'See all';
 
   @override
   String get homeActiveShipments => 'Your active shipments';
@@ -375,16 +400,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeCompactShipmentPrice => 'SAR 320';
 
   @override
-  String get homeCompactShipmentStatus => 'New';
+  String get homeCompactShipmentStatus => 'Preparing';
 
   @override
-  String get homeCompactShipmentDelivery => 'Arrives Tuesday, October 5';
+  String get homeCompactShipmentDelivery => 'Arrives Sunday, October 5';
 
   @override
   String get homeCompactShipmentTrackingLabel => 'Tracking:';
 
   @override
   String get homeCompactShipmentTrackingNumber => 'HS-3107';
+
+  @override
+  String get homeCompactShipment2Product => 'Men\'s fragrance, 100 ml';
+
+  @override
+  String get homeCompactShipment2Merchant => 'Al Majd Oud store';
+
+  @override
+  String get homeCompactShipment2Price => 'SAR 650';
+
+  @override
+  String get homeCompactShipment2Status => 'In transit';
+
+  @override
+  String get homeCompactShipment2Delivery => 'Arrives tomorrow';
+
+  @override
+  String get homeCompactShipment2TrackingNumber => 'HS-2990';
 
   @override
   String get shipmentDetailsTitle => 'Shipment details';
@@ -483,8 +526,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeRequestRemainingTime => 'Action required';
 
   @override
-  String get homeRequestTitle =>
-      'Men\'s fragrance valued at SAR 100 from Nice One';
+  String get homeRequestTitle => 'Men\'s fragrance, 100 ml · Nice One';
 
   @override
   String get homeRequestDescription =>
@@ -516,7 +558,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeSecondaryRequestDescription =>
-      'We are reviewing your claim details and will share an update soon.';
+      'We are reviewing your claim details. No further action is needed right now.';
 
   @override
   String get homeSecondaryRequestAmountLabel => 'Claim value';
@@ -576,14 +618,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get secondaryBannerEyebrow => 'How does protection work?';
 
   @override
-  String get secondaryBannerTitle => 'Get to know Haseen shipment protection';
+  String get secondaryBannerTitle => 'What does Haseen protection cover?';
 
   @override
   String get secondaryBannerDescription =>
-      'Coverage for damage, loss and delays on eligible merchant shipments.';
+      'Damage, loss, and delays on eligible merchant shipments.';
 
   @override
-  String get secondaryBannerAction => 'Visit the blog';
+  String get secondaryBannerAction => 'Read more';
 
   @override
   String get bottomNavHome => 'Home';
