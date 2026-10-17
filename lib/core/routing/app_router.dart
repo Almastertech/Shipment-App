@@ -13,7 +13,6 @@ import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 import '../../screens/auth/login_method_screen.dart';
 import '../../screens/auth/login_screen.dart';
-import '../../screens/auth/account_not_found_screen.dart';
 import '../../screens/auth/otp_success_screen.dart';
 import '../../screens/auth/otp_verification_screen.dart';
 import '../../screens/auth/welcome_screen.dart';
@@ -58,7 +57,6 @@ class AppRouter {
     AppRoutes.otp: RouteGuardType.guestOnly,
     AppRoutes.otpSuccess: RouteGuardType.guestOnly,
     AppRoutes.welcome: RouteGuardType.guestOnly,
-    AppRoutes.accountNotFound: RouteGuardType.guestOnly,
     AppRoutes.home: RouteGuardType.authOrGuest,
     AppRoutes.shipments: RouteGuardType.authOrGuest,
     AppRoutes.shipmentDetails: RouteGuardType.authOrGuest,
@@ -204,16 +202,12 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.otpSuccess,
         builder: (context, state) => OtpSuccessScreen(
-          onComplete: () => context.go(AppRoutes.accountNotFound),
+          onComplete: () => context.go(AppRoutes.welcome),
         ),
       ),
       GoRoute(
         path: AppRoutes.welcome,
         builder: (context, state) => const WelcomeScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.accountNotFound,
-        builder: (context, state) => const AccountNotFoundScreen(),
       ),
       GoRoute(
         path: AppRoutes.home,
