@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(
+          padding: const EdgeInsetsDirectional.fromSTEB(
             AppSpacing.tokenL,
             AppSpacing.tokenS,
             AppSpacing.tokenL,
@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onHelp: () => _showHelp(context, l10n),
         ),
         content: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
+          padding: const EdgeInsetsDirectional.fromSTEB(
             AppSpacing.tokenL,
             AppSpacing.token2Xl,
             AppSpacing.tokenL,
@@ -201,6 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textInputAction: TextInputAction.done,
                 )
               else
+                // Keep the phone number and calling code in LTR order.
                 Row(
                   textDirection: TextDirection.ltr,
                   children: <Widget>[
@@ -240,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: AppTypography.buyerMobile.bodySmall.toTextStyle(
                     color: AppColors.primitives.failure.shade500,
                   ),
-                  textAlign: TextAlign.right,
+                  textAlign: TextAlign.start,
                 )
               else
                 AppText(
@@ -249,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: AppTypography.buyerMobile.bodySmall.toTextStyle(
                     color: neutral.shade600,
                   ),
-                  textAlign: TextAlign.right,
+                  textAlign: TextAlign.start,
                 ),
               const SizedBox(height: AppSpacing.token3Xl),
             ],
@@ -310,7 +311,8 @@ class _LoginScreenState extends State<LoginScreen> {
           textInputAction: textInputAction,
           autofillHints: autofillHints,
           inputFormatters: inputFormatters,
-          textDirection: Directionality.of(context),
+          // Email and phone values use Latin characters and digits.
+          textDirection: TextDirection.ltr,
           onChanged: (_) => setState(() {}),
         ),
       ),

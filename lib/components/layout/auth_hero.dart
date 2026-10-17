@@ -47,67 +47,64 @@ class AuthHero extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            left: AppSpacing.tokenL,
-            right: AppSpacing.tokenL,
+          PositionedDirectional(
+            start: AppSpacing.tokenL,
+            end: AppSpacing.tokenL,
             top: 0,
             child: SafeArea(
               bottom: false,
               child: SizedBox(
                 height: 48,
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (onHelp != null)
-                        TextButton(
-                          onPressed: onHelp,
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor:
-                                Colors.white.withValues(alpha: .16),
-                            shape: const StadiumBorder(),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.tokenM,
-                            ),
-                          ),
-                          child: Directionality(
-                            textDirection: Directionality.of(context),
-                            child: AppText(
-                              helpLabel,
-                              variant: AppTextVariant.labelSmall,
-                              style: AppTypography.buyerMobile.label
-                                  .toTextStyle(color: Colors.white),
-                            ),
-                          ),
-                        )
-                      else
-                        const SizedBox(width: 44),
-                      IconButton(
-                        onPressed: onBack,
-                        icon: const Icon(Icons.chevron_right_rounded),
-                        color: Colors.white,
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.white.withValues(alpha: .16),
-                          fixedSize: const Size(40, 40),
-                        ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: onBack,
+                      icon: Icon(
+                        Directionality.of(context) == TextDirection.rtl
+                            ? Icons.arrow_forward_rounded
+                            : Icons.arrow_back_rounded,
                       ),
-                    ],
-                  ),
+                      color: Colors.white,
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.white.withValues(alpha: .16),
+                        fixedSize: const Size(40, 40),
+                      ),
+                    ),
+                    if (onHelp != null)
+                      TextButton(
+                        onPressed: onHelp,
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.white.withValues(alpha: .16),
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.tokenM,
+                          ),
+                        ),
+                        child: AppText(
+                          helpLabel,
+                          variant: AppTextVariant.labelSmall,
+                          style: AppTypography.buyerMobile.label
+                              .toTextStyle(color: Colors.white),
+                        ),
+                      )
+                    else
+                      const SizedBox(width: 44),
+                  ],
                 ),
               ),
             ),
           ),
-          Positioned(
-            left: AppSpacing.tokenL,
-            right: AppSpacing.tokenL,
+          PositionedDirectional(
+            start: AppSpacing.tokenL,
+            end: AppSpacing.tokenL,
             bottom: AppSpacing.token5Xl,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: AlignmentDirectional.centerStart,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -132,7 +129,7 @@ class AuthHero extends StatelessWidget {
                 AppText(
                   title,
                   variant: AppTextVariant.headlineMedium,
-                  textAlign: TextAlign.right,
+                  textAlign: TextAlign.start,
                   maxLines: 2,
                   style: AppTypography.buyerMobile.h2.toTextStyle(
                     color: Colors.white,
@@ -142,7 +139,7 @@ class AuthHero extends StatelessWidget {
                 AppText(
                   subtitle,
                   variant: AppTextVariant.bodySmall,
-                  textAlign: TextAlign.right,
+                  textAlign: TextAlign.start,
                   maxLines: 2,
                   style: AppTypography.buyerMobile.bodySmall.toTextStyle(
                     color: Colors.white.withValues(alpha: .82),

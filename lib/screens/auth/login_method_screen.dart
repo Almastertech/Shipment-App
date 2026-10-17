@@ -36,7 +36,7 @@ class _LoginMethodScreenState extends State<LoginMethodScreen> {
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(
+          padding: const EdgeInsetsDirectional.fromSTEB(
             AppSpacing.tokenL,
             AppSpacing.tokenS,
             AppSpacing.tokenL,
@@ -97,7 +97,7 @@ class _LoginMethodScreenState extends State<LoginMethodScreen> {
           onHelp: () => _showHelp(context, l10n),
         ),
         content: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
+          padding: const EdgeInsetsDirectional.fromSTEB(
             AppSpacing.tokenL,
             AppSpacing.token2Xl,
             AppSpacing.tokenL,
@@ -109,7 +109,7 @@ class _LoginMethodScreenState extends State<LoginMethodScreen> {
               AppText(
                 l10n.loginMethodChooseTitle,
                 variant: AppTextVariant.titleMedium,
-                textAlign: TextAlign.right,
+                textAlign: TextAlign.start,
                 style: AppTypography.buyerMobile.h5.toTextStyle(
                   color: neutral.shade700,
                 ),
@@ -181,7 +181,6 @@ class _LoginMethodTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final primary = AppColors.primitives.primary;
     final neutral = AppColors.primitives.neutral;
-    final direction = Directionality.of(context);
     return Semantics(
       button: true,
       selected: selected,
@@ -217,31 +216,27 @@ class _LoginMethodTile extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSpacing.tokenM),
                 Expanded(
-                  child: Directionality(
-                    textDirection: direction,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppText(
-                          title,
-                          variant: AppTextVariant.titleSmall,
-                          style: AppTypography.buyerMobile.h5.toTextStyle(
-                            color: neutral.shade900,
-                          ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        title,
+                        variant: AppTextVariant.titleSmall,
+                        style: AppTypography.buyerMobile.h5.toTextStyle(
+                          color: neutral.shade900,
                         ),
-                        const SizedBox(height: AppSpacing.token2Xs),
-                        AppText(
-                          subtitle,
-                          variant: AppTextVariant.bodySmall,
-                          style:
-                              AppTypography.buyerMobile.bodySmall.toTextStyle(
-                            color: neutral.shade600,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: AppSpacing.token2Xs),
+                      AppText(
+                        subtitle,
+                        variant: AppTextVariant.bodySmall,
+                        style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                          color: neutral.shade600,
                         ),
-                      ],
-                    ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(width: AppSpacing.tokenM),

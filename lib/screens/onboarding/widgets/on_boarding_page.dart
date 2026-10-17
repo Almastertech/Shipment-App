@@ -64,7 +64,7 @@ class OnboardingPage extends StatelessWidget {
           padding: EdgeInsets.zero,
           dismissKeyboardOnTap: false,
           body: Padding(
-            padding: const EdgeInsets.fromLTRB(
+            padding: const EdgeInsetsDirectional.fromSTEB(
               AppSpacing.tokenL,
               AppSpacing.tokenS,
               AppSpacing.tokenL,
@@ -93,7 +93,7 @@ class OnboardingPage extends StatelessWidget {
                   style: AppTypography.buyerMobile.display.toTextStyle(
                     color: headingColor,
                   ),
-                  textAlign: isRtl ? TextAlign.right : TextAlign.center,
+                  textAlign: TextAlign.start,
                   textDirection: Directionality.of(context),
                   maxLines: isRtl ? 2 : 3,
                 ),
@@ -104,7 +104,7 @@ class OnboardingPage extends StatelessWidget {
                   style: AppTypography.buyerMobile.bodySmall.toTextStyle(
                     color: subtitleColor,
                   ),
-                  textAlign: isRtl ? TextAlign.right : TextAlign.center,
+                  textAlign: TextAlign.start,
                   maxLines: 2,
                 ),
                 const SizedBox(height: AppSpacing.token5Xl),
@@ -115,8 +115,6 @@ class OnboardingPage extends StatelessWidget {
                       scaleY: 1.36,
                       child: Image.asset(
                         AppImages.image(page.imagePath),
-                        fit: BoxFit.contain,
-                        excludeFromSemantics: true,
                       ),
                     ),
                   ),
@@ -185,7 +183,7 @@ class _OnboardingDiamonds extends StatelessWidget {
       AppColors.primitives.neutral.shade400,
     ];
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: AlignmentDirectional.centerStart,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

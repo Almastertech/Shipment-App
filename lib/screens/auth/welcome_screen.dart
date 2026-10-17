@@ -33,94 +33,152 @@ class WelcomeScreen extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                primary.shade900.withValues(alpha: .58),
-                primary.shade900,
+                primary.shade900.withValues(alpha: .16),
+                primary.shade900.withValues(alpha: .12),
+                primary.shade900.withValues(alpha: .5),
+                primary.shade900.withValues(alpha: .96),
               ],
+              stops: const [0, .48, .78, 1],
             ),
           ),
         ),
         AppScaffold(
-          safeArea: false,
           backgroundColor: Colors.transparent,
-          padding: const EdgeInsets.all(AppSpacing.tokenL),
+          padding: EdgeInsets.zero,
           body: Column(
             children: [
-              const SizedBox(height: AppSpacing.token10Xl),
-              AppText(
-                l10n.welcomeTitle,
-                variant: AppTextVariant.headlineMedium,
-                textAlign: TextAlign.center,
-                style: AppTypography.buyerMobile.h2.toTextStyle(
-                  color: Colors.white,
+              const Spacer(flex: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.tokenL,
                 ),
-              ),
-              const SizedBox(height: AppSpacing.tokenM),
-              AppText(
-                l10n.welcomeDescription,
-                variant: AppTextVariant.bodyMedium,
-                textAlign: TextAlign.center,
-                style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
-                  color: neutral.shade200,
-                ),
-              ),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.all(AppSpacing.tokenM),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: .15),
-                  borderRadius: BorderRadius.circular(AppRadius.token2Xl),
-                  border: Border.all(color: Colors.white.withValues(alpha: .2)),
-                ),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(AppRadius.tokenL),
-                      child: Image.asset(
-                        AppImages.onboardingProtection,
-                        width: 72,
-                        height: 72,
-                        fit: BoxFit.cover,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        for (final color in [
+                          yellow.shade300,
+                          neutral.shade300,
+                          yellow.shade300,
+                          neutral.shade300,
+                          yellow.shade300,
+                          neutral.shade300,
+                          yellow.shade300,
+                          neutral.shade300,
+                        ])
+                          Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                              start: AppSpacing.tokenS,
+                            ),
+                            child: Transform.rotate(
+                              angle: .785,
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                color: color,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.tokenM),
+                    AppText(
+                      l10n.welcomeTitle,
+                      variant: AppTextVariant.headlineMedium,
+                      textAlign: TextAlign.start,
+                      style: AppTypography.buyerMobile.h2.toTextStyle(
+                        color: Colors.white,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.tokenM),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppText(
-                            l10n.welcomeProductTitle,
-                            variant: AppTextVariant.titleSmall,
-                            style: AppTypography.buyerMobile.label.toTextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: AppSpacing.tokenS),
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: yellow.shade100,
-                              borderRadius: BorderRadius.circular(
-                                AppRadius.tokenFull,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppSpacing.tokenS,
-                                vertical: AppSpacing.token2Xs,
-                              ),
-                              child: AppText(
-                                l10n.welcomeProtectionActive,
-                                variant: AppTextVariant.labelSmall,
-                                style:
-                                    AppTypography.buyerMobile.label.toTextStyle(
-                                  color: primary.shade800,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                    const SizedBox(height: AppSpacing.tokenXs),
+                    AppText(
+                      l10n.welcomeDescription,
+                      variant: AppTextVariant.bodyMedium,
+                      textAlign: TextAlign.start,
+                      style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
+                        color: neutral.shade200,
                       ),
                     ),
                   ],
+                ),
+              ),
+              const Spacer(flex: 1),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.tokenL,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(AppSpacing.tokenM),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: .16),
+                    borderRadius: BorderRadius.circular(AppRadius.token2Xl),
+                  ),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(AppRadius.tokenL),
+                        child: Image.asset(
+                          AppImages.shipmentBackground,
+                          width: 52,
+                          height: 52,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.tokenM),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              l10n.welcomeProductTitle,
+                              variant: AppTextVariant.titleSmall,
+                              textAlign: TextAlign.start,
+                              style: AppTypography.buyerMobile.label
+                                  .toTextStyle(color: Colors.white),
+                            ),
+                            const SizedBox(height: AppSpacing.tokenS),
+                            DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: yellow.shade300,
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.tokenFull,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSpacing.tokenS,
+                                  vertical: AppSpacing.token2Xs,
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.verified_user_outlined,
+                                      size: 14,
+                                      color: primary.shade900,
+                                    ),
+                                    const SizedBox(
+                                      width: AppSpacing.token2Xs,
+                                    ),
+                                    AppText(
+                                      l10n.welcomeProtectionActive,
+                                      variant: AppTextVariant.labelSmall,
+                                      style: AppTypography.buyerMobile.label
+                                          .toTextStyle(
+                                        color: primary.shade900,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: AppSpacing.token2Xl),

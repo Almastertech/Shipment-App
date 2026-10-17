@@ -208,7 +208,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           onHelp: _showHelp,
         ),
         content: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
+          padding: const EdgeInsetsDirectional.fromSTEB(
             AppSpacing.tokenL,
             AppSpacing.token3Xl,
             AppSpacing.tokenL,
@@ -220,15 +220,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               AppText(
                 l10n.otpHint,
                 variant: AppTextVariant.titleSmall,
-                textAlign: TextAlign.right,
+                textAlign: TextAlign.start,
                 style: TextStyle(
                   color: AppColors.primitives.neutral.shade900,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: AppSpacing.tokenM),
+              // OTP digits follow LTR entry order in both locales.
               Directionality(
-                textDirection: Directionality.of(context),
+                textDirection: TextDirection.ltr,
                 child: Pinput(
                   length: _codeLength,
                   controller: _pinController,
@@ -266,7 +267,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   child: AppText(
                     l10n.otpVerificationFailed,
                     variant: AppTextVariant.bodySmall,
-                    textAlign: TextAlign.right,
+                    textAlign: TextAlign.start,
                     style: TextStyle(color: resultColor),
                   ),
                 ),
@@ -286,19 +287,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           child: AppText(
                             l10n.otpResendCountdown(_formatCountdown()),
                             variant: AppTextVariant.bodySmall,
-                            textAlign:
-                                Directionality.of(context) == TextDirection.rtl
-                                    ? TextAlign.right
-                                    : TextAlign.left,
+                            textAlign: TextAlign.start,
                             style: TextStyle(color: colors.text.secondary),
                           ),
                         ),
                       ],
                     )
                   : Align(
-                      alignment: Directionality.of(context) == TextDirection.rtl
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
+                      alignment: AlignmentDirectional.centerStart,
                       child: TextButton.icon(
                         onPressed: _resendCode,
                         icon: Icon(
@@ -322,7 +318,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(
+          padding: const EdgeInsetsDirectional.fromSTEB(
             AppSpacing.tokenL,
             AppSpacing.tokenS,
             AppSpacing.tokenL,
@@ -354,10 +350,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       child: AppText(
                         l10n.otpPrivacyNotice,
                         variant: AppTextVariant.bodySmall,
-                        textAlign:
-                            Directionality.of(context) == TextDirection.rtl
-                                ? TextAlign.right
-                                : TextAlign.left,
+                        textAlign: TextAlign.start,
                       ),
                     ),
                   ],
