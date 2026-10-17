@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'before checkout'**
   String get onboardingProtectionTail;
 
+  /// No description provided for @onboardingProtectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Haseen protection at checkout and ship with peace of mind.'**
+  String get onboardingProtectionSubtitle;
+
   /// No description provided for @onboardingTrackingLead.
   ///
   /// In en, this message translates to:
@@ -139,6 +145,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'from dispatch to delivery'**
   String get onboardingTrackingTail;
+
+  /// No description provided for @onboardingTrackingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow your shipment step by step and know when it will arrive.'**
+  String get onboardingTrackingSubtitle;
+
+  /// No description provided for @onboardingClaimTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection that stays with you'**
+  String get onboardingClaimTitle;
+
+  /// No description provided for @onboardingClaimSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'If something goes wrong, we will guide you through a simple claim.'**
+  String get onboardingClaimSubtitle;
 
   /// No description provided for @onboardingNext.
   ///
@@ -179,8 +203,26 @@ abstract class AppLocalizations {
   /// No description provided for @loginMethodSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Use the same contact details you entered when you purchased shipment protection.'**
+  /// **'Use the same phone or email you entered when you activated protection.'**
   String get loginMethodSubtitle;
+
+  /// No description provided for @loginMethodChooseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a sign-in method'**
+  String get loginMethodChooseTitle;
+
+  /// No description provided for @authPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing, you agree to our Terms and Privacy Policy'**
+  String get authPrivacyNotice;
+
+  /// No description provided for @loginSendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get loginSendCode;
 
   /// No description provided for @loginMethodPhone.
   ///
@@ -283,6 +325,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We sent a 6-digit code to {contact}'**
   String otpDestination(String contact);
+
+  /// No description provided for @otpPhoneDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to your number ending in {contact}'**
+  String otpPhoneDestination(Object contact);
+
+  /// No description provided for @otpEmailDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to {contact}'**
+  String otpEmailDestination(Object contact);
+
+  /// No description provided for @otpPhoneLengthHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 4-digit code'**
+  String get otpPhoneLengthHint;
+
+  /// No description provided for @otpEmailLengthHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit code'**
+  String get otpEmailLengthHint;
 
   /// No description provided for @countryPickerTitle.
   ///
@@ -398,6 +464,12 @@ abstract class AppLocalizations {
   /// **'Enter verification code'**
   String get otpTitle;
 
+  /// No description provided for @otpVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get otpVerify;
+
   /// No description provided for @otpSubtitle.
   ///
   /// In en, this message translates to:
@@ -407,7 +479,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpHint.
   ///
   /// In en, this message translates to:
-  /// **'Code'**
+  /// **'Verification code'**
   String get otpHint;
 
   /// No description provided for @otpResend.
@@ -419,7 +491,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpResendCountdown.
   ///
   /// In en, this message translates to:
-  /// **'Resend code in {time}'**
+  /// **'You can request a new code in {time}'**
   String otpResendCountdown(String time);
 
   /// No description provided for @otpVerificationFailed.
@@ -434,16 +506,22 @@ abstract class AppLocalizations {
   /// **'Verification successful'**
   String get otpSuccessTitle;
 
+  /// No description provided for @otpSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your identity is confirmed. We are finding your protection.'**
+  String get otpSuccessMessage;
+
   /// No description provided for @welcomeTitle.
   ///
   /// In en, this message translates to:
-  /// **'Welcome. Your shipments are waiting.'**
+  /// **'Welcome back, Abdullah 👋'**
   String get welcomeTitle;
 
   /// No description provided for @welcomeDescription.
   ///
   /// In en, this message translates to:
-  /// **'We found your shipment protection. You can now follow its details and everything related to it from one place.'**
+  /// **'We found your protection. View its details and track your shipment to delivery.'**
   String get welcomeDescription;
 
   /// No description provided for @welcomeContinue.
@@ -451,6 +529,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter Haseen'**
   String get welcomeContinue;
+
+  /// No description provided for @welcomeProductTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart watch — Gold edition'**
+  String get welcomeProductTitle;
+
+  /// No description provided for @welcomeProtectionActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Haseen protection active'**
+  String get welcomeProtectionActive;
+
+  /// No description provided for @accountNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t find protection'**
+  String get accountNotFoundTitle;
+
+  /// No description provided for @accountNotFoundBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the same phone number or email address you used when purchasing protection.'**
+  String get accountNotFoundBody;
+
+  /// No description provided for @accountNotFoundPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone used at purchase'**
+  String get accountNotFoundPhone;
+
+  /// No description provided for @accountNotFoundEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email used at purchase'**
+  String get accountNotFoundEmail;
+
+  /// No description provided for @accountNotFoundTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try different details'**
+  String get accountNotFoundTryAgain;
 
   /// No description provided for @homeGreeting.
   ///
@@ -977,7 +1097,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpPrivacyNotice.
   ///
   /// In en, this message translates to:
-  /// **'Your verification code is valid for a limited time. Never share it with anyone.'**
+  /// **'Never share your code with anyone, even if they claim to be from Haseen.'**
   String get otpPrivacyNotice;
 
   /// No description provided for @otpChangePhone.

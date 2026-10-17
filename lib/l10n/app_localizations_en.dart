@@ -21,6 +21,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingProtectionTail => 'before checkout';
 
   @override
+  String get onboardingProtectionSubtitle =>
+      'Choose Haseen protection at checkout and ship with peace of mind.';
+
+  @override
   String get onboardingTrackingLead => 'Track your';
 
   @override
@@ -28,6 +32,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingTrackingTail => 'from dispatch to delivery';
+
+  @override
+  String get onboardingTrackingSubtitle =>
+      'Follow your shipment step by step and know when it will arrive.';
+
+  @override
+  String get onboardingClaimTitle => 'Protection that stays with you';
+
+  @override
+  String get onboardingClaimSubtitle =>
+      'If something goes wrong, we will guide you through a simple claim.';
 
   @override
   String get onboardingNext => 'Next';
@@ -50,7 +65,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginMethodSubtitle =>
-      'Use the same contact details you entered when you purchased shipment protection.';
+      'Use the same phone or email you entered when you activated protection.';
+
+  @override
+  String get loginMethodChooseTitle => 'Choose a sign-in method';
+
+  @override
+  String get authPrivacyNotice =>
+      'By continuing, you agree to our Terms and Privacy Policy';
+
+  @override
+  String get loginSendCode => 'Send code';
 
   @override
   String get loginMethodPhone => 'Phone number';
@@ -113,6 +138,22 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String otpPhoneDestination(Object contact) {
+    return 'We sent a 6-digit code to your number ending in $contact';
+  }
+
+  @override
+  String otpEmailDestination(Object contact) {
+    return 'We sent a 6-digit code to $contact';
+  }
+
+  @override
+  String get otpPhoneLengthHint => 'Enter the 4-digit code';
+
+  @override
+  String get otpEmailLengthHint => 'Enter the 6-digit code';
+
+  @override
   String get countryPickerTitle => 'Choose a country code';
 
   @override
@@ -173,17 +214,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpTitle => 'Enter verification code';
 
   @override
+  String get otpVerify => 'Verify';
+
+  @override
   String get otpSubtitle => 'We sent a 6-digit code to your number';
 
   @override
-  String get otpHint => 'Code';
+  String get otpHint => 'Verification code';
 
   @override
   String get otpResend => 'Resend code';
 
   @override
   String otpResendCountdown(String time) {
-    return 'Resend code in $time';
+    return 'You can request a new code in $time';
   }
 
   @override
@@ -193,14 +237,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpSuccessTitle => 'Verification successful';
 
   @override
-  String get welcomeTitle => 'Welcome. Your shipments are waiting.';
+  String get otpSuccessMessage =>
+      'Your identity is confirmed. We are finding your protection.';
+
+  @override
+  String get welcomeTitle => 'Welcome back, Abdullah 👋';
 
   @override
   String get welcomeDescription =>
-      'We found your shipment protection. You can now follow its details and everything related to it from one place.';
+      'We found your protection. View its details and track your shipment to delivery.';
 
   @override
   String get welcomeContinue => 'Enter Haseen';
+
+  @override
+  String get welcomeProductTitle => 'Smart watch — Gold edition';
+
+  @override
+  String get welcomeProtectionActive => 'Haseen protection active';
+
+  @override
+  String get accountNotFoundTitle => 'We couldn\'t find protection';
+
+  @override
+  String get accountNotFoundBody =>
+      'Use the same phone number or email address you used when purchasing protection.';
+
+  @override
+  String get accountNotFoundPhone => 'Phone used at purchase';
+
+  @override
+  String get accountNotFoundEmail => 'Email used at purchase';
+
+  @override
+  String get accountNotFoundTryAgain => 'Try different details';
 
   @override
   String homeGreeting(String name) {
@@ -473,7 +543,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otpPrivacyNotice =>
-      'Your verification code is valid for a limited time. Never share it with anyone.';
+      'Never share your code with anyone, even if they claim to be from Haseen.';
 
   @override
   String get otpChangePhone => 'Change phone number';

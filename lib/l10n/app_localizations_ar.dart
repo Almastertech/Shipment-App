@@ -12,22 +12,37 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appTitle => 'Shipments';
 
   @override
-  String get onboardingProtectionLead => 'ابدأ بتفعيل خيار';
+  String get onboardingProtectionLead => 'قفل';
 
   @override
-  String get onboardingProtectionHighlight => 'حماية الشحنة';
+  String get onboardingProtectionHighlight => 'الحماية';
 
   @override
-  String get onboardingProtectionTail => 'أثناء الشراء';
+  String get onboardingProtectionTail => 'أثناء عملية الشراء';
 
   @override
-  String get onboardingTrackingLead => 'تتبع';
+  String get onboardingProtectionSubtitle =>
+      'اختر حماية حصين وقت الدفع، وشحنتك بأمان من أول لحظة.';
 
   @override
-  String get onboardingTrackingHighlight => 'رحلة شحنتك';
+  String get onboardingTrackingLead => 'تابع';
 
   @override
-  String get onboardingTrackingTail => 'منذ البداية حتى تسليمها';
+  String get onboardingTrackingHighlight => 'شحنتك';
+
+  @override
+  String get onboardingTrackingTail => 'لين توصل بابك';
+
+  @override
+  String get onboardingTrackingSubtitle =>
+      'تابع شحنتك خطوة بخطوة واعرف موعد وصولها حتى بابك.';
+
+  @override
+  String get onboardingClaimTitle => 'حصّن معاك';
+
+  @override
+  String get onboardingClaimSubtitle =>
+      'إذا صار أي شيء لشحنتك، نساعدك بخطوات مطالبة واضحة وسهلة.';
 
   @override
   String get onboardingNext => 'التالي';
@@ -46,11 +61,20 @@ class AppLocalizationsAr extends AppLocalizations {
       'تواصل مع فريق الدعم لمساعدتك في تسجيل الدخول.';
 
   @override
-  String get loginMethodTitle => 'كيف تريد الدخول؟';
+  String get loginMethodTitle => 'كيف تبي تدخل؟';
 
   @override
   String get loginMethodSubtitle =>
-      'استخدم نفس بيانات التواصل التي أدخلتها عند شراء حماية شحنتك.';
+      'استخدم نفس الجوال أو الإيميل اللي حطيته وقت ما فعّلت الحماية.';
+
+  @override
+  String get loginMethodChooseTitle => 'اختر طريقة الدخول';
+
+  @override
+  String get authPrivacyNotice => 'بالمتابعة توافق على الشروط وسياسة الخصوصية';
+
+  @override
+  String get loginSendCode => 'إرسال رمز';
 
   @override
   String get loginMethodPhone => 'رقم الجوال';
@@ -67,14 +91,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'سنرسل رمز تحقق إلى البريد الإلكتروني المرتبط بحسابك.';
 
   @override
-  String get loginMethodContinue => 'متابعة';
+  String get loginMethodContinue => 'كمل';
 
   @override
-  String get loginPhoneTitle => 'أدخل رقم جوالك';
+  String get loginPhoneTitle => 'وش رقم جوالك؟';
 
   @override
-  String get loginPhoneSubtitle =>
-      'استخدم رقم الجوال الذي أدخلته عند شراء حماية شحنتك.';
+  String get loginPhoneSubtitle => 'الرقم اللي استخدمته وقت ما اشتريت الحماية';
 
   @override
   String get loginPhoneFieldLabel => 'رقم الجوال';
@@ -86,11 +109,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get loginPhoneFieldHelper => 'سيصلك رمز تحقق لمرة واحدة على رقمك.';
 
   @override
-  String get loginEmailTitle => 'أدخل بريدك الإلكتروني';
+  String get loginEmailTitle => 'وش إيميلك؟';
 
   @override
   String get loginEmailSubtitle =>
-      'استخدم البريد الإلكتروني الذي أدخلته عند شراء حماية شحنتك.';
+      'الإيميل اللي استخدمته وقت ما اشتريت الحماية';
 
   @override
   String get loginEmailFieldLabel => 'البريد الإلكتروني';
@@ -109,6 +132,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String otpDestination(String contact) {
     return 'أرسلنا رمزاً مكوناً من 6 أرقام إلى $contact';
   }
+
+  @override
+  String otpPhoneDestination(Object contact) {
+    return 'أرسلنا رمزًا من ٦ أرقام إلى جوالك المنتهي بـ $contact';
+  }
+
+  @override
+  String otpEmailDestination(Object contact) {
+    return 'أرسلنا رمزاً من 6 أرقام إلى $contact';
+  }
+
+  @override
+  String get otpPhoneLengthHint => 'أدخل الرمز المكوّن من 4 أرقام';
+
+  @override
+  String get otpEmailLengthHint => 'أدخل الرمز المكوّن من 6 أرقام';
 
   @override
   String get countryPickerTitle => 'اختر رمز الدولة';
@@ -167,20 +206,23 @@ class AppLocalizationsAr extends AppLocalizations {
   String get openOtpDemo => 'فتح تجربة رمز التحقق';
 
   @override
-  String get otpTitle => 'أدخل رمز التحقق';
+  String get otpTitle => 'اكتب رمز التحقق';
+
+  @override
+  String get otpVerify => 'تحقق';
 
   @override
   String get otpSubtitle => 'أرسلنا رمزاً مكوناً من 6 أرقام إلى رقمك';
 
   @override
-  String get otpHint => 'الرمز';
+  String get otpHint => 'رمز التحقق';
 
   @override
   String get otpResend => 'إعادة إرسال الرمز';
 
   @override
   String otpResendCountdown(String time) {
-    return 'إعادة الإرسال خلال $time';
+    return 'تقدر تطلب رمز جديد بعد $time';
   }
 
   @override
@@ -190,14 +232,39 @@ class AppLocalizationsAr extends AppLocalizations {
   String get otpSuccessTitle => 'تم التحقق بنجاح';
 
   @override
-  String get welcomeTitle => 'أهلاً بك.. شحناتك بانتظارك.';
+  String get otpSuccessMessage => 'تم تأكيد هويتك بنجاح، نبحث الآن عن حمايتك.';
+
+  @override
+  String get welcomeTitle => 'هلا والله، عبدالله 👋';
 
   @override
   String get welcomeDescription =>
-      'وجدنا حماية شحنتك. يمكنك الآن متابعة تفاصيلها وكل ما يتعلق بها من مكان واحد.';
+      'لقينا حمايتك. استعرض تفاصيلها وتابع شحنتك لين توصل.';
 
   @override
-  String get welcomeContinue => 'الدخول الى حصين';
+  String get welcomeContinue => 'ادخل حصين';
+
+  @override
+  String get welcomeProductTitle => 'ساعة ذكية — إصدار ذهبي';
+
+  @override
+  String get welcomeProtectionActive => 'حماية حصين مفعّلة';
+
+  @override
+  String get accountNotFoundTitle => 'ما لقينا حماية بهالبيانات';
+
+  @override
+  String get accountNotFoundBody =>
+      'تأكد أنك تستخدم نفس رقم الجوال أو الإيميل اللي استخدمته وقت شراء الحماية.';
+
+  @override
+  String get accountNotFoundPhone => 'رقم الجوال المستخدم عند الشراء';
+
+  @override
+  String get accountNotFoundEmail => 'الإيميل المستخدم عند الشراء';
+
+  @override
+  String get accountNotFoundTryAgain => 'جرب بيانات ثانية';
 
   @override
   String homeGreeting(String name) {
@@ -468,10 +535,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get otpPrivacyNotice =>
-      'رمز التحقق صالح لفترة محدودة ولا تشاركه مع أي شخص.';
+      'لا تشارك الرمز مع أي أحد، حتى لو قال إنه من حصين.';
 
   @override
-  String get otpChangePhone => 'تغيير رقم الجوال';
+  String get otpChangePhone => 'غيّر رقم الجوال';
 
   @override
   String get otpChangeEmail => 'تغيير البريد الإلكتروني';
