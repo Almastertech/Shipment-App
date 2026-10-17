@@ -41,79 +41,64 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> _bootstrap() async {
     await Future<void>.delayed(const Duration(milliseconds: 3500));
     if (!mounted) return;
-
-    final initialRoute = getIt<StartupFlow>().resolveInitialRoute();
-    context.go(initialRoute);
+    context.go(getIt<StartupFlow>().resolveInitialRoute());
   }
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = AppColors.primitives.primary.shade500;
-    final foregroundColor = AppColors.primitives.neutral.shade100;
-
+    final purple = AppColors.primitives.primary;
+    const foreground = Color(0xFFFFFFFF);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: backgroundColor,
+        statusBarColor: purple.shade900,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: backgroundColor,
+        systemNavigationBarColor: purple.shade900,
         systemNavigationBarIconBrightness: Brightness.light,
-        systemNavigationBarDividerColor: backgroundColor,
       ),
       child: AppScaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor: purple.shade900,
         padding: EdgeInsets.zero,
         dismissKeyboardOnTap: false,
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ShipmentsMark(animation: _logoController),
-              const SizedBox(height: AppSpacing.tokenM),
-              AnimatedBuilder(
-                animation: _logoController,
-                builder: (context, child) {
-                  final progress = Curves.easeOutCubic.transform(
-                    (_logoController.value / 0.2).clamp(0.0, 1.0),
-                  );
-
-                  return Transform.translate(
-                    offset: Offset(-3 * (1 - progress), 0),
-                    child: child,
-                  );
-                },
-                child: AppText(
+        body: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [purple.shade800, purple.shade900],
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ShipmentsMark(animation: _logoController),
+                const SizedBox(height: AppSpacing.tokenM),
+                AppText(
                   'حصين',
                   variant: AppTextVariant.headlineLarge,
                   style: AppTypography.buyerMobile.display.toTextStyle(
-                    color: foregroundColor,
+                    color: foreground,
                   ),
                   textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: AppSpacing.tokenS),
-              Semantics(
-                label: 'منتجاتك.. في أيد أمينة',
-                child: FadeTransition(
+                const SizedBox(height: AppSpacing.tokenS),
+                FadeTransition(
                   opacity: _logoController,
                   child: AppText(
-                    'منتجاتك.. في أيد أمينة',
+                    'منتجاتك.. في أيدٍ آمنة',
                     variant: AppTextVariant.bodyLarge,
                     style: AppTypography.buyerMobile.bodyLarge.toTextStyle(
-                      color: foregroundColor,
+                      color: foreground,
                     ),
                     textAlign: TextAlign.center,
-                    maxLines: 1,
-                    softWrap: false,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-
