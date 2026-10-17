@@ -152,10 +152,9 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
                       : l10n.homeShipmentStepDelivered,
                   expectedDeliveryLabel: l10n.homeShipmentExpectedDelivery,
                   expectedDeliveryDate: l10n.homeShipmentExpectedDate,
-                  trackingNumberLabel: l10n.homeShipmentTrackingLabel,
-                  trackingNumber: l10n.homeShipmentTrackingNumber,
                   detailsActionLabel: l10n.homeShipmentDetails,
                   onDetails: () => context.go(AppRoutes.shipmentDetails),
+                  activeStepIndex: isActive ? 1 : 2,
                 ),
               );
             }),

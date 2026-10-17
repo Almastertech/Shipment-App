@@ -5,14 +5,13 @@ import '../core/resources/app_images.dart';
 import '../core/resources/app_radius.dart';
 import '../core/resources/app_spacing.dart';
 import '../core/resources/app_typography.dart';
-import 'app_card.dart';
+import '../l10n/app_localizations.dart';
 import 'app_text.dart';
 import 'buttons/primary_button.dart';
 
-/// Compact shipment details card for an item and its delivery information.
+/// Compact shipment summary card with product, protection, and delivery status.
 ///
-/// Pass labels from the app's localizations. The ambient text direction controls
-/// the placement of the image, details, badges, and information cells.
+/// The row order follows the active locale. Pass labels from app localizations.
 class CustomShipmentInfoCard extends StatelessWidget {
   const CustomShipmentInfoCard({
     super.key,
@@ -23,11 +22,10 @@ class CustomShipmentInfoCard extends StatelessWidget {
     required this.deliveryStatus,
     required this.expectedDeliveryLabel,
     required this.expectedDeliveryDate,
-    required this.trackingNumberLabel,
-    required this.trackingNumber,
     required this.detailsActionLabel,
     required this.onDetails,
     this.productImage = AppImages.shipmentBackground,
+    this.activeStepIndex = 1,
     this.showDetailsAction = true,
   });
 
@@ -38,71 +36,111 @@ class CustomShipmentInfoCard extends StatelessWidget {
   final String deliveryStatus;
   final String expectedDeliveryLabel;
   final String expectedDeliveryDate;
-  final String trackingNumberLabel;
-  final String trackingNumber;
   final String detailsActionLabel;
   final VoidCallback? onDetails;
   final String productImage;
+  final int activeStepIndex;
   final bool showDetailsAction;
 
   @override
   Widget build(BuildContext context) {
-    const cardRadius = BorderRadius.all(
-      Radius.circular(AppRadius.token2Xl),
-    );
+    final colors = AppColors.primitives;
+    final localizations = AppLocalizations.of(context)!;
+    final steps = <String>[
+      localizations.shipmentTimelineOrdered,
+      localizations.shipmentTimelineInTransit,
+      localizations.shipmentTimelineDelivered,
+    ];
 
     return ClipRRect(
-      borderRadius: cardRadius,
-      child: AppCard(
-        padding: EdgeInsets.zero,
-        child: ColoredBox(
-          color: AppColors.primitives.neutral.shade200,
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.tokenM),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                _ProductHeader(
-                  productTitle: productTitle,
-                  merchantName: merchantName,
-                  price: price,
-                  protectionLabel: protectionLabel,
-                  deliveryStatus: deliveryStatus,
-                  image: productImage,
+      borderRadius: BorderRadius.circular(AppRadius.token2Xl),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: AlignmentDirectional.topStart,
+            end: AlignmentDirectional.bottomEnd,
+            colors: [colors.primary.shade600, colors.primary.shade700],
+          ),
+        ),
+        child: Stack(
+          children: [
+            PositionedDirectional(
+              end: -28,
+              top: -54,
+              child: Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  color: colors.primary.shade500.withValues(alpha: .38),
+                  shape: BoxShape.circle,
                 ),
-                const SizedBox(height: AppSpacing.tokenM),
-                _ShipmentMetadata(
-                  expectedDeliveryLabel: expectedDeliveryLabel,
-                  expectedDeliveryDate: expectedDeliveryDate,
-                  trackingNumberLabel: trackingNumberLabel,
-                  trackingNumber: trackingNumber,
-                ),
-                if (showDetailsAction) ...<Widget>[
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(AppSpacing.tokenM),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _ProductHeader(
+                    productTitle: productTitle,
+                    merchantName: merchantName,
+                    price: price,
+                    protectionLabel: protectionLabel,
+                    deliveryStatus: deliveryStatus,
+                    image: productImage,
+                  ),
+                  const SizedBox(height: AppSpacing.tokenM),
+                  _ShipmentTimeline(
+                    steps: steps,
+                    activeStepIndex: activeStepIndex,
+                  ),
                   const SizedBox(height: AppSpacing.tokenS),
-                  PrimaryButton(
-                    label: detailsActionLabel,
-                    onPressed: onDetails,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primitives.primary.shade500,
-                      foregroundColor: AppColors.primitives.neutral.shade100,
-                      disabledBackgroundColor:
-                          AppColors.primitives.primary.shade300,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.tokenM,
-                        vertical: AppSpacing.tokenS,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: _DeliveryDate(
+                            label: expectedDeliveryLabel,
+                            date: expectedDeliveryDate,
+                          ),
+                        ),
                       ),
-                      minimumSize: const Size.fromHeight(48),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      shape: const StadiumBorder(),
-                      textStyle: AppTypography.buyerMobile.button.toTextStyle(),
-                    ),
+                      if (showDetailsAction) ...[
+                        const SizedBox(width: AppSpacing.tokenS),
+                        PrimaryButton(
+                          label: detailsActionLabel,
+                          onPressed: onDetails,
+                          fullWidth: false,
+                          iconOnTrailing: true,
+                          icon: Icon(
+                            Directionality.of(context) == TextDirection.rtl
+                                ? Icons.chevron_left_rounded
+                                : Icons.chevron_right_rounded,
+                            size: 16,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: colors.accent01.shade300,
+                            foregroundColor: colors.neutral.shade900,
+                            minimumSize: const Size(0, 30),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.tokenS,
+                            ),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            elevation: 0,
+                            shape: const StadiumBorder(),
+                            textStyle: AppTypography.buyerMobile.caption
+                                .toTextStyle(color: colors.neutral.shade900),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ],
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -128,94 +166,87 @@ class _ProductHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const imageRadius = BorderRadius.all(
-      Radius.circular(AppRadius.tokenXl),
-    );
+    final colors = AppColors.primitives;
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: imageRadius,
-          child: Image.asset(
-            image,
-            width: 100,
-            height: 100,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => ColoredBox(
-              color: AppColors.primitives.neutral.shade300,
-              child: const SizedBox(
-                width: 100,
-                height: 100,
-                child: Icon(Icons.image_not_supported_outlined),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: AppSpacing.tokenS),
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Expanded(
-                    flex: 3,
-                    child: AppText(
-                      productTitle,
-                      variant: AppTextVariant.titleSmall,
-                      textAlign: TextAlign.start,
-                      style: AppTypography.buyerMobile.h6.toTextStyle(
-                        color: AppColors.primitives.neutral.shade500,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.tokenXs),
-                  Flexible(
-                    flex: 2,
-                    child: AppText(
-                      merchantName,
-                      variant: AppTextVariant.bodySmall,
-                      textAlign: TextAlign.start,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                        color: AppColors.primitives.neutral.shade400,
-                      ),
-                    ),
-                  ),
-                ],
+            children: [
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: _ProtectionBadge(label: protectionLabel),
               ),
+              const SizedBox(height: AppSpacing.tokenXs),
               AppText(
-                price,
+                productTitle,
                 variant: AppTextVariant.titleSmall,
                 textAlign: TextAlign.start,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTypography.buyerMobile.h6.toTextStyle(
-                  color: AppColors.primitives.primary.shade500,
+                style: AppTypography.buyerMobile.label.toTextStyle(
+                  color: Colors.white,
                 ),
               ),
-              const SizedBox(height: AppSpacing.tokenS),
-              Wrap(
-                spacing: AppSpacing.tokenXs,
-                runSpacing: AppSpacing.tokenXs,
-                children: <Widget>[
-                  _ShipmentBadge(
-                    label: protectionLabel,
-                    color: AppColors.primitives.accent01.shade500,
-                    foregroundColor: AppColors.primitives.neutral.shade500,
-                    icon: Icons.verified_user_outlined,
+              AppText(
+                '$merchantName · $price',
+                variant: AppTextVariant.caption,
+                textAlign: TextAlign.start,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTypography.buyerMobile.caption.toTextStyle(
+                  color: colors.neutral.shade200,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.tokenXs),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.inventory_2_outlined,
+                    size: 14,
+                    color: colors.accent01.shade300,
                   ),
-                  _ShipmentBadge(
-                    label: deliveryStatus,
-                    color: AppColors.primitives.primary.shade100,
-                    foregroundColor: AppColors.primitives.primary.shade500,
+                  const SizedBox(width: AppSpacing.token2Xs),
+                  Flexible(
+                    child: AppText(
+                      deliveryStatus,
+                      variant: AppTextVariant.labelSmall,
+                      textAlign: TextAlign.start,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.buyerMobile.labelSmall.toTextStyle(
+                        color: colors.accent01.shade300,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ],
+          ),
+        ),
+        const SizedBox(width: AppSpacing.tokenS),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(AppRadius.tokenL),
+          child: Image.asset(
+            image,
+            width: 54,
+            height: 66,
+            fit: BoxFit.cover,
+            alignment: const Alignment(-.4, 0),
+            errorBuilder: (context, error, stackTrace) => ColoredBox(
+              color: colors.neutral.shade100,
+              child: SizedBox(
+                width: 54,
+                height: 66,
+                child: Icon(
+                  Icons.image_not_supported_outlined,
+                  color: colors.neutral.shade500,
+                ),
+              ),
+            ),
           ),
         ),
       ],
@@ -223,45 +254,38 @@ class _ProductHeader extends StatelessWidget {
   }
 }
 
-class _ShipmentBadge extends StatelessWidget {
-  const _ShipmentBadge({
-    required this.label,
-    required this.color,
-    required this.foregroundColor,
-    this.icon,
-  });
+class _ProtectionBadge extends StatelessWidget {
+  const _ProtectionBadge({required this.label});
 
   final String label;
-  final Color color;
-  final Color foregroundColor;
-  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.primitives;
+
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: color,
+        color: colors.accent01.shade300,
         borderRadius: BorderRadius.circular(AppRadius.tokenFull),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.tokenS,
-          vertical: AppSpacing.tokenXs,
-        ),
+        padding: const EdgeInsetsDirectional.fromSTEB(8, 3, 6, 3),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            if (icon != null) ...<Widget>[
-              Icon(icon, size: 14, color: foregroundColor),
-              const SizedBox(width: AppSpacing.tokenXs),
-            ],
+          children: [
+            Icon(
+              Icons.verified_user_outlined,
+              size: 12,
+              color: colors.neutral.shade900,
+            ),
+            const SizedBox(width: AppSpacing.token2Xs),
             AppText(
               label,
-              variant: AppTextVariant.labelSmall,
+              variant: AppTextVariant.caption,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppTypography.buyerMobile.caption.toTextStyle(
-                color: foregroundColor,
+                color: colors.neutral.shade900,
               ),
             ),
           ],
@@ -271,88 +295,116 @@ class _ShipmentBadge extends StatelessWidget {
   }
 }
 
-class _ShipmentMetadata extends StatelessWidget {
-  const _ShipmentMetadata({
-    required this.expectedDeliveryLabel,
-    required this.expectedDeliveryDate,
-    required this.trackingNumberLabel,
-    required this.trackingNumber,
+class _ShipmentTimeline extends StatelessWidget {
+  const _ShipmentTimeline({
+    required this.steps,
+    required this.activeStepIndex,
   });
 
-  final String expectedDeliveryLabel;
-  final String expectedDeliveryDate;
-  final String trackingNumberLabel;
-  final String trackingNumber;
+  final List<String> steps;
+  final int activeStepIndex;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(AppRadius.tokenXl),
-      child: ColoredBox(
-        color: AppColors.primitives.neutral.shade100,
-        child: IntrinsicHeight(
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: _MetadataCell(
-                  label: expectedDeliveryLabel,
-                  value: expectedDeliveryDate,
+    final colors = AppColors.primitives;
+    final activeIndex = activeStepIndex.clamp(0, steps.length - 1);
+
+    return SizedBox(
+      height: 36,
+      child: Stack(
+        children: [
+          PositionedDirectional(
+            start: 20,
+            end: 20,
+            top: 5,
+            child: Container(
+              height: 2,
+              color: Colors.white.withValues(alpha: .22),
+            ),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (var index = 0; index < steps.length; index++)
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          color: index <= activeIndex
+                              ? colors.accent01.shade300
+                              : colors.primary.shade300,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.token2Xs),
+                      AppText(
+                        steps[index],
+                        variant: AppTextVariant.caption,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.buyerMobile.caption
+                            .toTextStyle(color: colors.neutral.shade200)
+                            .copyWith(fontSize: 10, height: 1.2),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                width: 1,
-                thickness: 1,
-                color: AppColors.primitives.neutral.shade200,
-              ),
-              Expanded(
-                child: _MetadataCell(
-                  label: trackingNumberLabel,
-                  value: trackingNumber,
-                ),
-              ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
 }
 
-class _MetadataCell extends StatelessWidget {
-  const _MetadataCell({required this.label, required this.value});
+class _DeliveryDate extends StatelessWidget {
+  const _DeliveryDate({required this.label, required this.date});
 
   final String label;
-  final String value;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.tokenM,
-        vertical: AppSpacing.tokenS,
+    final colors = AppColors.primitives;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: .12),
+        borderRadius: BorderRadius.circular(AppRadius.tokenFull),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          AppText(
-            label,
-            variant: AppTextVariant.bodySmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-              color: AppColors.primitives.neutral.shade300,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.tokenS,
+          vertical: AppSpacing.tokenXs,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.access_time_rounded,
+              size: 13,
+              color: colors.neutral.shade200,
             ),
-          ),
-          AppText(
-            value,
-            variant: AppTextVariant.bodyMedium,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
-              color: AppColors.primitives.neutral.shade500,
+            const SizedBox(width: AppSpacing.token2Xs),
+            Flexible(
+              child: AppText(
+                '$label · $date',
+                variant: AppTextVariant.caption,
+                textAlign: TextAlign.start,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTypography.buyerMobile.caption.toTextStyle(
+                  color: colors.neutral.shade100,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
