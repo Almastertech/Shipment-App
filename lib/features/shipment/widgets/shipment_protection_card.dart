@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../components/app_text.dart';
-import '../../../components/buttons/primary_button.dart';
+import '../../../components/buttons/text_link_button.dart';
 import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_images.dart';
 import '../../../core/resources/app_radius.dart';
@@ -44,24 +44,24 @@ class ShipmentProtectionCard extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           ColoredBox(
-            color: colors.accent01.shade500,
+            color: colors.primary.shade600,
             child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.tokenM),
+              padding: const EdgeInsets.all(AppSpacing.tokenL),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Row(
                     children: <Widget>[
                       Container(
-                        width: 48,
-                        height: 48,
+                        width: 44,
+                        height: 44,
                         decoration: BoxDecoration(
-                          color: colors.neutral.shade600,
+                          color: colors.accent01.shade300,
                           borderRadius: BorderRadius.circular(AppRadius.tokenL),
                         ),
                         child: Icon(
                           Icons.verified_user_outlined,
-                          color: colors.accent01.shade500,
+                          color: colors.neutral.shade900,
                           size: 24,
                         ),
                       ),
@@ -74,7 +74,7 @@ class ShipmentProtectionCard extends StatelessWidget {
                               title,
                               variant: AppTextVariant.titleLarge,
                               style: AppTypography.buyerMobile.h4.toTextStyle(
-                                color: colors.neutral.shade500,
+                                color: colors.neutral.shade100,
                               ),
                             ),
                             const SizedBox(height: AppSpacing.tokenXs),
@@ -83,7 +83,7 @@ class ShipmentProtectionCard extends StatelessWidget {
                               variant: AppTextVariant.bodySmall,
                               style: AppTypography.buyerMobile.bodySmall
                                   .toTextStyle(
-                                color: colors.neutral.shade400,
+                                color: colors.neutral.shade200,
                               ),
                             ),
                           ],
@@ -91,7 +91,7 @@ class ShipmentProtectionCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.tokenM),
+                  const SizedBox(height: AppSpacing.tokenL),
                   Row(
                     children: <Widget>[
                       Expanded(
@@ -116,17 +116,20 @@ class ShipmentProtectionCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.tokenM),
-                  PrimaryButton(
-                    label: actionLabel,
-                    onPressed: onAction,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colors.neutral.shade600,
-                      foregroundColor: colors.accent01.shade500,
-                      elevation: 0,
-                      minimumSize: const Size.fromHeight(48),
-                      shape: const StadiumBorder(),
-                      textStyle: AppTypography.buyerMobile.button.toTextStyle(),
+                  const SizedBox(height: AppSpacing.tokenXs),
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: TextLinkButton(
+                      label: actionLabel,
+                      onPressed: onAction,
+                      iconOnTrailing: true,
+                      icon: Icon(
+                        Icons.help_outline_rounded,
+                        size: 16,
+                        color: colors.accent01.shade300,
+                      ),
+                      foregroundColor: colors.accent01.shade300,
+                      semanticLabel: actionLabel,
                     ),
                   ),
                 ],
@@ -168,13 +171,13 @@ class _ProtectionMetric extends StatelessWidget {
     const colors = AppColors.primitives;
 
     return Container(
-      constraints: const BoxConstraints(minHeight: 58),
+      constraints: const BoxConstraints(minHeight: 62),
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.tokenS,
         vertical: AppSpacing.tokenXs,
       ),
       decoration: BoxDecoration(
-        color: colors.neutral.shade100.withValues(alpha: 0.72),
+        color: colors.primary.shade500.withValues(alpha: .62),
         borderRadius: BorderRadius.circular(AppRadius.tokenL),
       ),
       child: Column(
@@ -187,7 +190,7 @@ class _ProtectionMetric extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppTypography.buyerMobile.caption.toTextStyle(
-              color: colors.neutral.shade300,
+              color: colors.primary.shade100,
             ),
           ),
           AppText(
@@ -196,7 +199,7 @@ class _ProtectionMetric extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
-              color: colors.neutral.shade500,
+              color: colors.neutral.shade100,
             ),
           ),
         ],

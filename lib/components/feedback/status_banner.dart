@@ -18,6 +18,7 @@ class StatusBanner extends StatelessWidget {
     required this.message,
     this.title,
     this.type = StatusBannerType.info,
+    this.leadingIcon,
     this.actionLabel,
     this.onAction,
     this.onDismiss,
@@ -28,6 +29,7 @@ class StatusBanner extends StatelessWidget {
   final String message;
   final String? title;
   final StatusBannerType type;
+  final IconData? leadingIcon;
   final String? actionLabel;
   final VoidCallback? onAction;
   final VoidCallback? onDismiss;
@@ -36,7 +38,8 @@ class StatusBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (background, foreground, icon) = _resolveStyle(context, type);
+    final (background, foreground, defaultIcon) = _resolveStyle(context, type);
+    final icon = leadingIcon ?? defaultIcon;
 
     return Container(
       width: double.infinity,

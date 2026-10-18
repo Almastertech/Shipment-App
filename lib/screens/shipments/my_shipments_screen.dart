@@ -1,18 +1,19 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shipments/screens/shipments/widgets/shipments_hero.dart';
 
 import '../../components/app_scaffold.dart';
-import '../../components/app_text.dart';
-import '../../components/custom_shipment_info_card.dart';
+import '../../components/custom_secondary_banner.dart';
+import '../../components/feedback/status_banner.dart';
 import '../../components/layout/custom_bottom_nav_bar.dart';
-import '../../components/shipment_card_widget.dart';
 import '../../core/resources/app_colors.dart';
-import '../../core/resources/app_radius.dart';
+import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
-import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
-import '../../features/notifications/presentation/notification_bell_button.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/custom_product_card_shipments.dart';
 
 class MyShipmentsScreen extends StatefulWidget {
   const MyShipmentsScreen({super.key});
@@ -27,138 +28,128 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    const colors = AppColors.primitives;
+    final width = MediaQuery.sizeOf(context).width;
+    final heroHeight = math.max(314.0, width * .75).toDouble();
     final isActive = _selectedFilter == 0;
+    final firstProduct = CustomProductCardShipments(
+      productTitle: isActive
+          ? l10n.homeShipmentProduct
+          : l10n.homeCompactShipment2Product,
+      merchantName: isActive
+          ? l10n.homeCompactShipmentMerchant
+          : l10n.homeCompactShipment2Merchant,
+      price: isActive
+          ? l10n.homeCompactShipmentPrice
+          : l10n.homeCompactShipment2Price,
+      protectionLabel: l10n.homeShipmentProtection,
+      statusLabel: isActive
+          ? l10n.homeShipmentStepInTransit
+          : l10n.shipmentDeliveredStatus,
+      trackingLabel: l10n.homeShipmentTrackingLabel,
+      trackingNumber: isActive
+          ? l10n.homeShipmentTrackingNumber
+          : l10n.homeCompactShipment2TrackingNumber,
+      deliveryDateLabel: isActive
+          ? l10n.homeShipmentExpectedDelivery
+          : l10n.shipmentDeliveredAt,
+      deliveryDate:
+          isActive ? l10n.homeShipmentExpectedDate : l10n.shipmentDeliveredDate,
+      actionLabel: l10n.homeShipmentDetails,
+      isDelivered: !isActive,
+      imageAlignment:
+          isActive ? const Alignment(-.4, 0) : const Alignment(.8, 0),
+      footer: isActive
+          ? null
+          : StatusBanner(
+              message: l10n.shipmentDeliveredClaimHint,
+              type: StatusBannerType.warning,
+              leadingIcon: Icons.camera_alt_outlined,
+              actionLabel: l10n.shipmentProtectionClaimAction,
+              maxMessageLines: 2,
+              onAction: () => context.go(AppRoutes.openDemands),
+            ),
+      onAction: () => context.go(AppRoutes.shipmentDetails),
+      onTap: () => context.go(AppRoutes.shipmentDetails),
+    );
 
     return AppScaffold(
       padding: EdgeInsets.zero,
+      safeArea: false,
       safeAreaBottom: false,
       extendBody: true,
       backgroundColor: AppColors.semantic.background.primary,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(
-          AppSpacing.tokenM,
-          AppSpacing.tokenXl,
-          AppSpacing.tokenM,
-          AppSpacing.tokenM,
-        ),
+        padding: const EdgeInsets.only(bottom: AppSpacing.tokenL),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      AppText(
-                        l10n.homeActiveShipments,
-                        variant: AppTextVariant.titleLarge,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypography.buyerMobile.h4.toTextStyle(
-                          color: colors.primary.shade500,
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.tokenXs),
-                      AppText(
-                        l10n.myShipmentsSubtitle,
-                        variant: AppTextVariant.bodySmall,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                          color: colors.neutral.shade400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.tokenM),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: colors.neutral.shade200,
-                    shape: BoxShape.circle,
-                  ),
-                  child: SizedBox(
-                    width: 48,
-                    height: 48,
-                    child: IconTheme(
-                      data: IconThemeData(
-                        color: colors.primary.shade500,
-                        size: 22,
-                      ),
-                      child: const NotificationBellButton(),
+            SizedBox(
+              height: heroHeight + (isActive ? 172 : 261),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: <Widget>[
+                  PositionedDirectional(
+                    top: 0,
+                    start: 0,
+                    end: 0,
+                    height: heroHeight,
+                    child: ShipmentsHero(
+                      title: l10n.shipmentsScreenTitle,
+                      subtitle: isActive
+                          ? l10n.shipmentsScreenSubtitle
+                          : l10n.shipmentsDeliveredSubtitle,
+                      activeLabel: l10n.myShipmentsActiveTab,
+                      deliveredLabel: l10n.myShipmentsDeliveredTab,
+                      selectedIndex: _selectedFilter,
+                      onSelect: (index) =>
+                          setState(() => _selectedFilter = index),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.tokenL),
-            Container(
-              height: 52,
-              padding: const EdgeInsets.all(AppSpacing.tokenXs),
-              decoration: BoxDecoration(
-                color: colors.neutral.shade200,
-                borderRadius: BorderRadius.circular(AppRadius.tokenXl),
+                  PositionedDirectional(
+                    top: heroHeight - 16,
+                    start: AppSpacing.tokenXl,
+                    end: AppSpacing.tokenXl,
+                    child: firstProduct,
+                  ),
+                ],
               ),
-              child: Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.tokenXl,
+              ),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  _buildFilterButton(
-                    label: l10n.myShipmentsActiveTab,
-                    index: 0,
-                  ),
-                  _buildFilterButton(
-                    label: l10n.myShipmentsDeliveredTab,
-                    index: 1,
+                  if (isActive) ...<Widget>[
+                    CustomProductCardShipments(
+                      productTitle: l10n.homeCompactShipmentProduct,
+                      merchantName: l10n.homeCompactShipmentMerchant,
+                      price: l10n.homeCompactShipmentPrice,
+                      protectionLabel: l10n.homeShipmentProtection,
+                      statusLabel: l10n.homeCompactShipmentStatus,
+                      trackingLabel: l10n.homeShipmentTrackingLabel,
+                      trackingNumber: l10n.homeCompactShipmentTrackingNumber,
+                      deliveryDateLabel: l10n.homeShipmentExpectedDelivery,
+                      deliveryDate: l10n.homeCompactShipmentDelivery,
+                      actionLabel: l10n.homeShipmentDetails,
+                      productImage: AppImages.shipmentBackground,
+                      imageAlignment: const Alignment(.8, 0),
+                      onAction: () => context.go(AppRoutes.shipmentDetails),
+                      onTap: () => context.go(AppRoutes.shipmentDetails),
+                    ),
+                    const SizedBox(height: AppSpacing.token3Xl),
+                  ] else
+                    const SizedBox(height: AppSpacing.token2Xl),
+                  CustomSecondaryBanner(
+                    title: l10n.secondaryBannerTitle,
+                    description: l10n.secondaryBannerDescription,
+                    actionLabel: l10n.secondaryBannerAction,
+                    onAction: () {},
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: AppSpacing.tokenM),
-            if (isActive) ...<Widget>[
-              ShipmentCardWidget(
-                deliveryStatus: l10n.homeShipmentDeliveryStatus,
-                protectionLabel: l10n.homeShipmentProtection,
-                merchantAndItem: l10n.homeShipmentMerchant,
-                title: l10n.homeShipmentProduct,
-                progressSteps: <String>[
-                  l10n.homeShipmentStepOrdered,
-                  l10n.homeShipmentStepInTransit,
-                  l10n.homeShipmentStepDelivered,
-                ],
-                activeStepIndex: 1,
-                expectedDeliveryLabel: l10n.homeShipmentExpectedDelivery,
-                expectedDeliveryDate: l10n.homeShipmentExpectedDate,
-                actionLabel: l10n.homeShipmentView,
-                onAction: () => context.go(AppRoutes.shipmentDetails),
-                detailsHero: true,
-                trackingNumber: l10n.homeShipmentTrackingNumber,
-              ),
-            ],
-            const SizedBox(height: AppSpacing.tokenS),
-            ...List<Widget>.generate(isActive ? 2 : 1, (index) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  bottom: index == (isActive ? 1 : 0) ? 0 : AppSpacing.tokenS,
-                ),
-                child: CustomShipmentInfoCard(
-                  productTitle: l10n.homeShipmentProduct,
-                  merchantName: l10n.homeShipmentMerchant,
-                  price: l10n.homeShipmentPrice,
-                  protectionLabel: l10n.homeShipmentProtection,
-                  deliveryStatus: isActive
-                      ? l10n.homeShipmentDeliveryStatus
-                      : l10n.homeShipmentStepDelivered,
-                  expectedDeliveryLabel: l10n.homeShipmentExpectedDelivery,
-                  expectedDeliveryDate: l10n.homeShipmentExpectedDate,
-                  detailsActionLabel: l10n.homeShipmentDetails,
-                  onDetails: () => context.go(AppRoutes.shipmentDetails),
-                  activeStepIndex: isActive ? 1 : 2,
-                ),
-              );
-            }),
-            const SizedBox(height: 88),
           ],
         ),
       ),
@@ -175,36 +166,6 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
                   if (index == 0) context.go(AppRoutes.home);
                 },
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFilterButton({required String label, required int index}) {
-    final selected = _selectedFilter == index;
-    const colors = AppColors.primitives;
-
-    return Expanded(
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => setState(() => _selectedFilter = index),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          curve: Curves.easeOut,
-          decoration: BoxDecoration(
-            color: selected ? colors.primary.shade500 : Colors.transparent,
-            borderRadius: BorderRadius.circular(AppRadius.tokenL),
-          ),
-          alignment: Alignment.center,
-          child: AppText(
-            label,
-            variant: AppTextVariant.titleSmall,
-            textAlign: TextAlign.center,
-            style: AppTypography.buyerMobile.h6.toTextStyle(
-              color:
-                  selected ? colors.neutral.shade100 : colors.neutral.shade400,
             ),
           ),
         ),

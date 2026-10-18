@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../components/app_card.dart';
 import '../../../components/app_text.dart';
 import '../../../core/resources/app_colors.dart';
-import '../../../core/resources/app_radius.dart';
 import '../../../core/resources/app_spacing.dart';
 import '../../../core/resources/app_typography.dart';
 
@@ -11,37 +11,37 @@ class ShipmentDetailsCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.rows,
+    this.showTitle = true,
   });
 
   final String title;
   final List<ShipmentDetailEntry> rows;
+  final bool showTitle;
 
   @override
   Widget build(BuildContext context) {
     const colors = AppColors.primitives;
 
-    return Container(
+    return AppCard(
       padding: const EdgeInsets.fromLTRB(
-        AppSpacing.tokenM,
-        AppSpacing.tokenM,
-        AppSpacing.tokenM,
+        AppSpacing.tokenL,
         AppSpacing.tokenS,
-      ),
-      decoration: BoxDecoration(
-        color: colors.neutral.shade200,
-        borderRadius: BorderRadius.circular(AppRadius.token2Xl),
+        AppSpacing.tokenL,
+        AppSpacing.tokenS,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          AppText(
-            title,
-            variant: AppTextVariant.titleLarge,
-            style: AppTypography.buyerMobile.h4.toTextStyle(
-              color: colors.primary.shade500,
+          if (showTitle) ...<Widget>[
+            AppText(
+              title,
+              variant: AppTextVariant.titleLarge,
+              style: AppTypography.buyerMobile.h4.toTextStyle(
+                color: colors.primary.shade500,
+              ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.tokenS),
+            const SizedBox(height: AppSpacing.tokenS),
+          ],
           ListView.builder(
             itemCount: rows.length,
             shrinkWrap: true,

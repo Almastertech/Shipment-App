@@ -7,6 +7,7 @@ import '../core/resources/app_spacing.dart';
 import '../core/resources/app_typography.dart';
 import 'app_card.dart';
 import 'app_text.dart';
+import 'buttons/icon_circle_button.dart';
 import 'buttons/primary_button.dart';
 
 /// A shipment summary card with delivery status, protection, progress, and CTA.
@@ -28,6 +29,10 @@ class ShipmentCardWidget extends StatelessWidget {
     required this.onAction,
     this.detailsHero = false,
     this.trackingNumber = '',
+    this.onBack,
+    this.onShare,
+    this.backTooltip,
+    this.shareTooltip,
   })  : assert(progressSteps.length > 1),
         assert(activeStepIndex >= 0 && activeStepIndex < progressSteps.length);
 
@@ -45,6 +50,10 @@ class ShipmentCardWidget extends StatelessWidget {
   final VoidCallback? onAction;
   final bool detailsHero;
   final String trackingNumber;
+  final VoidCallback? onBack;
+  final VoidCallback? onShare;
+  final String? backTooltip;
+  final String? shareTooltip;
 
   @override
   Widget build(BuildContext context) {
@@ -167,91 +176,120 @@ class ShipmentCardWidget extends StatelessWidget {
 
   Widget _buildDetailsHero() {
     const colors = AppColors.primitives;
-    const radius = BorderRadius.all(Radius.circular(AppRadius.token2Xl));
 
     return AspectRatio(
-      aspectRatio: 404 / 238,
-      child: ClipRRect(
-        borderRadius: radius,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Image.asset(
-              AppImages.shipmentBackground,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => ColoredBox(
-                color: colors.neutral.shade400,
+      aspectRatio: 404 / 368,
+      child: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Image.asset(
+            AppImages.shipmentBackground,
+            fit: BoxFit.cover,
+            alignment: const Alignment(-.35, -.1),
+            errorBuilder: (context, error, stackTrace) => ColoredBox(
+              color: colors.primary.shade700,
+            ),
+          ),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  colors.primary.shade900.withValues(alpha: .20),
+                  colors.primary.shade800.withValues(alpha: .42),
+                  colors.primary.shade800.withValues(alpha: .92),
+                ],
+                stops: const <double>[0, .56, 1],
               ),
             ),
-            const DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color(0x18090A0D),
-                    Color(0x06090A0D),
-                    Color(0xCC090A0D),
+          ),
+          PositionedDirectional(
+            top: 0,
+            start: AppSpacing.tokenL,
+            end: AppSpacing.tokenL,
+            child: SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: const EdgeInsets.only(top: AppSpacing.tokenS),
+                child: Row(
+                  children: <Widget>[
+                    IconCircleButton(
+                      icon: Icons.arrow_back_rounded,
+                      tooltip: backTooltip ?? title,
+                      onPressed: onBack,
+                      backgroundColor: Colors.white.withValues(alpha: .16),
+                      foregroundColor: Colors.white,
+                    ),
+                    const Spacer(),
+                    IconCircleButton(
+                      icon: Icons.ios_share_rounded,
+                      tooltip: shareTooltip ?? title,
+                      onPressed: onShare,
+                      backgroundColor: Colors.white.withValues(alpha: .16),
+                      foregroundColor: Colors.white,
+                    ),
                   ],
-                  stops: <double>[0, 0.42, 1],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(AppSpacing.tokenM),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      _ProtectionPill(label: protectionLabel),
-                      const Spacer(),
-                      _StatusPill(label: deliveryStatus),
-                    ],
-                  ),
-                  const Spacer(),
-                  AppText(
-                    title,
-                    variant: AppTextVariant.headlineSmall,
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTypography.buyerMobile.h2.toTextStyle(
-                      color: colors.neutral.shade100,
+          ),
+          PositionedDirectional(
+            start: AppSpacing.tokenXl,
+            end: AppSpacing.tokenXl,
+            bottom: AppSpacing.token8Xl,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: _Pill(
+                    color: colors.accent01.shade300,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Icon(
+                          Icons.inventory_2_outlined,
+                          size: 16,
+                          color: colors.neutral.shade900,
+                        ),
+                        const SizedBox(width: AppSpacing.tokenXs),
+                        AppText(
+                          deliveryStatus,
+                          variant: AppTextVariant.labelSmall,
+                          style: AppTypography.buyerMobile.labelSmall
+                              .toTextStyle(color: colors.neutral.shade900),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.tokenS),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Flexible(
-                        child: AppText(
-                          merchantAndItem,
-                          variant: AppTextVariant.bodySmall,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              AppTypography.buyerMobile.bodySmall.toTextStyle(
-                            color: colors.neutral.shade100,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.tokenS),
-                      AppText(
-                        trackingNumber,
-                        variant: AppTextVariant.titleSmall,
-                        maxLines: 1,
-                        style: AppTypography.buyerMobile.h6.toTextStyle(
-                          color: colors.neutral.shade100,
-                        ),
-                      ),
-                    ],
+                ),
+                const SizedBox(height: AppSpacing.tokenS),
+                AppText(
+                  title,
+                  variant: AppTextVariant.headlineSmall,
+                  textAlign: TextAlign.end,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTypography.buyerMobile.h2.toTextStyle(
+                    color: colors.neutral.shade100,
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: AppSpacing.tokenS),
+                AppText(
+                  '$merchantAndItem · $trackingNumber',
+                  variant: AppTextVariant.bodySmall,
+                  textAlign: TextAlign.end,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                    color: colors.neutral.shade200,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
