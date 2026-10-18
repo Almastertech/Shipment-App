@@ -237,6 +237,7 @@ class AppRouter {
                 extra is LocationCoordinates ? false : extra as bool? ?? true,
             location: extra is LocationCoordinates ? extra : null,
             cameraCaptureService: getIt<CameraCaptureService>(),
+            permissionService: getIt<PermissionService>(),
           );
         },
       ),

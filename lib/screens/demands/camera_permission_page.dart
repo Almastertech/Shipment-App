@@ -1,18 +1,20 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
+import '../../components/buttons/secondary_button.dart';
 import '../../core/camera/camera_capture_service.dart';
 import '../../core/permissions/permission_service.dart';
-import '../../core/resources/app_radius.dart';
+import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../l10n/app_localizations.dart';
 
-class CameraPermissionPage extends StatefulWidget {
+/// Kept as a route fallback. The demand flow opens [CameraPermissionSheet]
+/// over the evidence page so the permission prompt feels attached to the action.
+class CameraPermissionPage extends StatelessWidget {
   const CameraPermissionPage({
     super.key,
     required this.cameraCaptureService,
@@ -25,10 +27,38 @@ class CameraPermissionPage extends StatefulWidget {
   final CameraMediaType mediaType;
 
   @override
-  State<CameraPermissionPage> createState() => _CameraPermissionPageState();
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body: SafeArea(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.tokenL),
+              child: CameraPermissionSheet(
+                cameraCaptureService: cameraCaptureService,
+                permissionService: permissionService,
+              ),
+            ),
+          ),
+        ),
+      );
 }
 
-class _CameraPermissionPageState extends State<CameraPermissionPage>
+class CameraPermissionSheet extends StatefulWidget {
+  const CameraPermissionSheet({
+    super.key,
+    required this.cameraCaptureService,
+    required this.permissionService,
+  });
+
+  final CameraCaptureService cameraCaptureService;
+  final PermissionService permissionService;
+
+  @override
+  State<CameraPermissionSheet> createState() => _CameraPermissionSheetState();
+}
+
+class _CameraPermissionSheetState extends State<CameraPermissionSheet>
     with WidgetsBindingObserver {
   bool _isOpeningCamera = false;
   bool _cameraPermissionDenied = false;
@@ -58,13 +88,11 @@ class _CameraPermissionPageState extends State<CameraPermissionPage>
       await widget.permissionService.openAppSettings();
       return;
     }
-
     if (_isOpeningCamera) return;
     setState(() => _isOpeningCamera = true);
-
     try {
       final granted = await widget.cameraCaptureService.requestCameraAccess();
-      if (mounted) context.pop<bool>(granted);
+      if (mounted) Navigator.of(context).pop<bool>(granted);
     } on CameraException catch (error) {
       if (!mounted) return;
       setState(() {
@@ -87,95 +115,76 @@ class _CameraPermissionPageState extends State<CameraPermissionPage>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    const backgroundColor = Color(0xFF202330);
-    const iconTileColor = Color(0xFF2B2E3A);
-    const accentColor = Color(0xFFE8F9A7);
-    const textColor = Color(0xFFF9FAFA);
-    const secondaryTextColor = Color(0xFFB1B2B7);
-
+    final colors = AppColors.semantic;
     final description = _cameraPermissionDenied
         ? l10n.cameraPermissionDeniedDescription
         : _cameraUnavailable
             ? l10n.cameraCaptureFailedDescription
             : l10n.cameraPermissionDescription;
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(
-            AppSpacing.tokenM,
-            AppSpacing.tokenM,
-            AppSpacing.tokenM,
-            AppSpacing.tokenL,
-          ),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: iconTileColor,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(AppRadius.token2Xl),
-                          ),
-                        ),
-                        child: SizedBox(
-                          width: 96,
-                          height: 96,
-                          child: Icon(
-                            Icons.no_photography_outlined,
-                            size: 40,
-                            color: accentColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.tokenM),
-                      AppText(
-                        l10n.cameraPermissionHeading,
-                        variant: AppTextVariant.headlineSmall,
-                        textAlign: TextAlign.center,
-                        style: AppTypography.buyerMobile.h3.toTextStyle(
-                          color: textColor,
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.tokenS),
-                      AppText(
-                        description,
-                        variant: AppTextVariant.bodyMedium,
-                        textAlign: TextAlign.center,
-                        style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                          color: secondaryTextColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: AppSpacing.token2Xl),
-              PrimaryButton(
-                label: _cameraPermissionDenied
-                    ? l10n.cameraPermissionOpenSettings
-                    : l10n.cameraPermissionAllow,
-                onPressed: _onPrimaryAction,
-                isLoading: _isOpeningCamera,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: accentColor,
-                  foregroundColor: backgroundColor,
-                  disabledBackgroundColor: accentColor.withValues(alpha: 0.7),
-                  elevation: 0,
-                  minimumSize: const Size.fromHeight(52),
-                  shape: const StadiumBorder(),
-                  textStyle: AppTypography.buyerMobile.button.toTextStyle(),
-                ),
-              ),
-            ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Center(
+          child: Container(
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+              color: AppColors.primitives.primary.shade100,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.camera_alt_outlined,
+              size: 32,
+              color: AppColors.primitives.primary.shade500,
+            ),
           ),
         ),
-      ),
+        const SizedBox(height: AppSpacing.tokenM),
+        AppText(
+          l10n.cameraPermissionHeading,
+          variant: AppTextVariant.headlineSmall,
+          textAlign: TextAlign.center,
+          style: AppTypography.buyerMobile.h3.toTextStyle(
+            color: colors.text.primary,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.tokenS),
+        AppText(
+          description,
+          variant: AppTextVariant.bodyMedium,
+          textAlign: TextAlign.center,
+          style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+            color: colors.text.secondary,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.tokenXl),
+        PrimaryButton(
+          label: _cameraPermissionDenied
+              ? l10n.cameraPermissionOpenSettings
+              : l10n.cameraPermissionAllow,
+          onPressed: _onPrimaryAction,
+          isLoading: _isOpeningCamera,
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(52),
+            shape: const StadiumBorder(),
+            textStyle: AppTypography.buyerMobile.button.toTextStyle(),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.tokenS),
+        SecondaryButton(
+          label: l10n.cameraPermissionNotNow,
+          onPressed: () => Navigator.of(context).pop<bool>(false),
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size.fromHeight(52),
+            foregroundColor: colors.text.primary,
+            side: BorderSide(color: colors.border.secondary),
+            shape: const StadiumBorder(),
+            textStyle: AppTypography.buyerMobile.button.toTextStyle(),
+          ),
+        ),
+      ],
     );
   }
 }

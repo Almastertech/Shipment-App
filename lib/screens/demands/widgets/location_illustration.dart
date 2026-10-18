@@ -1,96 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:shipments/components/app_card.dart';
 import 'package:shipments/core/resources/app_colors.dart';
 import 'package:shipments/core/resources/app_images.dart';
 import 'package:shipments/core/resources/app_radius.dart';
+import 'package:shipments/core/resources/app_spacing.dart';
 
 class LocationIllustration extends StatelessWidget {
   const LocationIllustration({
     super.key,
-    required this.size,
     required this.shadowProgress,
-    this.locationDisabled = false,
   });
 
-  final double size;
   final Animation<double> shadowProgress;
-  final bool locationDisabled;
 
   @override
   Widget build(BuildContext context) {
     const colors = AppColors.primitives;
 
-    return SizedBox.square(
-      dimension: size,
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          for (final factor in <double>[1, 0.74, 0.5, 0.32])
-            SizedBox.square(
-              dimension: size * factor,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: colors.neutral.shade200.withValues(alpha: 0.5),
-                    width: 0.7,
-                  ),
+    return AppCard(
+      padding: EdgeInsets.zero,
+      child: AspectRatio(
+        aspectRatio: 400 / 230,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Positioned.fill(
+              child: Image.asset(
+                AppImages.riyadhCity,
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+                errorBuilder: (context, error, stackTrace) => ColoredBox(
+                  color: colors.primary.shade700,
                 ),
               ),
             ),
-          SvgPicture.asset(
-            AppImages.wavesBackground,
-            width: size,
-            height: size,
-            fit: BoxFit.contain,
-          ),
-          AnimatedBuilder(
-            animation: shadowProgress,
-            builder: (context, child) {
-              final progress = shadowProgress.value;
-              final markerColor = locationDisabled
-                  ? colors.neutral.shade500
-                  : colors.primary.shade500;
-              return Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: markerColor,
-                  borderRadius: BorderRadius.circular(AppRadius.token2Xl),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: markerColor.withValues(
-                        alpha: 0.16 + (0.18 * progress),
-                      ),
-                      blurRadius: 18 + (22 * progress),
-                      spreadRadius: 2 + (8 * progress),
-                      offset: const Offset(0, 12),
+            Positioned.fill(
+              child: ColoredBox(
+                color: colors.primary.shade900.withValues(alpha: .38),
+              ),
+            ),
+            for (final diameter in <double>[176, 136, 100])
+              SizedBox.square(
+                dimension: diameter,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: .18),
+                      width: 1,
                     ),
-                  ],
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    locationDisabled ? AppImages.markerCross : AppImages.marker,
-                    width: 36,
-                    height: 36,
                   ),
                 ),
-              );
-            },
-          ),
-          Positioned(
-            bottom: size * 0.21,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: locationDisabled
-                    ? colors.neutral.shade500
-                    : colors.primary.shade500,
-                borderRadius: BorderRadius.circular(AppRadius.tokenFull),
               ),
-              child: const SizedBox.square(dimension: 8),
+            AnimatedBuilder(
+              animation: shadowProgress,
+              builder: (context, child) {
+                final progress = shadowProgress.value;
+                final markerColor = colors.accent01.shade300;
+                return Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: markerColor,
+                    borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: markerColor.withValues(
+                          alpha: 0.2 + (0.16 * progress),
+                        ),
+                        blurRadius: 16 + (14 * progress),
+                        spreadRadius: 2 + (5 * progress),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.location_on_outlined,
+                    size: 34,
+                    color: colors.neutral.shade900,
+                  ),
+                );
+              },
             ),
-          ),
-        ],
+            PositionedDirectional(
+              end: AppSpacing.tokenM,
+              bottom: AppSpacing.tokenS,
+              child: Icon(
+                Icons.my_location_rounded,
+                color: Colors.white.withValues(alpha: .72),
+                size: 18,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -10,10 +10,22 @@ class DemandProgress extends StatelessWidget {
     super.key,
     required this.steps,
     this.activeStepIndex = 0,
+    this.activeColor,
+    this.completedColor,
+    this.inactiveColor,
+    this.activeLabelColor,
+    this.completedLabelColor,
+    this.inactiveLabelColor,
   }) : assert(activeStepIndex >= 0);
 
   final List<String> steps;
   final int activeStepIndex;
+  final Color? activeColor;
+  final Color? completedColor;
+  final Color? inactiveColor;
+  final Color? activeLabelColor;
+  final Color? completedLabelColor;
+  final Color? inactiveLabelColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +46,13 @@ class DemandProgress extends StatelessWidget {
                 Container(
                   height: AppSpacing.tokenXs,
                   decoration: BoxDecoration(
-                    color: isCurrent
-                        ? colors.primary.shade500
-                        : colors.neutral.shade200,
+                    color: index == activeStepIndex
+                        ? activeColor ?? colors.primary.shade500
+                        : index < activeStepIndex
+                            ? completedColor ??
+                                activeColor ??
+                                colors.primary.shade500
+                            : inactiveColor ?? colors.neutral.shade200,
                     borderRadius: BorderRadius.circular(AppRadius.tokenFull),
                   ),
                 ),
@@ -47,8 +63,12 @@ class DemandProgress extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: AppTypography.buyerMobile.caption.toTextStyle(
                     color: isCurrent
-                        ? colors.primary.shade500
-                        : colors.neutral.shade300,
+                        ? activeLabelColor ?? colors.primary.shade500
+                        : index < activeStepIndex
+                            ? completedLabelColor ??
+                                activeLabelColor ??
+                                colors.primary.shade500
+                            : inactiveLabelColor ?? colors.neutral.shade300,
                   ),
                 ),
               ],

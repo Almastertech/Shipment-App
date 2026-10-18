@@ -7,8 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../components/app_text.dart';
+import '../../components/buttons/primary_button.dart';
+import '../../components/layout/app_bottom_sheet.dart';
 import '../../core/camera/camera_capture_service.dart' as app_camera;
 import '../../core/permissions/permission_service.dart';
+import '../../core/resources/app_colors.dart';
+import '../../core/resources/app_spacing.dart';
+import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -32,7 +38,7 @@ class InAppCameraPage extends StatefulWidget {
 
 class _InAppCameraPageState extends State<InAppCameraPage>
     with WidgetsBindingObserver {
-  static const _accent = Color(0xFFE8F9A7);
+  static const _accent = Color(0xFFFFD34D);
   static const _background = Color(0xFF202330);
 
   CameraController? _controller;
@@ -462,18 +468,17 @@ class _InAppCameraPageState extends State<InAppCameraPage>
       child: Scaffold(
         backgroundColor: _background,
         body: SafeArea(
+          bottom: !_showGuide,
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
               if (!_hasCapturedMedia &&
-                  !_showGuide &&
                   controller != null &&
                   controller.value.isInitialized)
                 _CameraPreviewFill(controller: controller)
               else
                 const ColoredBox(color: _background),
               if (!_hasCapturedMedia &&
-                  !_showGuide &&
                   controller != null &&
                   controller.value.isInitialized)
                 const _CameraFramingOverlay(),
@@ -502,82 +507,109 @@ class _InAppCameraPageState extends State<InAppCameraPage>
       2 => l10n.cameraGuideDamage,
       _ => l10n.cameraGuideDocuments,
     };
-    final title = switch (widget.categoryIndex) {
-      0 => l10n.demandDetailsEvidenceDocuments,
-      1 => l10n.demandDetailsEvidencePackaging,
-      2 => l10n.demandDetailsEvidenceDamageVideo,
-      _ => l10n.cameraGuideTitle,
-    };
-    return Column(
+    final text = AppColors.semantic.text;
+    final checklist = <String>[
+      l10n.cameraGuideShippingLabel,
+      l10n.cameraGuideTrackingNumber,
+      l10n.cameraGuideIncludedDocuments,
+    ];
+
+    return Stack(
+      fit: StackFit.expand,
       children: <Widget>[
-        _buildTopBar(l10n),
-        Expanded(child: Center(child: _CameraFramingOverlay.compact())),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(28),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(l10n.cameraGuideQuestion,
-                  textAlign: TextAlign.end,
-                  style: const TextStyle(color: Color(0xFF6B6E76))),
-              const SizedBox(height: 8),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Text(title,
-                            textAlign: TextAlign.end,
-                            style: const TextStyle(
-                                color: Color(0xFF292C38),
-                                fontWeight: FontWeight.w600)),
-                        const SizedBox(height: 5),
-                        Text(detail,
-                            textAlign: TextAlign.end,
-                            style: const TextStyle(
-                                color: Color(0xFF555965), height: 1.4)),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 14),
-                  Container(
-                    width: 64,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE9E4D0),
-                      border: Border.all(color: _background, width: 3),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Icon(
-                        _isVideo
-                            ? Icons.videocam_outlined
-                            : Icons.qr_code_2_rounded,
-                        color: const Color(0xFF4C5262),
-                        size: 34),
-                  ),
-                ],
+        Column(
+          children: <Widget>[
+            _buildTopBar(l10n),
+            const Spacer(),
+          ],
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: AppBottomSheet(
+            padding: EdgeInsets.zero,
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
               ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 48,
-                child: FilledButton(
-                  onPressed: _onReady,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF315FC2),
-                    foregroundColor: Colors.white,
-                    shape: const StadiumBorder(),
-                  ),
-                  child: Text(l10n.cameraGuideReady,
-                      style: const TextStyle(fontWeight: FontWeight.w700)),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 22),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    AppText(
+                      l10n.cameraGuideQuestion,
+                      variant: AppTextVariant.headlineSmall,
+                      textAlign: TextAlign.end,
+                      style: AppTypography.buyerMobile.h3.toTextStyle(
+                        color: text.primary,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.tokenXs),
+                    AppText(
+                      _isVideo ? detail : l10n.cameraGuidePhotoHint,
+                      variant: AppTextVariant.bodySmall,
+                      textAlign: TextAlign.end,
+                      style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                        color: text.secondary,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.tokenM),
+                    ...checklist.map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+                        child: Container(
+                          constraints: const BoxConstraints(minHeight: 48),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                            14,
+                            8,
+                            12,
+                            8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primitives.neutral.shade200,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.check_rounded,
+                                color: AppColors.primitives.primary.shade500,
+                                size: 20,
+                              ),
+                              const Spacer(),
+                              Flexible(
+                                child: AppText(
+                                  item,
+                                  variant: AppTextVariant.bodyMedium,
+                                  textAlign: TextAlign.end,
+                                  style: AppTypography.buyerMobile.bodyMedium
+                                      .toTextStyle(color: text.primary),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.tokenS),
+                    PrimaryButton(
+                      label: l10n.cameraGuideReady,
+                      onPressed: _onReady,
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(52),
+                        shape: const StadiumBorder(),
+                        textStyle:
+                            AppTypography.buyerMobile.button.toTextStyle(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ],
@@ -775,7 +807,7 @@ class _InAppCameraPageState extends State<InAppCameraPage>
   Widget _buildTopBar(AppLocalizations l10n) {
     final progress = widget.categoryIndex + 1;
     final title = switch (widget.categoryIndex) {
-      0 => l10n.demandDetailsEvidenceDocuments,
+      0 => l10n.cameraGuideTitle,
       1 => l10n.demandDetailsEvidencePackaging,
       _ => l10n.demandDetailsEvidenceDamageVideo,
     };
@@ -784,7 +816,35 @@ class _InAppCameraPageState extends State<InAppCameraPage>
       child: Column(
         children: <Widget>[
           Row(
+            textDirection: TextDirection.ltr,
             children: <Widget>[
+              IconButton.filledTonal(
+                tooltip: l10n.cameraHelp,
+                onPressed: () {},
+                style: IconButton.styleFrom(
+                  backgroundColor: const Color(0x332B2E3A),
+                  foregroundColor: Colors.white,
+                ),
+                icon: const Icon(Icons.help_outline_rounded),
+              ),
+              const Spacer(),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: const Color(0x332B2E3A),
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                  child: Text(
+                    '$progress ${Localizations.localeOf(context).languageCode == 'ar' ? 'من' : 'of'} 3',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              const Spacer(),
               IconButton.filledTonal(
                 tooltip: l10n.close,
                 onPressed: () => unawaited(_showExitConfirmation()),
@@ -793,24 +853,6 @@ class _InAppCameraPageState extends State<InAppCameraPage>
                     foregroundColor: Colors.white),
                 icon: const Icon(Icons.close_rounded),
               ),
-              const Spacer(),
-              Row(
-                  children: List<Widget>.generate(
-                      3,
-                      (index) => Container(
-                            width: 24,
-                            height: 4,
-                            margin: const EdgeInsets.symmetric(horizontal: 2),
-                            decoration: BoxDecoration(
-                              color:
-                                  index < progress ? _accent : Colors.white24,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ))),
-              const Spacer(),
-              Text(
-                  '$progress ${Localizations.localeOf(context).languageCode == 'ar' ? 'من' : 'of'} 3',
-                  style: const TextStyle(color: Colors.white70)),
             ],
           ),
           const SizedBox(height: 22),
@@ -889,19 +931,15 @@ class _CameraPreviewFill extends StatelessWidget {
 }
 
 class _CameraFramingOverlay extends StatelessWidget {
-  const _CameraFramingOverlay({this.compact = false});
-  final bool compact;
-
-  factory _CameraFramingOverlay.compact() =>
-      const _CameraFramingOverlay(compact: true);
+  const _CameraFramingOverlay();
 
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
       child: Center(
         child: SizedBox(
-          width: compact ? 280 : 310,
-          height: compact ? 205 : 250,
+          width: 310,
+          height: 250,
           child: Stack(
             children: <Widget>[
               Positioned.fill(
