@@ -106,9 +106,7 @@ class CustomSecondaryBanner extends StatelessWidget {
                           fullWidth: false,
                           iconOnTrailing: true,
                           icon: Icon(
-                            Directionality.of(context) == TextDirection.rtl
-                                ? Icons.chevron_left_rounded
-                                : Icons.chevron_right_rounded,
+                            Icons.chevron_right_rounded,
                             size: 18,
                             color: colors.neutral.shade900,
                           ),

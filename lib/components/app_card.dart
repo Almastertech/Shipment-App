@@ -10,6 +10,7 @@ class AppCard extends StatelessWidget {
     this.onTap,
     this.margin = EdgeInsets.zero,
     this.clipBehavior = Clip.antiAlias,
+    this.color,
   });
 
   final Widget child;
@@ -17,11 +18,13 @@ class AppCard extends StatelessWidget {
   final VoidCallback? onTap;
   final EdgeInsetsGeometry margin;
   final Clip clipBehavior;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: margin,
+      color: color,
       clipBehavior: clipBehavior,
       child: Material(
         color: Colors.transparent,

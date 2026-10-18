@@ -7,27 +7,50 @@ class TextLinkButton extends StatelessWidget {
     required this.onPressed,
     this.underlined = false,
     this.semanticLabel,
+    this.icon,
+    this.iconOnTrailing = false,
+    this.foregroundColor,
   });
 
   final String label;
   final VoidCallback? onPressed;
   final bool underlined;
   final String? semanticLabel;
+  final Widget? icon;
+  final bool iconOnTrailing;
+  final Color? foregroundColor;
 
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.labelLarge?.copyWith(
           decoration: underlined ? TextDecoration.underline : null,
+          color: foregroundColor,
         );
 
     Widget button = TextButton(
       onPressed: onPressed,
-      child: Text(
-        label,
-        style: style,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        softWrap: false,
+      style: TextButton.styleFrom(foregroundColor: foregroundColor),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          if (icon != null && !iconOnTrailing) ...<Widget>[
+            icon!,
+            const SizedBox(width: 6),
+          ],
+          Flexible(
+            child: Text(
+              label,
+              style: style,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+            ),
+          ),
+          if (icon != null && iconOnTrailing) ...<Widget>[
+            const SizedBox(width: 6),
+            icon!,
+          ],
+        ],
       ),
     );
 
