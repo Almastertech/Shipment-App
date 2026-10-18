@@ -496,7 +496,9 @@ class _InAppCameraPageState extends State<InAppCameraPage>
                 if (!_hasCapturedMedia &&
                     controller != null &&
                     controller.value.isInitialized)
-                  const _CameraFramingOverlay(),
+                  _CameraFramingOverlay(
+                    color: _isRecording ? const Color(0xFFE34B56) : _accent,
+                  ),
                 if (_hasCapturedMedia)
                   _buildMediaReview(l10n)
                 else if (_showGuide &&
@@ -636,48 +638,34 @@ class _InAppCameraPageState extends State<InAppCameraPage>
     return Column(
       children: <Widget>[
         _buildTopBar(l10n),
+        if (_isRecording) ...<Widget>[
+          const SizedBox(height: AppSpacing.tokenS),
+          _buildRecordingIndicator(l10n),
+        ],
         const Spacer(),
-        if (!_isVideo)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 0, 24, 28),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: .48),
-                borderRadius: BorderRadius.circular(24),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 28),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: .48),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.tokenM,
+                vertical: AppSpacing.tokenS,
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.tokenM,
-                  vertical: AppSpacing.tokenS,
-                ),
-                child: AppText(
-                  l10n.cameraFramingHint,
-                  variant: AppTextVariant.bodySmall,
-                  textAlign: TextAlign.center,
-                  style: AppTypography.buyerMobile.caption.toTextStyle(
-                    color: Colors.white,
-                  ),
+              child: AppText(
+                _isVideo ? l10n.cameraVideoFramingHint : l10n.cameraFramingHint,
+                variant: AppTextVariant.bodySmall,
+                textAlign: TextAlign.center,
+                style: AppTypography.buyerMobile.caption.toTextStyle(
+                  color: Colors.white,
                 ),
               ),
             ),
           ),
-        if (_isRecording)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  color: Colors.black54,
-                  borderRadius: BorderRadius.circular(24)),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                child: Text(
-                    '${l10n.cameraRecording} 00:${_recordingSeconds.toString().padLeft(2, '0')}',
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w600)),
-              ),
-            ),
-          ),
+        ),
         Padding(
           padding: EdgeInsets.fromLTRB(
             24,
@@ -707,7 +695,10 @@ class _InAppCameraPageState extends State<InAppCameraPage>
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 3),
+                        border: Border.all(
+                          color: _isRecording ? _accent : Colors.white,
+                          width: 3,
+                        ),
                       ),
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 150),
@@ -745,6 +736,36 @@ class _InAppCameraPageState extends State<InAppCameraPage>
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildRecordingIndicator(AppLocalizations l10n) {
+    final seconds = (_recordingSeconds % 60).toString().padLeft(2, '0');
+    return Semantics(
+      label: l10n.cameraRecording,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: const Color(0xFFE34B56),
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              AppText(
+                '0:$seconds',
+                variant: AppTextVariant.labelMedium,
+                style: AppTypography.buyerMobile.button.toTextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.tokenXs),
+              const Icon(Icons.circle, size: 8, color: Colors.white),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

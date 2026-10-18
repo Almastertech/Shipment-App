@@ -1374,6 +1374,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cameraFramingHint => 'قرّب شوي، وخَلّ الملصق كله داخل الإطار';
 
   @override
+  String get cameraVideoFramingHint => 'لف حول الطرد ببطء، وركّز على الضرر';
+
+  @override
   String get cameraFlash => 'الفلاش';
 
   @override

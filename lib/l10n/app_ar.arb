@@ -482,6 +482,7 @@
   "cameraPhotoModeLabel": "صورة",
   "cameraVideoModeLabel": "فيديو",
   "cameraFramingHint": "قرّب شوي، وخَلّ الملصق كله داخل الإطار",
+  "cameraVideoFramingHint": "لف حول الطرد ببطء، وركّز على الضرر",
   "cameraFlash": "الفلاش",
   "cameraSwitch": "تبديل الكاميرا",
   "cameraRecording": "جارٍ التسجيل",

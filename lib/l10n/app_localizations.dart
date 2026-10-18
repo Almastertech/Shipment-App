@@ -2678,6 +2678,12 @@ abstract class AppLocalizations {
   /// **'Move closer and keep the whole label in frame'**
   String get cameraFramingHint;
 
+  /// No description provided for @cameraVideoFramingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Move slowly around the parcel and focus on the damage'**
+  String get cameraVideoFramingHint;
+
   /// No description provided for @cameraFlash.
   ///
   /// In en, this message translates to:

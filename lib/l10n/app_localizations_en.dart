@@ -1400,6 +1400,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Move closer and keep the whole label in frame';
 
   @override
+  String get cameraVideoFramingHint =>
+      'Move slowly around the parcel and focus on the damage';
+
+  @override
   String get cameraFlash => 'Flash';
 
   @override
