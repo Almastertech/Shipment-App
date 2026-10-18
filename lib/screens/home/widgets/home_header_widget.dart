@@ -213,7 +213,7 @@ class _HomeImageHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.token6Xl),
                 Align(
-                  alignment: AlignmentDirectional.centerEnd,
+                  alignment: AlignmentDirectional.centerStart,
                   child: SizedBox(
                     width: MediaQuery.sizeOf(context).width * .58,
                     child: Column(
@@ -434,17 +434,20 @@ class _FeaturedShipmentCard extends StatelessWidget {
                     const Spacer(),
                     Row(
                       children: <Widget>[
-                        _ArrivalPill(date: arrivalDate),
-                        const Spacer(),
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: _ArrivalPill(date: arrivalDate),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.tokenS),
                         PrimaryButton(
                           label: actionLabel,
                           onPressed: onAction,
                           fullWidth: false,
                           iconOnTrailing: true,
                           icon: Icon(
-                            Directionality.of(context) == TextDirection.rtl
-                                ? Icons.chevron_left_rounded
-                                : Icons.chevron_right_rounded,
+                            Icons.chevron_right_rounded,
                             size: 20,
                             color: colors.neutral.shade900,
                           ),
@@ -482,7 +485,7 @@ class _ProtectionPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -497,13 +500,15 @@ class _ProtectionPill extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            AppText(
-              label,
-              variant: AppTextVariant.labelSmall,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppTypography.buyerMobile.caption.toTextStyle(
-                color: colors.neutral.shade900,
+            Flexible(
+              child: AppText(
+                label,
+                variant: AppTextVariant.labelSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTypography.buyerMobile.caption.toTextStyle(
+                  color: colors.neutral.shade900,
+                ),
               ),
             ),
             const SizedBox(width: AppSpacing.token2Xs),
@@ -534,46 +539,57 @@ class _FeaturedShipmentProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
+    final activeColor = colors.accent01.shade300;
+    final inactiveColor = colors.primary.shade400.withValues(alpha: .45);
 
     return Row(
       children: <Widget>[
-        for (var index = 0; index < steps.length; index++) ...<Widget>[
+        for (var index = 0; index < steps.length; index++)
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(
                   height: 18,
-                  child: Center(
-                    child: Container(
-                      width: 18,
-                      height: 18,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: index == activeStepIndex
-                            ? colors.accent01.shade300
-                            : index < activeStepIndex
-                                ? colors.primary.shade400
-                                : colors.accent01.shade300,
-                        border: index == activeStepIndex
-                            ? Border.all(
-                                color: colors.primary.shade500, width: 3)
-                            : null,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: index == 0
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    height: 3.5,
+                                    color: (index - 1) < activeStepIndex
+                                        ? activeColor
+                                        : inactiveColor,
+                                  ),
+                          ),
+                          Expanded(
+                            child: index == steps.length - 1
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    height: 3.5,
+                                    color: index < activeStepIndex
+                                        ? activeColor
+                                        : inactiveColor,
+                                  ),
+                          ),
+                        ],
                       ),
-                      child: index == activeStepIndex
-                          ? Center(
-                              child: Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  color: colors.accent01.shade300,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            )
-                          : null,
-                    ),
+                      Container(
+                        width: 18,
+                        height: 18,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: index <= activeStepIndex
+                              ? activeColor
+                              : inactiveColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: AppSpacing.tokenXs),
@@ -584,7 +600,7 @@ class _FeaturedShipmentProgress extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypography.buyerMobile.caption.toTextStyle(
-                    color: index == activeStepIndex
+                    color: index <= activeStepIndex
                         ? Colors.white
                         : colors.primary.shade200,
                   ),
@@ -592,20 +608,6 @@ class _FeaturedShipmentProgress extends StatelessWidget {
               ],
             ),
           ),
-          if (index < steps.length - 1)
-            Expanded(
-              child: Container(
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 22),
-                decoration: BoxDecoration(
-                  color: index < activeStepIndex
-                      ? colors.primary.shade400
-                      : colors.accent01.shade300,
-                  borderRadius: BorderRadius.circular(AppRadius.tokenFull),
-                ),
-              ),
-            ),
-        ],
       ],
     );
   }
@@ -618,46 +620,44 @@ class _ArrivalPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
 
-    return Flexible(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: .14),
-          borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: .14),
+        borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.tokenS,
+          vertical: AppSpacing.tokenXs,
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.tokenS,
-            vertical: AppSpacing.tokenXs,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SvgPicture.asset(
-                AppImages.timeQuarterTo,
-                width: 15,
-                height: 15,
-                colorFilter: ColorFilter.mode(
-                  colors.neutral.shade100,
-                  BlendMode.srcIn,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SvgPicture.asset(
+              AppImages.timeQuarterTo,
+              width: 15,
+              height: 15,
+              colorFilter: ColorFilter.mode(
+                colors.neutral.shade100,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.tokenXs),
+            Flexible(
+              child: AppText(
+                date,
+                variant: AppTextVariant.labelSmall,
+                textAlign: TextAlign.start,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTypography.buyerMobile.caption.toTextStyle(
+                  color: colors.neutral.shade100,
                 ),
               ),
-              const SizedBox(width: AppSpacing.tokenXs),
-              Flexible(
-                child: AppText(
-                  date,
-                  variant: AppTextVariant.labelSmall,
-                  textAlign: TextAlign.start,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTypography.buyerMobile.caption.toTextStyle(
-                    color: colors.neutral.shade100,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

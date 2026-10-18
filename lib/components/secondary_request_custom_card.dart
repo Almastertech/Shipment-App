@@ -88,10 +88,8 @@ class SecondaryRequestCustomCard extends StatelessWidget {
                   onPressed: onTap,
                   fullWidth: false,
                   iconOnTrailing: true,
-                  icon: Icon(
-                    Directionality.of(context) == TextDirection.rtl
-                        ? Icons.chevron_left_rounded
-                        : Icons.chevron_right_rounded,
+                  icon: const Icon(
+                    Icons.chevron_right_rounded,
                     size: 16,
                   ),
                   style: OutlinedButton.styleFrom(
@@ -234,46 +232,48 @@ class _ClaimProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
+    final activeLineColor = colors.primary.shade500;
+    final inactiveLineColor = colors.neutral.shade300;
 
     return Row(
       children: <Widget>[
-        for (var index = 0; index < steps.length; index++) ...<Widget>[
+        for (var index = 0; index < steps.length; index++)
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(
-                  height: 14,
-                  child: Center(
-                    child: Container(
-                      width: 12,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: index < activeStepIndex
-                            ? colors.neutral.shade300
-                            : index == activeStepIndex
-                                ? AppColors.semantic.surface.primary
-                                : colors.primary.shade500,
-                        border: index == activeStepIndex
-                            ? Border.all(
-                                color: colors.primary.shade500, width: 2)
-                            : null,
+                  height: 16,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: index == 0
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    height: 2.5,
+                                    color: (index - 1) < activeStepIndex
+                                        ? activeLineColor
+                                        : inactiveLineColor,
+                                  ),
+                          ),
+                          Expanded(
+                            child: index == steps.length - 1
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    height: 2.5,
+                                    color: index < activeStepIndex
+                                        ? activeLineColor
+                                        : inactiveLineColor,
+                                  ),
+                          ),
+                        ],
                       ),
-                      child: index == activeStepIndex
-                          ? Center(
-                              child: Container(
-                                width: 6,
-                                height: 6,
-                                decoration: BoxDecoration(
-                                  color: colors.accent01.shade300,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            )
-                          : null,
-                    ),
+                      _buildStepCircle(index),
+                    ],
                   ),
                 ),
                 const SizedBox(height: AppSpacing.token2Xs),
@@ -284,27 +284,52 @@ class _ClaimProgress extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypography.buyerMobile.caption.toTextStyle(
-                    color: index < activeStepIndex
-                        ? colors.neutral.shade600
-                        : colors.neutral.shade800,
+                    color: index <= activeStepIndex
+                        ? colors.neutral.shade900
+                        : colors.neutral.shade500,
                   ),
                 ),
               ],
             ),
           ),
-          if (index < steps.length - 1)
-            Expanded(
-              child: Container(
-                height: 2,
-                margin: const EdgeInsets.only(bottom: 17),
-                color: index < activeStepIndex - 1
-                    ? colors.neutral.shade300
-                    : colors.primary.shade500,
-              ),
-            ),
-        ],
       ],
     );
+  }
+
+  Widget _buildStepCircle(int index) {
+    const colors = AppColors.primitives;
+    if (index < activeStepIndex) {
+      return Container(
+        width: 14,
+        height: 14,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: colors.primary.shade500,
+        ),
+      );
+    } else if (index == activeStepIndex) {
+      return Container(
+        width: 16,
+        height: 16,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: colors.accent01.shade300,
+          border: Border.all(
+            color: colors.primary.shade500,
+            width: 2.5,
+          ),
+        ),
+      );
+    } else {
+      return Container(
+        width: 13,
+        height: 13,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: colors.neutral.shade300,
+        ),
+      );
+    }
   }
 }
 
