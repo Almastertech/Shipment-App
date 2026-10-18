@@ -195,7 +195,13 @@ class _OpenDemandsPageState extends State<OpenDemandsPage>
                       l10n.openDemandsStepEvidence,
                       l10n.openDemandsStepReview,
                     ],
-                    onBack: () => context.pop(),
+                    onBack: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go(AppRoutes.shipments);
+                      }
+                    },
                     backTooltip: l10n.navigationBack,
                   ),
                 ),
