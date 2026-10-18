@@ -2660,6 +2660,24 @@ abstract class AppLocalizations {
   /// **'Capture'**
   String get cameraCapture;
 
+  /// No description provided for @cameraPhotoModeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get cameraPhotoModeLabel;
+
+  /// No description provided for @cameraVideoModeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get cameraVideoModeLabel;
+
+  /// No description provided for @cameraFramingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Move closer and keep the whole label in frame'**
+  String get cameraFramingHint;
+
   /// No description provided for @cameraFlash.
   ///
   /// In en, this message translates to:
@@ -2711,13 +2729,13 @@ abstract class AppLocalizations {
   /// No description provided for @cameraExitTitle.
   ///
   /// In en, this message translates to:
-  /// **'Do you want to exit?'**
+  /// **'Are you sure you want to exit?'**
   String get cameraExitTitle;
 
   /// No description provided for @cameraExitDescription.
   ///
   /// In en, this message translates to:
-  /// **'The evidence and information you added to this claim won\'t be saved. You\'ll need to start again later.'**
+  /// **'Your evidence will not be saved, and you will need to start this claim again.'**
   String get cameraExitDescription;
 
   /// No description provided for @cameraContinueClaim.

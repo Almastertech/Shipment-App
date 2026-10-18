@@ -1390,6 +1390,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cameraCapture => 'Capture';
 
   @override
+  String get cameraPhotoModeLabel => 'Photo';
+
+  @override
+  String get cameraVideoModeLabel => 'Video';
+
+  @override
+  String get cameraFramingHint =>
+      'Move closer and keep the whole label in frame';
+
+  @override
   String get cameraFlash => 'Flash';
 
   @override
@@ -1415,11 +1425,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cameraRetakePhoto => 'Retake photo';
 
   @override
-  String get cameraExitTitle => 'Do you want to exit?';
+  String get cameraExitTitle => 'Are you sure you want to exit?';
 
   @override
   String get cameraExitDescription =>
-      'The evidence and information you added to this claim won\'t be saved. You\'ll need to start again later.';
+      'Your evidence will not be saved, and you will need to start this claim again.';
 
   @override
   String get cameraContinueClaim => 'Continue claim';

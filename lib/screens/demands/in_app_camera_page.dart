@@ -4,11 +4,13 @@ import 'dart:math' as math;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
+import '../../components/buttons/secondary_button.dart';
 import '../../components/layout/app_bottom_sheet.dart';
 import '../../core/camera/camera_capture_service.dart' as app_camera;
 import '../../core/permissions/permission_service.dart';
@@ -54,6 +56,7 @@ class _InAppCameraPageState extends State<InAppCameraPage>
   bool _isShowingExitConfirmation = false;
   XFile? _capturedPhoto;
   XFile? _capturedVideo;
+  Future<Uint8List>? _capturedPhotoBytes;
   VideoPlayerController? _videoPlayerController;
   String? _error;
   int _recordingSeconds = 0;
@@ -221,6 +224,7 @@ class _InAppCameraPageState extends State<InAppCameraPage>
         setState(() {
           _controller = null;
           _capturedPhoto = file;
+          _capturedPhotoBytes = file.readAsBytes();
           _isCapturing = false;
         });
       }
@@ -363,67 +367,71 @@ class _InAppCameraPageState extends State<InAppCameraPage>
     if (_isShowingExitConfirmation || !mounted) return;
     _isShowingExitConfirmation = true;
     final l10n = AppLocalizations.of(context)!;
-    final shouldExit = await showModalBottomSheet<bool>(
+    final shouldExit = await showDialog<bool>(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
       barrierColor: Colors.black54,
-      builder: (sheetContext) => SafeArea(
-        top: false,
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(24, 12, 24, 20),
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(28),
-          ),
+      builder: (dialogContext) => Dialog(
+        backgroundColor: Colors.white,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 18),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text(
+              Center(
+                child: Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: AppColors.primitives.failure.shade100,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.warning_amber_rounded,
+                    size: 30,
+                    color: AppColors.primitives.failure.shade600,
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.tokenM),
+              AppText(
                 l10n.cameraExitTitle,
-                textAlign: TextAlign.end,
-                style: const TextStyle(
-                  color: Color(0xFF315FC2),
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
+                variant: AppTextVariant.titleLarge,
+                textAlign: TextAlign.center,
+                style: AppTypography.buyerMobile.h4.toTextStyle(
+                  color: AppColors.primitives.neutral.shade900,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
+              const SizedBox(height: AppSpacing.tokenS),
+              AppText(
                 l10n.cameraExitDescription,
-                textAlign: TextAlign.end,
-                style: const TextStyle(
-                  color: Color(0xFF777984),
-                  height: 1.5,
+                variant: AppTextVariant.bodySmall,
+                textAlign: TextAlign.center,
+                style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                  color: AppColors.primitives.neutral.shade600,
                 ),
               ),
-              const SizedBox(height: 18),
-              SizedBox(
-                height: 52,
-                child: FilledButton(
-                  onPressed: () => Navigator.of(sheetContext).pop(false),
-                  style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF315FC2),
-                    foregroundColor: Colors.white,
-                    shape: const StadiumBorder(),
-                  ),
-                  child: Text(l10n.cameraContinueClaim),
+              const SizedBox(height: AppSpacing.tokenL),
+              PrimaryButton(
+                label: l10n.cameraContinueClaim,
+                onPressed: () => Navigator.of(dialogContext).pop(false),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(52),
+                  shape: const StadiumBorder(),
+                  textStyle: AppTypography.buyerMobile.button.toTextStyle(),
                 ),
               ),
-              const SizedBox(height: 8),
-              SizedBox(
-                height: 52,
-                child: FilledButton(
-                  onPressed: () => Navigator.of(sheetContext).pop(true),
-                  style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFFFCF2F2),
-                    foregroundColor: const Color(0xFFE24C4C),
-                    shape: const StadiumBorder(),
-                  ),
-                  child: Text(l10n.cameraExitClaim),
+              const SizedBox(height: AppSpacing.tokenXs),
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(true),
+                style: TextButton.styleFrom(
+                  foregroundColor: AppColors.primitives.failure.shade600,
+                  textStyle: AppTypography.buyerMobile.button.toTextStyle(),
                 ),
+                child: Text(l10n.cameraExitClaim),
               ),
             ],
           ),
@@ -441,6 +449,7 @@ class _InAppCameraPageState extends State<InAppCameraPage>
     final player = _videoPlayerController;
     setState(() {
       _capturedPhoto = null;
+      _capturedPhotoBytes = null;
       _capturedVideo = null;
       _videoPlayerController = null;
     });
@@ -460,40 +469,47 @@ class _InAppCameraPageState extends State<InAppCameraPage>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final controller = _controller;
-    return PopScope<XFile>(
-      canPop: _allowPop,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!didPop) unawaited(_showExitConfirmation());
-      },
-      child: Scaffold(
-        backgroundColor: _background,
-        body: SafeArea(
-          bottom: !_showGuide,
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              if (!_hasCapturedMedia &&
-                  controller != null &&
-                  controller.value.isInitialized)
-                _CameraPreviewFill(controller: controller)
-              else
-                const ColoredBox(color: _background),
-              if (!_hasCapturedMedia &&
-                  controller != null &&
-                  controller.value.isInitialized)
-                const _CameraFramingOverlay(),
-              if (_hasCapturedMedia)
-                _buildMediaReview(l10n)
-              else if (_showGuide &&
-                  controller != null &&
-                  controller.value.isInitialized)
-                _buildGuide(l10n)
-              else if (!_hasCapturedMedia)
-                _buildCaptureControls(l10n),
-              if (_isInitializing && !_hasCapturedMedia)
-                const _LoadingOverlay(),
-              if (_error != null) _buildError(l10n),
-            ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.black,
+      ),
+      child: PopScope<XFile>(
+        canPop: _allowPop,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) unawaited(_showExitConfirmation());
+        },
+        child: Scaffold(
+          backgroundColor: _background,
+          body: SafeArea(
+            top: false,
+            bottom: !_showGuide,
+            child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                if (!_hasCapturedMedia &&
+                    controller != null &&
+                    controller.value.isInitialized)
+                  _CameraPreviewFill(controller: controller)
+                else
+                  const ColoredBox(color: _background),
+                if (!_hasCapturedMedia &&
+                    controller != null &&
+                    controller.value.isInitialized)
+                  const _CameraFramingOverlay(),
+                if (_hasCapturedMedia)
+                  _buildMediaReview(l10n)
+                else if (_showGuide &&
+                    controller != null &&
+                    controller.value.isInitialized)
+                  _buildGuide(l10n)
+                else if (!_hasCapturedMedia)
+                  _buildCaptureControls(l10n),
+                if (_isInitializing && !_hasCapturedMedia)
+                  const _LoadingOverlay(),
+                if (_error != null) _buildError(l10n),
+              ],
+            ),
           ),
         ),
       ),
@@ -621,6 +637,30 @@ class _InAppCameraPageState extends State<InAppCameraPage>
       children: <Widget>[
         _buildTopBar(l10n),
         const Spacer(),
+        if (!_isVideo)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 28),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: .48),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.tokenM,
+                  vertical: AppSpacing.tokenS,
+                ),
+                child: AppText(
+                  l10n.cameraFramingHint,
+                  variant: AppTextVariant.bodySmall,
+                  textAlign: TextAlign.center,
+                  style: AppTypography.buyerMobile.caption.toTextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
         if (_isRecording)
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
@@ -639,8 +679,14 @@ class _InAppCameraPageState extends State<InAppCameraPage>
             ),
           ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
+          padding: EdgeInsets.fromLTRB(
+            24,
+            12,
+            24,
+            MediaQuery.paddingOf(context).bottom + 24,
+          ),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               _RoundCameraButton(
@@ -650,27 +696,45 @@ class _InAppCameraPageState extends State<InAppCameraPage>
                 label: l10n.cameraFlash,
                 onPressed: _toggleFlash,
               ),
-              GestureDetector(
-                onTap: _isCapturing ? null : _onShutter,
-                child: Container(
-                  width: 78,
-                  height: 78,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 3)),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    decoration: BoxDecoration(
-                      color:
-                          _isRecording ? const Color(0xFFE74D4D) : Colors.white,
-                      shape:
-                          _isRecording ? BoxShape.rectangle : BoxShape.circle,
-                      borderRadius:
-                          _isRecording ? BorderRadius.circular(12) : null,
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: _isCapturing ? null : _onShutter,
+                    child: Container(
+                      width: 78,
+                      height: 78,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 3),
+                      ),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 150),
+                        decoration: BoxDecoration(
+                          color: _isRecording
+                              ? const Color(0xFFE74D4D)
+                              : Colors.white,
+                          shape: _isRecording
+                              ? BoxShape.rectangle
+                              : BoxShape.circle,
+                          borderRadius:
+                              _isRecording ? BorderRadius.circular(12) : null,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(height: AppSpacing.tokenXs),
+                  AppText(
+                    _isVideo
+                        ? l10n.cameraVideoModeLabel
+                        : l10n.cameraPhotoModeLabel,
+                    variant: AppTextVariant.labelSmall,
+                    style: AppTypography.buyerMobile.caption.toTextStyle(
+                      color: _accent,
+                    ),
+                  ),
+                ],
               ),
               _RoundCameraButton(
                 icon: Icons.flip_camera_ios_rounded,
@@ -688,117 +752,120 @@ class _InAppCameraPageState extends State<InAppCameraPage>
     final isVideo = _capturedVideo != null;
     final media = _capturedVideo ?? _capturedPhoto!;
     final player = _videoPlayerController;
-    return Column(
+    final l10nStyle = AppTypography.buyerMobile.button.toTextStyle();
+    return Stack(
+      fit: StackFit.expand,
       children: <Widget>[
-        _buildTopBar(l10n),
-        Expanded(
-          child: Center(
-            child: Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 42, vertical: 18),
-              padding: const EdgeInsets.all(18),
+        Positioned.fill(
+          child: isVideo
+              ? player != null && player.value.isInitialized
+                  ? GestureDetector(
+                      onTap: () => unawaited(
+                        _toggleVideoPlayback(player),
+                      ),
+                      child: Center(
+                        child: AspectRatio(
+                          aspectRatio: player.value.aspectRatio,
+                          child: VideoPlayer(player),
+                        ),
+                      ),
+                    )
+                  : const Center(
+                      child: Icon(
+                        Icons.videocam_outlined,
+                        color: Colors.white70,
+                        size: 48,
+                      ),
+                    )
+              : FutureBuilder<Uint8List>(
+                  future: _capturedPhotoBytes ?? media.readAsBytes(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(color: _accent),
+                      );
+                    }
+                    return Image.memory(
+                      snapshot.data!,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Center(
+                        child: Icon(
+                          Icons.broken_image_outlined,
+                          color: Colors.white70,
+                          size: 48,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+        ),
+        const _CameraFramingOverlay(color: Color(0xFF54C66A)),
+        Column(
+          children: <Widget>[
+            _buildTopBar(l10n),
+            const Spacer(),
+            DecoratedBox(
               decoration: BoxDecoration(
-                color: const Color(0xFF292C38),
-                borderRadius: BorderRadius.circular(28),
+                color: Colors.black.withValues(alpha: .48),
+                borderRadius: BorderRadius.circular(24),
               ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(14),
-                    child: isVideo
-                        ? player != null && player.value.isInitialized
-                            ? Center(
-                                child: AspectRatio(
-                                  aspectRatio: player.value.aspectRatio,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      unawaited(_toggleVideoPlayback(player));
-                                    },
-                                    child: VideoPlayer(player),
-                                  ),
-                                ),
-                              )
-                            : const Center(
-                                child: Icon(
-                                  Icons.videocam_outlined,
-                                  color: Colors.white70,
-                                  size: 48,
-                                ),
-                              )
-                        : Image.file(
-                            File(media.path),
-                            fit: BoxFit.contain,
-                            width: double.infinity,
-                            height: double.infinity,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Icon(
-                              Icons.broken_image_outlined,
-                              color: Colors.white70,
-                              size: 48,
-                            ),
-                          ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.tokenM,
+                  vertical: AppSpacing.tokenS,
+                ),
+                child: AppText(
+                  isVideo
+                      ? l10n.cameraVideoLooksClear
+                      : l10n.cameraPhotoLooksClear,
+                  variant: AppTextVariant.bodySmall,
+                  style: AppTypography.buyerMobile.caption.toTextStyle(
+                    color: Colors.white,
                   ),
-                  PositionedDirectional(
-                    top: 0,
-                    end: 0,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: _accent,
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 8,
-                        ),
-                        child: Text(
-                          isVideo
-                              ? l10n.cameraVideoLooksClear
-                              : l10n.cameraPhotoLooksClear,
-                          style: const TextStyle(
-                            color: Color(0xFF252833),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.tokenL,
+                AppSpacing.token5Xl,
+                AppSpacing.tokenL,
+                MediaQuery.paddingOf(context).bottom + AppSpacing.tokenL,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  PrimaryButton(
+                    label: isVideo ? l10n.cameraUseVideo : l10n.cameraUsePhoto,
+                    onPressed: _usePhoto,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _accent,
+                      foregroundColor: AppColors.primitives.neutral.shade900,
+                      elevation: 0,
+                      minimumSize: const Size.fromHeight(52),
+                      shape: const StadiumBorder(),
+                      textStyle: l10nStyle,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.tokenS),
+                  SecondaryButton(
+                    label: isVideo
+                        ? l10n.cameraRetakeVideo
+                        : l10n.cameraRetakePhoto,
+                    onPressed: _retakeCapture,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.white, width: 1.5),
+                      minimumSize: const Size.fromHeight(52),
+                      shape: const StadiumBorder(),
+                      textStyle: l10nStyle,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              SizedBox(
-                height: 52,
-                child: FilledButton(
-                  onPressed: _usePhoto,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: _accent,
-                    foregroundColor: const Color(0xFF252833),
-                    shape: const StadiumBorder(),
-                  ),
-                  child: Text(
-                    isVideo ? l10n.cameraUseVideo : l10n.cameraUsePhoto,
-                    style: const TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: _retakeCapture,
-                style: TextButton.styleFrom(foregroundColor: Colors.white70),
-                child: Text(
-                  isVideo ? l10n.cameraRetakeVideo : l10n.cameraRetakePhoto,
-                ),
-              ),
-            ],
-          ),
+          ],
         ),
       ],
     );
@@ -812,7 +879,12 @@ class _InAppCameraPageState extends State<InAppCameraPage>
       _ => l10n.demandDetailsEvidenceDamageVideo,
     };
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
+      padding: EdgeInsets.fromLTRB(
+        20,
+        MediaQuery.paddingOf(context).top + 12,
+        20,
+        8,
+      ),
       child: Column(
         children: <Widget>[
           Row(
@@ -931,26 +1003,22 @@ class _CameraPreviewFill extends StatelessWidget {
 }
 
 class _CameraFramingOverlay extends StatelessWidget {
-  const _CameraFramingOverlay();
+  const _CameraFramingOverlay({this.color = _InAppCameraPageState._accent});
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
       child: Center(
         child: SizedBox(
-          width: 310,
-          height: 250,
-          child: Stack(
-            children: <Widget>[
-              Positioned.fill(
-                  child: CustomPaint(painter: _CornerFramePainter())),
-              Align(
-                child: Container(
-                    height: 1,
-                    color:
-                        _InAppCameraPageState._accent.withValues(alpha: 0.8)),
-              ),
-            ],
+          width: math
+              .max(0, math.min(MediaQuery.sizeOf(context).width - 72, 350))
+              .toDouble(),
+          height:
+              math.min(MediaQuery.sizeOf(context).height * .46, 420).toDouble(),
+          child: CustomPaint(
+            painter: _CornerFramePainter(color: color),
           ),
         ),
       ),
@@ -959,12 +1027,16 @@ class _CameraFramingOverlay extends StatelessWidget {
 }
 
 class _CornerFramePainter extends CustomPainter {
+  const _CornerFramePainter({required this.color});
+
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     const length = 25.0;
     const radius = 12.0;
     final paint = Paint()
-      ..color = _InAppCameraPageState._accent
+      ..color = color
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
@@ -997,7 +1069,8 @@ class _CornerFramePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _CornerFramePainter oldDelegate) =>
+      oldDelegate.color != color;
 }
 
 class _RoundCameraButton extends StatelessWidget {

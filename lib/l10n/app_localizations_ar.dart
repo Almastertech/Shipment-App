@@ -1365,6 +1365,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cameraCapture => 'التقاط';
 
   @override
+  String get cameraPhotoModeLabel => 'صورة';
+
+  @override
+  String get cameraVideoModeLabel => 'فيديو';
+
+  @override
+  String get cameraFramingHint => 'قرّب شوي، وخَلّ الملصق كله داخل الإطار';
+
+  @override
   String get cameraFlash => 'الفلاش';
 
   @override
@@ -1384,23 +1393,23 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cameraPhotoLooksClear => 'الصورة واضحة ✓';
 
   @override
-  String get cameraUsePhoto => 'استخدام الصورة';
+  String get cameraUsePhoto => 'استخدم الصورة';
 
   @override
-  String get cameraRetakePhoto => 'إعادة التصوير';
+  String get cameraRetakePhoto => 'صوّر من جديد';
 
   @override
-  String get cameraExitTitle => 'هل تريد الخروج؟';
+  String get cameraExitTitle => 'متأكد تبي تطلع؟';
 
   @override
   String get cameraExitDescription =>
-      'لن يتم حفظ الأدلة أو المعلومات التي أضفتها في هذه المطالبة، وستحتاج للبدء من جديد لاحقًا.';
+      'ما راح نحفظ الأدلة اللي أضفتها، وبتحتاج تبدأ المطالبة من جديد.';
 
   @override
-  String get cameraContinueClaim => 'متابعة المطالبة';
+  String get cameraContinueClaim => 'كمّل المطالبة';
 
   @override
-  String get cameraExitClaim => 'الخروج';
+  String get cameraExitClaim => 'اطلع';
 
   @override
   String get cameraVideoLooksClear => 'الفيديو واضح ✓';
