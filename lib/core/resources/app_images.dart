@@ -8,10 +8,8 @@ class AppImages {
   static const String _pngBasePath = '$_imagesBasePath/png';
 
   static const String splash = '$_pngBasePath/splash.png';
-  static const String onboardingProtection =
-      '$_pngBasePath/onboarding1.png';
-  static const String onboardingTracking =
-      '$_pngBasePath/onboarding2.png';
+  static const String onboardingProtection = '$_pngBasePath/onboarding1.png';
+  static const String onboardingTracking = '$_pngBasePath/onboarding2.png';
   static const String onboardingClaim = '$_pngBasePath/onboarding3.png';
   static const String verification = '$_pngBasePath/verification.png';
 
@@ -21,6 +19,9 @@ class AppImages {
       '$_imagesBasePath/png/secondarybanner.png';
   static const String shipmentBackground =
       '$_imagesBasePath/png/shipmentbackground.png';
+  static const String boxesStack = '$_pngBasePath/boxesstack.png';
+  static const String riyadhCity = '$_pngBasePath/riyadhcity.png';
+  static const String boxFocus = '$_pngBasePath/boxfocus.png';
   static const String logo = '$_svgBasePath/Logo.svg';
   static const String phoneIcon = '$_svgBasePath/phoneicon.svg';
   static const String wavesBackground = '$_svgBasePath/wavesbackground.svg';
