@@ -139,24 +139,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String otpDestination(String contact) {
-    return 'أرسلنا رمزاً مكوناً من 6 أرقام إلى $contact';
+    return 'أرسلنا رمزاً مكوناً من 4 أرقام إلى $contact';
   }
 
   @override
   String otpPhoneDestination(Object contact) {
-    return 'أرسلنا رمزًا من ٦ أرقام إلى جوالك المنتهي بـ $contact';
+    return 'أرسلنا رمزًا من ٤ أرقام إلى جوالك المنتهي بـ $contact';
   }
 
   @override
   String otpEmailDestination(Object contact) {
-    return 'أرسلنا رمزاً من 6 أرقام إلى $contact';
+    return 'أرسلنا رمزاً من 4 أرقام إلى $contact';
   }
 
   @override
   String get otpPhoneLengthHint => 'أدخل الرمز المكوّن من 4 أرقام';
 
   @override
-  String get otpEmailLengthHint => 'أدخل الرمز المكوّن من 6 أرقام';
+  String get otpEmailLengthHint => 'أدخل الرمز المكوّن من 4 أرقام';
 
   @override
   String get countryPickerTitle => 'اختر رمز الدولة';
@@ -221,7 +221,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get otpVerify => 'تحقق';
 
   @override
-  String get otpSubtitle => 'أرسلنا رمزاً مكوناً من 6 أرقام إلى رقمك';
+  String get otpSubtitle => 'أرسلنا رمزاً مكوناً من 4 أرقام إلى رقمك';
 
   @override
   String get otpHint => 'رمز التحقق';
@@ -328,7 +328,30 @@ class AppLocalizationsAr extends AppLocalizations {
   String get myShipmentsActiveTab => 'نشطة 2';
 
   @override
-  String get myShipmentsDeliveredTab => 'تم التسليم 1';
+  String get myShipmentsDeliveredTab => 'وصلتك 1';
+
+  @override
+  String get shipmentsScreenTitle => 'شحناتي';
+
+  @override
+  String get shipmentsScreenSubtitle => 'عندك شحنتين بالطريق، وكلها محمية';
+
+  @override
+  String get shipmentsDeliveredSubtitle =>
+      'شحناتك اللي وصلتك، والمطالبة متاحة لك';
+
+  @override
+  String get shipmentDeliveredStatus => '✓ وصلتك';
+
+  @override
+  String get shipmentDeliveredAt => 'وصلتك';
+
+  @override
+  String get shipmentDeliveredDate => 'الاثنين 27 سبتمبر';
+
+  @override
+  String get shipmentDeliveredClaimHint =>
+      'لاحظت شي؟ تقدر تفتح مطالبة لين 11 أكتوبر';
 
   @override
   String get homeActiveClaims => 'مطالباتك النشطة';
@@ -424,49 +447,72 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shipmentDetailsTitle => 'تفاصيل الشحنة';
 
   @override
-  String get shipmentProtectionTitle => 'حماية الشحنة';
+  String get shipmentDetailsInTransitLabel => 'بالطريق لك';
 
   @override
-  String get shipmentProtectionCoveredBy => 'محمية بواسطة حصين';
+  String get shipmentDetailsBack => 'رجوع';
 
   @override
-  String get shipmentProtectionValueLabel => 'القيمة المحمية';
+  String get shipmentDetailsShare => 'مشاركة الشحنة';
+
+  @override
+  String get shipmentProtectionTitle => 'حصين ماسك ظهرك';
+
+  @override
+  String get shipmentProtectionCoveredBy =>
+      'شحناتك محمية من التلف والفقدان لين توصلك';
+
+  @override
+  String get shipmentProtectionValueLabel => 'قيمة الحماية';
 
   @override
   String get shipmentProtectionValue => '480 ر.س';
 
   @override
-  String get shipmentProtectionStatusLabel => 'الحالة';
+  String get shipmentProtectionStatusLabel => 'التغطية';
 
   @override
-  String get shipmentProtectionStatus => 'فعالة';
+  String get shipmentProtectionStatus => 'تلف وفقدان';
 
   @override
-  String get shipmentProtectionRemainingLabel => 'المطالبة (12 يوم)';
+  String get shipmentProtectionRemainingLabel => 'المطالبة';
 
   @override
-  String get shipmentProtectionRemaining => 'لم يتم تفعيلها';
+  String get shipmentProtectionRemaining => 'بعد الاستلام';
 
   @override
-  String get shipmentProtectionClaimAction => 'فتح مطالبة';
+  String get shipmentProtectionClaimAction =>
+      'تقدر تفتح مطالبة أول ما توصلك الشحنة';
 
   @override
-  String get shipmentTimelineTitle => 'مسار الشحنة';
+  String get shipmentTimelineTitle => 'وين وصلت شحنتك؟';
 
   @override
   String get shipmentTimelineOrdered => 'تم الطلب';
 
   @override
-  String get shipmentTimelineShipped => 'تم الشحن';
+  String get shipmentTimelineShipped => 'طلعت من المستودع';
 
   @override
-  String get shipmentTimelineInTransit => 'قيد التوصيل';
+  String get shipmentTimelineInTransit => 'بالطريق لك';
 
   @override
-  String get shipmentTimelineDelivered => 'تم التسليم';
+  String get shipmentTimelineDelivered => 'توصلك';
 
   @override
   String get shipmentTimelineOrderDate => '1 أكتوبر';
+
+  @override
+  String get shipmentTimelineOrderedDate => 'الثلاثاء 28 سبتمبر';
+
+  @override
+  String get shipmentTimelineShippedDate => 'الأربعاء 29 سبتمبر · الرياض';
+
+  @override
+  String get shipmentTimelineInTransitDate => 'الحين · المندوب في طريقه إليك';
+
+  @override
+  String get shipmentTimelineDeliveryDate => 'الجمعة 1 أكتوبر';
 
   @override
   String get shipmentDetailsSectionTitle => 'تفاصيل الشحنة';
@@ -475,19 +521,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shipmentDetailsExpectedDelivery => 'التسليم المتوقع';
 
   @override
-  String get shipmentDetailsExpectedDeliveryValue => 'متجر نون';
+  String get shipmentDetailsExpectedDeliveryValue => 'الجمعة 1 أكتوبر';
+
+  @override
+  String get shipmentDetailsMerchant => 'التاجر';
 
   @override
   String get shipmentDetailsOrderDate => 'تاريخ الطلب';
 
   @override
-  String get shipmentDetailsOrderDateValue => 'الجمعة - 1 أكتوبر';
+  String get shipmentDetailsOrderDateValue => 'الثلاثاء 28 سبتمبر';
 
   @override
   String get shipmentDetailsProduct => 'المنتج';
 
   @override
-  String get shipmentDetailsProductValue => 'سماعات لاسلكية برو';
+  String get shipmentDetailsProductValue => 'ساعة ذكية – إصدار ذهبي';
 
   @override
   String get shipmentDetailsAddress => 'عنوان التسليم';
@@ -524,16 +573,16 @@ class AppLocalizationsAr extends AppLocalizations {
       'صوّر المنتج والتغليف بوضوح عشان نكمل مراجعة مطالبتك بسرعة.';
 
   @override
-  String get homeRequestStepReceived => 'استلام الطلب';
+  String get homeRequestStepReceived => 'استلمناها';
 
   @override
-  String get homeRequestStepReview => 'مراجعة الطلب';
+  String get homeRequestStepReview => 'نراجعها';
 
   @override
-  String get homeRequestStepDecision => 'إصدار قرار';
+  String get homeRequestStepDecision => 'القرار';
 
   @override
-  String get homeRequestStepCompensation => 'تعويض';
+  String get homeRequestStepCompensation => 'التعويض';
 
   @override
   String get homeRequestAmountLabel => 'قيمة الوثيقة';
@@ -1113,6 +1162,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get openDemandsTitle => 'فتح مطالبة';
 
   @override
+  String get openDemandsWhyLocationHeading => 'ليش نحتاج موقعك؟';
+
+  @override
+  String get openDemandsLocationBenefitOne => 'يوثّق ظروف مطالبتك وقت تقديمها';
+
+  @override
+  String get openDemandsLocationBenefitTwo =>
+      'يساعد فريق المراجعة يدرس ملفك أسرع';
+
+  @override
+  String get openDemandsLocationBenefitThree =>
+      'نستخدمه للمطالبة بس، وما نشاركه مع أحد';
+
+  @override
   String get openDemandsStepLocation => 'الموقع';
 
   @override
@@ -1125,17 +1188,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get openDemandsLocationBadge => 'تفعيل الموقع';
 
   @override
-  String get openDemandsLocationHeading => 'نحتاج موقعك الحالي';
+  String get openDemandsLocationHeading => 'وين أنت الحين؟';
 
   @override
   String get openDemandsLocationDescription =>
-      'يساعدنا موقعك وقت تقديم المطالبة على توثيق ظروفها، ويدعم فريق المراجعة عند دراسة ملفك. نستخدمه لهذه المطالبة فقط.';
+      'نحتاج موقعك الحالي عشان نوثق ظروف مطالبتك';
 
   @override
-  String get openDemandsAllowLocation => 'السماح بالموقع';
+  String get openDemandsAllowLocation => 'اسمح بالموقع';
 
   @override
-  String get openDemandsNotNow => 'ليس الآن';
+  String get openDemandsNotNow => 'مو الحين';
 
   @override
   String get openDemandsLocationGranted => 'تم السماح بالوصول إلى الموقع.';
@@ -1159,21 +1222,35 @@ class AppLocalizationsAr extends AppLocalizations {
       'معلومة الموقع تساعد في توضيح ظروف المطالبة. إذا تابعت بدونها، لن تكون متاحة لفريق حصين أثناء المراجعة، ويمكنك مع ذلك إكمال طلبك بشكل طبيعي.';
 
   @override
-  String get openDemandsContinueWithoutLocation => 'المتابعة بدون الموقع';
+  String get openDemandsSkippedWarningTitle =>
+      'بدون موقعك، ممكن يتأثر تقييم مطالبتك';
+
+  @override
+  String get openDemandsSkippedWarningDescription =>
+      'الموقع يوضّح ظروف المطالبة لفريق حصين وقت المراجعة. لو كملت بدونه، تقدر تقدم طلبك عادي.';
+
+  @override
+  String get openDemandsContinueWithoutLocation => 'كمّل بدون الموقع';
 
   @override
   String get demandDetailsLocationUnavailable =>
-      'الموقع غير متاح، تم تسجيل ذلك في الطلب';
+      'ما قدرنا نحدد موقعك، وسجلناه بالطلب';
 
   @override
   String get demandDetailsLocationAvailable => 'تم تسجيل موقعك في الطلب';
 
   @override
-  String get demandDetailsHeading => 'خلّنا نوثّق حالة الشحنة';
+  String get demandDetailsHeading => 'خلنا نوثق حالة شحنتك';
 
   @override
   String get demandDetailsDescription =>
-      'بعض الصور وفيديو قصير تكفي لتوثيق حالة الشحنة بوضوح. نرشدك في كل خطوة.';
+      'كم صورة وفيديو قصير يكفون، وحنا نوجهك لقطة لقطة';
+
+  @override
+  String get demandDetailsEvidenceQuestion => 'وش بنصور؟';
+
+  @override
+  String get demandDetailsEvidenceAdded => 'تم إرفاق الدليل';
 
   @override
   String get demandDetailsEvidenceDocuments => 'الملصق والمستندات';
@@ -1182,7 +1259,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get demandDetailsEvidencePackaging => 'التغليف والمنتج';
 
   @override
-  String get demandDetailsEvidenceDamageVideo => 'فيديو قصير يوضح مناطق الضرر';
+  String get demandDetailsEvidenceDamageVideo => 'فيديو قصير للضرر';
+
+  @override
+  String get demandDetailsDocumentsHint => 'صورة وحدة للملصق ورقم التتبع';
+
+  @override
+  String get demandDetailsPackagingHint => 'صورة وحدة توضح الضرر';
+
+  @override
+  String get demandDetailsVideoHint => 'حوالي 10 ثواني';
 
   @override
   String get demandDetailsOnePhoto => 'صورة واحدة';
@@ -1191,13 +1277,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get demandDetailsAboutTenSeconds => 'حوالي ١٠ ثوانٍ';
 
   @override
-  String get demandDetailsOptionalImages => 'صور إضافية (اختياري*)';
+  String get demandDetailsOptionalImages => 'صور إضافية (اختياري)';
 
   @override
   String get demandDetailsAddImage => 'إضافة صورة';
 
   @override
-  String get demandDetailsStartDocumentation => 'ابدأ التوثيق';
+  String get demandDetailsStartDocumentation => 'يلا نبدأ التوثيق';
 
   @override
   String get demandDetailsContinueDocumentation => 'استكمال التوثيق';
@@ -1238,10 +1324,29 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cameraPermissionOpenSettings => 'فتح الإعدادات';
 
   @override
+  String get cameraPermissionNotNow => 'مو الحين';
+
+  @override
   String get cameraGuideTitle => 'صوّر الملصق والمستندات';
 
   @override
   String get cameraGuideQuestion => 'ماذا تصوّر؟';
+
+  @override
+  String get cameraGuidePhotoHint =>
+      'لقطة وحدة واضحة تكفي، تأكد إن الكلام مقروء';
+
+  @override
+  String get cameraGuideShippingLabel => 'ملصق الشحن';
+
+  @override
+  String get cameraGuideTrackingNumber => 'رقم التتبع';
+
+  @override
+  String get cameraGuideIncludedDocuments => 'أي مستندات جت مع الطرد';
+
+  @override
+  String get cameraHelp => 'مساعدة الكاميرا';
 
   @override
   String get cameraGuideDocuments =>
@@ -1254,7 +1359,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cameraGuideDamage => 'فيديو قصير يوضح مناطق الضرر';
 
   @override
-  String get cameraGuideReady => 'جاهز';
+  String get cameraGuideReady => 'جاهز، يلا نصوّر';
 
   @override
   String get cameraCapture => 'التقاط';

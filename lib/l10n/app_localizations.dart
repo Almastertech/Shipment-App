@@ -341,19 +341,19 @@ abstract class AppLocalizations {
   /// No description provided for @otpDestination.
   ///
   /// In en, this message translates to:
-  /// **'We sent a 6-digit code to {contact}'**
+  /// **'We sent a 4-digit code to {contact}'**
   String otpDestination(String contact);
 
   /// No description provided for @otpPhoneDestination.
   ///
   /// In en, this message translates to:
-  /// **'We sent a 6-digit code to your number ending in {contact}'**
+  /// **'We sent a 4-digit code to your number ending in {contact}'**
   String otpPhoneDestination(Object contact);
 
   /// No description provided for @otpEmailDestination.
   ///
   /// In en, this message translates to:
-  /// **'We sent a 6-digit code to {contact}'**
+  /// **'We sent a 4-digit code to {contact}'**
   String otpEmailDestination(Object contact);
 
   /// No description provided for @otpPhoneLengthHint.
@@ -365,7 +365,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpEmailLengthHint.
   ///
   /// In en, this message translates to:
-  /// **'Enter the 6-digit code'**
+  /// **'Enter the 4-digit code'**
   String get otpEmailLengthHint;
 
   /// No description provided for @countryPickerTitle.
@@ -491,7 +491,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'We sent a 6-digit code to your number'**
+  /// **'We sent a 4-digit code to your number'**
   String get otpSubtitle;
 
   /// No description provided for @otpHint.
@@ -692,6 +692,48 @@ abstract class AppLocalizations {
   /// **'Delivered 1'**
   String get myShipmentsDeliveredTab;
 
+  /// No description provided for @shipmentsScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My shipments'**
+  String get shipmentsScreenTitle;
+
+  /// No description provided for @shipmentsScreenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Two shipments on the way, both protected'**
+  String get shipmentsScreenSubtitle;
+
+  /// No description provided for @shipmentsDeliveredSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your delivered shipment, with time to make a claim'**
+  String get shipmentsDeliveredSubtitle;
+
+  /// No description provided for @shipmentDeliveredStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'✓ Delivered'**
+  String get shipmentDeliveredStatus;
+
+  /// No description provided for @shipmentDeliveredAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get shipmentDeliveredAt;
+
+  /// No description provided for @shipmentDeliveredDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday, September 27'**
+  String get shipmentDeliveredDate;
+
+  /// No description provided for @shipmentDeliveredClaimHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Notice an issue? You can file a claim until October 11'**
+  String get shipmentDeliveredClaimHint;
+
   /// No description provided for @homeActiveClaims.
   ///
   /// In en, this message translates to:
@@ -878,22 +920,40 @@ abstract class AppLocalizations {
   /// **'Shipment details'**
   String get shipmentDetailsTitle;
 
+  /// No description provided for @shipmentDetailsInTransitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'On its way to you'**
+  String get shipmentDetailsInTransitLabel;
+
+  /// No description provided for @shipmentDetailsBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get shipmentDetailsBack;
+
+  /// No description provided for @shipmentDetailsShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share shipment'**
+  String get shipmentDetailsShare;
+
   /// No description provided for @shipmentProtectionTitle.
   ///
   /// In en, this message translates to:
-  /// **'Shipment protection'**
+  /// **'Haseen has your back'**
   String get shipmentProtectionTitle;
 
   /// No description provided for @shipmentProtectionCoveredBy.
   ///
   /// In en, this message translates to:
-  /// **'Protected by Haseen'**
+  /// **'Your shipment is protected from damage and loss until it arrives'**
   String get shipmentProtectionCoveredBy;
 
   /// No description provided for @shipmentProtectionValueLabel.
   ///
   /// In en, this message translates to:
-  /// **'Coverage value'**
+  /// **'Protection value'**
   String get shipmentProtectionValueLabel;
 
   /// No description provided for @shipmentProtectionValue.
@@ -905,37 +965,37 @@ abstract class AppLocalizations {
   /// No description provided for @shipmentProtectionStatusLabel.
   ///
   /// In en, this message translates to:
-  /// **'Status'**
+  /// **'Coverage'**
   String get shipmentProtectionStatusLabel;
 
   /// No description provided for @shipmentProtectionStatus.
   ///
   /// In en, this message translates to:
-  /// **'Active'**
+  /// **'Damage and loss'**
   String get shipmentProtectionStatus;
 
   /// No description provided for @shipmentProtectionRemainingLabel.
   ///
   /// In en, this message translates to:
-  /// **'Claim window (12 days)'**
+  /// **'Claim'**
   String get shipmentProtectionRemainingLabel;
 
   /// No description provided for @shipmentProtectionRemaining.
   ///
   /// In en, this message translates to:
-  /// **'Not activated'**
+  /// **'After delivery'**
   String get shipmentProtectionRemaining;
 
   /// No description provided for @shipmentProtectionClaimAction.
   ///
   /// In en, this message translates to:
-  /// **'File a claim'**
+  /// **'You can file a claim once your shipment arrives'**
   String get shipmentProtectionClaimAction;
 
   /// No description provided for @shipmentTimelineTitle.
   ///
   /// In en, this message translates to:
-  /// **'Shipment journey'**
+  /// **'Where is your shipment?'**
   String get shipmentTimelineTitle;
 
   /// No description provided for @shipmentTimelineOrdered.
@@ -947,13 +1007,13 @@ abstract class AppLocalizations {
   /// No description provided for @shipmentTimelineShipped.
   ///
   /// In en, this message translates to:
-  /// **'Shipped'**
+  /// **'Left the warehouse'**
   String get shipmentTimelineShipped;
 
   /// No description provided for @shipmentTimelineInTransit.
   ///
   /// In en, this message translates to:
-  /// **'In transit'**
+  /// **'On its way to you'**
   String get shipmentTimelineInTransit;
 
   /// No description provided for @shipmentTimelineDelivered.
@@ -967,6 +1027,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'October 1'**
   String get shipmentTimelineOrderDate;
+
+  /// No description provided for @shipmentTimelineOrderedDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday, September 28'**
+  String get shipmentTimelineOrderedDate;
+
+  /// No description provided for @shipmentTimelineShippedDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday, September 29 · Riyadh'**
+  String get shipmentTimelineShippedDate;
+
+  /// No description provided for @shipmentTimelineInTransitDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Now · Your courier is on the way'**
+  String get shipmentTimelineInTransitDate;
+
+  /// No description provided for @shipmentTimelineDeliveryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday, October 1'**
+  String get shipmentTimelineDeliveryDate;
 
   /// No description provided for @shipmentDetailsSectionTitle.
   ///
@@ -983,8 +1067,14 @@ abstract class AppLocalizations {
   /// No description provided for @shipmentDetailsExpectedDeliveryValue.
   ///
   /// In en, this message translates to:
-  /// **'Noon store'**
+  /// **'Friday, October 1'**
   String get shipmentDetailsExpectedDeliveryValue;
+
+  /// No description provided for @shipmentDetailsMerchant.
+  ///
+  /// In en, this message translates to:
+  /// **'Merchant'**
+  String get shipmentDetailsMerchant;
 
   /// No description provided for @shipmentDetailsOrderDate.
   ///
@@ -995,7 +1085,7 @@ abstract class AppLocalizations {
   /// No description provided for @shipmentDetailsOrderDateValue.
   ///
   /// In en, this message translates to:
-  /// **'Friday, October 1'**
+  /// **'Tuesday, September 28'**
   String get shipmentDetailsOrderDateValue;
 
   /// No description provided for @shipmentDetailsProduct.
@@ -1007,7 +1097,7 @@ abstract class AppLocalizations {
   /// No description provided for @shipmentDetailsProductValue.
   ///
   /// In en, this message translates to:
-  /// **'Wireless Pro earbuds'**
+  /// **'Smart watch – Gold Edition'**
   String get shipmentDetailsProductValue;
 
   /// No description provided for @shipmentDetailsAddress.
@@ -2198,6 +2288,30 @@ abstract class AppLocalizations {
   /// **'File a claim'**
   String get openDemandsTitle;
 
+  /// No description provided for @openDemandsWhyLocationHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Why do we need your location?'**
+  String get openDemandsWhyLocationHeading;
+
+  /// No description provided for @openDemandsLocationBenefitOne.
+  ///
+  /// In en, this message translates to:
+  /// **'It documents the circumstances when you file your claim'**
+  String get openDemandsLocationBenefitOne;
+
+  /// No description provided for @openDemandsLocationBenefitTwo.
+  ///
+  /// In en, this message translates to:
+  /// **'It helps the review team assess your claim sooner'**
+  String get openDemandsLocationBenefitTwo;
+
+  /// No description provided for @openDemandsLocationBenefitThree.
+  ///
+  /// In en, this message translates to:
+  /// **'We use it only for this claim and never share it'**
+  String get openDemandsLocationBenefitThree;
+
   /// No description provided for @openDemandsStepLocation.
   ///
   /// In en, this message translates to:
@@ -2282,6 +2396,18 @@ abstract class AppLocalizations {
   /// **'Location information helps clarify the circumstances of your claim. Without it, the Haseen review team may have less information, but you can still complete your claim normally.'**
   String get openDemandsLocationDeclinedDescription;
 
+  /// No description provided for @openDemandsSkippedWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Without your location, your claim assessment may be affected'**
+  String get openDemandsSkippedWarningTitle;
+
+  /// No description provided for @openDemandsSkippedWarningDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your location helps the Haseen team understand your claim during review. You can still submit your claim without it.'**
+  String get openDemandsSkippedWarningDescription;
+
   /// No description provided for @openDemandsContinueWithoutLocation.
   ///
   /// In en, this message translates to:
@@ -2291,7 +2417,7 @@ abstract class AppLocalizations {
   /// No description provided for @demandDetailsLocationUnavailable.
   ///
   /// In en, this message translates to:
-  /// **'Location unavailable; noted in your claim'**
+  /// **'Location unavailable, noted for your claim'**
   String get demandDetailsLocationUnavailable;
 
   /// No description provided for @demandDetailsLocationAvailable.
@@ -2303,14 +2429,26 @@ abstract class AppLocalizations {
   /// No description provided for @demandDetailsHeading.
   ///
   /// In en, this message translates to:
-  /// **'Let’s document the shipment condition'**
+  /// **'Let’s document your shipment'**
   String get demandDetailsHeading;
 
   /// No description provided for @demandDetailsDescription.
   ///
   /// In en, this message translates to:
-  /// **'A few photos and a short video help us document the shipment clearly. We’ll guide you through each step.'**
+  /// **'A few photos and a short video will help us review.'**
   String get demandDetailsDescription;
+
+  /// No description provided for @demandDetailsEvidenceQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What should we photograph?'**
+  String get demandDetailsEvidenceQuestion;
+
+  /// No description provided for @demandDetailsEvidenceAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence added'**
+  String get demandDetailsEvidenceAdded;
 
   /// No description provided for @demandDetailsEvidenceDocuments.
   ///
@@ -2327,8 +2465,26 @@ abstract class AppLocalizations {
   /// No description provided for @demandDetailsEvidenceDamageVideo.
   ///
   /// In en, this message translates to:
-  /// **'Short video of the damaged areas'**
+  /// **'Short video of the damage'**
   String get demandDetailsEvidenceDamageVideo;
+
+  /// No description provided for @demandDetailsDocumentsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'One photo of the label and tracking number'**
+  String get demandDetailsDocumentsHint;
+
+  /// No description provided for @demandDetailsPackagingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'One photo showing the damage'**
+  String get demandDetailsPackagingHint;
+
+  /// No description provided for @demandDetailsVideoHint.
+  ///
+  /// In en, this message translates to:
+  /// **'About 10 seconds'**
+  String get demandDetailsVideoHint;
 
   /// No description provided for @demandDetailsOnePhoto.
   ///
@@ -2345,7 +2501,7 @@ abstract class AppLocalizations {
   /// No description provided for @demandDetailsOptionalImages.
   ///
   /// In en, this message translates to:
-  /// **'Additional photos (optional*)'**
+  /// **'Additional photos (optional)'**
   String get demandDetailsOptionalImages;
 
   /// No description provided for @demandDetailsAddImage.
@@ -2357,7 +2513,7 @@ abstract class AppLocalizations {
   /// No description provided for @demandDetailsStartDocumentation.
   ///
   /// In en, this message translates to:
-  /// **'Start documentation'**
+  /// **'Let’s start documenting'**
   String get demandDetailsStartDocumentation;
 
   /// No description provided for @demandDetailsContinueDocumentation.
@@ -2426,6 +2582,12 @@ abstract class AppLocalizations {
   /// **'Open settings'**
   String get cameraPermissionOpenSettings;
 
+  /// No description provided for @cameraPermissionNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get cameraPermissionNotNow;
+
   /// No description provided for @cameraGuideTitle.
   ///
   /// In en, this message translates to:
@@ -2437,6 +2599,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What to capture?'**
   String get cameraGuideQuestion;
+
+  /// No description provided for @cameraGuidePhotoHint.
+  ///
+  /// In en, this message translates to:
+  /// **'One clear photo is enough. Make sure the label can be read.'**
+  String get cameraGuidePhotoHint;
+
+  /// No description provided for @cameraGuideShippingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping label'**
+  String get cameraGuideShippingLabel;
+
+  /// No description provided for @cameraGuideTrackingNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking number'**
+  String get cameraGuideTrackingNumber;
+
+  /// No description provided for @cameraGuideIncludedDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Any documents that came with the parcel'**
+  String get cameraGuideIncludedDocuments;
+
+  /// No description provided for @cameraHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera help'**
+  String get cameraHelp;
 
   /// No description provided for @cameraGuideDocuments.
   ///
@@ -2459,7 +2651,7 @@ abstract class AppLocalizations {
   /// No description provided for @cameraGuideReady.
   ///
   /// In en, this message translates to:
-  /// **'Ready'**
+  /// **'Ready, let’s take a photo'**
   String get cameraGuideReady;
 
   /// No description provided for @cameraCapture.

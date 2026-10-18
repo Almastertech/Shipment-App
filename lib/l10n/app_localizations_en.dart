@@ -144,24 +144,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String otpDestination(String contact) {
-    return 'We sent a 6-digit code to $contact';
+    return 'We sent a 4-digit code to $contact';
   }
 
   @override
   String otpPhoneDestination(Object contact) {
-    return 'We sent a 6-digit code to your number ending in $contact';
+    return 'We sent a 4-digit code to your number ending in $contact';
   }
 
   @override
   String otpEmailDestination(Object contact) {
-    return 'We sent a 6-digit code to $contact';
+    return 'We sent a 4-digit code to $contact';
   }
 
   @override
   String get otpPhoneLengthHint => 'Enter the 4-digit code';
 
   @override
-  String get otpEmailLengthHint => 'Enter the 6-digit code';
+  String get otpEmailLengthHint => 'Enter the 4-digit code';
 
   @override
   String get countryPickerTitle => 'Choose a country code';
@@ -227,7 +227,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpVerify => 'Verify';
 
   @override
-  String get otpSubtitle => 'We sent a 6-digit code to your number';
+  String get otpSubtitle => 'We sent a 4-digit code to your number';
 
   @override
   String get otpHint => 'Verification code';
@@ -340,6 +340,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myShipmentsDeliveredTab => 'Delivered 1';
 
   @override
+  String get shipmentsScreenTitle => 'My shipments';
+
+  @override
+  String get shipmentsScreenSubtitle =>
+      'Two shipments on the way, both protected';
+
+  @override
+  String get shipmentsDeliveredSubtitle =>
+      'Your delivered shipment, with time to make a claim';
+
+  @override
+  String get shipmentDeliveredStatus => '✓ Delivered';
+
+  @override
+  String get shipmentDeliveredAt => 'Delivered';
+
+  @override
+  String get shipmentDeliveredDate => 'Monday, September 27';
+
+  @override
+  String get shipmentDeliveredClaimHint =>
+      'Notice an issue? You can file a claim until October 11';
+
+  @override
   String get homeActiveClaims => 'Your active claims';
 
   @override
@@ -433,43 +457,54 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shipmentDetailsTitle => 'Shipment details';
 
   @override
-  String get shipmentProtectionTitle => 'Shipment protection';
+  String get shipmentDetailsInTransitLabel => 'On its way to you';
 
   @override
-  String get shipmentProtectionCoveredBy => 'Protected by Haseen';
+  String get shipmentDetailsBack => 'Back';
 
   @override
-  String get shipmentProtectionValueLabel => 'Coverage value';
+  String get shipmentDetailsShare => 'Share shipment';
+
+  @override
+  String get shipmentProtectionTitle => 'Haseen has your back';
+
+  @override
+  String get shipmentProtectionCoveredBy =>
+      'Your shipment is protected from damage and loss until it arrives';
+
+  @override
+  String get shipmentProtectionValueLabel => 'Protection value';
 
   @override
   String get shipmentProtectionValue => 'SAR 480';
 
   @override
-  String get shipmentProtectionStatusLabel => 'Status';
+  String get shipmentProtectionStatusLabel => 'Coverage';
 
   @override
-  String get shipmentProtectionStatus => 'Active';
+  String get shipmentProtectionStatus => 'Damage and loss';
 
   @override
-  String get shipmentProtectionRemainingLabel => 'Claim window (12 days)';
+  String get shipmentProtectionRemainingLabel => 'Claim';
 
   @override
-  String get shipmentProtectionRemaining => 'Not activated';
+  String get shipmentProtectionRemaining => 'After delivery';
 
   @override
-  String get shipmentProtectionClaimAction => 'File a claim';
+  String get shipmentProtectionClaimAction =>
+      'You can file a claim once your shipment arrives';
 
   @override
-  String get shipmentTimelineTitle => 'Shipment journey';
+  String get shipmentTimelineTitle => 'Where is your shipment?';
 
   @override
   String get shipmentTimelineOrdered => 'Order placed';
 
   @override
-  String get shipmentTimelineShipped => 'Shipped';
+  String get shipmentTimelineShipped => 'Left the warehouse';
 
   @override
-  String get shipmentTimelineInTransit => 'In transit';
+  String get shipmentTimelineInTransit => 'On its way to you';
 
   @override
   String get shipmentTimelineDelivered => 'Delivered';
@@ -478,25 +513,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shipmentTimelineOrderDate => 'October 1';
 
   @override
+  String get shipmentTimelineOrderedDate => 'Tuesday, September 28';
+
+  @override
+  String get shipmentTimelineShippedDate => 'Wednesday, September 29 · Riyadh';
+
+  @override
+  String get shipmentTimelineInTransitDate =>
+      'Now · Your courier is on the way';
+
+  @override
+  String get shipmentTimelineDeliveryDate => 'Friday, October 1';
+
+  @override
   String get shipmentDetailsSectionTitle => 'Shipment information';
 
   @override
   String get shipmentDetailsExpectedDelivery => 'Estimated delivery';
 
   @override
-  String get shipmentDetailsExpectedDeliveryValue => 'Noon store';
+  String get shipmentDetailsExpectedDeliveryValue => 'Friday, October 1';
+
+  @override
+  String get shipmentDetailsMerchant => 'Merchant';
 
   @override
   String get shipmentDetailsOrderDate => 'Order date';
 
   @override
-  String get shipmentDetailsOrderDateValue => 'Friday, October 1';
+  String get shipmentDetailsOrderDateValue => 'Tuesday, September 28';
 
   @override
   String get shipmentDetailsProduct => 'Product';
 
   @override
-  String get shipmentDetailsProductValue => 'Wireless Pro earbuds';
+  String get shipmentDetailsProductValue => 'Smart watch – Gold Edition';
 
   @override
   String get shipmentDetailsAddress => 'Delivery address';
@@ -1131,6 +1182,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get openDemandsTitle => 'File a claim';
 
   @override
+  String get openDemandsWhyLocationHeading => 'Why do we need your location?';
+
+  @override
+  String get openDemandsLocationBenefitOne =>
+      'It documents the circumstances when you file your claim';
+
+  @override
+  String get openDemandsLocationBenefitTwo =>
+      'It helps the review team assess your claim sooner';
+
+  @override
+  String get openDemandsLocationBenefitThree =>
+      'We use it only for this claim and never share it';
+
+  @override
   String get openDemandsStepLocation => 'Location';
 
   @override
@@ -1178,22 +1244,36 @@ class AppLocalizationsEn extends AppLocalizations {
       'Location information helps clarify the circumstances of your claim. Without it, the Haseen review team may have less information, but you can still complete your claim normally.';
 
   @override
+  String get openDemandsSkippedWarningTitle =>
+      'Without your location, your claim assessment may be affected';
+
+  @override
+  String get openDemandsSkippedWarningDescription =>
+      'Your location helps the Haseen team understand your claim during review. You can still submit your claim without it.';
+
+  @override
   String get openDemandsContinueWithoutLocation => 'Continue without location';
 
   @override
   String get demandDetailsLocationUnavailable =>
-      'Location unavailable; noted in your claim';
+      'Location unavailable, noted for your claim';
 
   @override
   String get demandDetailsLocationAvailable =>
       'Location recorded for this claim';
 
   @override
-  String get demandDetailsHeading => 'Let’s document the shipment condition';
+  String get demandDetailsHeading => 'Let’s document your shipment';
 
   @override
   String get demandDetailsDescription =>
-      'A few photos and a short video help us document the shipment clearly. We’ll guide you through each step.';
+      'A few photos and a short video will help us review.';
+
+  @override
+  String get demandDetailsEvidenceQuestion => 'What should we photograph?';
+
+  @override
+  String get demandDetailsEvidenceAdded => 'Evidence added';
 
   @override
   String get demandDetailsEvidenceDocuments => 'Label and documents';
@@ -1202,8 +1282,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get demandDetailsEvidencePackaging => 'Packaging and item';
 
   @override
-  String get demandDetailsEvidenceDamageVideo =>
-      'Short video of the damaged areas';
+  String get demandDetailsEvidenceDamageVideo => 'Short video of the damage';
+
+  @override
+  String get demandDetailsDocumentsHint =>
+      'One photo of the label and tracking number';
+
+  @override
+  String get demandDetailsPackagingHint => 'One photo showing the damage';
+
+  @override
+  String get demandDetailsVideoHint => 'About 10 seconds';
 
   @override
   String get demandDetailsOnePhoto => '1 photo';
@@ -1212,13 +1301,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get demandDetailsAboutTenSeconds => 'About 10 seconds';
 
   @override
-  String get demandDetailsOptionalImages => 'Additional photos (optional*)';
+  String get demandDetailsOptionalImages => 'Additional photos (optional)';
 
   @override
   String get demandDetailsAddImage => 'Add a photo';
 
   @override
-  String get demandDetailsStartDocumentation => 'Start documentation';
+  String get demandDetailsStartDocumentation => 'Let’s start documenting';
 
   @override
   String get demandDetailsContinueDocumentation => 'Continue documentation';
@@ -1259,10 +1348,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cameraPermissionOpenSettings => 'Open settings';
 
   @override
+  String get cameraPermissionNotNow => 'Not now';
+
+  @override
   String get cameraGuideTitle => 'Photograph the label and documents';
 
   @override
   String get cameraGuideQuestion => 'What to capture?';
+
+  @override
+  String get cameraGuidePhotoHint =>
+      'One clear photo is enough. Make sure the label can be read.';
+
+  @override
+  String get cameraGuideShippingLabel => 'Shipping label';
+
+  @override
+  String get cameraGuideTrackingNumber => 'Tracking number';
+
+  @override
+  String get cameraGuideIncludedDocuments =>
+      'Any documents that came with the parcel';
+
+  @override
+  String get cameraHelp => 'Camera help';
 
   @override
   String get cameraGuideDocuments =>
@@ -1275,7 +1384,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cameraGuideDamage => 'A short video showing the damaged areas';
 
   @override
-  String get cameraGuideReady => 'Ready';
+  String get cameraGuideReady => 'Ready, let’s take a photo';
 
   @override
   String get cameraCapture => 'Capture';
