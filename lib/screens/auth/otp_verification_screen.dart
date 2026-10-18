@@ -41,8 +41,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   bool _isVerifying = false;
 
   bool get _isEmail => widget.contact?.contains('@') ?? false;
-  int get _codeLength => _isEmail ? 6 : 4;
-  int get _numericLimit => _isEmail ? 999999 : 9999;
+  static const int _codeLength = 4;
+  static const int _numericLimit = 9999;
 
   @override
   void initState() {
