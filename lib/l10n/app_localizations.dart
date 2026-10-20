@@ -1232,6 +1232,138 @@ abstract class AppLocalizations {
   /// **'Track claim'**
   String get homeSecondaryRequestAction;
 
+  /// No description provided for @requestsScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your claims'**
+  String get requestsScreenTitle;
+
+  /// No description provided for @requestsOpenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You have 3 open claims; one needs your attention'**
+  String get requestsOpenSubtitle;
+
+  /// No description provided for @requestsClosedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your completed claims and their outcomes'**
+  String get requestsClosedSubtitle;
+
+  /// No description provided for @requestsOpenTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Open · 3'**
+  String get requestsOpenTab;
+
+  /// No description provided for @requestsClosedTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed · 2'**
+  String get requestsClosedTab;
+
+  /// No description provided for @requestsSecondOpenNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'HS-1931'**
+  String get requestsSecondOpenNumber;
+
+  /// No description provided for @requestsSecondOpenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wireless headphones Pro · Jarir'**
+  String get requestsSecondOpenTitle;
+
+  /// No description provided for @requestsOpenClaimAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 320'**
+  String get requestsOpenClaimAmount;
+
+  /// No description provided for @requestsClaimAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim value'**
+  String get requestsClaimAmountLabel;
+
+  /// No description provided for @requestsClosedRejectedNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'HS-1874'**
+  String get requestsClosedRejectedNumber;
+
+  /// No description provided for @requestsClosedRejectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Men\'s fragrance · Aug 20'**
+  String get requestsClosedRejectedTitle;
+
+  /// No description provided for @requestsClosedAcceptedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get requestsClosedAcceptedStatus;
+
+  /// No description provided for @requestsClosedRejectedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Declined'**
+  String get requestsClosedRejectedStatus;
+
+  /// No description provided for @requestsCompensationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation'**
+  String get requestsCompensationLabel;
+
+  /// No description provided for @requestsItemValueLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Item value'**
+  String get requestsItemValueLabel;
+
+  /// No description provided for @requestsAcceptedCompensation.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 65'**
+  String get requestsAcceptedCompensation;
+
+  /// No description provided for @requestsRejectedCompensation.
+  ///
+  /// In en, this message translates to:
+  /// **'—'**
+  String get requestsRejectedCompensation;
+
+  /// No description provided for @requestsClosedItemValue.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 480'**
+  String get requestsClosedItemValue;
+
+  /// No description provided for @requestsAcceptedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund returns to your card within 3–5 days'**
+  String get requestsAcceptedMessage;
+
+  /// No description provided for @requestsRejectedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We need more details. Contact support'**
+  String get requestsRejectedMessage;
+
+  /// No description provided for @requestsDetailsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get requestsDetailsAction;
+
+  /// No description provided for @requestsDetailsComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim details will be available soon.'**
+  String get requestsDetailsComingSoon;
+
   /// No description provided for @homeHowItWorks.
   ///
   /// In en, this message translates to:
@@ -1363,6 +1495,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Orders'**
   String get bottomNavOrders;
+
+  /// No description provided for @bottomNavClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get bottomNavClaims;
 
   /// No description provided for @bottomNavStores.
   ///
@@ -2546,6 +2684,114 @@ abstract class AppLocalizations {
   /// **'Attachments will be available when claim uploads are enabled.'**
   String get demandDetailsUploadComingSoon;
 
+  /// No description provided for @demandReviewHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Review and submit your claim'**
+  String get demandReviewHeading;
+
+  /// No description provided for @demandReviewDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the details, then the Haseen team will receive it'**
+  String get demandReviewDescription;
+
+  /// No description provided for @demandReviewLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your location'**
+  String get demandReviewLocationTitle;
+
+  /// No description provided for @demandReviewLocationMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is turned off'**
+  String get demandReviewLocationMissing;
+
+  /// No description provided for @demandReviewLocationMissingDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This may affect the assessment of your claim'**
+  String get demandReviewLocationMissingDescription;
+
+  /// No description provided for @demandReviewLocationCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current location'**
+  String get demandReviewLocationCurrent;
+
+  /// No description provided for @demandReviewLocationEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable'**
+  String get demandReviewLocationEnable;
+
+  /// No description provided for @demandReviewEvidenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence'**
+  String get demandReviewEvidenceTitle;
+
+  /// No description provided for @demandReviewFileCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} files ✓'**
+  String demandReviewFileCount(int count);
+
+  /// No description provided for @demandReviewLabelPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get demandReviewLabelPhoto;
+
+  /// No description provided for @demandReviewPackagingPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging'**
+  String get demandReviewPackagingPhoto;
+
+  /// No description provided for @demandReviewVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get demandReviewVideo;
+
+  /// No description provided for @demandReviewAdditionalPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photo'**
+  String get demandReviewAdditionalPhoto;
+
+  /// No description provided for @demandReviewDescriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What happened to the item?'**
+  String get demandReviewDescriptionTitle;
+
+  /// No description provided for @demandReviewDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the damage... for example: the screen is scratched'**
+  String get demandReviewDescriptionHint;
+
+  /// No description provided for @demandReviewCharacterCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}/300'**
+  String demandReviewCharacterCount(int count);
+
+  /// No description provided for @demandReviewSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit claim'**
+  String get demandReviewSubmit;
+
+  /// No description provided for @demandReviewSubmitComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim submission will be available when claims are enabled.'**
+  String get demandReviewSubmitComingSoon;
+
   /// No description provided for @cameraPermissionHeading.
   ///
   /// In en, this message translates to:
@@ -2803,6 +3049,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get close;
+
+  /// No description provided for @claimDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim HS-2048'**
+  String get claimDetailsTitle;
+
+  /// No description provided for @claimDetailsProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart watch – Gold Edition · 12 September'**
+  String get claimDetailsProduct;
+
+  /// No description provided for @claimDetailsAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get claimDetailsAccepted;
+
+  /// No description provided for @claimDetailsSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your claim was accepted'**
+  String get claimDetailsSuccessTitle;
+
+  /// No description provided for @claimDetailsSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your compensation is on its way and should arrive in 3–5 days'**
+  String get claimDetailsSuccessBody;
+
+  /// No description provided for @claimDetailsSettlement.
+  ///
+  /// In en, this message translates to:
+  /// **'Settlement'**
+  String get claimDetailsSettlement;
+
+  /// No description provided for @claimDetailsTimelineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim timeline'**
+  String get claimDetailsTimelineTitle;
+
+  /// No description provided for @claimDetailsSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim submitted'**
+  String get claimDetailsSubmitted;
+
+  /// No description provided for @claimDetailsReviewed.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get claimDetailsReviewed;
+
+  /// No description provided for @claimDetailsDecision.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted 🎉'**
+  String get claimDetailsDecision;
+
+  /// No description provided for @claimDetailsCompensation.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation sent'**
+  String get claimDetailsCompensation;
+
+  /// No description provided for @claimDetailsSep6.
+  ///
+  /// In en, this message translates to:
+  /// **'6 September'**
+  String get claimDetailsSep6;
+
+  /// No description provided for @claimDetailsSep7.
+  ///
+  /// In en, this message translates to:
+  /// **'7 September'**
+  String get claimDetailsSep7;
+
+  /// No description provided for @claimDetailsEvidenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence you sent'**
+  String get claimDetailsEvidenceTitle;
+
+  /// No description provided for @claimDetailsAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional'**
+  String get claimDetailsAttachment;
+
+  /// No description provided for @claimDetailsVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get claimDetailsVideo;
+
+  /// No description provided for @claimDetailsPackaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging'**
+  String get claimDetailsPackaging;
+
+  /// No description provided for @claimDetailsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get claimDetailsLabel;
+
+  /// No description provided for @claimDetailsLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your location and notes'**
+  String get claimDetailsLocationTitle;
+
+  /// No description provided for @claimDetailsLocationCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'Location when the claim was submitted'**
+  String get claimDetailsLocationCaption;
+
+  /// No description provided for @claimDetailsLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'2415 King Fahd Road, Al Sahil, Al Rimal, Riyadh'**
+  String get claimDetailsLocation;
+
+  /// No description provided for @claimDetailsNoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your note'**
+  String get claimDetailsNoteTitle;
+
+  /// No description provided for @claimDetailsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'“The watch screen is cracked, and the carton was pressed in from the corner.”'**
+  String get claimDetailsNote;
+
+  /// No description provided for @claimDetailsDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim details'**
+  String get claimDetailsDetailsTitle;
+
+  /// No description provided for @claimDetailsClaimNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim number'**
+  String get claimDetailsClaimNumber;
+
+  /// No description provided for @claimDetailsProductLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get claimDetailsProductLabel;
+
+  /// No description provided for @claimDetailsProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart watch – Gold Edition'**
+  String get claimDetailsProductName;
+
+  /// No description provided for @claimDetailsItemPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Item price'**
+  String get claimDetailsItemPrice;
+
+  /// No description provided for @claimDetailsClaimValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim value'**
+  String get claimDetailsClaimValue;
+
+  /// No description provided for @claimDetailsShipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Related shipment'**
+  String get claimDetailsShipment;
+
+  /// No description provided for @claimDetailsStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Store'**
+  String get claimDetailsStore;
+
+  /// No description provided for @claimDetailsSubmittedDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get claimDetailsSubmittedDate;
+
+  /// No description provided for @claimDetailsDecisionDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Decision date'**
+  String get claimDetailsDecisionDate;
+
+  /// No description provided for @claimDetailsTransferDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer date'**
+  String get claimDetailsTransferDate;
+
+  /// No description provided for @claimDetailsSubmittedDateValue.
+  ///
+  /// In en, this message translates to:
+  /// **'6 September 2026'**
+  String get claimDetailsSubmittedDateValue;
+
+  /// No description provided for @claimDetailsDecisionDateValue.
+  ///
+  /// In en, this message translates to:
+  /// **'7 September 2026'**
+  String get claimDetailsDecisionDateValue;
+
+  /// No description provided for @claimDetailsTransferDateValue.
+  ///
+  /// In en, this message translates to:
+  /// **'7 September 2026'**
+  String get claimDetailsTransferDateValue;
+
+  /// No description provided for @claimDetailsStoreName.
+  ///
+  /// In en, this message translates to:
+  /// **'Noon Store'**
+  String get claimDetailsStoreName;
+
+  /// No description provided for @claimDetailsSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all details'**
+  String get claimDetailsSeeAll;
+
+  /// No description provided for @claimDetailsHide.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide details'**
+  String get claimDetailsHide;
 }
 
 class _AppLocalizationsDelegate

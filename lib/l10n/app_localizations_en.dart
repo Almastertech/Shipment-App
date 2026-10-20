@@ -618,6 +618,76 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeSecondaryRequestAction => 'Track claim';
 
   @override
+  String get requestsScreenTitle => 'Your claims';
+
+  @override
+  String get requestsOpenSubtitle =>
+      'You have 3 open claims; one needs your attention';
+
+  @override
+  String get requestsClosedSubtitle =>
+      'Your completed claims and their outcomes';
+
+  @override
+  String get requestsOpenTab => 'Open · 3';
+
+  @override
+  String get requestsClosedTab => 'Closed · 2';
+
+  @override
+  String get requestsSecondOpenNumber => 'HS-1931';
+
+  @override
+  String get requestsSecondOpenTitle => 'Wireless headphones Pro · Jarir';
+
+  @override
+  String get requestsOpenClaimAmount => 'SAR 320';
+
+  @override
+  String get requestsClaimAmountLabel => 'Claim value';
+
+  @override
+  String get requestsClosedRejectedNumber => 'HS-1874';
+
+  @override
+  String get requestsClosedRejectedTitle => 'Men\'s fragrance · Aug 20';
+
+  @override
+  String get requestsClosedAcceptedStatus => 'Accepted';
+
+  @override
+  String get requestsClosedRejectedStatus => 'Declined';
+
+  @override
+  String get requestsCompensationLabel => 'Compensation';
+
+  @override
+  String get requestsItemValueLabel => 'Item value';
+
+  @override
+  String get requestsAcceptedCompensation => 'SAR 65';
+
+  @override
+  String get requestsRejectedCompensation => '—';
+
+  @override
+  String get requestsClosedItemValue => 'SAR 480';
+
+  @override
+  String get requestsAcceptedMessage =>
+      'Refund returns to your card within 3–5 days';
+
+  @override
+  String get requestsRejectedMessage => 'We need more details. Contact support';
+
+  @override
+  String get requestsDetailsAction => 'Details';
+
+  @override
+  String get requestsDetailsComingSoon =>
+      'Claim details will be available soon.';
+
+  @override
   String get homeHowItWorks => 'How it works';
 
   @override
@@ -686,6 +756,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bottomNavOrders => 'Orders';
+
+  @override
+  String get bottomNavClaims => 'Claims';
 
   @override
   String get bottomNavStores => 'Merchant';
@@ -1327,6 +1400,68 @@ class AppLocalizationsEn extends AppLocalizations {
       'Attachments will be available when claim uploads are enabled.';
 
   @override
+  String get demandReviewHeading => 'Review and submit your claim';
+
+  @override
+  String get demandReviewDescription =>
+      'Check the details, then the Haseen team will receive it';
+
+  @override
+  String get demandReviewLocationTitle => 'Your location';
+
+  @override
+  String get demandReviewLocationMissing => 'Location is turned off';
+
+  @override
+  String get demandReviewLocationMissingDescription =>
+      'This may affect the assessment of your claim';
+
+  @override
+  String get demandReviewLocationCurrent => 'Your current location';
+
+  @override
+  String get demandReviewLocationEnable => 'Enable';
+
+  @override
+  String get demandReviewEvidenceTitle => 'Evidence';
+
+  @override
+  String demandReviewFileCount(int count) {
+    return '$count files ✓';
+  }
+
+  @override
+  String get demandReviewLabelPhoto => 'Label';
+
+  @override
+  String get demandReviewPackagingPhoto => 'Packaging';
+
+  @override
+  String get demandReviewVideo => 'Video';
+
+  @override
+  String get demandReviewAdditionalPhoto => 'Add photo';
+
+  @override
+  String get demandReviewDescriptionTitle => 'What happened to the item?';
+
+  @override
+  String get demandReviewDescriptionHint =>
+      'Describe the damage... for example: the screen is scratched';
+
+  @override
+  String demandReviewCharacterCount(int count) {
+    return '$count/300';
+  }
+
+  @override
+  String get demandReviewSubmit => 'Submit claim';
+
+  @override
+  String get demandReviewSubmitComingSoon =>
+      'Claim submission will be available when claims are enabled.';
+
+  @override
   String get cameraPermissionHeading => 'We need camera access';
 
   @override
@@ -1464,4 +1599,128 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get close => 'Close';
+
+  @override
+  String get claimDetailsTitle => 'Claim HS-2048';
+
+  @override
+  String get claimDetailsProduct => 'Smart watch – Gold Edition · 12 September';
+
+  @override
+  String get claimDetailsAccepted => 'Accepted';
+
+  @override
+  String get claimDetailsSuccessTitle => 'Your claim was accepted';
+
+  @override
+  String get claimDetailsSuccessBody =>
+      'Your compensation is on its way and should arrive in 3–5 days';
+
+  @override
+  String get claimDetailsSettlement => 'Settlement';
+
+  @override
+  String get claimDetailsTimelineTitle => 'Claim timeline';
+
+  @override
+  String get claimDetailsSubmitted => 'Claim submitted';
+
+  @override
+  String get claimDetailsReviewed => 'Under review';
+
+  @override
+  String get claimDetailsDecision => 'Accepted 🎉';
+
+  @override
+  String get claimDetailsCompensation => 'Compensation sent';
+
+  @override
+  String get claimDetailsSep6 => '6 September';
+
+  @override
+  String get claimDetailsSep7 => '7 September';
+
+  @override
+  String get claimDetailsEvidenceTitle => 'Evidence you sent';
+
+  @override
+  String get claimDetailsAttachment => 'Additional';
+
+  @override
+  String get claimDetailsVideo => 'Video';
+
+  @override
+  String get claimDetailsPackaging => 'Packaging';
+
+  @override
+  String get claimDetailsLabel => 'Label';
+
+  @override
+  String get claimDetailsLocationTitle => 'Your location and notes';
+
+  @override
+  String get claimDetailsLocationCaption =>
+      'Location when the claim was submitted';
+
+  @override
+  String get claimDetailsLocation =>
+      '2415 King Fahd Road, Al Sahil, Al Rimal, Riyadh';
+
+  @override
+  String get claimDetailsNoteTitle => 'Your note';
+
+  @override
+  String get claimDetailsNote =>
+      '“The watch screen is cracked, and the carton was pressed in from the corner.”';
+
+  @override
+  String get claimDetailsDetailsTitle => 'Claim details';
+
+  @override
+  String get claimDetailsClaimNumber => 'Claim number';
+
+  @override
+  String get claimDetailsProductLabel => 'Product';
+
+  @override
+  String get claimDetailsProductName => 'Smart watch – Gold Edition';
+
+  @override
+  String get claimDetailsItemPrice => 'Item price';
+
+  @override
+  String get claimDetailsClaimValue => 'Claim value';
+
+  @override
+  String get claimDetailsShipment => 'Related shipment';
+
+  @override
+  String get claimDetailsStore => 'Store';
+
+  @override
+  String get claimDetailsSubmittedDate => 'Submitted';
+
+  @override
+  String get claimDetailsDecisionDate => 'Decision date';
+
+  @override
+  String get claimDetailsTransferDate => 'Transfer date';
+
+  @override
+  String get claimDetailsSubmittedDateValue => '6 September 2026';
+
+  @override
+  String get claimDetailsDecisionDateValue => '7 September 2026';
+
+  @override
+  String get claimDetailsTransferDateValue => '7 September 2026';
+
+  @override
+  String get claimDetailsStoreName => 'Noon Store';
+
+  @override
+  String get claimDetailsSeeAll => 'See all details';
+
+  @override
+  String get claimDetailsHide => 'Hide details';
 }

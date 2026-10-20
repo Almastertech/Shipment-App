@@ -607,6 +607,73 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeSecondaryRequestAction => 'تابع المطالبة';
 
   @override
+  String get requestsScreenTitle => 'مطالباتك';
+
+  @override
+  String get requestsOpenSubtitle =>
+      'عندك 3 مطالبات مفتوحة، وحدة منها تحتاج خطوة منك';
+
+  @override
+  String get requestsClosedSubtitle => 'مطالباتك اللي انتهت، وش صار فيها';
+
+  @override
+  String get requestsOpenTab => 'مفتوحة • 3';
+
+  @override
+  String get requestsClosedTab => 'مغلقة • 2';
+
+  @override
+  String get requestsSecondOpenNumber => 'HS-1931';
+
+  @override
+  String get requestsSecondOpenTitle => 'سماعات لاسلكية برو · جرير';
+
+  @override
+  String get requestsOpenClaimAmount => '320 ر.س';
+
+  @override
+  String get requestsClaimAmountLabel => 'قيمة المطالبة';
+
+  @override
+  String get requestsClosedRejectedNumber => 'HS-1874';
+
+  @override
+  String get requestsClosedRejectedTitle => 'عطر رجالي · 20 أغسطس';
+
+  @override
+  String get requestsClosedAcceptedStatus => 'انقبلت';
+
+  @override
+  String get requestsClosedRejectedStatus => 'انرفضت';
+
+  @override
+  String get requestsCompensationLabel => 'تعويضات';
+
+  @override
+  String get requestsItemValueLabel => 'قيمة السلعة';
+
+  @override
+  String get requestsAcceptedCompensation => '65 ر.س';
+
+  @override
+  String get requestsRejectedCompensation => '—';
+
+  @override
+  String get requestsClosedItemValue => '480 ر.س';
+
+  @override
+  String get requestsAcceptedMessage => 'يرجع المبلغ لبطاقتك خلال 3–5 أيام';
+
+  @override
+  String get requestsRejectedMessage => 'نبي توضيح أكثر، كلم الدعم';
+
+  @override
+  String get requestsDetailsAction => 'التفاصيل';
+
+  @override
+  String get requestsDetailsComingSoon => 'تفاصيل المطالبة ستتاح قريبًا.';
+
+  @override
   String get homeHowItWorks => 'كيف يبدأ الأمر';
 
   @override
@@ -673,6 +740,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bottomNavOrders => 'الطلبات';
+
+  @override
+  String get bottomNavClaims => 'المطالبات';
 
   @override
   String get bottomNavStores => 'التاجر';
@@ -1303,6 +1373,68 @@ class AppLocalizationsAr extends AppLocalizations {
       'إرفاق الصور سيتاح عند تفعيل خدمة المطالبات.';
 
   @override
+  String get demandReviewHeading => 'راجع مطالبتك وارسلها';
+
+  @override
+  String get demandReviewDescription =>
+      'تأكد من التفاصيل، وبعدها فريق حصين يستلمها';
+
+  @override
+  String get demandReviewLocationTitle => 'موقعك';
+
+  @override
+  String get demandReviewLocationMissing => 'ما فعلت الموقع';
+
+  @override
+  String get demandReviewLocationMissingDescription =>
+      'ممكن يأثر على تقييم مطالبتك';
+
+  @override
+  String get demandReviewLocationCurrent => 'موقعك الحالي';
+
+  @override
+  String get demandReviewLocationEnable => 'فعّله';
+
+  @override
+  String get demandReviewEvidenceTitle => 'الأدلة';
+
+  @override
+  String demandReviewFileCount(int count) {
+    return '$count ملفات ✓';
+  }
+
+  @override
+  String get demandReviewLabelPhoto => 'للتلف';
+
+  @override
+  String get demandReviewPackagingPhoto => 'التغليف';
+
+  @override
+  String get demandReviewVideo => 'فيديو';
+
+  @override
+  String get demandReviewAdditionalPhoto => 'إضافية';
+
+  @override
+  String get demandReviewDescriptionTitle => 'وش صار للمنتج؟';
+
+  @override
+  String get demandReviewDescriptionHint =>
+      'اوصف الضرر هنا... مثلاً: الشاشة فيها شخ';
+
+  @override
+  String demandReviewCharacterCount(int count) {
+    return '$count/300';
+  }
+
+  @override
+  String get demandReviewSubmit => 'أرسل المطالبة';
+
+  @override
+  String get demandReviewSubmitComingSoon =>
+      'إرسال المطالبة سيتاح عند تفعيل خدمة المطالبات.';
+
+  @override
   String get cameraPermissionHeading => 'نحتاج إذن الكاميرا';
 
   @override
@@ -1437,4 +1569,126 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get close => 'إغلاق';
+
+  @override
+  String get claimDetailsTitle => 'مطالبة HS-2048';
+
+  @override
+  String get claimDetailsProduct => 'ساعة ذكية – إصدار ذهبي · 12 سبتمبر';
+
+  @override
+  String get claimDetailsAccepted => 'انقبلت';
+
+  @override
+  String get claimDetailsSuccessTitle => 'أبشر، انقبلت مطالبتك';
+
+  @override
+  String get claimDetailsSuccessBody =>
+      'حوّلنا تعويضك لبطاقتك، وبوصلك خلال 3–5 أيام';
+
+  @override
+  String get claimDetailsSettlement => 'التحويل';
+
+  @override
+  String get claimDetailsTimelineTitle => 'مشوار مطالبتك';
+
+  @override
+  String get claimDetailsSubmitted => 'أرسلت المطالبة';
+
+  @override
+  String get claimDetailsReviewed => 'راجعناها';
+
+  @override
+  String get claimDetailsDecision => 'انقبلت 🎉';
+
+  @override
+  String get claimDetailsCompensation => 'حوّلنا تعويضك';
+
+  @override
+  String get claimDetailsSep6 => '6 سبتمبر';
+
+  @override
+  String get claimDetailsSep7 => '7 سبتمبر';
+
+  @override
+  String get claimDetailsEvidenceTitle => 'الأدلة اللي أرسلتها';
+
+  @override
+  String get claimDetailsAttachment => 'إضافية';
+
+  @override
+  String get claimDetailsVideo => 'فيديو';
+
+  @override
+  String get claimDetailsPackaging => 'التغليف';
+
+  @override
+  String get claimDetailsLabel => 'الملصق';
+
+  @override
+  String get claimDetailsLocationTitle => 'موقعك وكلامك';
+
+  @override
+  String get claimDetailsLocationCaption => 'موقعك وقت المطالبة';
+
+  @override
+  String get claimDetailsLocation => '2415 شارع وادي الساحل، حي الرمال، الرياض';
+
+  @override
+  String get claimDetailsNoteTitle => 'وش كتبت لنا';
+
+  @override
+  String get claimDetailsNote =>
+      '«شاشة الساعة فيها شرخ واضح، والكرتون كان مضغوط من الزاوية.»';
+
+  @override
+  String get claimDetailsDetailsTitle => 'تفاصيل المطالبة';
+
+  @override
+  String get claimDetailsClaimNumber => 'رقم المطالبة';
+
+  @override
+  String get claimDetailsProductLabel => 'المنتج';
+
+  @override
+  String get claimDetailsProductName => 'ساعة ذكية – إصدار ذهبي';
+
+  @override
+  String get claimDetailsItemPrice => 'سعر المنتج';
+
+  @override
+  String get claimDetailsClaimValue => 'قيمة المطالبة';
+
+  @override
+  String get claimDetailsShipment => 'الشحنة المرتبطة';
+
+  @override
+  String get claimDetailsStore => 'المتجر';
+
+  @override
+  String get claimDetailsSubmittedDate => 'تاريخ الإرسال';
+
+  @override
+  String get claimDetailsDecisionDate => 'تاريخ القرار';
+
+  @override
+  String get claimDetailsTransferDate => 'تاريخ التحويل';
+
+  @override
+  String get claimDetailsSubmittedDateValue => '6 سبتمبر 2026';
+
+  @override
+  String get claimDetailsDecisionDateValue => '7 سبتمبر 2026';
+
+  @override
+  String get claimDetailsTransferDateValue => '7 سبتمبر 2026';
+
+  @override
+  String get claimDetailsStoreName => 'متجر نون';
+
+  @override
+  String get claimDetailsSeeAll => 'شوف كل التفاصيل';
+
+  @override
+  String get claimDetailsHide => 'اخف التفاصيل';
 }
