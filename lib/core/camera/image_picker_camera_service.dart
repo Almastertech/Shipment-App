@@ -43,7 +43,7 @@ class ImagePickerCameraService implements CameraCaptureService {
       );
       controller = CameraController(
         camera,
-        ResolutionPreset.medium,
+        ResolutionPreset.max,
         enableAudio: false,
       );
       await controller.initialize();

@@ -57,7 +57,7 @@ class ClaimLocationHeader extends StatelessWidget {
               AppSpacing.tokenM,
               AppSpacing.tokenXs,
               AppSpacing.tokenM,
-              AppSpacing.token8Xl,
+              AppSpacing.token6Xl,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

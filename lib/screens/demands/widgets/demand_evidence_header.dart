@@ -19,6 +19,8 @@ class DemandEvidenceHeader extends StatelessWidget {
     required this.locationUnavailable,
     required this.onBack,
     required this.backTooltip,
+    this.activeStepIndex = 1,
+    this.showLocationStatus = true,
   });
 
   final String title;
@@ -29,6 +31,8 @@ class DemandEvidenceHeader extends StatelessWidget {
   final bool locationUnavailable;
   final VoidCallback onBack;
   final String backTooltip;
+  final int activeStepIndex;
+  final bool showLocationStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +105,7 @@ class DemandEvidenceHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.tokenS),
                 DemandProgress(
-                  activeStepIndex: 1,
+                  activeStepIndex: activeStepIndex,
                   steps: <String>[
                     for (var index = 0; index < steps.length; index++)
                       '${index + 1} ${steps[index]}',
@@ -157,47 +161,47 @@ class DemandEvidenceHeader extends StatelessWidget {
                     color: colors.neutral.shade200,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.tokenS),
-                Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: locationUnavailable
-                          ? colors.warning.shade100
-                          : colors.success.shade100,
-                      borderRadius: BorderRadius.circular(28),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.tokenM,
-                        vertical: AppSpacing.tokenS,
+                if (showLocationStatus) ...<Widget>[
+                  const SizedBox(height: AppSpacing.tokenS),
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: locationUnavailable
+                            ? colors.warning.shade100
+                            : colors.success.shade100,
+                        borderRadius: BorderRadius.circular(28),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Icon(
-                            locationUnavailable
-                                ? Icons.location_on_outlined
-                                : Icons.location_on_rounded,
-                            size: 18,
-                            color: statusColor,
-                          ),
-                          const SizedBox(width: AppSpacing.tokenS),
-                          AppText(
-                            locationMessage,
-                            variant: AppTextVariant.bodySmall,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                AppTypography.buyerMobile.bodySmall.toTextStyle(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.tokenM,
+                          vertical: AppSpacing.tokenS,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Icon(
+                              locationUnavailable
+                                  ? Icons.location_on_outlined
+                                  : Icons.location_on_rounded,
+                              size: 18,
                               color: statusColor,
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: AppSpacing.tokenS),
+                            AppText(
+                              locationMessage,
+                              variant: AppTextVariant.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTypography.buyerMobile.bodySmall
+                                  .toTextStyle(color: statusColor),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ],
             ),
           ),

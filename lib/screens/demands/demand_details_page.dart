@@ -19,6 +19,7 @@ import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
 import 'camera_permission_page.dart';
+import 'demand_review_page.dart';
 import 'widgets/demand_evidence_header.dart';
 
 class DemandDetailsPage extends StatefulWidget {
@@ -44,6 +45,7 @@ class _DemandDetailsPageState extends State<DemandDetailsPage> {
   final List<XFile?> _requiredEvidence = List<XFile?>.filled(3, null);
   final List<XFile?> _optionalPhotos = List<XFile?>.filled(3, null);
   bool _isCapturing = false;
+  bool _showReview = false;
 
   bool get _allRequiredEvidenceCaptured =>
       _requiredEvidence.every((file) => file != null);
@@ -117,24 +119,44 @@ class _DemandDetailsPageState extends State<DemandDetailsPage> {
 
   void _onPrimaryAction() {
     if (_allRequiredEvidenceCaptured) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(
-              AppLocalizations.of(context)!.demandDetailsReviewComingSoon,
-            ),
-          ),
-        );
+      setState(() => _showReview = true);
       return;
     }
     _captureEvidence(_nextEvidenceIndex());
+  }
+
+  void _handleBack() {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(AppRoutes.openDemands);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     const colors = AppColors.primitives;
+
+    if (_showReview) {
+      return DemandReviewPage(
+        locationUnavailable: widget.locationUnavailable,
+        location: widget.location,
+        evidence: _requiredEvidence,
+        optionalPhotos: _optionalPhotos,
+        onBack: () => setState(() => _showReview = false),
+        onRetakeEvidence: _captureEvidence,
+        onAddOptionalPhoto: _captureOptionalPhoto,
+        onSubmit: () {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text(l10n.demandReviewSubmitComingSoon)),
+            );
+        },
+      );
+    }
+
     final width = MediaQuery.sizeOf(context).width;
     final headerHeight = (width * .8).clamp(310.0, 360.0);
     const summaryCardHeight = 96.0;
@@ -171,7 +193,7 @@ class _DemandDetailsPageState extends State<DemandDetailsPage> {
                         ? l10n.demandDetailsLocationUnavailable
                         : l10n.demandDetailsLocationAvailable,
                     locationUnavailable: widget.locationUnavailable,
-                    onBack: () => context.pop(),
+                    onBack: _handleBack,
                     backTooltip: l10n.navigationBack,
                   ),
                 ),
