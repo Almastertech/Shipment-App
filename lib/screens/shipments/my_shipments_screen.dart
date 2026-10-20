@@ -164,6 +164,7 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
                 selectedIndex: 1,
                 onDestinationSelected: (index) {
                   if (index == 0) context.go(AppRoutes.home);
+                  if (index == 2) context.go(AppRoutes.requests);
                 },
               ),
             ),

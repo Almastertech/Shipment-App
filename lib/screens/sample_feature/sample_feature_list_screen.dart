@@ -244,6 +244,10 @@ class _SampleFeatureListScreenState extends State<SampleFeatureListScreen> {
       bottomNavigationBar: CustomBottomNavBar(
         selectedIndex: _selectedNavigationIndex,
         onDestinationSelected: (index) {
+          if (index == 2) {
+            context.go(AppRoutes.requests);
+            return;
+          }
           setState(() => _selectedNavigationIndex = index);
         },
       ),

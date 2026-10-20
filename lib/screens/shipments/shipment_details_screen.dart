@@ -173,6 +173,7 @@ class ShipmentDetailsScreen extends StatelessWidget {
                 onDestinationSelected: (index) {
                   if (index == 0) context.go(AppRoutes.home);
                   if (index == 1) context.go(AppRoutes.shipments);
+                  if (index == 2) context.go(AppRoutes.requests);
                 },
               ),
             ),

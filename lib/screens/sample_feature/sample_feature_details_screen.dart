@@ -15,6 +15,7 @@ import '../../components/skeleton/app_details_skeleton.dart';
 import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/resources/screen_utils_helper.dart';
+import '../../core/routing/app_routes.dart';
 import '../../data/model/sample_item.dart';
 import '../../l10n/app_localizations.dart';
 import 'sample_feature_details_view_model.dart';
@@ -84,6 +85,10 @@ class _SampleFeatureDetailsScreenState
       bottomNavigationBar: CustomBottomNavBar(
         selectedIndex: _selectedNavigationIndex,
         onDestinationSelected: (index) {
+          if (index == 2) {
+            context.go(AppRoutes.requests);
+            return;
+          }
           setState(() => _selectedNavigationIndex = index);
         },
       ),
