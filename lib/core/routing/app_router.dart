@@ -21,6 +21,8 @@ import '../../screens/demands/demand_details_page.dart';
 import '../../screens/demands/open_demands_page.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
+import '../../screens/requests/request_screen.dart';
+import '../../screens/requests/widgets/request_details_screen.dart';
 import '../../screens/sample_feature/sample_feature_details_screen.dart';
 import '../../screens/sample_feature/sample_feature_details_view_model.dart';
 import '../../screens/sample_feature/sample_feature_list_screen.dart';
@@ -60,6 +62,8 @@ class AppRouter {
     AppRoutes.home: RouteGuardType.authOrGuest,
     AppRoutes.shipments: RouteGuardType.authOrGuest,
     AppRoutes.shipmentDetails: RouteGuardType.authOrGuest,
+    AppRoutes.requests: RouteGuardType.authOrGuest,
+    AppRoutes.requestDetails: RouteGuardType.authOrGuest,
     AppRoutes.openDemands: RouteGuardType.authOrGuest,
     AppRoutes.demandDetails: RouteGuardType.authOrGuest,
     AppRoutes.cameraPermission: RouteGuardType.authOrGuest,
@@ -220,6 +224,14 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.shipmentDetails,
         builder: (context, state) => const ShipmentDetailsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.requests,
+        builder: (context, state) => const RequestScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.requestDetails,
+        builder: (context, state) => const RequestDetailsScreen(),
       ),
       GoRoute(
         path: AppRoutes.openDemands,

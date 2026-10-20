@@ -7,6 +7,7 @@ import '../core/resources/app_radius.dart';
 import '../core/resources/app_spacing.dart';
 import '../core/resources/app_typography.dart';
 import 'app_text.dart';
+import 'buttons/primary_button.dart';
 import 'buttons/secondary_button.dart';
 
 /// White, compact claim card for following a request and its progress.
@@ -25,6 +26,11 @@ class SecondaryRequestCustomCard extends StatelessWidget {
     required this.actionLabel,
     required this.onTap,
     this.productImage = AppImages.shipmentBackground,
+    this.needsAction = false,
+    this.filledAction = false,
+    this.cardHeight,
+    this.cardPadding = const EdgeInsets.all(AppSpacing.tokenS),
+    this.imageSize = 40,
   })  : assert(progressSteps.length > 1),
         assert(activeStepIndex >= 0 && activeStepIndex < progressSteps.length);
 
@@ -40,6 +46,11 @@ class SecondaryRequestCustomCard extends StatelessWidget {
   final String actionLabel;
   final VoidCallback? onTap;
   final String productImage;
+  final bool needsAction;
+  final bool filledAction;
+  final double? cardHeight;
+  final EdgeInsetsGeometry cardPadding;
+  final double imageSize;
 
   @override
   Widget build(BuildContext context) {
@@ -58,57 +69,91 @@ class SecondaryRequestCustomCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.tokenS),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _ClaimHeader(
-              requestNumber: requestNumber,
-              requestType: requestType,
-              remainingTimeLabel: remainingTimeLabel,
-              title: title,
-              productImage: productImage,
-            ),
-            const SizedBox(height: AppSpacing.tokenS),
-            _ClaimProgress(
-              steps: progressSteps,
-              activeStepIndex: activeStepIndex,
-            ),
-            const SizedBox(height: AppSpacing.tokenS),
-            _ClaimNote(description: description),
-            const SizedBox(height: AppSpacing.tokenS),
-            Row(
-              children: <Widget>[
-                _ClaimAmount(label: amountLabel, amount: amount),
-                const Spacer(),
-                SecondaryButton(
-                  label: actionLabel,
-                  onPressed: onTap,
-                  fullWidth: false,
-                  iconOnTrailing: true,
-                  icon: const Icon(
-                    Icons.chevron_right_rounded,
-                    size: 16,
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: colors.primary.shade500,
-                    side: BorderSide(color: colors.primary.shade500),
-                    minimumSize: const Size(0, 30),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.tokenS,
+      child: SizedBox(
+        height: cardHeight,
+        child: Padding(
+          padding: cardPadding,
+          child: Column(
+            mainAxisSize:
+                cardHeight == null ? MainAxisSize.min : MainAxisSize.max,
+            mainAxisAlignment: cardHeight == null
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              _ClaimHeader(
+                requestNumber: requestNumber,
+                requestType: requestType,
+                remainingTimeLabel: remainingTimeLabel,
+                title: title,
+                productImage: productImage,
+                needsAction: needsAction,
+                imageSize: imageSize,
+              ),
+              const SizedBox(height: AppSpacing.tokenS),
+              _ClaimProgress(
+                steps: progressSteps,
+                activeStepIndex: activeStepIndex,
+              ),
+              const SizedBox(height: AppSpacing.tokenS),
+              _ClaimNote(description: description, needsAction: needsAction),
+              const SizedBox(height: AppSpacing.tokenS),
+              Row(
+                children: <Widget>[
+                  _ClaimAmount(label: amountLabel, amount: amount),
+                  const Spacer(),
+                  if (filledAction)
+                    PrimaryButton(
+                      label: actionLabel,
+                      onPressed: onTap,
+                      fullWidth: false,
+                      iconOnTrailing: true,
+                      icon: const Icon(
+                        Icons.chevron_right_rounded,
+                        size: 16,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colors.accent01.shade300,
+                        foregroundColor: colors.neutral.shade900,
+                        minimumSize: const Size(0, 34),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.tokenS,
+                        ),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        elevation: 0,
+                        shape: const StadiumBorder(),
+                        textStyle: AppTypography.buyerMobile.labelSmall
+                            .toTextStyle(color: colors.neutral.shade900),
+                      ),
+                    )
+                  else
+                    SecondaryButton(
+                      label: actionLabel,
+                      onPressed: onTap,
+                      fullWidth: false,
+                      iconOnTrailing: true,
+                      icon: Icon(
+                        Icons.chevron_right_rounded,
+                        size: 16,
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: colors.primary.shade500,
+                        side: BorderSide(color: colors.primary.shade500),
+                        minimumSize: const Size(0, 30),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.tokenS,
+                        ),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        visualDensity: VisualDensity.compact,
+                        shape: const StadiumBorder(),
+                        textStyle: AppTypography.buyerMobile.labelSmall
+                            .toTextStyle(color: colors.primary.shade500),
+                      ),
                     ),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    visualDensity: VisualDensity.compact,
-                    shape: const StadiumBorder(),
-                    textStyle: AppTypography.buyerMobile.labelSmall
-                        .toTextStyle(color: colors.primary.shade500),
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -122,6 +167,8 @@ class _ClaimHeader extends StatelessWidget {
     required this.remainingTimeLabel,
     required this.title,
     required this.productImage,
+    required this.needsAction,
+    required this.imageSize,
   });
 
   final String requestNumber;
@@ -129,6 +176,8 @@ class _ClaimHeader extends StatelessWidget {
   final String remainingTimeLabel;
   final String title;
   final String productImage;
+  final bool needsAction;
+  final double imageSize;
 
   @override
   Widget build(BuildContext context) {
@@ -140,16 +189,16 @@ class _ClaimHeader extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.tokenL),
           child: Image.asset(
             productImage,
-            width: 40,
-            height: 40,
+            width: imageSize,
+            height: imageSize,
             fit: BoxFit.cover,
             alignment: const Alignment(-.4, 0),
             errorBuilder: (context, error, stackTrace) => ColoredBox(
               color: colors.neutral.shade200,
-              child: const SizedBox(
-                width: 40,
-                height: 40,
-                child: Icon(Icons.image_not_supported_outlined, size: 18),
+              child: SizedBox(
+                width: imageSize,
+                height: imageSize,
+                child: const Icon(Icons.image_not_supported_outlined, size: 18),
               ),
             ),
           ),
@@ -185,7 +234,8 @@ class _ClaimHeader extends StatelessWidget {
         const SizedBox(width: AppSpacing.tokenXs),
         DecoratedBox(
           decoration: BoxDecoration(
-            color: colors.primary.shade100,
+            color:
+                needsAction ? colors.warning.shade100 : colors.primary.shade100,
             borderRadius: BorderRadius.circular(AppRadius.tokenFull),
           ),
           child: Padding(
@@ -196,15 +246,22 @@ class _ClaimHeader extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                SvgPicture.asset(
-                  AppImages.timeQuarterTo,
-                  width: 12,
-                  height: 12,
-                  colorFilter: ColorFilter.mode(
-                    colors.primary.shade500,
-                    BlendMode.srcIn,
+                if (needsAction)
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    size: 13,
+                    color: colors.warning.shade700,
+                  )
+                else
+                  SvgPicture.asset(
+                    AppImages.timeQuarterTo,
+                    width: 12,
+                    height: 12,
+                    colorFilter: ColorFilter.mode(
+                      colors.primary.shade500,
+                      BlendMode.srcIn,
+                    ),
                   ),
-                ),
                 const SizedBox(width: AppSpacing.token2Xs),
                 AppText(
                   remainingTimeLabel,
@@ -212,7 +269,9 @@ class _ClaimHeader extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypography.buyerMobile.caption.toTextStyle(
-                    color: colors.primary.shade500,
+                    color: needsAction
+                        ? colors.warning.shade700
+                        : colors.primary.shade500,
                   ),
                 ),
               ],
@@ -334,9 +393,10 @@ class _ClaimProgress extends StatelessWidget {
 }
 
 class _ClaimNote extends StatelessWidget {
-  const _ClaimNote({required this.description});
+  const _ClaimNote({required this.description, required this.needsAction});
 
   final String description;
+  final bool needsAction;
 
   @override
   Widget build(BuildContext context) {
@@ -344,7 +404,7 @@ class _ClaimNote extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: colors.primary.shade100,
+        color: needsAction ? colors.warning.shade100 : colors.primary.shade100,
         borderRadius: BorderRadius.circular(AppRadius.tokenL),
       ),
       child: Padding(
@@ -354,15 +414,22 @@ class _ClaimNote extends StatelessWidget {
         ),
         child: Row(
           children: <Widget>[
-            SvgPicture.asset(
-              AppImages.shieldCheck,
-              width: 16,
-              height: 16,
-              colorFilter: ColorFilter.mode(
-                colors.primary.shade500,
-                BlendMode.srcIn,
+            if (needsAction)
+              Icon(
+                Icons.camera_alt_outlined,
+                size: 18,
+                color: colors.warning.shade700,
+              )
+            else
+              SvgPicture.asset(
+                AppImages.shieldCheck,
+                width: 16,
+                height: 16,
+                colorFilter: ColorFilter.mode(
+                  colors.primary.shade500,
+                  BlendMode.srcIn,
+                ),
               ),
-            ),
             const SizedBox(width: AppSpacing.tokenXs),
             Expanded(
               child: AppText(

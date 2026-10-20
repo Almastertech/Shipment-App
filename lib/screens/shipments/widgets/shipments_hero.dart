@@ -18,6 +18,8 @@ class ShipmentsHero extends StatelessWidget {
     required this.deliveredLabel,
     required this.selectedIndex,
     required this.onSelect,
+    this.backgroundImage = AppImages.boxesStack,
+    this.flipTopActions = false,
   });
 
   final String title;
@@ -26,6 +28,8 @@ class ShipmentsHero extends StatelessWidget {
   final String deliveredLabel;
   final int selectedIndex;
   final ValueChanged<int> onSelect;
+  final String backgroundImage;
+  final bool flipTopActions;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class ShipmentsHero extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           Image.asset(
-            AppImages.boxesStack,
+            backgroundImage,
             fit: BoxFit.cover,
             alignment: Alignment.center,
           ),
@@ -72,37 +76,42 @@ class ShipmentsHero extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: .16),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: .48),
-                        ),
-                      ),
-                      child: const SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: IconTheme(
-                          data: IconThemeData(
-                            color: Colors.white,
-                            size: 21,
+                Directionality(
+                  textDirection: flipTopActions
+                      ? TextDirection.ltr
+                      : Directionality.of(context),
+                  child: Row(
+                    children: <Widget>[
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: .16),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: .48),
                           ),
-                          child: NotificationBellButton(),
+                        ),
+                        child: const SizedBox(
+                          width: 44,
+                          height: 44,
+                          child: IconTheme(
+                            data: IconThemeData(
+                              color: Colors.white,
+                              size: 21,
+                            ),
+                            child: NotificationBellButton(),
+                          ),
                         ),
                       ),
-                    ),
-                    const Spacer(),
-                    const ShipmentDotsMark(),
-                  ],
+                      const Spacer(),
+                      const ShipmentDotsMark(),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.token3Xl),
                 AppText(
                   title,
                   variant: AppTextVariant.headlineMedium,
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   style: AppTypography.buyerMobile.h2.toTextStyle(
                     color: Colors.white,
                   ),
@@ -111,7 +120,7 @@ class ShipmentsHero extends StatelessWidget {
                 AppText(
                   subtitle,
                   variant: AppTextVariant.bodySmall,
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypography.buyerMobile.bodySmall.toTextStyle(

@@ -29,7 +29,7 @@ class CustomBottomNavBar extends StatelessWidget {
     final localizedDestinations = <_NavDestinationData>[
       _NavDestinationData(l10n.bottomNavHome, 'Logo.svg'),
       _NavDestinationData(l10n.bottomNavShipments, 'products.svg'),
-      _NavDestinationData(l10n.bottomNavOrders, 'receipt.svg'),
+      _NavDestinationData(l10n.bottomNavClaims, 'receipt.svg'),
       _NavDestinationData(l10n.bottomNavStores, 'shop.svg'),
       _NavDestinationData(l10n.bottomNavProfile, 'user.svg'),
     ];
