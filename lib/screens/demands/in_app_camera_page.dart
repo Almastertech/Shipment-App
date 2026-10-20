@@ -706,11 +706,9 @@ class _InAppCameraPageState extends State<InAppCameraPage>
                           color: _isRecording
                               ? const Color(0xFFE74D4D)
                               : Colors.white,
-                          shape: _isRecording
-                              ? BoxShape.rectangle
-                              : BoxShape.circle,
-                          borderRadius:
-                              _isRecording ? BorderRadius.circular(12) : null,
+                          borderRadius: BorderRadius.circular(
+                            _isRecording ? 12 : 34,
+                          ),
                         ),
                       ),
                     ),
