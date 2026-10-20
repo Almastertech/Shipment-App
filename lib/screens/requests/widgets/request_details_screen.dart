@@ -267,6 +267,7 @@ class _ClaimHero extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: AppTypography.buyerMobile.bodySmall.toTextStyle(
                         color: Colors.white.withValues(alpha: .82))),
+                        const SizedBox(height: AppSpacing.token2Xl),
               ],
             ),
           ),
