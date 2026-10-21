@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shipments/components/app_text.dart';
 import 'package:shipments/core/resources/app_colors.dart';

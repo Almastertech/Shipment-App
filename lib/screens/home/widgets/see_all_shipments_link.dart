@@ -5,8 +5,11 @@ import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_typography.dart';
 
 class SeeAllShipmentsLink extends StatelessWidget {
-  const SeeAllShipmentsLink(
-      {super.key, required this.label, required this.onTap});
+  const SeeAllShipmentsLink({
+    super.key,
+    required this.label,
+    required this.onTap,
+  });
 
   final String label;
   final VoidCallback onTap;
