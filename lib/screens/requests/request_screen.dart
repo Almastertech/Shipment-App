@@ -101,7 +101,7 @@ class _RequestScreenState extends State<RequestScreen> {
                           amountLabel: l10n.requestsClaimAmountLabel,
                           amount: l10n.requestsOpenClaimAmount,
                           actionLabel: l10n.homeRequestAction,
-                          onTap: () => context.go(
+                          onTap: () => context.push<void>(
                             AppRoutes.demandDetails,
                             extra: true,
                           ),
