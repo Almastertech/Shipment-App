@@ -20,6 +20,7 @@ import '../../screens/debug/api_monitoring_screen.dart';
 import '../../screens/demands/demand_details_page.dart';
 import '../../screens/demands/open_demands_page.dart';
 import '../../screens/home/home_screen.dart';
+import '../../screens/merchant/merchant_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
 import '../../screens/requests/request_screen.dart';
 import '../../screens/requests/widgets/request_details_screen.dart';
@@ -60,6 +61,7 @@ class AppRouter {
     AppRoutes.otpSuccess: RouteGuardType.guestOnly,
     AppRoutes.welcome: RouteGuardType.guestOnly,
     AppRoutes.home: RouteGuardType.authOrGuest,
+    AppRoutes.merchant: RouteGuardType.authOrGuest,
     AppRoutes.shipments: RouteGuardType.authOrGuest,
     AppRoutes.shipmentDetails: RouteGuardType.authOrGuest,
     AppRoutes.requests: RouteGuardType.authOrGuest,
@@ -216,6 +218,10 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.home,
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.merchant,
+        builder: (context, state) => const MerchantScreen(),
       ),
       GoRoute(
         path: AppRoutes.shipments,

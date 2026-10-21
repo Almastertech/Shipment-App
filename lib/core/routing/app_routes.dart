@@ -7,6 +7,7 @@ class AppRoutes {
   static const String otpSuccess = '/otp-success';
   static const String welcome = '/welcome';
   static const String home = '/home';
+  static const String merchant = '/merchant';
   static const String shipments = '/shipments';
   static const String shipmentDetails = '/shipment-details';
   static const String requests = '/requests';
