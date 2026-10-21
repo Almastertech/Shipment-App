@@ -748,6 +748,91 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bottomNavStores => 'التاجر';
 
   @override
+  String get merchantHeroTitle => 'متاجر تثق فيها';
+
+  @override
+  String get merchantHeroSubtitle =>
+      'تسوق من شركائنا، وشحناتك محمية من الباب للباب.';
+
+  @override
+  String get merchantSearchHint => 'دور على متجر...';
+
+  @override
+  String get merchantTrustTitle => 'كل متاجرنا محمية بحصين';
+
+  @override
+  String get merchantTrustDescription =>
+      'تسوق من أي متجر شريك، وخلي حماية شحنتك من صفحة الدفع.';
+
+  @override
+  String get merchantMetricPartners => 'متجر شريك';
+
+  @override
+  String get merchantMetricCategories => 'أقسام';
+
+  @override
+  String get merchantMetricDays => 'لتقديم المطالبة';
+
+  @override
+  String get merchantDaysValue => 'يومين';
+
+  @override
+  String get merchantProtectionPromise =>
+      'تلف، فقدان، أو تأخير مؤهل؟ مطالبتك من التطبيق مباشرة.';
+
+  @override
+  String get merchantFeaturedTitle => 'متاجر مميزة';
+
+  @override
+  String get merchantSeeAll => 'شوف الكل';
+
+  @override
+  String get merchantProtectionAvailable => 'الحماية متاحة';
+
+  @override
+  String get merchantFeaturedStore => 'متجر مدار';
+
+  @override
+  String get merchantFeaturedCategory => 'إلكترونيات وإكسسوارات';
+
+  @override
+  String get merchantShopNow => 'تسوق من مدار';
+
+  @override
+  String get merchantAllStores => 'كل المتاجر';
+
+  @override
+  String get merchantStoreCount => '+40 متجر';
+
+  @override
+  String get merchantFashionStore => 'متجر خطى';
+
+  @override
+  String get merchantFashionCategory => 'أزياء ومنتجات يومية';
+
+  @override
+  String get merchantPerfumeStore => 'دار العود';
+
+  @override
+  String get merchantPerfumeCategory => 'عطور وبخور';
+
+  @override
+  String get merchantCafeStore => 'محمصة الديرة';
+
+  @override
+  String get merchantCafeCategory => 'قهوة ومحامص مختصة';
+
+  @override
+  String get merchantJoinTitle => 'عندك متجر؟ خلّ عملاءك يشترون بثقة';
+
+  @override
+  String get merchantJoinDescription =>
+      'أضف حصين لتجارتك، وقدّم حماية شحن لعملائك بدون أي تعقيد.';
+
+  @override
+  String get merchantJoinAction => 'أضف حصين لمتجرك';
+
+  @override
   String get bottomNavProfile => 'حسابي';
 
   @override

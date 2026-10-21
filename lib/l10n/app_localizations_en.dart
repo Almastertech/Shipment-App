@@ -764,6 +764,92 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavStores => 'Merchant';
 
   @override
+  String get merchantHeroTitle => 'Stores you can trust';
+
+  @override
+  String get merchantHeroSubtitle =>
+      'Shop from our partners with shipment protection from door to door.';
+
+  @override
+  String get merchantSearchHint => 'Search for a store...';
+
+  @override
+  String get merchantTrustTitle => 'Every store is protected by Haseen';
+
+  @override
+  String get merchantTrustDescription =>
+      'Shop from trusted stores and get shipment protection from checkout to delivery.';
+
+  @override
+  String get merchantMetricPartners => 'Partner stores';
+
+  @override
+  String get merchantMetricCategories => 'Categories';
+
+  @override
+  String get merchantMetricDays => 'To file a claim';
+
+  @override
+  String get merchantDaysValue => '2 days';
+
+  @override
+  String get merchantProtectionPromise =>
+      'Lost, damaged, or delayed? File a claim right in the app.';
+
+  @override
+  String get merchantFeaturedTitle => 'Featured stores';
+
+  @override
+  String get merchantSeeAll => 'See all';
+
+  @override
+  String get merchantProtectionAvailable => 'Protection available';
+
+  @override
+  String get merchantFeaturedStore => 'Madar Store';
+
+  @override
+  String get merchantFeaturedCategory => 'Electronics and accessories';
+
+  @override
+  String get merchantShopNow => 'Shop Madar';
+
+  @override
+  String get merchantAllStores => 'All stores';
+
+  @override
+  String get merchantStoreCount => '+40 stores';
+
+  @override
+  String get merchantFashionStore => 'Style Store';
+
+  @override
+  String get merchantFashionCategory => 'Fashion and everyday items';
+
+  @override
+  String get merchantPerfumeStore => 'Dar Al Oud';
+
+  @override
+  String get merchantPerfumeCategory => 'Perfumes and incense';
+
+  @override
+  String get merchantCafeStore => 'Al Deera Roastery';
+
+  @override
+  String get merchantCafeCategory => 'Coffee and specialty roasts';
+
+  @override
+  String get merchantJoinTitle =>
+      'Have a store? Let your customers shop with confidence.';
+
+  @override
+  String get merchantJoinDescription =>
+      'Add your store to Haseen and offer shipment protection with every order.';
+
+  @override
+  String get merchantJoinAction => 'Add your store to Haseen';
+
+  @override
   String get bottomNavProfile => 'Profile';
 
   @override
