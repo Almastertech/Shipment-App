@@ -164,6 +164,7 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                   if (index == 0) context.go(AppRoutes.home);
                   if (index == 1) context.go(AppRoutes.shipments);
                   if (index == 2) context.go(AppRoutes.requests);
+                  if (index == 3) context.go(AppRoutes.merchant);
                 },
               ),
             ),
