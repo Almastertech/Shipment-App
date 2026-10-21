@@ -58,7 +58,7 @@ class RequestDetailsHero extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     _HeroAction(
-                        icon: Icons.chevron_right_rounded,
+                        icon: Icons.chevron_left_rounded,
                         label: l10n.navigationBack,
                         onTap: () => context.pop()),
                     _HeroAction(
