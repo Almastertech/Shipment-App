@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shipments/features/shipment/widgets/shipment_loading_state.dart';
 import 'package:shipments/screens/shipments/widgets/shipments_hero.dart';
 
 import '../../components/app_scaffold.dart';
@@ -16,7 +17,13 @@ import '../../l10n/app_localizations.dart';
 import 'widgets/custom_product_card_shipments.dart';
 
 class MyShipmentsScreen extends StatefulWidget {
-  const MyShipmentsScreen({super.key});
+  const MyShipmentsScreen({super.key, this.isLoading = false});
+
+  /// Applies skeletons to the full shipments list while it is loading.
+  ///
+  /// The current screen uses localized sample content, so the caller owns this
+  /// state until shipment data is connected to a view model.
+  final bool isLoading;
 
   @override
   State<MyShipmentsScreen> createState() => _MyShipmentsScreenState();
@@ -72,7 +79,7 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
       onTap: () => context.go(AppRoutes.shipmentDetails),
     );
 
-    return AppScaffold(
+    final content = AppScaffold(
       padding: EdgeInsets.zero,
       safeArea: false,
       safeAreaBottom: false,
@@ -171,6 +178,12 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
           ),
         ),
       ),
+    );
+
+    return ShipmentLoadingState(
+      isLoading: widget.isLoading,
+      loadingLabel: l10n.loading,
+      child: content,
     );
   }
 }
