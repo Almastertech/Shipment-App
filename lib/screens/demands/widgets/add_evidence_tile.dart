@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shipments/core/resources/app_colors.dart';
 import 'package:shipments/core/resources/app_radius.dart';
 import 'package:shipments/screens/demands/widgets/dash_border_painter.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class AddEvidenceTile extends StatelessWidget {
   const AddEvidenceTile({
@@ -47,6 +48,17 @@ class AddEvidenceTile extends StatelessWidget {
                         child: FutureBuilder<Uint8List>(
                           future: photo!.readAsBytes(),
                           builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Skeletonizer(
+                                enabled: true,
+                                child: Icon(
+                                  Icons.photo_outlined,
+                                  color: colors.neutral.shade600,
+                                  size: 24,
+                                ),
+                              );
+                            }
                             if (snapshot.hasError || !snapshot.hasData) {
                               return Icon(
                                 Icons.photo_outlined,

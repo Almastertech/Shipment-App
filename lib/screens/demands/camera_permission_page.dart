@@ -11,6 +11,7 @@ import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/demand_loading_state.dart';
 
 /// Kept as a route fallback. The demand flow opens [CameraPermissionSheet]
 /// over the evidence page so the permission prompt feels attached to the action.
@@ -122,69 +123,73 @@ class _CameraPermissionSheetState extends State<CameraPermissionSheet>
             ? l10n.cameraCaptureFailedDescription
             : l10n.cameraPermissionDescription;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Center(
-          child: Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: AppColors.primitives.primary.shade100,
-              shape: BoxShape.circle,
+    return DemandLoadingState(
+      isLoading: _isOpeningCamera,
+      loadingLabel: l10n.loading,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Center(
+            child: Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(
+                color: AppColors.primitives.primary.shade100,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.camera_alt_outlined,
+                size: 32,
+                color: AppColors.primitives.primary.shade500,
+              ),
             ),
-            child: Icon(
-              Icons.camera_alt_outlined,
-              size: 32,
-              color: AppColors.primitives.primary.shade500,
+          ),
+          const SizedBox(height: AppSpacing.tokenM),
+          AppText(
+            l10n.cameraPermissionHeading,
+            variant: AppTextVariant.headlineSmall,
+            textAlign: TextAlign.center,
+            style: AppTypography.buyerMobile.h3.toTextStyle(
+              color: colors.text.primary,
             ),
           ),
-        ),
-        const SizedBox(height: AppSpacing.tokenM),
-        AppText(
-          l10n.cameraPermissionHeading,
-          variant: AppTextVariant.headlineSmall,
-          textAlign: TextAlign.center,
-          style: AppTypography.buyerMobile.h3.toTextStyle(
-            color: colors.text.primary,
+          const SizedBox(height: AppSpacing.tokenS),
+          AppText(
+            description,
+            variant: AppTextVariant.bodyMedium,
+            textAlign: TextAlign.center,
+            style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+              color: colors.text.secondary,
+            ),
           ),
-        ),
-        const SizedBox(height: AppSpacing.tokenS),
-        AppText(
-          description,
-          variant: AppTextVariant.bodyMedium,
-          textAlign: TextAlign.center,
-          style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-            color: colors.text.secondary,
+          const SizedBox(height: AppSpacing.tokenXl),
+          PrimaryButton(
+            label: _cameraPermissionDenied
+                ? l10n.cameraPermissionOpenSettings
+                : l10n.cameraPermissionAllow,
+            onPressed: _onPrimaryAction,
+            isLoading: _isOpeningCamera,
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(52),
+              shape: const StadiumBorder(),
+              textStyle: AppTypography.buyerMobile.button.toTextStyle(),
+            ),
           ),
-        ),
-        const SizedBox(height: AppSpacing.tokenXl),
-        PrimaryButton(
-          label: _cameraPermissionDenied
-              ? l10n.cameraPermissionOpenSettings
-              : l10n.cameraPermissionAllow,
-          onPressed: _onPrimaryAction,
-          isLoading: _isOpeningCamera,
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(52),
-            shape: const StadiumBorder(),
-            textStyle: AppTypography.buyerMobile.button.toTextStyle(),
+          const SizedBox(height: AppSpacing.tokenS),
+          SecondaryButton(
+            label: l10n.cameraPermissionNotNow,
+            onPressed: () => Navigator.of(context).pop<bool>(false),
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size.fromHeight(52),
+              foregroundColor: colors.text.primary,
+              side: BorderSide(color: colors.border.secondary),
+              shape: const StadiumBorder(),
+              textStyle: AppTypography.buyerMobile.button.toTextStyle(),
+            ),
           ),
-        ),
-        const SizedBox(height: AppSpacing.tokenS),
-        SecondaryButton(
-          label: l10n.cameraPermissionNotNow,
-          onPressed: () => Navigator.of(context).pop<bool>(false),
-          style: OutlinedButton.styleFrom(
-            minimumSize: const Size.fromHeight(52),
-            foregroundColor: colors.text.primary,
-            side: BorderSide(color: colors.border.secondary),
-            shape: const StadiumBorder(),
-            textStyle: AppTypography.buyerMobile.button.toTextStyle(),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

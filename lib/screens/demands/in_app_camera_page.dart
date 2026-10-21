@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../components/app_text.dart';
@@ -19,6 +20,7 @@ import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/demand_loading_state.dart';
 
 class InAppCameraPage extends StatefulWidget {
   const InAppCameraPage({
@@ -479,38 +481,42 @@ class _InAppCameraPageState extends State<InAppCameraPage>
         onPopInvokedWithResult: (didPop, result) {
           if (!didPop) unawaited(_showExitConfirmation());
         },
-        child: Scaffold(
-          backgroundColor: _background,
-          body: SafeArea(
-            top: false,
-            bottom: !_showGuide,
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                if (!_hasCapturedMedia &&
-                    controller != null &&
-                    controller.value.isInitialized)
-                  _CameraPreviewFill(controller: controller)
-                else
-                  const ColoredBox(color: _background),
-                if (!_hasCapturedMedia &&
-                    controller != null &&
-                    controller.value.isInitialized)
-                  _CameraFramingOverlay(
-                    color: _isRecording ? const Color(0xFFE34B56) : _accent,
-                  ),
-                if (_hasCapturedMedia)
-                  _buildMediaReview(l10n)
-                else if (_showGuide &&
-                    controller != null &&
-                    controller.value.isInitialized)
-                  _buildGuide(l10n)
-                else if (!_hasCapturedMedia)
-                  _buildCaptureControls(l10n),
-                if (_isInitializing && !_hasCapturedMedia)
-                  const _LoadingOverlay(),
-                if (_error != null) _buildError(l10n),
-              ],
+        child: DemandLoadingState(
+          isLoading: (_isInitializing && !_hasCapturedMedia) || _isCapturing,
+          loadingLabel: l10n.loading,
+          child: Scaffold(
+            backgroundColor: _background,
+            body: SafeArea(
+              top: false,
+              bottom: !_showGuide,
+              child: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  if (!_hasCapturedMedia &&
+                      controller != null &&
+                      controller.value.isInitialized)
+                    _CameraPreviewFill(controller: controller)
+                  else
+                    const ColoredBox(color: _background),
+                  if (!_hasCapturedMedia &&
+                      controller != null &&
+                      controller.value.isInitialized)
+                    _CameraFramingOverlay(
+                      color: _isRecording ? const Color(0xFFE34B56) : _accent,
+                    ),
+                  if (_hasCapturedMedia)
+                    _buildMediaReview(l10n)
+                  else if (_showGuide &&
+                      controller != null &&
+                      controller.value.isInitialized)
+                    _buildGuide(l10n)
+                  else if (!_hasCapturedMedia)
+                    _buildCaptureControls(l10n),
+                  if (_isInitializing && !_hasCapturedMedia)
+                    const _LoadingOverlay(),
+                  if (_error != null) _buildError(l10n),
+                ],
+              ),
             ),
           ),
         ),
@@ -799,9 +805,19 @@ class _InAppCameraPageState extends State<InAppCameraPage>
               : FutureBuilder<Uint8List>(
                   future: _capturedPhotoBytes ?? media.readAsBytes(),
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
+                    if (snapshot.hasError) {
                       return const Center(
-                        child: CircularProgressIndicator(color: _accent),
+                        child: Icon(
+                          Icons.broken_image_outlined,
+                          color: Colors.white70,
+                          size: 48,
+                        ),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Skeletonizer(
+                        enabled: true,
+                        child: ColoredBox(color: _background),
                       );
                     }
                     return Image.memory(

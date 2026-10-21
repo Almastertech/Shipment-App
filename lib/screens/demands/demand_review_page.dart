@@ -13,6 +13,8 @@ import 'package:shipments/core/resources/app_spacing.dart';
 import 'package:shipments/core/resources/app_typography.dart';
 import 'package:shipments/l10n/app_localizations.dart';
 import 'package:shipments/screens/demands/widgets/demand_evidence_header.dart';
+import 'package:shipments/screens/demands/widgets/demand_loading_state.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class DemandReviewPage extends StatefulWidget {
   const DemandReviewPage({
@@ -25,6 +27,7 @@ class DemandReviewPage extends StatefulWidget {
     required this.onRetakeEvidence,
     required this.onAddOptionalPhoto,
     required this.onSubmit,
+    this.isLoading = false,
   });
 
   final bool locationUnavailable;
@@ -35,6 +38,7 @@ class DemandReviewPage extends StatefulWidget {
   final ValueChanged<int> onRetakeEvidence;
   final ValueChanged<int> onAddOptionalPhoto;
   final VoidCallback onSubmit;
+  final bool isLoading;
 
   @override
   State<DemandReviewPage> createState() => _DemandReviewPageState();
@@ -62,7 +66,7 @@ class _DemandReviewPageState extends State<DemandReviewPage> {
     final fileCount = widget.evidence.whereType<XFile>().length +
         widget.optionalPhotos.whereType<XFile>().length;
 
-    return AppScaffold(
+    final content = AppScaffold(
       padding: EdgeInsets.zero,
       backgroundColor: AppColors.semantic.background.primary,
       safeArea: false,
@@ -301,6 +305,12 @@ class _DemandReviewPageState extends State<DemandReviewPage> {
         ],
       ),
     );
+
+    return DemandLoadingState(
+      isLoading: widget.isLoading,
+      loadingLabel: l10n.loading,
+      child: content,
+    );
   }
 
   String _formatLocation(LocationCoordinates? location) {
@@ -461,9 +471,26 @@ class _EvidenceTile extends StatelessWidget {
                 if (evidence != null && !video)
                   FutureBuilder<Uint8List>(
                     future: evidence!.readAsBytes(),
-                    builder: (context, snapshot) => snapshot.hasData
-                        ? Image.memory(snapshot.data!, fit: BoxFit.cover)
-                        : ColoredBox(color: colors.neutral.shade300),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Image.memory(snapshot.data!, fit: BoxFit.cover);
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Skeletonizer(
+                          enabled: true,
+                          child: ColoredBox(color: colors.neutral.shade300),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return ColoredBox(
+                          color: colors.neutral.shade300,
+                          child: const Center(
+                            child: Icon(Icons.broken_image_outlined),
+                          ),
+                        );
+                      }
+                      return ColoredBox(color: colors.neutral.shade300);
+                    },
                   )
                 else
                   ColoredBox(

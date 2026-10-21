@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shipments/core/resources/app_colors.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class EvidenceThumbnail extends StatefulWidget {
   const EvidenceThumbnail({
@@ -60,6 +61,12 @@ class _EvidenceThumbnailState extends State<EvidenceThumbnail> {
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) =>
                         _thumbnailFallback(),
+                  );
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Skeletonizer(
+                    enabled: true,
+                    child: _thumbnailFallback(),
                   );
                 }
                 return _thumbnailFallback();

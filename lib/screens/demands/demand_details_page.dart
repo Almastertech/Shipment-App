@@ -21,6 +21,7 @@ import '../../l10n/app_localizations.dart';
 import 'camera_permission_page.dart';
 import 'demand_review_page.dart';
 import 'widgets/demand_evidence_header.dart';
+import 'widgets/demand_loading_state.dart';
 
 class DemandDetailsPage extends StatefulWidget {
   const DemandDetailsPage({
@@ -164,7 +165,7 @@ class _DemandDetailsPageState extends State<DemandDetailsPage> {
     final headerStageHeight =
         headerHeight + summaryCardHeight - summaryCardOverlap;
 
-    return AppScaffold(
+    final content = AppScaffold(
       padding: EdgeInsets.zero,
       backgroundColor: AppColors.semantic.background.primary,
       safeArea: false,
@@ -318,6 +319,12 @@ class _DemandDetailsPageState extends State<DemandDetailsPage> {
           SizedBox(height: MediaQuery.paddingOf(context).bottom),
         ],
       ),
+    );
+
+    return DemandLoadingState(
+      isLoading: _isCapturing,
+      loadingLabel: l10n.loading,
+      child: content,
     );
   }
 }

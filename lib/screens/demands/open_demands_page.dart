@@ -18,6 +18,7 @@ import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/demand_loading_state.dart';
 import 'widgets/location_illustration.dart';
 
 class OpenDemandsPage extends StatefulWidget {
@@ -170,7 +171,7 @@ class _OpenDemandsPageState extends State<OpenDemandsPage>
     const locationCardOverlap = 24.0;
     final introHeight = heroHeight + locationCardHeight - locationCardOverlap;
 
-    return AppScaffold(
+    final content = AppScaffold(
       padding: EdgeInsets.zero,
       backgroundColor: AppColors.semantic.background.primary,
       safeArea: false,
@@ -309,6 +310,12 @@ class _OpenDemandsPageState extends State<OpenDemandsPage>
           ),
         ],
       ),
+    );
+
+    return DemandLoadingState(
+      isLoading: _isRequestingLocation,
+      loadingLabel: l10n.loading,
+      child: content,
     );
   }
 }
