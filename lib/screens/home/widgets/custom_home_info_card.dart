@@ -37,7 +37,7 @@ class CustomHomeInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
 
     return DecoratedBox(
       decoration: BoxDecoration(

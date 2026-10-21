@@ -311,7 +311,7 @@ class _FeaturedShipmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
 
     return Container(
       decoration: BoxDecoration(
