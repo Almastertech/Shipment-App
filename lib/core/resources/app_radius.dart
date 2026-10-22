@@ -9,6 +9,7 @@ class AppRadius {
   static const double tokenL = 12;
   static const double tokenXl = 16;
   static const double token2Xl = 24;
+  static const double token3Xl = 32;
   static const double tokenFull = 9999;
 
   // Existing app aliases retained to avoid changing current layouts at once.

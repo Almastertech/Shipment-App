@@ -681,6 +681,127 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bottomNavProfile => 'حسابي';
 
   @override
+  String get profileScreenTitle => 'حسابي';
+
+  @override
+  String get profileScreenSubtitle => 'معلوماتك وإعداداتك في مكان واحد';
+
+  @override
+  String get profilePhone => '+966 55 012 3487';
+
+  @override
+  String get profileStatCompensations => 'تعويضاتك';
+
+  @override
+  String get profileStatCompensationsValue => '480 ر.س';
+
+  @override
+  String get profileStatClaims => 'مطالباتك';
+
+  @override
+  String get profileStatClaimsValue => '7';
+
+  @override
+  String get profileStatShipments => 'شحناتك';
+
+  @override
+  String get profileStatShipmentsValue => '12';
+
+  @override
+  String get profileSectionGeneral => 'عام';
+
+  @override
+  String get profileActivity => 'نشاطك';
+
+  @override
+  String get profileNotifications => 'الإشعارات';
+
+  @override
+  String get profileSectionSupport => 'الدعم والمساعدة';
+
+  @override
+  String get profileSupportTickets => 'تذاكر الدعم';
+
+  @override
+  String get profileBlog => 'المدونة';
+
+  @override
+  String get profileFaq => 'الأسئلة الشائعة';
+
+  @override
+  String get profileSectionLegal => 'قانوني';
+
+  @override
+  String get profileTerms => 'الشروط والأحكام';
+
+  @override
+  String get profilePrivacy => 'سياسة الخصوصية';
+
+  @override
+  String get profileProtectionTerms => 'شروط الحماية';
+
+  @override
+  String get profileSectionAccount => 'الحساب';
+
+  @override
+  String get profileLogout => 'سجّل خروجك';
+
+  @override
+  String get profileDeleteAccount => 'احذف حسابك';
+
+  @override
+  String get profileLogoutTitle => 'تيجي تطلع من حسابك؟';
+
+  @override
+  String get profileLogoutMessage =>
+      'تقدر ترجع تدخل بأي وقت برقم جوالك أو إيميلك.';
+
+  @override
+  String get profileLogoutConfirm => 'إيه، سجّل خروجي';
+
+  @override
+  String get profileLogoutCancel => 'لا، خلّني';
+
+  @override
+  String get profileDeleteHeroTitle => 'احذف حسابك';
+
+  @override
+  String get profileDeleteSubtitle => 'قرار نهائي، فخذ وقتك قبل تأكده';
+
+  @override
+  String get profileDeleteTitle => 'متأكد تي تحذف حسابك؟';
+
+  @override
+  String get profileDeleteMessage =>
+      'بتفقد وصولك لحسابك، وكل شحناتك ومطالباتك بتنشال معه. ما تقدر ترجعها بعدين.';
+
+  @override
+  String get profileDeleteNameLabel => 'اسم الحساب';
+
+  @override
+  String get profileDeletePhoneLabel => 'رقم الجوال';
+
+  @override
+  String get profileDeleteConfirm => 'احذف حسابي نهائياً';
+
+  @override
+  String get profileDeleteCancel => 'خلّني، ما أبي أحذفه';
+
+  @override
+  String get profileDeleteBack => 'رجوع';
+
+  @override
+  String get profileDeleteUnavailable => 'خدمة حذف الحساب غير متاحة حالياً.';
+
+  @override
+  String profileVersion(String version) {
+    return 'حصين • الإصدار $version';
+  }
+
+  @override
+  String get profileCredits => 'صُنع بحب 🩶 بواسطة الماستر - AL Master';
+
+  @override
   String get otpPrivacyNotice =>
       'لا تشارك الرمز مع أي أحد، حتى لو قال إنه من حصين.';
 

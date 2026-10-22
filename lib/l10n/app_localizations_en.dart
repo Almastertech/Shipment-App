@@ -694,6 +694,131 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavProfile => 'Profile';
 
   @override
+  String get profileScreenTitle => 'My account';
+
+  @override
+  String get profileScreenSubtitle =>
+      'Your information and settings in one place';
+
+  @override
+  String get profilePhone => '+966 55 012 3487';
+
+  @override
+  String get profileStatCompensations => 'Compensations';
+
+  @override
+  String get profileStatCompensationsValue => 'SAR 480';
+
+  @override
+  String get profileStatClaims => 'Claims';
+
+  @override
+  String get profileStatClaimsValue => '7';
+
+  @override
+  String get profileStatShipments => 'Shipments';
+
+  @override
+  String get profileStatShipmentsValue => '12';
+
+  @override
+  String get profileSectionGeneral => 'General';
+
+  @override
+  String get profileActivity => 'Activity';
+
+  @override
+  String get profileNotifications => 'Notifications';
+
+  @override
+  String get profileSectionSupport => 'Help & support';
+
+  @override
+  String get profileSupportTickets => 'Support tickets';
+
+  @override
+  String get profileBlog => 'Blog';
+
+  @override
+  String get profileFaq => 'FAQ';
+
+  @override
+  String get profileSectionLegal => 'Legal';
+
+  @override
+  String get profileTerms => 'Terms and conditions';
+
+  @override
+  String get profilePrivacy => 'Privacy policy';
+
+  @override
+  String get profileProtectionTerms => 'Protection terms';
+
+  @override
+  String get profileSectionAccount => 'Account';
+
+  @override
+  String get profileLogout => 'Log out';
+
+  @override
+  String get profileDeleteAccount => 'Delete account';
+
+  @override
+  String get profileLogoutTitle => 'Ready to log out?';
+
+  @override
+  String get profileLogoutMessage =>
+      'You can sign back in anytime with your phone number or email.';
+
+  @override
+  String get profileLogoutConfirm => 'Yes, log out';
+
+  @override
+  String get profileLogoutCancel => 'No, stay';
+
+  @override
+  String get profileDeleteHeroTitle => 'Delete your account';
+
+  @override
+  String get profileDeleteSubtitle =>
+      'This is final, so take a moment before confirming';
+
+  @override
+  String get profileDeleteTitle =>
+      'Are you sure you want to delete your account?';
+
+  @override
+  String get profileDeleteMessage =>
+      'You will lose access to your account, shipments, and claims. This cannot be undone.';
+
+  @override
+  String get profileDeleteNameLabel => 'Account name';
+
+  @override
+  String get profileDeletePhoneLabel => 'Mobile number';
+
+  @override
+  String get profileDeleteConfirm => 'Delete my account permanently';
+
+  @override
+  String get profileDeleteCancel => 'Keep my account';
+
+  @override
+  String get profileDeleteBack => 'Back';
+
+  @override
+  String get profileDeleteUnavailable =>
+      'Account deletion is not available yet.';
+
+  @override
+  String profileVersion(String version) {
+    return 'Haseen • Version $version';
+  }
+
+  @override
+  String get profileCredits => 'Made with love by AL Master';
+
+  @override
   String get otpPrivacyNotice =>
       'Never share your code with anyone, even if they claim to be from Haseen.';
 

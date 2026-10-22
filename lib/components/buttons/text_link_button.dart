@@ -10,6 +10,8 @@ class TextLinkButton extends StatelessWidget {
     this.icon,
     this.iconOnTrailing = false,
     this.foregroundColor,
+    this.textStyle,
+    this.buttonStyle,
   });
 
   final String label;
@@ -19,17 +21,21 @@ class TextLinkButton extends StatelessWidget {
   final Widget? icon;
   final bool iconOnTrailing;
   final Color? foregroundColor;
+  final TextStyle? textStyle;
+  final ButtonStyle? buttonStyle;
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.labelLarge?.copyWith(
+    final style = Theme.of(context).textTheme.labelLarge?.merge(textStyle).copyWith(
           decoration: underlined ? TextDecoration.underline : null,
           color: foregroundColor,
         );
 
     Widget button = TextButton(
       onPressed: onPressed,
-      style: TextButton.styleFrom(foregroundColor: foregroundColor),
+      style: TextButton.styleFrom(
+        foregroundColor: foregroundColor,
+      ).merge(buttonStyle),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

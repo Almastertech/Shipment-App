@@ -1376,6 +1376,240 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get bottomNavProfile;
 
+  /// No description provided for @profileScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My account'**
+  String get profileScreenTitle;
+
+  /// No description provided for @profileScreenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your information and settings in one place'**
+  String get profileScreenSubtitle;
+
+  /// No description provided for @profilePhone.
+  ///
+  /// In en, this message translates to:
+  /// **'+966 55 012 3487'**
+  String get profilePhone;
+
+  /// No description provided for @profileStatCompensations.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensations'**
+  String get profileStatCompensations;
+
+  /// No description provided for @profileStatCompensationsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 480'**
+  String get profileStatCompensationsValue;
+
+  /// No description provided for @profileStatClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get profileStatClaims;
+
+  /// No description provided for @profileStatClaimsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'7'**
+  String get profileStatClaimsValue;
+
+  /// No description provided for @profileStatShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get profileStatShipments;
+
+  /// No description provided for @profileStatShipmentsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'12'**
+  String get profileStatShipmentsValue;
+
+  /// No description provided for @profileSectionGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get profileSectionGeneral;
+
+  /// No description provided for @profileActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get profileActivity;
+
+  /// No description provided for @profileNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get profileNotifications;
+
+  /// No description provided for @profileSectionSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & support'**
+  String get profileSectionSupport;
+
+  /// No description provided for @profileSupportTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Support tickets'**
+  String get profileSupportTickets;
+
+  /// No description provided for @profileBlog.
+  ///
+  /// In en, this message translates to:
+  /// **'Blog'**
+  String get profileBlog;
+
+  /// No description provided for @profileFaq.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get profileFaq;
+
+  /// No description provided for @profileSectionLegal.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get profileSectionLegal;
+
+  /// No description provided for @profileTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and conditions'**
+  String get profileTerms;
+
+  /// No description provided for @profilePrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get profilePrivacy;
+
+  /// No description provided for @profileProtectionTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection terms'**
+  String get profileProtectionTerms;
+
+  /// No description provided for @profileSectionAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get profileSectionAccount;
+
+  /// No description provided for @profileLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get profileLogout;
+
+  /// No description provided for @profileDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get profileDeleteAccount;
+
+  /// No description provided for @profileLogoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to log out?'**
+  String get profileLogoutTitle;
+
+  /// No description provided for @profileLogoutMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You can sign back in anytime with your phone number or email.'**
+  String get profileLogoutMessage;
+
+  /// No description provided for @profileLogoutConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, log out'**
+  String get profileLogoutConfirm;
+
+  /// No description provided for @profileLogoutCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'No, stay'**
+  String get profileLogoutCancel;
+
+  /// No description provided for @profileDeleteHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your account'**
+  String get profileDeleteHeroTitle;
+
+  /// No description provided for @profileDeleteSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This is final, so take a moment before confirming'**
+  String get profileDeleteSubtitle;
+
+  /// No description provided for @profileDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get profileDeleteTitle;
+
+  /// No description provided for @profileDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You will lose access to your account, shipments, and claims. This cannot be undone.'**
+  String get profileDeleteMessage;
+
+  /// No description provided for @profileDeleteNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Account name'**
+  String get profileDeleteNameLabel;
+
+  /// No description provided for @profileDeletePhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get profileDeletePhoneLabel;
+
+  /// No description provided for @profileDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account permanently'**
+  String get profileDeleteConfirm;
+
+  /// No description provided for @profileDeleteCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep my account'**
+  String get profileDeleteCancel;
+
+  /// No description provided for @profileDeleteBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get profileDeleteBack;
+
+  /// No description provided for @profileDeleteUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Account deletion is not available yet.'**
+  String get profileDeleteUnavailable;
+
+  /// No description provided for @profileVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Haseen • Version {version}'**
+  String profileVersion(String version);
+
+  /// No description provided for @profileCredits.
+  ///
+  /// In en, this message translates to:
+  /// **'Made with love by AL Master'**
+  String get profileCredits;
+
   /// No description provided for @otpPrivacyNotice.
   ///
   /// In en, this message translates to:

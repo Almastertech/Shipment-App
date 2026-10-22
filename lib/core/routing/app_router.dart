@@ -20,6 +20,8 @@ import '../../screens/debug/api_monitoring_screen.dart';
 import '../../screens/demands/demand_details_page.dart';
 import '../../screens/demands/open_demands_page.dart';
 import '../../screens/home/home_screen.dart';
+import '../../screens/profile/delete_account_screen.dart';
+import '../../screens/profile/profile_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
 import '../../screens/sample_feature/sample_feature_details_screen.dart';
 import '../../screens/sample_feature/sample_feature_details_view_model.dart';
@@ -59,6 +61,8 @@ class AppRouter {
     AppRoutes.welcome: RouteGuardType.guestOnly,
     AppRoutes.home: RouteGuardType.authOrGuest,
     AppRoutes.shipments: RouteGuardType.authOrGuest,
+    AppRoutes.profile: RouteGuardType.authOrGuest,
+    AppRoutes.deleteAccount: RouteGuardType.authOrGuest,
     AppRoutes.shipmentDetails: RouteGuardType.authOrGuest,
     AppRoutes.openDemands: RouteGuardType.authOrGuest,
     AppRoutes.demandDetails: RouteGuardType.authOrGuest,
@@ -216,6 +220,14 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.shipments,
         builder: (context, state) => const MyShipmentsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.profile,
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.deleteAccount,
+        builder: (context, state) => const DeleteAccountScreen(),
       ),
       GoRoute(
         path: AppRoutes.shipmentDetails,

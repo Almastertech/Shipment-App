@@ -10,12 +10,16 @@ class AppBottomSheet extends StatelessWidget {
     this.showHandle = true,
     this.padding = AppSpacing.cardLarge,
     this.maxWidth = 720,
+    this.topPadding = AppSpacing.sm,
+    this.handleBottomSpacing = AppSpacing.md,
   });
 
   final Widget child;
   final bool showHandle;
   final EdgeInsets padding;
   final double maxWidth;
+  final double topPadding;
+  final double handleBottomSpacing;
 
   static Future<T?> show<T>(
     BuildContext context, {
@@ -28,6 +32,10 @@ class AppBottomSheet extends StatelessWidget {
     bool showHandle = true,
     EdgeInsets padding = AppSpacing.cardLarge,
     double maxWidth = 720,
+    double topRadius = AppRadius.sheet,
+    Color? backgroundColor,
+    double topPadding = AppSpacing.sm,
+    double handleBottomSpacing = AppSpacing.md,
   }) {
     return showModalBottomSheet<T>(
       context: context,
@@ -36,16 +44,17 @@ class AppBottomSheet extends StatelessWidget {
       enableDrag: enableDrag,
       isDismissible: isDismissible,
       barrierColor: barrierColor,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppRadius.sheet),
-        ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(topRadius)),
       ),
+      backgroundColor: backgroundColor,
       builder: (_) {
         return AppBottomSheet(
           showHandle: showHandle,
           padding: padding,
           maxWidth: maxWidth,
+          topPadding: topPadding,
+          handleBottomSpacing: handleBottomSpacing,
           child: child,
         );
       },
@@ -56,11 +65,12 @@ class AppBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: AppSpacing.sm,
+        top: topPadding,
         bottom: padding.bottom + MediaQuery.viewInsetsOf(context).bottom,
       ),
       child: Align(
         alignment: Alignment.topCenter,
+        heightFactor: 1,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: maxWidth),
           child: Padding(
@@ -77,7 +87,7 @@ class AppBottomSheet extends StatelessWidget {
                     child: Container(
                       width: 42,
                       height: 4,
-                      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                      margin: EdgeInsets.only(bottom: handleBottomSpacing),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.outline,
                         borderRadius: BorderRadius.circular(AppRadius.circle),

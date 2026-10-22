@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shipments/screens/home/widgets/custom_home_info_card.dart';
 import 'package:shipments/screens/home/widgets/home_header_widget.dart';
 import 'package:shipments/screens/home/widgets/see_all_shipments_link.dart';
 
 import '../../components/app_scaffold.dart';
 import '../../components/custom_secondary_banner.dart';
-import '../../components/layout/custom_bottom_nav_bar.dart';
+import '../../components/layout/app_shell_bottom_bar.dart';
 import '../../components/secondary_request_custom_card.dart';
 import '../../components/section_title.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_spacing.dart';
-import '../../core/routing/app_routes.dart';
+import '../../core/routing/bottom_nav_destinations.dart';
 import '../../l10n/app_localizations.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedNavigationIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -119,26 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: SizedBox(
-          height: 84,
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 380),
-              child: CustomBottomNavBar(
-                selectedIndex: _selectedNavigationIndex,
-                onDestinationSelected: (index) {
-                  if (index == 1) {
-                    context.go(AppRoutes.shipments);
-                    return;
-                  }
-                  setState(() => _selectedNavigationIndex = index);
-                },
-              ),
-            ),
-          ),
-        ),
+      bottomNavigationBar: const AppShellBottomBar(
+        selectedIndex: BottomNavDestinations.home,
       ),
     );
   }
