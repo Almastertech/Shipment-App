@@ -30,6 +30,8 @@ class AppTextField extends StatelessWidget {
     this.onTapOutside,
     this.clearFocusOnTapOutside = true,
     this.textDirection,
+    this.textAlign,
+    this.style,
   });
 
   final TextEditingController? controller;
@@ -58,6 +60,8 @@ class AppTextField extends StatelessWidget {
   final TapRegionCallback? onTapOutside;
   final bool clearFocusOnTapOutside;
   final TextDirection? textDirection;
+  final TextAlign? textAlign;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +86,8 @@ class AppTextField extends StatelessWidget {
       maxLength: maxLength,
       maxLengthEnforcement: maxLengthEnforcement,
       textDirection: textDirection,
+      textAlign: textAlign ?? TextAlign.start,
+      style: style,
       onTapOutside: onTapOutside ??
           (clearFocusOnTapOutside
               ? (_) => FocusManager.instance.primaryFocus?.unfocus()

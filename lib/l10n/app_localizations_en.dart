@@ -1589,4 +1589,80 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get close => 'Close';
+
+  @override
+  String get profileEditTitle => 'Edit your profile';
+
+  @override
+  String get profileEditSubtitle => 'Keep your information up to date';
+
+  @override
+  String get profileEditPhoto => 'Change your photo';
+
+  @override
+  String get profileEditFullNameLabel => 'Full name';
+
+  @override
+  String get profileEditFullName => 'Abdullah Al Otaibi';
+
+  @override
+  String get profileEditPhoneLabel => 'Mobile number';
+
+  @override
+  String get profileEditPhoneHelper =>
+      'If you change your number, we\'ll send a verification code to the new number';
+
+  @override
+  String get profileEditEmailLabel => 'Email (optional)';
+
+  @override
+  String get profileEditEmailHint => 'Enter your email';
+
+  @override
+  String get profileEditSave => 'Save changes';
+
+  @override
+  String get profileEditSaveUnavailable =>
+      'Saving profile changes is not available yet.';
+
+  @override
+  String get profileEditPhotoUnavailable => 'Could not open photos right now.';
+
+  @override
+  String get notificationSettingsTitle => 'Notifications';
+
+  @override
+  String get notificationSettingsSubtitle => 'Choose what you hear from us';
+
+  @override
+  String get notificationPermissionTitle => 'Allow notifications';
+
+  @override
+  String get notificationPermissionDescription =>
+      'Turn them on so you don\'t miss updates';
+
+  @override
+  String get notificationShipmentTitle => 'Shipment updates';
+
+  @override
+  String get notificationShipmentDescription =>
+      'Where your shipment is and when it arrives';
+
+  @override
+  String get notificationClaimTitle => 'Claim updates';
+
+  @override
+  String get notificationClaimDescription =>
+      'News about your claims or compensation';
+
+  @override
+  String get notificationOffersTitle => 'Store offers';
+
+  @override
+  String get notificationOffersDescription =>
+      'Offers and discounts from partner stores';
+
+  @override
+  String get notificationSettingsNote =>
+      'You can change these settings anytime and stay up to date on your claims.';
 }

@@ -7,19 +7,21 @@ import '../../../core/resources/app_typography.dart';
 import '../../shipments/widgets/shipments_dot_marks.dart';
 import 'profile_hero_background.dart';
 
-class DeleteAccountHero extends StatelessWidget {
-  const DeleteAccountHero({
+class ProfileSubpageHero extends StatelessWidget {
+  const ProfileSubpageHero({
     super.key,
     required this.title,
     required this.subtitle,
     required this.onBack,
     required this.backLabel,
+    this.titleSubtitleSpacing = AppSpacing.token2Xs,
   });
 
   final String title;
   final String subtitle;
   final VoidCallback onBack;
   final String backLabel;
+  final double titleSubtitleSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,7 @@ class DeleteAccountHero extends StatelessWidget {
                   color: textColor,
                 ),
               ),
-              const SizedBox(height: AppSpacing.token2Xs),
+              SizedBox(height: titleSubtitleSpacing),
               AppText(
                 subtitle,
                 variant: AppTextVariant.bodySmall,

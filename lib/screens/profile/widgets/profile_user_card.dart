@@ -58,7 +58,7 @@ class ProfileUserCard extends StatelessWidget {
             children: <Widget>[
               PositionedDirectional(
                 top: -100,
-                end: -100,
+                end: -80,
                 child: Container(
                   width: 220,
                   height: 220,

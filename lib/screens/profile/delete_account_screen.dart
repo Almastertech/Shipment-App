@@ -8,7 +8,7 @@ import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
 import 'widgets/delete_account_actions.dart';
 import 'widgets/delete_account_card.dart';
-import 'widgets/delete_account_hero.dart';
+import 'widgets/profile_subpage_hero.dart';
 import 'widgets/profile_hero.dart';
 
 class DeleteAccountScreen extends StatelessWidget {
@@ -45,7 +45,7 @@ class DeleteAccountScreen extends StatelessWidget {
             start: 0,
             end: 0,
             height: heroHeight,
-            child: DeleteAccountHero(
+            child: ProfileSubpageHero(
               title: l10n.profileDeleteHeroTitle,
               subtitle: l10n.profileDeleteSubtitle,
               backLabel: l10n.profileDeleteBack,

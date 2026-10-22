@@ -1558,4 +1558,76 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get close => 'إغلاق';
+
+  @override
+  String get profileEditTitle => 'عدّل ملفك';
+
+  @override
+  String get profileEditSubtitle => 'خلّ معلوماتك دايماً محدّثة';
+
+  @override
+  String get profileEditPhoto => 'غيّر صورتك';
+
+  @override
+  String get profileEditFullNameLabel => 'الاسم الكامل';
+
+  @override
+  String get profileEditFullName => 'عبدالله العتيبي';
+
+  @override
+  String get profileEditPhoneLabel => 'رقم الجوال';
+
+  @override
+  String get profileEditPhoneHelper =>
+      'لو غيرت رقمك، بنرسل رمز تحقق للرقم الجديد';
+
+  @override
+  String get profileEditEmailLabel => 'الإيميل (اختياري)';
+
+  @override
+  String get profileEditEmailHint => 'اكتب ايميلك';
+
+  @override
+  String get profileEditSave => 'احفظ التعديلات';
+
+  @override
+  String get profileEditSaveUnavailable => 'حفظ التعديلات غير متاح حالياً.';
+
+  @override
+  String get profileEditPhotoUnavailable => 'تعذر فتح الصور حالياً.';
+
+  @override
+  String get notificationSettingsTitle => 'الإشعارات';
+
+  @override
+  String get notificationSettingsSubtitle => 'اختار وش يوصلك منا';
+
+  @override
+  String get notificationPermissionTitle => 'السماح بالإشعارات';
+
+  @override
+  String get notificationPermissionDescription =>
+      'فعلها عشان ما يفوتك أي تحديث';
+
+  @override
+  String get notificationShipmentTitle => 'تحديثات الشحنات';
+
+  @override
+  String get notificationShipmentDescription => 'وين وصلت شحنتك ومتى توصلك';
+
+  @override
+  String get notificationClaimTitle => 'تحديثات المطالبات';
+
+  @override
+  String get notificationClaimDescription => 'أي جديد في مطالباتك أو تعويضك';
+
+  @override
+  String get notificationOffersTitle => 'عروض المتاجر';
+
+  @override
+  String get notificationOffersDescription => 'عروض وخصومات من المتاجر الشريكة';
+
+  @override
+  String get notificationSettingsNote =>
+      'تقدر تغير هالإعدادات بأي وقت، وما راح يفوتك أي شي يخص مطالباتك.';
 }

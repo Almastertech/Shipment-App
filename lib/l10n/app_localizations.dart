@@ -3037,6 +3037,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get close;
+
+  /// No description provided for @profileEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit your profile'**
+  String get profileEditTitle;
+
+  /// No description provided for @profileEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your information up to date'**
+  String get profileEditSubtitle;
+
+  /// No description provided for @profileEditPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Change your photo'**
+  String get profileEditPhoto;
+
+  /// No description provided for @profileEditFullNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get profileEditFullNameLabel;
+
+  /// No description provided for @profileEditFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Abdullah Al Otaibi'**
+  String get profileEditFullName;
+
+  /// No description provided for @profileEditPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get profileEditPhoneLabel;
+
+  /// No description provided for @profileEditPhoneHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'If you change your number, we\'ll send a verification code to the new number'**
+  String get profileEditPhoneHelper;
+
+  /// No description provided for @profileEditEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email (optional)'**
+  String get profileEditEmailLabel;
+
+  /// No description provided for @profileEditEmailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get profileEditEmailHint;
+
+  /// No description provided for @profileEditSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profileEditSave;
+
+  /// No description provided for @profileEditSaveUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving profile changes is not available yet.'**
+  String get profileEditSaveUnavailable;
+
+  /// No description provided for @profileEditPhotoUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open photos right now.'**
+  String get profileEditPhotoUnavailable;
+
+  /// No description provided for @notificationSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationSettingsTitle;
+
+  /// No description provided for @notificationSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose what you hear from us'**
+  String get notificationSettingsSubtitle;
+
+  /// No description provided for @notificationPermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow notifications'**
+  String get notificationPermissionTitle;
+
+  /// No description provided for @notificationPermissionDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn them on so you don\'t miss updates'**
+  String get notificationPermissionDescription;
+
+  /// No description provided for @notificationShipmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment updates'**
+  String get notificationShipmentTitle;
+
+  /// No description provided for @notificationShipmentDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Where your shipment is and when it arrives'**
+  String get notificationShipmentDescription;
+
+  /// No description provided for @notificationClaimTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim updates'**
+  String get notificationClaimTitle;
+
+  /// No description provided for @notificationClaimDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'News about your claims or compensation'**
+  String get notificationClaimDescription;
+
+  /// No description provided for @notificationOffersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Store offers'**
+  String get notificationOffersTitle;
+
+  /// No description provided for @notificationOffersDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers and discounts from partner stores'**
+  String get notificationOffersDescription;
+
+  /// No description provided for @notificationSettingsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You can change these settings anytime and stay up to date on your claims.'**
+  String get notificationSettingsNote;
 }
 
 class _AppLocalizationsDelegate

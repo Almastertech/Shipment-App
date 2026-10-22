@@ -10,6 +10,8 @@ class AppRoutes {
   static const String shipments = '/shipments';
   static const String profile = '/profile';
   static const String deleteAccount = '/profile/delete-account';
+  static const String editProfile = '/profile/edit';
+  static const String notificationSettings = '/profile/notifications';
   static const String shipmentDetails = '/shipment-details';
   static const String openDemands = '/open-demands';
   static const String demandDetails = '/demand-details';

@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                       claimsValue: l10n.profileStatClaimsValue,
                       shipmentsLabel: l10n.profileStatShipments,
                       shipmentsValue: l10n.profileStatShipmentsValue,
-                      onEdit: () {},
+                      onEdit: () => context.push(AppRoutes.editProfile),
                     ),
                   ),
                 ],
@@ -89,7 +89,8 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileNotifications,
                         svgAsset: AppImages.bell,
-                        onTap: () {},
+                        onTap: () =>
+                            context.push(AppRoutes.notificationSettings),
                       ),
                     ],
                   ),
