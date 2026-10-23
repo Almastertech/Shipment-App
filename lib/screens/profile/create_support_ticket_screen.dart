@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +11,7 @@ import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
 import '../../components/inputs/app_text_field.dart';
 import '../../core/resources/app_colors.dart';
+import '../../core/resources/app_images.dart';
 import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_tap_target.dart';
@@ -17,7 +20,6 @@ import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
 import '../demands/widgets/dash_border_painter.dart';
 import 'widgets/activity_filter_chip.dart';
-import 'widgets/profile_hero.dart';
 import 'widgets/profile_subpage_hero.dart';
 
 enum _TicketCategory { claim, shipment, account }
@@ -56,8 +58,10 @@ class _CreateSupportTicketScreenState extends State<CreateSupportTicketScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final heroHeight =
-        ProfileHero.heightForWidth(MediaQuery.sizeOf(context).width);
+    final heroHeight = math.max(
+      280.0,
+      MediaQuery.sizeOf(context).width * .75,
+    ).toDouble();
     final inputTheme = _inputTheme(context);
 
     return AppScaffold(
@@ -111,9 +115,7 @@ class _CreateSupportTicketScreenState extends State<CreateSupportTicketScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      const SizedBox(
-                        height: AppSpacing.tokenS,
-                      ),
+                      const SizedBox(height: AppSpacing.tokenXl),
                       _SectionLabel(
                         text: l10n.createSupportTicketCategoryLabel,
                       ),
@@ -157,7 +159,7 @@ class _CreateSupportTicketScreenState extends State<CreateSupportTicketScreen> {
                         style: _fieldTextStyle,
                         keyboardType: TextInputType.multiline,
                         textInputAction: TextInputAction.newline,
-                        minLines: 1,
+                        minLines: 4,
                         maxLines: 4,
                         inputFormatters: <TextInputFormatter>[
                           LengthLimitingTextInputFormatter(
@@ -487,7 +489,7 @@ class _AttachmentPicker extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SvgPicture.asset(
-                        'assets/images/svg/document.svg',
+                        AppImages.document,
                         width: 18,
                         height: 18,
                       ),
