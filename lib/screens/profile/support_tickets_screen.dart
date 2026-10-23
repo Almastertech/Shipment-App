@@ -27,7 +27,7 @@ class SupportTicketsScreen extends StatefulWidget {
 }
 
 class _SupportTicketsScreenState extends State<SupportTicketsScreen> {
-  static const double _statsOverlap = AppSpacing.token3Xl + AppSpacing.tokenXl;
+  static const double _statsOverlap =  AppSpacing.token2Xl;
 
   _TicketFilter _filter = _TicketFilter.all;
   bool _newestFirst = true;

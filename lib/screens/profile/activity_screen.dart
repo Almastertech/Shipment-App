@@ -73,6 +73,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       onBack: () => _goBack(context),
                     ),
                   ),
+                  const SizedBox(height: AppSpacing.token2Xl),
                   PositionedDirectional(
                     top: heroHeight - _statsOverlap,
                     start: AppSpacing.tokenXl,
@@ -164,7 +165,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
   }
 
   static const double _statsOverlap =
-      AppSpacing.token3Xl + AppSpacing.tokenXl;
+      AppSpacing.tokenXl;
 
   bool _matchesFilter(ActivityEntry entry) {
     return switch (_filter) {

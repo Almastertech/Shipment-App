@@ -91,7 +91,7 @@ class _NotificationSettingsScreenState
             ),
           ),
           PositionedDirectional(
-            top: heroHeight - AppSpacing.token3Xl - AppSpacing.tokenXl,
+            top: heroHeight -  AppSpacing.tokenXl,
             start: AppSpacing.tokenXl,
             end: AppSpacing.tokenXl,
             bottom: 0,

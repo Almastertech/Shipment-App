@@ -30,7 +30,7 @@ class _SupportTicketDetailsScreenState
     extends State<SupportTicketDetailsScreen> {
   static const double _summaryHeight = 96;
   static const double _summaryOverlap =
-      AppSpacing.token6Xl + AppSpacing.token2Xs;
+       AppSpacing.tokenXl;
 
   @override
   Widget build(BuildContext context) {

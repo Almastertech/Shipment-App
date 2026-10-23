@@ -14,7 +14,7 @@ import 'widgets/profile_hero.dart';
 class DeleteAccountScreen extends StatelessWidget {
   const DeleteAccountScreen({super.key});
 
-  static const double _cardTop = 192;
+  static const double _cardTop = 220;
   static const double _cardHorizontalMargin = AppSpacing.tokenXl;
   static const double _actionsHorizontalMargin = AppSpacing.token2Xl;
   static const double _actionsBottomSpacing = AppSpacing.tokenXl;
