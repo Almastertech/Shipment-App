@@ -3,11 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/ui_kit_showcase_screen.dart';
-import '../../screens/demands/camera_permission_page.dart';
-import '../../screens/demands/in_app_camera_page.dart';
-import '../location/location_coordinates.dart';
-import '../location/location_service.dart';
-import '../camera/camera_capture_service.dart';
 import '../../core/permissions/permission_service.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
@@ -17,11 +12,22 @@ import '../../screens/auth/otp_success_screen.dart';
 import '../../screens/auth/otp_verification_screen.dart';
 import '../../screens/auth/welcome_screen.dart';
 import '../../screens/debug/api_monitoring_screen.dart';
+import '../../screens/demands/camera_permission_page.dart';
 import '../../screens/demands/demand_details_page.dart';
+import '../../screens/demands/in_app_camera_page.dart';
 import '../../screens/demands/open_demands_page.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/merchant/merchant_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
+import '../../screens/profile/activity_screen.dart';
+import '../../screens/profile/create_support_ticket_screen.dart';
+import '../../screens/profile/delete_account_screen.dart';
+import '../../screens/profile/edit_profile_screen.dart';
+import '../../screens/profile/models/support_ticket.dart';
+import '../../screens/profile/notification_settings_screen.dart';
+import '../../screens/profile/profile_screen.dart';
+import '../../screens/profile/support_ticket_details_screen.dart';
+import '../../screens/profile/support_tickets_screen.dart';
 import '../../screens/requests/request_screen.dart';
 import '../../screens/requests/widgets/request_details_screen.dart';
 import '../../screens/sample_feature/sample_feature_details_screen.dart';
@@ -31,7 +37,10 @@ import '../../screens/sample_feature/sample_feature_view_model.dart';
 import '../../screens/shipments/my_shipments_screen.dart';
 import '../../screens/shipments/shipment_details_screen.dart';
 import '../../screens/splash/splash_screen.dart';
+import '../camera/camera_capture_service.dart';
 import '../config/app_environment.dart';
+import '../location/location_coordinates.dart';
+import '../location/location_service.dart';
 import '../session/session_manager.dart';
 import 'app_routes.dart';
 
@@ -63,6 +72,14 @@ class AppRouter {
     AppRoutes.home: RouteGuardType.authOrGuest,
     AppRoutes.merchant: RouteGuardType.authOrGuest,
     AppRoutes.shipments: RouteGuardType.authOrGuest,
+    AppRoutes.profile: RouteGuardType.authOrGuest,
+    AppRoutes.deleteAccount: RouteGuardType.authOrGuest,
+    AppRoutes.editProfile: RouteGuardType.authOrGuest,
+    AppRoutes.notificationSettings: RouteGuardType.authOrGuest,
+    AppRoutes.activity: RouteGuardType.authOrGuest,
+    AppRoutes.supportTickets: RouteGuardType.authOrGuest,
+    AppRoutes.supportTicketDetails: RouteGuardType.authOrGuest,
+    AppRoutes.createSupportTicket: RouteGuardType.authOrGuest,
     AppRoutes.shipmentDetails: RouteGuardType.authOrGuest,
     AppRoutes.requests: RouteGuardType.authOrGuest,
     AppRoutes.requestDetails: RouteGuardType.authOrGuest,
@@ -226,6 +243,40 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.shipments,
         builder: (context, state) => const MyShipmentsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.profile,
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.deleteAccount,
+        builder: (context, state) => const DeleteAccountScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.editProfile,
+        builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.notificationSettings,
+        builder: (context, state) => const NotificationSettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.activity,
+        builder: (context, state) => const ActivityScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.supportTickets,
+        builder: (context, state) => const SupportTicketsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.supportTicketDetails,
+        builder: (context, state) => SupportTicketDetailsScreen(
+          ticket: state.extra! as SupportTicket,
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.createSupportTicket,
+        builder: (context, state) => const CreateSupportTicketScreen(),
       ),
       GoRoute(
         path: AppRoutes.shipmentDetails,

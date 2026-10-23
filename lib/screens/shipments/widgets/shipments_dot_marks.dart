@@ -8,7 +8,7 @@ class ShipmentDotsMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = AppColors.primitives.primary;
+    final neutral = AppColors.primitives.neutral;
     final accent = AppColors.primitives.accent01;
 
     return Row(
@@ -21,9 +21,9 @@ class ShipmentDotsMark extends StatelessWidget {
             child: Container(
               width: 8,
               height: 8,
-              color: index % 3 == 0
+              color: index % 2 == 0
                   ? accent.shade300
-                  : primary.shade200.withValues(alpha: .9),
+                  : neutral.shade100.withValues(alpha: .45),
             ),
           ),
         );

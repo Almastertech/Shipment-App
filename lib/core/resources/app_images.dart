@@ -8,6 +8,8 @@ class AppImages {
   static const String _pngBasePath = '$_imagesBasePath/png';
 
   static const String splash = '$_pngBasePath/splash.png';
+  static const String profile = '$_pngBasePath/profile.png';
+  static const String profileAvatar = '$_pngBasePath/profile.jpg';
   static const String onboardingProtection = '$_pngBasePath/onboarding1.png';
   static const String onboardingTracking = '$_pngBasePath/onboarding2.png';
   static const String onboardingClaim = '$_pngBasePath/onboarding3.png';
@@ -28,6 +30,11 @@ class AppImages {
   static const String wavesBackground = '$_svgBasePath/wavesbackground.svg';
   static const String marker = '$_svgBasePath/marker.svg';
   static const String markerCross = '$_svgBasePath/markercross.svg';
+  static const String book = '$_svgBasePath/book.svg';
+  static const String lock = '$_svgBasePath/lock.svg';
+  static const String logout = '$_svgBasePath/logout.svg';
+  static const String trash = '$_svgBasePath/trash.svg';
+  static const String alMaster = '$_svgBasePath/almaster.svg';
 
   // Product icon library (assets/images/svg).
   static const String receipt = '$_svgBasePath/receipt.svg';
@@ -40,6 +47,8 @@ class AppImages {
   static const String search = '$_svgBasePath/search.svg';
   static const String bell = '$_svgBasePath/bell.svg';
   static const String timeQuarterTo = '$_svgBasePath/time-quarter-to.svg';
+  static const String document = '$_svgBasePath/document.svg';
+  static const String send = '$_svgBasePath/send.svg';
   static const String mapMarkerCross = '$_svgBasePath/map-marker-cross.svg';
   static const String camera = '$_svgBasePath/camera.svg';
   static const String crossSmall = '$_svgBasePath/cross-small.svg';

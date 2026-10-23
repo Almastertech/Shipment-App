@@ -1676,6 +1676,240 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get bottomNavProfile;
 
+  /// No description provided for @profileScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My account'**
+  String get profileScreenTitle;
+
+  /// No description provided for @profileScreenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your information and settings in one place'**
+  String get profileScreenSubtitle;
+
+  /// No description provided for @profilePhone.
+  ///
+  /// In en, this message translates to:
+  /// **'+966 55 012 3487'**
+  String get profilePhone;
+
+  /// No description provided for @profileStatCompensations.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensations'**
+  String get profileStatCompensations;
+
+  /// No description provided for @profileStatCompensationsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 480'**
+  String get profileStatCompensationsValue;
+
+  /// No description provided for @profileStatClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get profileStatClaims;
+
+  /// No description provided for @profileStatClaimsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'7'**
+  String get profileStatClaimsValue;
+
+  /// No description provided for @profileStatShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get profileStatShipments;
+
+  /// No description provided for @profileStatShipmentsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'12'**
+  String get profileStatShipmentsValue;
+
+  /// No description provided for @profileSectionGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get profileSectionGeneral;
+
+  /// No description provided for @profileActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get profileActivity;
+
+  /// No description provided for @profileNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get profileNotifications;
+
+  /// No description provided for @profileSectionSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & support'**
+  String get profileSectionSupport;
+
+  /// No description provided for @profileSupportTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Support tickets'**
+  String get profileSupportTickets;
+
+  /// No description provided for @profileBlog.
+  ///
+  /// In en, this message translates to:
+  /// **'Blog'**
+  String get profileBlog;
+
+  /// No description provided for @profileFaq.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get profileFaq;
+
+  /// No description provided for @profileSectionLegal.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get profileSectionLegal;
+
+  /// No description provided for @profileTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and conditions'**
+  String get profileTerms;
+
+  /// No description provided for @profilePrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get profilePrivacy;
+
+  /// No description provided for @profileProtectionTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection terms'**
+  String get profileProtectionTerms;
+
+  /// No description provided for @profileSectionAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get profileSectionAccount;
+
+  /// No description provided for @profileLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get profileLogout;
+
+  /// No description provided for @profileDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get profileDeleteAccount;
+
+  /// No description provided for @profileLogoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to log out?'**
+  String get profileLogoutTitle;
+
+  /// No description provided for @profileLogoutMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You can sign back in anytime with your phone number or email.'**
+  String get profileLogoutMessage;
+
+  /// No description provided for @profileLogoutConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, log out'**
+  String get profileLogoutConfirm;
+
+  /// No description provided for @profileLogoutCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'No, stay'**
+  String get profileLogoutCancel;
+
+  /// No description provided for @profileDeleteHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your account'**
+  String get profileDeleteHeroTitle;
+
+  /// No description provided for @profileDeleteSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This is final, so take a moment before confirming'**
+  String get profileDeleteSubtitle;
+
+  /// No description provided for @profileDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get profileDeleteTitle;
+
+  /// No description provided for @profileDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You will lose access to your account, shipments, and claims. This cannot be undone.'**
+  String get profileDeleteMessage;
+
+  /// No description provided for @profileDeleteNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Account name'**
+  String get profileDeleteNameLabel;
+
+  /// No description provided for @profileDeletePhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get profileDeletePhoneLabel;
+
+  /// No description provided for @profileDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account permanently'**
+  String get profileDeleteConfirm;
+
+  /// No description provided for @profileDeleteCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep my account'**
+  String get profileDeleteCancel;
+
+  /// No description provided for @profileDeleteBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get profileDeleteBack;
+
+  /// No description provided for @profileDeleteUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Account deletion is not available yet.'**
+  String get profileDeleteUnavailable;
+
+  /// No description provided for @profileVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Haseen • Version {version}'**
+  String profileVersion(String version);
+
+  /// No description provided for @profileCredits.
+  ///
+  /// In en, this message translates to:
+  /// **'Made with love by AL Master'**
+  String get profileCredits;
+
   /// No description provided for @otpPrivacyNotice.
   ///
   /// In en, this message translates to:
@@ -3211,6 +3445,690 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get close;
+
+  /// No description provided for @profileEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit your profile'**
+  String get profileEditTitle;
+
+  /// No description provided for @profileEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your information up to date'**
+  String get profileEditSubtitle;
+
+  /// No description provided for @profileEditPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Change your photo'**
+  String get profileEditPhoto;
+
+  /// No description provided for @profileEditFullNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get profileEditFullNameLabel;
+
+  /// No description provided for @profileEditFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Abdullah Al Otaibi'**
+  String get profileEditFullName;
+
+  /// No description provided for @profileEditPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get profileEditPhoneLabel;
+
+  /// No description provided for @profileEditPhoneHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'If you change your number, we\'ll send a verification code to the new number'**
+  String get profileEditPhoneHelper;
+
+  /// No description provided for @profileEditEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email (optional)'**
+  String get profileEditEmailLabel;
+
+  /// No description provided for @profileEditEmailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get profileEditEmailHint;
+
+  /// No description provided for @profileEditSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profileEditSave;
+
+  /// No description provided for @profileEditSaveUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving profile changes is not available yet.'**
+  String get profileEditSaveUnavailable;
+
+  /// No description provided for @profileEditPhotoUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open photos right now.'**
+  String get profileEditPhotoUnavailable;
+
+  /// No description provided for @notificationSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationSettingsTitle;
+
+  /// No description provided for @notificationSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose what you hear from us'**
+  String get notificationSettingsSubtitle;
+
+  /// No description provided for @notificationPermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow notifications'**
+  String get notificationPermissionTitle;
+
+  /// No description provided for @notificationPermissionDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn them on so you don\'t miss updates'**
+  String get notificationPermissionDescription;
+
+  /// No description provided for @notificationShipmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment updates'**
+  String get notificationShipmentTitle;
+
+  /// No description provided for @notificationShipmentDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Where your shipment is and when it arrives'**
+  String get notificationShipmentDescription;
+
+  /// No description provided for @notificationClaimTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim updates'**
+  String get notificationClaimTitle;
+
+  /// No description provided for @notificationClaimDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'News about your claims or compensation'**
+  String get notificationClaimDescription;
+
+  /// No description provided for @notificationOffersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Store offers'**
+  String get notificationOffersTitle;
+
+  /// No description provided for @notificationOffersDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers and discounts from partner stores'**
+  String get notificationOffersDescription;
+
+  /// No description provided for @notificationSettingsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You can change these settings anytime and stay up to date on your claims.'**
+  String get notificationSettingsNote;
+
+  /// No description provided for @activityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your activity'**
+  String get activityTitle;
+
+  /// No description provided for @activitySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything happening with your shipments and claims'**
+  String get activitySubtitle;
+
+  /// No description provided for @activityFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get activityFilterAll;
+
+  /// No description provided for @activityFilterShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get activityFilterShipments;
+
+  /// No description provided for @activityFilterClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get activityFilterClaims;
+
+  /// No description provided for @activityLatestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest first'**
+  String get activityLatestFirst;
+
+  /// No description provided for @activityOldestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest first'**
+  String get activityOldestFirst;
+
+  /// No description provided for @activityToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, October 6'**
+  String get activityToday;
+
+  /// No description provided for @activityYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, October 5'**
+  String get activityYesterday;
+
+  /// No description provided for @activityOctoberThird.
+  ///
+  /// In en, this message translates to:
+  /// **'October 3'**
+  String get activityOctoberThird;
+
+  /// No description provided for @activityOctoberSecond.
+  ///
+  /// In en, this message translates to:
+  /// **'October 2'**
+  String get activityOctoberSecond;
+
+  /// No description provided for @activityOctoberFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'October 1'**
+  String get activityOctoberFirst;
+
+  /// No description provided for @activityTime1040.
+  ///
+  /// In en, this message translates to:
+  /// **'10:40 AM'**
+  String get activityTime1040;
+
+  /// No description provided for @activityTime0915.
+  ///
+  /// In en, this message translates to:
+  /// **'9:15 AM'**
+  String get activityTime0915;
+
+  /// No description provided for @activityTime0420.
+  ///
+  /// In en, this message translates to:
+  /// **'4:20 PM'**
+  String get activityTime0420;
+
+  /// No description provided for @activityTime0210.
+  ///
+  /// In en, this message translates to:
+  /// **'2:10 PM'**
+  String get activityTime0210;
+
+  /// No description provided for @activityTime1130.
+  ///
+  /// In en, this message translates to:
+  /// **'11:30 AM'**
+  String get activityTime1130;
+
+  /// No description provided for @activityTime0805.
+  ///
+  /// In en, this message translates to:
+  /// **'8:05 AM'**
+  String get activityTime0805;
+
+  /// No description provided for @activityShipmentOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shipment is out for delivery'**
+  String get activityShipmentOutTitle;
+
+  /// No description provided for @activityShipmentOutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Noon Store • Smart watch • HS-2048'**
+  String get activityShipmentOutDescription;
+
+  /// No description provided for @activityClaimReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your claim is under review'**
+  String get activityClaimReviewTitle;
+
+  /// No description provided for @activityClaimReviewDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Nice One • Men\'s fragrance • HS-1874'**
+  String get activityClaimReviewDescription;
+
+  /// No description provided for @activityCompensationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your compensation arrived 🎉'**
+  String get activityCompensationTitle;
+
+  /// No description provided for @activityCompensationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 180 • Claim HS-2039'**
+  String get activityCompensationDescription;
+
+  /// No description provided for @activityClaimSubmittedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We received your claim'**
+  String get activityClaimSubmittedTitle;
+
+  /// No description provided for @activityClaimSubmittedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Nice One • Men\'s fragrance • HS-1874'**
+  String get activityClaimSubmittedDescription;
+
+  /// No description provided for @activityShipmentDeliveredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shipment was delivered'**
+  String get activityShipmentDeliveredTitle;
+
+  /// No description provided for @activityShowOlder.
+  ///
+  /// In en, this message translates to:
+  /// **'Show older activity'**
+  String get activityShowOlder;
+
+  /// No description provided for @activityShowLess.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide older activity'**
+  String get activityShowLess;
+
+  /// No description provided for @supportTicketsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support tickets'**
+  String get supportTicketsTitle;
+
+  /// No description provided for @supportTicketsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re here for you, and coffee\'s on us ☕'**
+  String get supportTicketsSubtitle;
+
+  /// No description provided for @supportTicketsStatAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All tickets'**
+  String get supportTicketsStatAll;
+
+  /// No description provided for @supportTicketsStatOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get supportTicketsStatOpen;
+
+  /// No description provided for @supportTicketsStatResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get supportTicketsStatResolved;
+
+  /// No description provided for @supportTicketsNewButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a new ticket'**
+  String get supportTicketsNewButton;
+
+  /// No description provided for @supportTicketsFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get supportTicketsFilterAll;
+
+  /// No description provided for @supportTicketsFilterShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get supportTicketsFilterShipments;
+
+  /// No description provided for @supportTicketsFilterCompensations.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation'**
+  String get supportTicketsFilterCompensations;
+
+  /// No description provided for @supportTicketsStatusInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get supportTicketsStatusInProgress;
+
+  /// No description provided for @supportTicketsStatusWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting your reply'**
+  String get supportTicketsStatusWaiting;
+
+  /// No description provided for @supportTicketsCompensationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delayed compensation'**
+  String get supportTicketsCompensationTitle;
+
+  /// No description provided for @supportTicketsCompensationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'October 6, 2026 • ST-1052'**
+  String get supportTicketsCompensationSubtitle;
+
+  /// No description provided for @supportTicketsShipmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update shipment details'**
+  String get supportTicketsShipmentTitle;
+
+  /// No description provided for @supportTicketsShipmentSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'October 5, 2026 • ST-1048'**
+  String get supportTicketsShipmentSubtitle;
+
+  /// No description provided for @supportTicketsLastUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Last update'**
+  String get supportTicketsLastUpdate;
+
+  /// No description provided for @supportTicketsUpdateTwoHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'2 hours ago'**
+  String get supportTicketsUpdateTwoHoursAgo;
+
+  /// No description provided for @supportTicketsUpdateYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, 4:30 PM'**
+  String get supportTicketsUpdateYesterday;
+
+  /// No description provided for @supportTicketsCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get supportTicketsCategory;
+
+  /// No description provided for @supportTicketsCompensationCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation'**
+  String get supportTicketsCompensationCategory;
+
+  /// No description provided for @supportTicketsShipmentCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get supportTicketsShipmentCategory;
+
+  /// No description provided for @supportTicketsViewTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'View ticket'**
+  String get supportTicketsViewTicket;
+
+  /// No description provided for @supportTicketsViewReply.
+  ///
+  /// In en, this message translates to:
+  /// **'View reply'**
+  String get supportTicketsViewReply;
+
+  /// No description provided for @supportTicketsCreateUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening a new ticket is not available yet.'**
+  String get supportTicketsCreateUnavailable;
+
+  /// No description provided for @supportTicketsDetailsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket details are not available yet.'**
+  String get supportTicketsDetailsUnavailable;
+
+  /// No description provided for @supportTicketConversationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation'**
+  String get supportTicketConversationTitle;
+
+  /// No description provided for @supportTicketMessageCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 message} other{{count} messages}}'**
+  String supportTicketMessageCount(int count);
+
+  /// No description provided for @supportTicketConversationDate.
+  ///
+  /// In en, this message translates to:
+  /// **'October 6, 2026'**
+  String get supportTicketConversationDate;
+
+  /// No description provided for @supportTicketCustomerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, I still haven\'t received the compensation. Any updates?'**
+  String get supportTicketCustomerMessage;
+
+  /// No description provided for @supportTicketCustomerMetadata.
+  ///
+  /// In en, this message translates to:
+  /// **'Abdullah • 9:15 AM'**
+  String get supportTicketCustomerMetadata;
+
+  /// No description provided for @supportTicketTeamName.
+  ///
+  /// In en, this message translates to:
+  /// **'Husain team'**
+  String get supportTicketTeamName;
+
+  /// No description provided for @supportTicketTeamMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello Abdullah, thank you for contacting us. We are reviewing your compensation request with the relevant team and will keep you updated here.'**
+  String get supportTicketTeamMessage;
+
+  /// No description provided for @supportTicketReplySla.
+  ///
+  /// In en, this message translates to:
+  /// **'The Husain team usually replies within 24 hours'**
+  String get supportTicketReplySla;
+
+  /// No description provided for @supportTicketReplyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your reply here...'**
+  String get supportTicketReplyHint;
+
+  /// No description provided for @supportTicketAttachFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach file'**
+  String get supportTicketAttachFile;
+
+  /// No description provided for @supportTicketSendReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reply'**
+  String get supportTicketSendReply;
+
+  /// No description provided for @supportTicketReplyUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Replies are not available yet.'**
+  String get supportTicketReplyUnavailable;
+
+  /// No description provided for @createSupportTicketTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New ticket'**
+  String get createSupportTicketTitle;
+
+  /// No description provided for @createSupportTicketSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what happened and we\'ll get back to you soon'**
+  String get createSupportTicketSubtitle;
+
+  /// No description provided for @createSupportTicketRequiredNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Fields marked with * are required'**
+  String get createSupportTicketRequiredNote;
+
+  /// No description provided for @createSupportTicketCategoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category *'**
+  String get createSupportTicketCategoryLabel;
+
+  /// No description provided for @createSupportTicketClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get createSupportTicketClaims;
+
+  /// No description provided for @createSupportTicketShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get createSupportTicketShipments;
+
+  /// No description provided for @createSupportTicketAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'My account'**
+  String get createSupportTicketAccount;
+
+  /// No description provided for @createSupportTicketSubjectLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject *'**
+  String get createSupportTicketSubjectLabel;
+
+  /// No description provided for @createSupportTicketSubjectHint.
+  ///
+  /// In en, this message translates to:
+  /// **'For example: Shipment delivery is delayed'**
+  String get createSupportTicketSubjectHint;
+
+  /// No description provided for @createSupportTicketDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What is the issue? *'**
+  String get createSupportTicketDescriptionLabel;
+
+  /// No description provided for @createSupportTicketDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what happened, when, and how we can help.'**
+  String get createSupportTicketDescriptionHint;
+
+  /// No description provided for @createSupportTicketCharacterCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {max}'**
+  String createSupportTicketCharacterCount(int count, int max);
+
+  /// No description provided for @createSupportTicketShipmentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment number (optional)'**
+  String get createSupportTicketShipmentLabel;
+
+  /// No description provided for @createSupportTicketShipmentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the shipment number'**
+  String get createSupportTicketShipmentHint;
+
+  /// No description provided for @createSupportTicketShipmentHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Find it in the shipment details to help us assist you faster'**
+  String get createSupportTicketShipmentHelper;
+
+  /// No description provided for @createSupportTicketAttachmentsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments (optional)'**
+  String get createSupportTicketAttachmentsLabel;
+
+  /// No description provided for @createSupportTicketUploadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photos or files'**
+  String get createSupportTicketUploadTitle;
+
+  /// No description provided for @createSupportTicketUploadDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to 5 files, 10 MB each • JPG, PNG, PDF'**
+  String get createSupportTicketUploadDescription;
+
+  /// No description provided for @createSupportTicketRemoveAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove file'**
+  String get createSupportTicketRemoveAttachment;
+
+  /// No description provided for @createSupportTicketAttachmentLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'You can attach up to 5 files.'**
+  String get createSupportTicketAttachmentLimit;
+
+  /// No description provided for @createSupportTicketAttachmentSizeLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Each file must be 10 MB or less.'**
+  String get createSupportTicketAttachmentSizeLimit;
+
+  /// No description provided for @createSupportTicketPickerError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open files right now.'**
+  String get createSupportTicketPickerError;
+
+  /// No description provided for @createSupportTicketRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required.'**
+  String get createSupportTicketRequiredError;
+
+  /// No description provided for @createSupportTicketSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Send ticket'**
+  String get createSupportTicketSubmit;
+
+  /// No description provided for @createSupportTicketSubmitUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket submission is not available yet.'**
+  String get createSupportTicketSubmitUnavailable;
 
   /// No description provided for @claimDetailsTitle.
   ///

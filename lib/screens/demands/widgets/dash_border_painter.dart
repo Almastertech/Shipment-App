@@ -1,16 +1,17 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:shipments/core/resources/app_radius.dart';
 
 class DashedBorderPainter extends CustomPainter {
-  const DashedBorderPainter({required this.color});
+  const DashedBorderPainter({
+    required this.color,
+    this.radius = AppRadius.tokenXl,
+  });
 
   final Color color;
+  final double radius;
 
   @override
   void paint(Canvas canvas, Size size) {
-    const radius = AppRadius.tokenXl;
     const dashWidth = 6.0;
     const dashSpace = 4.0;
     final paint = Paint()
@@ -21,7 +22,7 @@ class DashedBorderPainter extends CustomPainter {
       ..addRRect(
         RRect.fromRectAndRadius(
           Offset.zero & size,
-          const Radius.circular(radius),
+          Radius.circular(radius),
         ),
       );
     for (final metric in path.computeMetrics()) {
@@ -36,5 +37,5 @@ class DashedBorderPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(DashedBorderPainter oldDelegate) =>
-      oldDelegate.color != color;
+      oldDelegate.color != color || oldDelegate.radius != radius;
 }

@@ -8,11 +8,12 @@ import 'package:shipments/screens/shipments/widgets/shipments_hero.dart';
 import '../../components/app_scaffold.dart';
 import '../../components/custom_secondary_banner.dart';
 import '../../components/feedback/status_banner.dart';
-import '../../components/layout/custom_bottom_nav_bar.dart';
+import '../../components/layout/app_shell_bottom_bar.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
+import '../../core/routing/bottom_nav_destinations.dart';
 import '../../l10n/app_localizations.dart';
 import 'widgets/custom_product_card_shipments.dart';
 
@@ -160,6 +161,8 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: const AppShellBottomBar(
+        selectedIndex: BottomNavDestinations.shipments,
       bottomNavigationBar: SafeArea(
         top: false,
         child: SizedBox(
