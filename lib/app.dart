@@ -10,7 +10,6 @@ import 'injection.dart';
 import 'l10n/app_localizations.dart';
 import 'localization/controllers/localization_controller.dart';
 import 'themes/app_themes.dart';
-import 'themes/theme_controller.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,7 +17,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizationController = context.watch<LocalizationController>();
-    final themeController = context.watch<ThemeController>();
     final router = getIt<GoRouter>();
 
     return ScreenUtilInit(
@@ -40,7 +38,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          themeMode: themeController.themeMode,
+          themeMode: ThemeMode.light,
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           builder: (context, child) {

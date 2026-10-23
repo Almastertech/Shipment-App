@@ -25,7 +25,6 @@ import '../../features/notifications/presentation/notification_bell_button.dart'
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 import '../../localization/controllers/localization_controller.dart';
-import '../../themes/theme_controller.dart';
 import 'sample_feature_view_model.dart';
 
 class SampleFeatureListScreen extends StatefulWidget {
@@ -124,11 +123,6 @@ class _SampleFeatureListScreenState extends State<SampleFeatureListScreen> {
         ),
         actions: <Widget>[
           const NotificationBellButton(),
-          IconButton(
-            tooltip: l10n.changeTheme,
-            onPressed: () => context.read<ThemeController>().toggleTheme(),
-            icon: const Icon(Icons.brightness_6_outlined),
-          ),
           IconButton(
             tooltip: l10n.switchLanguage,
             onPressed: () =>
