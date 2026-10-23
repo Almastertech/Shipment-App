@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../components/layout/bottom_sheet_service.dart';
+import '../../../core/routing/app_routes.dart';
 import '../../../l10n/app_localizations.dart';
 import '../application/in_app_notification_center.dart';
-import 'notification_center_sheet.dart';
 
-class NotificationBellButton extends StatelessWidget {
+class NotificationBellButton extends StatefulWidget {
   const NotificationBellButton({super.key});
+
+  @override
+  State<NotificationBellButton> createState() => _NotificationBellButtonState();
+}
+
+class _NotificationBellButtonState extends State<NotificationBellButton> {
+  bool _isOpening = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +24,7 @@ class NotificationBellButton extends StatelessWidget {
       builder: (context, center, _) {
         return IconButton(
           tooltip: l10n.notificationsTitle,
-          onPressed: () {
-            context.read<AppBottomSheetService>().showCustom<void>(
-                  isScrollControlled: true,
-                  builder: (_) =>
-                      ChangeNotifierProvider<InAppNotificationCenter>.value(
-                    value: center,
-                    child: const NotificationCenterSheet(),
-                  ),
-                );
-          },
+          onPressed: _isOpening ? null : () => _openNotifications(),
           icon: Stack(
             clipBehavior: Clip.none,
             children: <Widget>[
@@ -60,5 +58,15 @@ class NotificationBellButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _openNotifications() async {
+    if (!mounted || _isOpening) return;
+    _isOpening = true;
+    try {
+      await context.push<void>(AppRoutes.notificationsCenter);
+    } finally {
+      if (mounted) _isOpening = false;
+    }
   }
 }

@@ -12,6 +12,7 @@ import '../../screens/auth/otp_success_screen.dart';
 import '../../screens/auth/otp_verification_screen.dart';
 import '../../screens/auth/welcome_screen.dart';
 import '../../screens/debug/api_monitoring_screen.dart';
+import '../../features/notifications/presentation/notification_center_screen.dart';
 import '../../screens/demands/camera_permission_page.dart';
 import '../../screens/demands/demand_details_page.dart';
 import '../../screens/demands/in_app_camera_page.dart';
@@ -23,6 +24,8 @@ import '../../screens/profile/activity_screen.dart';
 import '../../screens/profile/create_support_ticket_screen.dart';
 import '../../screens/profile/delete_account_screen.dart';
 import '../../screens/profile/edit_profile_screen.dart';
+import '../../screens/profile/profile_faq_screen.dart';
+import '../../screens/profile/profile_legal_page_screen.dart';
 import '../../screens/profile/models/support_ticket.dart';
 import '../../screens/profile/notification_settings_screen.dart';
 import '../../screens/profile/profile_screen.dart';
@@ -76,10 +79,15 @@ class AppRouter {
     AppRoutes.deleteAccount: RouteGuardType.authOrGuest,
     AppRoutes.editProfile: RouteGuardType.authOrGuest,
     AppRoutes.notificationSettings: RouteGuardType.authOrGuest,
+    AppRoutes.notificationsCenter: RouteGuardType.authOrGuest,
     AppRoutes.activity: RouteGuardType.authOrGuest,
     AppRoutes.supportTickets: RouteGuardType.authOrGuest,
     AppRoutes.supportTicketDetails: RouteGuardType.authOrGuest,
     AppRoutes.createSupportTicket: RouteGuardType.authOrGuest,
+    AppRoutes.profileTerms: RouteGuardType.authOrGuest,
+    AppRoutes.profilePrivacy: RouteGuardType.authOrGuest,
+    AppRoutes.profileProtectionTerms: RouteGuardType.authOrGuest,
+    AppRoutes.profileFaq: RouteGuardType.authOrGuest,
     AppRoutes.shipmentDetails: RouteGuardType.authOrGuest,
     AppRoutes.requests: RouteGuardType.authOrGuest,
     AppRoutes.requestDetails: RouteGuardType.authOrGuest,
@@ -261,6 +269,10 @@ class AppRouter {
         builder: (context, state) => const NotificationSettingsScreen(),
       ),
       GoRoute(
+        path: AppRoutes.notificationsCenter,
+        builder: (context, state) => const NotificationCenterScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.activity,
         builder: (context, state) => const ActivityScreen(),
       ),
@@ -277,6 +289,22 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.createSupportTicket,
         builder: (context, state) => const CreateSupportTicketScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.profileTerms,
+        builder: (context, state) => const ProfileLegalPageScreen.terms(),
+      ),
+      GoRoute(
+        path: AppRoutes.profilePrivacy,
+        builder: (context, state) => const ProfileLegalPageScreen.privacy(),
+      ),
+      GoRoute(
+        path: AppRoutes.profileProtectionTerms,
+        builder: (context, state) => const ProfileLegalPageScreen.protection(),
+      ),
+      GoRoute(
+        path: AppRoutes.profileFaq,
+        builder: (context, state) => const ProfileFaqScreen(),
       ),
       GoRoute(
         path: AppRoutes.shipmentDetails,
