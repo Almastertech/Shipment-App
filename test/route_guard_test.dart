@@ -1,8 +1,8 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:shipments/core/routing/app_router.dart';
 import 'package:shipments/core/routing/app_routes.dart';
 import 'package:shipments/core/session/session_manager.dart';
 import 'package:shipments/core/storage/secure_storage.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('AppRouter route guards', () {
@@ -30,6 +30,13 @@ void main() {
       expect(
         AppRouter.resolveGuardedRoute(
           AppRoutes.cameraPermission,
+          sessionManager: sessionManager,
+        ),
+        AppRoutes.login,
+      );
+      expect(
+        AppRouter.resolveGuardedRoute(
+          AppRoutes.storeProtectionOptions,
           sessionManager: sessionManager,
         ),
         AppRoutes.login,
@@ -70,6 +77,13 @@ void main() {
           sessionManager: sessionManager,
         ),
         AppRoutes.cameraPermission,
+      );
+      expect(
+        AppRouter.resolveGuardedRoute(
+          AppRoutes.storeProtectionOptions,
+          sessionManager: sessionManager,
+        ),
+        AppRoutes.storeProtectionOptions,
       );
     });
 

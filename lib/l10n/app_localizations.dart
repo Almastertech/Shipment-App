@@ -1604,6 +1604,96 @@ abstract class AppLocalizations {
   /// **'Shop Madar'**
   String get merchantShopNow;
 
+  /// No description provided for @merchantOptionsHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Madar Store'**
+  String get merchantOptionsHeroTitle;
+
+  /// No description provided for @merchantOptionsCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronics and accessories • Riyadh'**
+  String get merchantOptionsCategory;
+
+  /// No description provided for @merchantOptionsProtection.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection'**
+  String get merchantOptionsProtection;
+
+  /// No description provided for @merchantOptionsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available ✓'**
+  String get merchantOptionsAvailable;
+
+  /// No description provided for @merchantOptionsDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get merchantOptionsDelivery;
+
+  /// No description provided for @merchantOptionsDeliveryValue.
+  ///
+  /// In en, this message translates to:
+  /// **'2–4 days'**
+  String get merchantOptionsDeliveryValue;
+
+  /// No description provided for @merchantOptionsReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Returns'**
+  String get merchantOptionsReturn;
+
+  /// No description provided for @merchantOptionsReturnValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Within 7 days'**
+  String get merchantOptionsReturnValue;
+
+  /// No description provided for @merchantOptionsQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How would you like your shipment protected?'**
+  String get merchantOptionsQuestion;
+
+  /// No description provided for @merchantOptionsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose protection before paying at the store'**
+  String get merchantOptionsSubtitle;
+
+  /// No description provided for @merchantOptionsProtectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'With Haseen protection'**
+  String get merchantOptionsProtectedTitle;
+
+  /// No description provided for @merchantOptionsProtectedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Damage or loss during transit, subject to protection terms'**
+  String get merchantOptionsProtectedDescription;
+
+  /// No description provided for @merchantOptionsUnprotectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Without protection'**
+  String get merchantOptionsUnprotectedTitle;
+
+  /// No description provided for @merchantOptionsUnprotectedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You are responsible for any damage to the shipment'**
+  String get merchantOptionsUnprotectedDescription;
+
+  /// No description provided for @merchantOptionsDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Details are illustrative and do not indicate an actual partnership or insurance with the store.'**
+  String get merchantOptionsDisclaimer;
+
   /// No description provided for @merchantAllStores.
   ///
   /// In en, this message translates to:

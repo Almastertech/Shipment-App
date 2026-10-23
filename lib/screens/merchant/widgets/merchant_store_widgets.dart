@@ -16,12 +16,14 @@ class MerchantFeaturedCard extends StatelessWidget {
     required this.storeName,
     required this.category,
     required this.action,
+    required this.onShopNow,
   });
 
   final String protectionLabel;
   final String storeName;
   final String category;
   final String action;
+  final VoidCallback onShopNow;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +119,7 @@ class MerchantFeaturedCard extends StatelessWidget {
                 const SizedBox(height: AppSpacing.tokenL),
                 PrimaryButton(
                   label: action,
-                  onPressed: () {},
+                  onPressed: onShopNow,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: purple,
                     foregroundColor: Colors.white,

@@ -76,6 +76,8 @@ class MerchantScreen extends StatelessWidget {
                     storeName: l10n.merchantFeaturedStore,
                     category: l10n.merchantFeaturedCategory,
                     action: l10n.merchantShopNow,
+                    onShopNow: () =>
+                        context.push(AppRoutes.storeProtectionOptions),
                   ),
                   const SizedBox(height: AppSpacing.token3Xl),
                   _SectionHeading(

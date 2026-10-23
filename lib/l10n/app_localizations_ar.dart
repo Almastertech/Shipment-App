@@ -799,6 +799,54 @@ class AppLocalizationsAr extends AppLocalizations {
   String get merchantShopNow => 'تسوق من مدار';
 
   @override
+  String get merchantOptionsHeroTitle => 'متجر مدار';
+
+  @override
+  String get merchantOptionsCategory => 'إلكترونيات وإكسسوارات • الرياض';
+
+  @override
+  String get merchantOptionsProtection => 'الحماية';
+
+  @override
+  String get merchantOptionsAvailable => 'متاحة ✓';
+
+  @override
+  String get merchantOptionsDelivery => 'التوصيل';
+
+  @override
+  String get merchantOptionsDeliveryValue => '2–4 أيام';
+
+  @override
+  String get merchantOptionsReturn => 'الإرجاع';
+
+  @override
+  String get merchantOptionsReturnValue => 'خلال 7 أيام';
+
+  @override
+  String get merchantOptionsQuestion => 'وش تبي لشحنتك؟';
+
+  @override
+  String get merchantOptionsSubtitle => 'اختار الحماية وانت تدفع في المتجر';
+
+  @override
+  String get merchantOptionsProtectedTitle => 'مع حماية حصين';
+
+  @override
+  String get merchantOptionsProtectedDescription =>
+      'تلف أو فقدان وقت النقل، حسب شروط الحماية';
+
+  @override
+  String get merchantOptionsUnprotectedTitle => 'بدون حماية';
+
+  @override
+  String get merchantOptionsUnprotectedDescription =>
+      'أي ضرر يصير للشحنة تتحمله أنت';
+
+  @override
+  String get merchantOptionsDisclaimer =>
+      'بيانات توضيحية؛ ما تعني وجود شراكة أو تأمين فعلي مع المتجر.';
+
+  @override
   String get merchantAllStores => 'كل المتاجر';
 
   @override

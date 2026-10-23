@@ -815,6 +815,56 @@ class AppLocalizationsEn extends AppLocalizations {
   String get merchantShopNow => 'Shop Madar';
 
   @override
+  String get merchantOptionsHeroTitle => 'Madar Store';
+
+  @override
+  String get merchantOptionsCategory => 'Electronics and accessories • Riyadh';
+
+  @override
+  String get merchantOptionsProtection => 'Protection';
+
+  @override
+  String get merchantOptionsAvailable => 'Available ✓';
+
+  @override
+  String get merchantOptionsDelivery => 'Delivery';
+
+  @override
+  String get merchantOptionsDeliveryValue => '2–4 days';
+
+  @override
+  String get merchantOptionsReturn => 'Returns';
+
+  @override
+  String get merchantOptionsReturnValue => 'Within 7 days';
+
+  @override
+  String get merchantOptionsQuestion =>
+      'How would you like your shipment protected?';
+
+  @override
+  String get merchantOptionsSubtitle =>
+      'Choose protection before paying at the store';
+
+  @override
+  String get merchantOptionsProtectedTitle => 'With Haseen protection';
+
+  @override
+  String get merchantOptionsProtectedDescription =>
+      'Damage or loss during transit, subject to protection terms';
+
+  @override
+  String get merchantOptionsUnprotectedTitle => 'Without protection';
+
+  @override
+  String get merchantOptionsUnprotectedDescription =>
+      'You are responsible for any damage to the shipment';
+
+  @override
+  String get merchantOptionsDisclaimer =>
+      'Details are illustrative and do not indicate an actual partnership or insurance with the store.';
+
+  @override
   String get merchantAllStores => 'All stores';
 
   @override
