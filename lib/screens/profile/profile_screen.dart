@@ -84,7 +84,7 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileActivity,
                         svgAsset: AppImages.chartBars,
-                        onTap: () {},
+                        onTap: () => context.push(AppRoutes.activity),
                       ),
                       ProfileMenuItem(
                         label: l10n.profileNotifications,
@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileSupportTickets,
                         svgAsset: AppImages.receipt,
-                        onTap: () {},
+                        onTap: () => context.push(AppRoutes.supportTickets),
                       ),
                       ProfileMenuItem(
                         label: l10n.profileBlog,

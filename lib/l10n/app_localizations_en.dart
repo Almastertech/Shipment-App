@@ -1665,4 +1665,260 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notificationSettingsNote =>
       'You can change these settings anytime and stay up to date on your claims.';
+
+  @override
+  String get activityTitle => 'Your activity';
+
+  @override
+  String get activitySubtitle =>
+      'Everything happening with your shipments and claims';
+
+  @override
+  String get activityFilterAll => 'All';
+
+  @override
+  String get activityFilterShipments => 'Shipments';
+
+  @override
+  String get activityFilterClaims => 'Claims';
+
+  @override
+  String get activityLatestFirst => 'Latest first';
+
+  @override
+  String get activityOldestFirst => 'Oldest first';
+
+  @override
+  String get activityToday => 'Today, October 6';
+
+  @override
+  String get activityYesterday => 'Yesterday, October 5';
+
+  @override
+  String get activityOctoberThird => 'October 3';
+
+  @override
+  String get activityOctoberSecond => 'October 2';
+
+  @override
+  String get activityOctoberFirst => 'October 1';
+
+  @override
+  String get activityTime1040 => '10:40 AM';
+
+  @override
+  String get activityTime0915 => '9:15 AM';
+
+  @override
+  String get activityTime0420 => '4:20 PM';
+
+  @override
+  String get activityTime0210 => '2:10 PM';
+
+  @override
+  String get activityTime1130 => '11:30 AM';
+
+  @override
+  String get activityTime0805 => '8:05 AM';
+
+  @override
+  String get activityShipmentOutTitle => 'Your shipment is out for delivery';
+
+  @override
+  String get activityShipmentOutDescription =>
+      'Noon Store • Smart watch • HS-2048';
+
+  @override
+  String get activityClaimReviewTitle => 'Your claim is under review';
+
+  @override
+  String get activityClaimReviewDescription =>
+      'Nice One • Men\'s fragrance • HS-1874';
+
+  @override
+  String get activityCompensationTitle => 'Your compensation arrived 🎉';
+
+  @override
+  String get activityCompensationDescription => 'SAR 180 • Claim HS-2039';
+
+  @override
+  String get activityClaimSubmittedTitle => 'We received your claim';
+
+  @override
+  String get activityClaimSubmittedDescription =>
+      'Nice One • Men\'s fragrance • HS-1874';
+
+  @override
+  String get activityShipmentDeliveredTitle => 'Your shipment was delivered';
+
+  @override
+  String get activityShowOlder => 'Show older activity';
+
+  @override
+  String get activityShowLess => 'Hide older activity';
+
+  @override
+  String get supportTicketsTitle => 'Support tickets';
+
+  @override
+  String get supportTicketsSubtitle =>
+      'We\'re here for you, and coffee\'s on us ☕';
+
+  @override
+  String get supportTicketsStatAll => 'All tickets';
+
+  @override
+  String get supportTicketsStatOpen => 'Open';
+
+  @override
+  String get supportTicketsStatResolved => 'Resolved';
+
+  @override
+  String get supportTicketsNewButton => 'Open a new ticket';
+
+  @override
+  String get supportTicketsFilterAll => 'All';
+
+  @override
+  String get supportTicketsFilterShipments => 'Shipments';
+
+  @override
+  String get supportTicketsFilterCompensations => 'Compensation';
+
+  @override
+  String get supportTicketsStatusInProgress => 'In progress';
+
+  @override
+  String get supportTicketsStatusWaiting => 'Awaiting your reply';
+
+  @override
+  String get supportTicketsCompensationTitle => 'Delayed compensation';
+
+  @override
+  String get supportTicketsCompensationSubtitle => 'October 6, 2026 • ST-1052';
+
+  @override
+  String get supportTicketsShipmentTitle => 'Update shipment details';
+
+  @override
+  String get supportTicketsShipmentSubtitle => 'October 5, 2026 • ST-1048';
+
+  @override
+  String get supportTicketsLastUpdate => 'Last update';
+
+  @override
+  String get supportTicketsUpdateTwoHoursAgo => '2 hours ago';
+
+  @override
+  String get supportTicketsUpdateYesterday => 'Yesterday, 4:30 PM';
+
+  @override
+  String get supportTicketsCategory => 'Category';
+
+  @override
+  String get supportTicketsCompensationCategory => 'Compensation';
+
+  @override
+  String get supportTicketsShipmentCategory => 'Shipments';
+
+  @override
+  String get supportTicketsViewTicket => 'View ticket';
+
+  @override
+  String get supportTicketsViewReply => 'View reply';
+
+  @override
+  String get supportTicketsCreateUnavailable =>
+      'Opening a new ticket is not available yet.';
+
+  @override
+  String get supportTicketsDetailsUnavailable =>
+      'Ticket details are not available yet.';
+
+  @override
+  String get createSupportTicketTitle => 'New ticket';
+
+  @override
+  String get createSupportTicketSubtitle =>
+      'Tell us what happened and we\'ll get back to you soon';
+
+  @override
+  String get createSupportTicketRequiredNote =>
+      'Fields marked with * are required';
+
+  @override
+  String get createSupportTicketCategoryLabel => 'Category *';
+
+  @override
+  String get createSupportTicketClaims => 'Claims';
+
+  @override
+  String get createSupportTicketShipments => 'Shipments';
+
+  @override
+  String get createSupportTicketAccount => 'My account';
+
+  @override
+  String get createSupportTicketSubjectLabel => 'Subject *';
+
+  @override
+  String get createSupportTicketSubjectHint =>
+      'For example: Shipment delivery is delayed';
+
+  @override
+  String get createSupportTicketDescriptionLabel => 'What is the issue? *';
+
+  @override
+  String get createSupportTicketDescriptionHint =>
+      'Tell us what happened, when, and how we can help.';
+
+  @override
+  String createSupportTicketCharacterCount(int count, int max) {
+    return '$count of $max';
+  }
+
+  @override
+  String get createSupportTicketShipmentLabel => 'Shipment number (optional)';
+
+  @override
+  String get createSupportTicketShipmentHint => 'Enter the shipment number';
+
+  @override
+  String get createSupportTicketShipmentHelper =>
+      'Find it in the shipment details to help us assist you faster';
+
+  @override
+  String get createSupportTicketAttachmentsLabel => 'Attachments (optional)';
+
+  @override
+  String get createSupportTicketUploadTitle => 'Add photos or files';
+
+  @override
+  String get createSupportTicketUploadDescription =>
+      'Up to 5 files, 10 MB each • JPG, PNG, PDF';
+
+  @override
+  String get createSupportTicketRemoveAttachment => 'Remove file';
+
+  @override
+  String get createSupportTicketAttachmentLimit =>
+      'You can attach up to 5 files.';
+
+  @override
+  String get createSupportTicketAttachmentSizeLimit =>
+      'Each file must be 10 MB or less.';
+
+  @override
+  String get createSupportTicketPickerError =>
+      'Could not open files right now.';
+
+  @override
+  String get createSupportTicketRequiredError => 'This field is required.';
+
+  @override
+  String get createSupportTicketSubmit => 'Send ticket';
+
+  @override
+  String get createSupportTicketSubmitUnavailable =>
+      'Ticket submission is not available yet.';
 }

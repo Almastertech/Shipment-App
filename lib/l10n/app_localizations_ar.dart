@@ -1630,4 +1630,254 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get notificationSettingsNote =>
       'تقدر تغير هالإعدادات بأي وقت، وما راح يفوتك أي شي يخص مطالباتك.';
+
+  @override
+  String get activityTitle => 'نشاطك';
+
+  @override
+  String get activitySubtitle => 'كل اللي صار في شحناتك ومطالباتك';
+
+  @override
+  String get activityFilterAll => 'الكل';
+
+  @override
+  String get activityFilterShipments => 'الشحنات';
+
+  @override
+  String get activityFilterClaims => 'المطالبات';
+
+  @override
+  String get activityLatestFirst => 'الأحدث أولاً';
+
+  @override
+  String get activityOldestFirst => 'الأقدم أولاً';
+
+  @override
+  String get activityToday => 'اليوم، 6 أكتوبر';
+
+  @override
+  String get activityYesterday => 'أمس، 5 أكتوبر';
+
+  @override
+  String get activityOctoberThird => '3 أكتوبر';
+
+  @override
+  String get activityOctoberSecond => '2 أكتوبر';
+
+  @override
+  String get activityOctoberFirst => '1 أكتوبر';
+
+  @override
+  String get activityTime1040 => '10:40 ص';
+
+  @override
+  String get activityTime0915 => '9:15 ص';
+
+  @override
+  String get activityTime0420 => '4:20 م';
+
+  @override
+  String get activityTime0210 => '2:10 م';
+
+  @override
+  String get activityTime1130 => '11:30 ص';
+
+  @override
+  String get activityTime0805 => '8:05 ص';
+
+  @override
+  String get activityShipmentOutTitle => 'شحنتك طلعت للتوصيل';
+
+  @override
+  String get activityShipmentOutDescription => 'متجر نون • ساعة ذكية • HS-2048';
+
+  @override
+  String get activityClaimReviewTitle => 'مطالبتك قيد المراجعة';
+
+  @override
+  String get activityClaimReviewDescription => 'نيس ون • عطر رجالي • HS-1874';
+
+  @override
+  String get activityCompensationTitle => 'وصلك تعويضك 🎉';
+
+  @override
+  String get activityCompensationDescription => '180 ر.س • مطالبة HS-2039';
+
+  @override
+  String get activityClaimSubmittedTitle => 'استلمنا مطالبتك';
+
+  @override
+  String get activityClaimSubmittedDescription =>
+      'نيس ون • عطر رجالي • HS-1874';
+
+  @override
+  String get activityShipmentDeliveredTitle => 'تم تسليم شحنتك';
+
+  @override
+  String get activityShowOlder => 'شوف النشاط الأقدم';
+
+  @override
+  String get activityShowLess => 'إخفاء النشاط الأقدم';
+
+  @override
+  String get supportTicketsTitle => 'تذاكر الدعم';
+
+  @override
+  String get supportTicketsSubtitle => 'حنا هنا لأي سالفة، وقهوتك علينا ☕';
+
+  @override
+  String get supportTicketsStatAll => 'كل التذاكر';
+
+  @override
+  String get supportTicketsStatOpen => 'المفتوحة';
+
+  @override
+  String get supportTicketsStatResolved => 'المحلولة';
+
+  @override
+  String get supportTicketsNewButton => 'افتح تذكرة جديدة';
+
+  @override
+  String get supportTicketsFilterAll => 'الكل';
+
+  @override
+  String get supportTicketsFilterShipments => 'الشحنات';
+
+  @override
+  String get supportTicketsFilterCompensations => 'التعويضات';
+
+  @override
+  String get supportTicketsStatusInProgress => 'قيد المعالجة';
+
+  @override
+  String get supportTicketsStatusWaiting => 'بانتظار ردّك';
+
+  @override
+  String get supportTicketsCompensationTitle => 'تأخر التعويض';
+
+  @override
+  String get supportTicketsCompensationSubtitle => '6 أكتوبر 2026 • ST-1052';
+
+  @override
+  String get supportTicketsShipmentTitle => 'تحديث بيانات الشحنة';
+
+  @override
+  String get supportTicketsShipmentSubtitle => '5 أكتوبر 2026 • ST-1048';
+
+  @override
+  String get supportTicketsLastUpdate => 'آخر تحديث';
+
+  @override
+  String get supportTicketsUpdateTwoHoursAgo => 'قبل ساعتين';
+
+  @override
+  String get supportTicketsUpdateYesterday => 'أمس، 4:30 م';
+
+  @override
+  String get supportTicketsCategory => 'التصنيف';
+
+  @override
+  String get supportTicketsCompensationCategory => 'التعويضات';
+
+  @override
+  String get supportTicketsShipmentCategory => 'الشحنات';
+
+  @override
+  String get supportTicketsViewTicket => 'شوف التذكرة';
+
+  @override
+  String get supportTicketsViewReply => 'شوف ردّك';
+
+  @override
+  String get supportTicketsCreateUnavailable =>
+      'فتح تذكرة جديدة غير متاح حالياً.';
+
+  @override
+  String get supportTicketsDetailsUnavailable =>
+      'عرض تفاصيل التذكرة غير متاح حالياً.';
+
+  @override
+  String get createSupportTicketTitle => 'تذكرة جديدة';
+
+  @override
+  String get createSupportTicketSubtitle =>
+      'قول لنا وش صار، ونرد عليك بأسرع وقت';
+
+  @override
+  String get createSupportTicketRequiredNote =>
+      'الحقول اللي عليها * لازم تتعبّى';
+
+  @override
+  String get createSupportTicketCategoryLabel => 'التصنيف *';
+
+  @override
+  String get createSupportTicketClaims => 'المطالبات';
+
+  @override
+  String get createSupportTicketShipments => 'الشحنات';
+
+  @override
+  String get createSupportTicketAccount => 'حسابي';
+
+  @override
+  String get createSupportTicketSubjectLabel => 'الموضوع *';
+
+  @override
+  String get createSupportTicketSubjectHint => 'مثلاً: تأخر وصول الشحنة';
+
+  @override
+  String get createSupportTicketDescriptionLabel => 'وش المشكلة؟ *';
+
+  @override
+  String get createSupportTicketDescriptionHint =>
+      'اشرح لنا وش صار ومتى، ووش تحتاج نساعدك فيه.';
+
+  @override
+  String createSupportTicketCharacterCount(int count, int max) {
+    return '$count من $max';
+  }
+
+  @override
+  String get createSupportTicketShipmentLabel => 'رقم الشحنة (اختياري)';
+
+  @override
+  String get createSupportTicketShipmentHint => 'اكتب رقم الشحنة';
+
+  @override
+  String get createSupportTicketShipmentHelper =>
+      'تلقاه في تفاصيل الشحنة، ويساعدنا نخدمك أسرع';
+
+  @override
+  String get createSupportTicketAttachmentsLabel => 'المرفقات (اختياري)';
+
+  @override
+  String get createSupportTicketUploadTitle => 'أضف صور أو ملفات';
+
+  @override
+  String get createSupportTicketUploadDescription =>
+      'لين 5 ملفات، 10 م.ب للملف • JPG, PNG, PDF';
+
+  @override
+  String get createSupportTicketRemoveAttachment => 'إزالة الملف';
+
+  @override
+  String get createSupportTicketAttachmentLimit =>
+      'تقدر ترفق 5 ملفات كحد أقصى.';
+
+  @override
+  String get createSupportTicketAttachmentSizeLimit =>
+      'حجم الملف الواحد لازم يكون 10 م.ب أو أقل.';
+
+  @override
+  String get createSupportTicketPickerError => 'تعذر فتح الملفات حالياً.';
+
+  @override
+  String get createSupportTicketRequiredError => 'الحقل مطلوب.';
+
+  @override
+  String get createSupportTicketSubmit => 'أرسل التذكرة';
+
+  @override
+  String get createSupportTicketSubmitUnavailable =>
+      'إرسال التذاكر غير متاح حالياً.';
 }

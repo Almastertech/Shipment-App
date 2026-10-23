@@ -3175,6 +3175,480 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can change these settings anytime and stay up to date on your claims.'**
   String get notificationSettingsNote;
+
+  /// No description provided for @activityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your activity'**
+  String get activityTitle;
+
+  /// No description provided for @activitySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything happening with your shipments and claims'**
+  String get activitySubtitle;
+
+  /// No description provided for @activityFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get activityFilterAll;
+
+  /// No description provided for @activityFilterShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get activityFilterShipments;
+
+  /// No description provided for @activityFilterClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get activityFilterClaims;
+
+  /// No description provided for @activityLatestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest first'**
+  String get activityLatestFirst;
+
+  /// No description provided for @activityOldestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest first'**
+  String get activityOldestFirst;
+
+  /// No description provided for @activityToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, October 6'**
+  String get activityToday;
+
+  /// No description provided for @activityYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, October 5'**
+  String get activityYesterday;
+
+  /// No description provided for @activityOctoberThird.
+  ///
+  /// In en, this message translates to:
+  /// **'October 3'**
+  String get activityOctoberThird;
+
+  /// No description provided for @activityOctoberSecond.
+  ///
+  /// In en, this message translates to:
+  /// **'October 2'**
+  String get activityOctoberSecond;
+
+  /// No description provided for @activityOctoberFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'October 1'**
+  String get activityOctoberFirst;
+
+  /// No description provided for @activityTime1040.
+  ///
+  /// In en, this message translates to:
+  /// **'10:40 AM'**
+  String get activityTime1040;
+
+  /// No description provided for @activityTime0915.
+  ///
+  /// In en, this message translates to:
+  /// **'9:15 AM'**
+  String get activityTime0915;
+
+  /// No description provided for @activityTime0420.
+  ///
+  /// In en, this message translates to:
+  /// **'4:20 PM'**
+  String get activityTime0420;
+
+  /// No description provided for @activityTime0210.
+  ///
+  /// In en, this message translates to:
+  /// **'2:10 PM'**
+  String get activityTime0210;
+
+  /// No description provided for @activityTime1130.
+  ///
+  /// In en, this message translates to:
+  /// **'11:30 AM'**
+  String get activityTime1130;
+
+  /// No description provided for @activityTime0805.
+  ///
+  /// In en, this message translates to:
+  /// **'8:05 AM'**
+  String get activityTime0805;
+
+  /// No description provided for @activityShipmentOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shipment is out for delivery'**
+  String get activityShipmentOutTitle;
+
+  /// No description provided for @activityShipmentOutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Noon Store • Smart watch • HS-2048'**
+  String get activityShipmentOutDescription;
+
+  /// No description provided for @activityClaimReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your claim is under review'**
+  String get activityClaimReviewTitle;
+
+  /// No description provided for @activityClaimReviewDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Nice One • Men\'s fragrance • HS-1874'**
+  String get activityClaimReviewDescription;
+
+  /// No description provided for @activityCompensationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your compensation arrived 🎉'**
+  String get activityCompensationTitle;
+
+  /// No description provided for @activityCompensationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 180 • Claim HS-2039'**
+  String get activityCompensationDescription;
+
+  /// No description provided for @activityClaimSubmittedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We received your claim'**
+  String get activityClaimSubmittedTitle;
+
+  /// No description provided for @activityClaimSubmittedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Nice One • Men\'s fragrance • HS-1874'**
+  String get activityClaimSubmittedDescription;
+
+  /// No description provided for @activityShipmentDeliveredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shipment was delivered'**
+  String get activityShipmentDeliveredTitle;
+
+  /// No description provided for @activityShowOlder.
+  ///
+  /// In en, this message translates to:
+  /// **'Show older activity'**
+  String get activityShowOlder;
+
+  /// No description provided for @activityShowLess.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide older activity'**
+  String get activityShowLess;
+
+  /// No description provided for @supportTicketsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support tickets'**
+  String get supportTicketsTitle;
+
+  /// No description provided for @supportTicketsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re here for you, and coffee\'s on us ☕'**
+  String get supportTicketsSubtitle;
+
+  /// No description provided for @supportTicketsStatAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All tickets'**
+  String get supportTicketsStatAll;
+
+  /// No description provided for @supportTicketsStatOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get supportTicketsStatOpen;
+
+  /// No description provided for @supportTicketsStatResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get supportTicketsStatResolved;
+
+  /// No description provided for @supportTicketsNewButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a new ticket'**
+  String get supportTicketsNewButton;
+
+  /// No description provided for @supportTicketsFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get supportTicketsFilterAll;
+
+  /// No description provided for @supportTicketsFilterShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get supportTicketsFilterShipments;
+
+  /// No description provided for @supportTicketsFilterCompensations.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation'**
+  String get supportTicketsFilterCompensations;
+
+  /// No description provided for @supportTicketsStatusInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get supportTicketsStatusInProgress;
+
+  /// No description provided for @supportTicketsStatusWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting your reply'**
+  String get supportTicketsStatusWaiting;
+
+  /// No description provided for @supportTicketsCompensationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delayed compensation'**
+  String get supportTicketsCompensationTitle;
+
+  /// No description provided for @supportTicketsCompensationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'October 6, 2026 • ST-1052'**
+  String get supportTicketsCompensationSubtitle;
+
+  /// No description provided for @supportTicketsShipmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update shipment details'**
+  String get supportTicketsShipmentTitle;
+
+  /// No description provided for @supportTicketsShipmentSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'October 5, 2026 • ST-1048'**
+  String get supportTicketsShipmentSubtitle;
+
+  /// No description provided for @supportTicketsLastUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Last update'**
+  String get supportTicketsLastUpdate;
+
+  /// No description provided for @supportTicketsUpdateTwoHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'2 hours ago'**
+  String get supportTicketsUpdateTwoHoursAgo;
+
+  /// No description provided for @supportTicketsUpdateYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, 4:30 PM'**
+  String get supportTicketsUpdateYesterday;
+
+  /// No description provided for @supportTicketsCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get supportTicketsCategory;
+
+  /// No description provided for @supportTicketsCompensationCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation'**
+  String get supportTicketsCompensationCategory;
+
+  /// No description provided for @supportTicketsShipmentCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get supportTicketsShipmentCategory;
+
+  /// No description provided for @supportTicketsViewTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'View ticket'**
+  String get supportTicketsViewTicket;
+
+  /// No description provided for @supportTicketsViewReply.
+  ///
+  /// In en, this message translates to:
+  /// **'View reply'**
+  String get supportTicketsViewReply;
+
+  /// No description provided for @supportTicketsCreateUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening a new ticket is not available yet.'**
+  String get supportTicketsCreateUnavailable;
+
+  /// No description provided for @supportTicketsDetailsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket details are not available yet.'**
+  String get supportTicketsDetailsUnavailable;
+
+  /// No description provided for @createSupportTicketTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New ticket'**
+  String get createSupportTicketTitle;
+
+  /// No description provided for @createSupportTicketSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what happened and we\'ll get back to you soon'**
+  String get createSupportTicketSubtitle;
+
+  /// No description provided for @createSupportTicketRequiredNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Fields marked with * are required'**
+  String get createSupportTicketRequiredNote;
+
+  /// No description provided for @createSupportTicketCategoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category *'**
+  String get createSupportTicketCategoryLabel;
+
+  /// No description provided for @createSupportTicketClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get createSupportTicketClaims;
+
+  /// No description provided for @createSupportTicketShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get createSupportTicketShipments;
+
+  /// No description provided for @createSupportTicketAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'My account'**
+  String get createSupportTicketAccount;
+
+  /// No description provided for @createSupportTicketSubjectLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject *'**
+  String get createSupportTicketSubjectLabel;
+
+  /// No description provided for @createSupportTicketSubjectHint.
+  ///
+  /// In en, this message translates to:
+  /// **'For example: Shipment delivery is delayed'**
+  String get createSupportTicketSubjectHint;
+
+  /// No description provided for @createSupportTicketDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What is the issue? *'**
+  String get createSupportTicketDescriptionLabel;
+
+  /// No description provided for @createSupportTicketDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what happened, when, and how we can help.'**
+  String get createSupportTicketDescriptionHint;
+
+  /// No description provided for @createSupportTicketCharacterCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {max}'**
+  String createSupportTicketCharacterCount(int count, int max);
+
+  /// No description provided for @createSupportTicketShipmentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment number (optional)'**
+  String get createSupportTicketShipmentLabel;
+
+  /// No description provided for @createSupportTicketShipmentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the shipment number'**
+  String get createSupportTicketShipmentHint;
+
+  /// No description provided for @createSupportTicketShipmentHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Find it in the shipment details to help us assist you faster'**
+  String get createSupportTicketShipmentHelper;
+
+  /// No description provided for @createSupportTicketAttachmentsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments (optional)'**
+  String get createSupportTicketAttachmentsLabel;
+
+  /// No description provided for @createSupportTicketUploadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photos or files'**
+  String get createSupportTicketUploadTitle;
+
+  /// No description provided for @createSupportTicketUploadDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to 5 files, 10 MB each • JPG, PNG, PDF'**
+  String get createSupportTicketUploadDescription;
+
+  /// No description provided for @createSupportTicketRemoveAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove file'**
+  String get createSupportTicketRemoveAttachment;
+
+  /// No description provided for @createSupportTicketAttachmentLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'You can attach up to 5 files.'**
+  String get createSupportTicketAttachmentLimit;
+
+  /// No description provided for @createSupportTicketAttachmentSizeLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Each file must be 10 MB or less.'**
+  String get createSupportTicketAttachmentSizeLimit;
+
+  /// No description provided for @createSupportTicketPickerError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open files right now.'**
+  String get createSupportTicketPickerError;
+
+  /// No description provided for @createSupportTicketRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required.'**
+  String get createSupportTicketRequiredError;
+
+  /// No description provided for @createSupportTicketSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Send ticket'**
+  String get createSupportTicketSubmit;
+
+  /// No description provided for @createSupportTicketSubmitUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket submission is not available yet.'**
+  String get createSupportTicketSubmitUnavailable;
 }
 
 class _AppLocalizationsDelegate
