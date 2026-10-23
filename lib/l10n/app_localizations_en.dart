@@ -914,6 +914,265 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileProtectionTerms => 'Protection terms';
 
   @override
+  String get profileTermsSubtitle =>
+      'Your rights and responsibilities, clearly explained';
+
+  @override
+  String get profilePrivacySubtitle =>
+      'Your privacy matters. Here is how we handle your data';
+
+  @override
+  String get profileProtectionSubtitle =>
+      'Clear information about your shipment protection';
+
+  @override
+  String get profileFaqSubtitle =>
+      'Answers to the questions we hear most often';
+
+  @override
+  String get profileFaqHeroTitle => 'Have a question?';
+
+  @override
+  String get profileInformationDetails => 'Details';
+
+  @override
+  String get profileInformationVersion => 'Version';
+
+  @override
+  String get profileInformationCurrentVersion => 'October 2026';
+
+  @override
+  String get profileInformationReadingTime => 'Reading time';
+
+  @override
+  String get profileInformationScope => 'Scope';
+
+  @override
+  String get profileInformationLanguage => 'Language';
+
+  @override
+  String get profileInformationArabic => 'Arabic';
+
+  @override
+  String get profileInformationMinutes4 => '4 minutes';
+
+  @override
+  String get profileInformationMinutes3 => '3 minutes';
+
+  @override
+  String get profileInformationProtectionScope => 'Shipping and protection';
+
+  @override
+  String get profileInformationProtectionIncludes => 'Includes';
+
+  @override
+  String get profileInformationClaimPeriod => 'Claim window';
+
+  @override
+  String get profileInformationLossDamage => 'Loss and damage';
+
+  @override
+  String get profileInformationTwoDays => 'Within two days';
+
+  @override
+  String get profileInformationSupportQuestion =>
+      'Have a question about this topic?';
+
+  @override
+  String get profileInformationContactSupport => 'Contact support';
+
+  @override
+  String get profileTermsSection1Title => 'Your account and responsibility';
+
+  @override
+  String get profileTermsSection1Body =>
+      'Provide accurate details and update them when needed. Keep your sign-in details private and tell us if you notice unusual activity.';
+
+  @override
+  String get profileTermsSection2Title => 'Shipment protection';
+
+  @override
+  String get profileTermsSection2Body =>
+      'Protection applies to shipments for which you selected Haseen protection at checkout with a partner store, according to the plan linked to your order.';
+
+  @override
+  String get profileTermsSection3Title => 'Orders and compensation';
+
+  @override
+  String get profileTermsSection3Body =>
+      'You can submit a claim within the stated period after delivery. We review the evidence and share our decision. Approved compensation is sent using the original payment method.';
+
+  @override
+  String get profileTermsSection4Title => 'Acceptable use';
+
+  @override
+  String get profileTermsSection4Body =>
+      'You may not use the app for unlawful activity, infringe ownership rights, or submit false details or evidence.';
+
+  @override
+  String get profileTermsSection5Title => 'Changes to these terms';
+
+  @override
+  String get profileTermsSection5Body =>
+      'We may update these terms from time to time and will notify you before a material change affects you.';
+
+  @override
+  String get profilePrivacySection1Title => 'Data we collect';
+
+  @override
+  String get profilePrivacySection1Body =>
+      'Your name, phone number, email, partner-store order details, claim evidence you upload, and your location if you allow access.';
+
+  @override
+  String get profilePrivacySection2Title => 'How we use it';
+
+  @override
+  String get profilePrivacySection2Body =>
+      'We use it to activate shipment protection, track delivery, review claims, issue compensation, and improve your app experience.';
+
+  @override
+  String get profilePrivacySection3Title => 'Who we share it with';
+
+  @override
+  String get profilePrivacySection3Body =>
+      'We share only what is needed with the store, carrier, and insurance partner to serve your request. We do not sell your data.';
+
+  @override
+  String get profilePrivacySection4Title => 'How we protect it';
+
+  @override
+  String get profilePrivacySection4Body =>
+      'We store your data using encryption and limit which team members can access it.';
+
+  @override
+  String get profilePrivacySection5Title => 'Your rights and choices';
+
+  @override
+  String get profilePrivacySection5Body =>
+      'You can view, update, or request deletion of your data. You can also turn off location sharing in settings at any time.';
+
+  @override
+  String get profilePrivacySection6Title => 'Contact us';
+
+  @override
+  String get profilePrivacySection6Body =>
+      'For privacy questions, open a support ticket from your account.';
+
+  @override
+  String get profileProtectionSection1Title => 'Protection coverage';
+
+  @override
+  String get profileProtectionSection1Body =>
+      'Protection covers shipment loss or damage during transit according to the plan selected for your order. See each shipment page for its specific coverage.';
+
+  @override
+  String get profileProtectionSection2Title => 'What is not covered';
+
+  @override
+  String get profileProtectionSection2Body =>
+      'Misuse after delivery, manufacturing defects, and damage unrelated to transportation are not covered.';
+
+  @override
+  String get profileProtectionSection3Title => 'When to submit a claim';
+
+  @override
+  String get profileProtectionSection3Body =>
+      'After delivery, submit within two days of receipt. For a missing shipment, you can submit after the estimated delivery date.';
+
+  @override
+  String get profileProtectionSection4Title => 'Required evidence';
+
+  @override
+  String get profileProtectionSection4Body =>
+      'A photo of the package and tracking number, photos of the packaging and item, and a short video showing the damage.';
+
+  @override
+  String get profileProtectionSection5Title => 'Compensation';
+
+  @override
+  String get profileProtectionSection5Body =>
+      'If your claim is approved, compensation is returned to the original payment method within 3–5 business days.';
+
+  @override
+  String get profileFaqSearchHint => 'Search for a question...';
+
+  @override
+  String get profileFaqCategoryAll => 'All';
+
+  @override
+  String get profileFaqCategoryShipments => 'Shipments';
+
+  @override
+  String get profileFaqCategoryProtection => 'Protection';
+
+  @override
+  String get profileFaqCategoryClaims => 'Claims';
+
+  @override
+  String get profileFaqMostAsked => 'Most asked';
+
+  @override
+  String get profileFaqQuestion1 =>
+      'How do I claim for a damaged or missing shipment?';
+
+  @override
+  String get profileFaqAnswer1 =>
+      'If your shipment has Haseen protection, you can submit a claim in a few steps:';
+
+  @override
+  String get profileFaqStep1 =>
+      'Open My shipments and select the affected shipment.';
+
+  @override
+  String get profileFaqStep2 => 'Tap Submit a claim and choose what happened.';
+
+  @override
+  String get profileFaqStep3 =>
+      'Photograph the label and item, add a short video, and send your request.';
+
+  @override
+  String get profileFaqAnswer1Note =>
+      'Track your claim under Claims. Compensation follows the protection terms for your shipment.';
+
+  @override
+  String get profileFaqQuestion2 => 'What does shipment protection cover?';
+
+  @override
+  String get profileFaqAnswer2 =>
+      'Coverage depends on the plan shown at checkout. Open shipment details to review its coverage and exclusions.';
+
+  @override
+  String get profileFaqQuestion3 => 'How can I track my shipment?';
+
+  @override
+  String get profileFaqAnswer3 =>
+      'Open My shipments to see the latest update and delivery status. If tracking is unavailable, contact us through support tickets.';
+
+  @override
+  String get profileFaqQuestion4 => 'Which documents are needed for a claim?';
+
+  @override
+  String get profileFaqAnswer4 =>
+      'We usually need the tracking number, clear photos of the shipment, packaging and damage, and proof of the contents\' value.';
+
+  @override
+  String get profileFaqQuestion5 => 'How do I track my claim and compensation?';
+
+  @override
+  String get profileFaqAnswer5 =>
+      'Open Claims to see the latest status. If approved, the compensation amount and transfer method will be shown there.';
+
+  @override
+  String get profileFaqEmpty => 'No questions match your search.';
+
+  @override
+  String get profileFaqSupportTitle => 'Still need help?';
+
+  @override
+  String get profileFaqSupportDescription =>
+      'Our support team can help with shipments, protection, and claims.';
+
+  @override
   String get profileSectionAccount => 'Account';
 
   @override
@@ -1056,6 +1315,99 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationsEmpty => 'No notifications yet.';
+
+  @override
+  String get notificationsHeroTitle => 'Your notifications';
+
+  @override
+  String notificationsUnreadSubtitle(int count) {
+    return 'You have $count unread notifications';
+  }
+
+  @override
+  String get notificationsToday => 'Today';
+
+  @override
+  String get notificationsYesterday => 'Yesterday';
+
+  @override
+  String get notificationsFilterAll => 'All';
+
+  @override
+  String notificationsFilterUnread(int count) {
+    return 'Unread • $count';
+  }
+
+  @override
+  String get notificationsFilterShipments => 'Shipments';
+
+  @override
+  String get notificationsFilterClaims => 'Claims';
+
+  @override
+  String get notificationsDemoClaimTitle => 'Complete your claim';
+
+  @override
+  String get notificationsDemoClaimMessage =>
+      'Add product photos for claim HS-2048';
+
+  @override
+  String get notificationsDemoShipmentTitle => 'Your shipment is on the way';
+
+  @override
+  String get notificationsDemoShipmentMessage =>
+      'Your order from Noon arrives today';
+
+  @override
+  String get notificationsDemoProtectionTitle =>
+      'Shipment protection activated';
+
+  @override
+  String get notificationsDemoProtectionMessage =>
+      'Your order from Madar is protected by Haseen';
+
+  @override
+  String get notificationsDemoApprovedTitle => 'Your claim was approved 🎉';
+
+  @override
+  String get notificationsDemoApprovedMessage => 'SAR 65 was sent to your card';
+
+  @override
+  String get notificationsDemoReviewTitle => 'Your claim is under review';
+
+  @override
+  String get notificationsDemoReviewMessage =>
+      'We will let you know when there is a decision';
+
+  @override
+  String get notificationsTimeFiveMinutes => '5 minutes ago';
+
+  @override
+  String get notificationsTimeThirtyMinutes => '30 minutes ago';
+
+  @override
+  String get notificationsTimeTodayExample => 'Today, 10:40 AM';
+
+  @override
+  String get notificationsTimeYesterdaySix => 'Yesterday, 6:20 AM';
+
+  @override
+  String get notificationsTimeYesterdayNine => 'Yesterday, 9:15 AM';
+
+  @override
+  String notificationsMinutesAgo(int count) {
+    return '$count minutes ago';
+  }
+
+  @override
+  String notificationsTodayAt(String time) {
+    return 'Today, $time';
+  }
+
+  @override
+  String notificationsYesterdayAt(String time) {
+    return 'Yesterday, $time';
+  }
 
   @override
   String get apiMonitorTitle => 'API Monitor';

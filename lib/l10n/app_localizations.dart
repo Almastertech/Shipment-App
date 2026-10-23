@@ -1796,6 +1796,462 @@ abstract class AppLocalizations {
   /// **'Protection terms'**
   String get profileProtectionTerms;
 
+  /// No description provided for @profileTermsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your rights and responsibilities, clearly explained'**
+  String get profileTermsSubtitle;
+
+  /// No description provided for @profilePrivacySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your privacy matters. Here is how we handle your data'**
+  String get profilePrivacySubtitle;
+
+  /// No description provided for @profileProtectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear information about your shipment protection'**
+  String get profileProtectionSubtitle;
+
+  /// No description provided for @profileFaqSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Answers to the questions we hear most often'**
+  String get profileFaqSubtitle;
+
+  /// No description provided for @profileFaqHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a question?'**
+  String get profileFaqHeroTitle;
+
+  /// No description provided for @profileInformationDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get profileInformationDetails;
+
+  /// No description provided for @profileInformationVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get profileInformationVersion;
+
+  /// No description provided for @profileInformationCurrentVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'October 2026'**
+  String get profileInformationCurrentVersion;
+
+  /// No description provided for @profileInformationReadingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading time'**
+  String get profileInformationReadingTime;
+
+  /// No description provided for @profileInformationScope.
+  ///
+  /// In en, this message translates to:
+  /// **'Scope'**
+  String get profileInformationScope;
+
+  /// No description provided for @profileInformationLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get profileInformationLanguage;
+
+  /// No description provided for @profileInformationArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get profileInformationArabic;
+
+  /// No description provided for @profileInformationMinutes4.
+  ///
+  /// In en, this message translates to:
+  /// **'4 minutes'**
+  String get profileInformationMinutes4;
+
+  /// No description provided for @profileInformationMinutes3.
+  ///
+  /// In en, this message translates to:
+  /// **'3 minutes'**
+  String get profileInformationMinutes3;
+
+  /// No description provided for @profileInformationProtectionScope.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping and protection'**
+  String get profileInformationProtectionScope;
+
+  /// No description provided for @profileInformationProtectionIncludes.
+  ///
+  /// In en, this message translates to:
+  /// **'Includes'**
+  String get profileInformationProtectionIncludes;
+
+  /// No description provided for @profileInformationClaimPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim window'**
+  String get profileInformationClaimPeriod;
+
+  /// No description provided for @profileInformationLossDamage.
+  ///
+  /// In en, this message translates to:
+  /// **'Loss and damage'**
+  String get profileInformationLossDamage;
+
+  /// No description provided for @profileInformationTwoDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Within two days'**
+  String get profileInformationTwoDays;
+
+  /// No description provided for @profileInformationSupportQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a question about this topic?'**
+  String get profileInformationSupportQuestion;
+
+  /// No description provided for @profileInformationContactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact support'**
+  String get profileInformationContactSupport;
+
+  /// No description provided for @profileTermsSection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account and responsibility'**
+  String get profileTermsSection1Title;
+
+  /// No description provided for @profileTermsSection1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Provide accurate details and update them when needed. Keep your sign-in details private and tell us if you notice unusual activity.'**
+  String get profileTermsSection1Body;
+
+  /// No description provided for @profileTermsSection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment protection'**
+  String get profileTermsSection2Title;
+
+  /// No description provided for @profileTermsSection2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection applies to shipments for which you selected Haseen protection at checkout with a partner store, according to the plan linked to your order.'**
+  String get profileTermsSection2Body;
+
+  /// No description provided for @profileTermsSection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders and compensation'**
+  String get profileTermsSection3Title;
+
+  /// No description provided for @profileTermsSection3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'You can submit a claim within the stated period after delivery. We review the evidence and share our decision. Approved compensation is sent using the original payment method.'**
+  String get profileTermsSection3Body;
+
+  /// No description provided for @profileTermsSection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Acceptable use'**
+  String get profileTermsSection4Title;
+
+  /// No description provided for @profileTermsSection4Body.
+  ///
+  /// In en, this message translates to:
+  /// **'You may not use the app for unlawful activity, infringe ownership rights, or submit false details or evidence.'**
+  String get profileTermsSection4Body;
+
+  /// No description provided for @profileTermsSection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes to these terms'**
+  String get profileTermsSection5Title;
+
+  /// No description provided for @profileTermsSection5Body.
+  ///
+  /// In en, this message translates to:
+  /// **'We may update these terms from time to time and will notify you before a material change affects you.'**
+  String get profileTermsSection5Body;
+
+  /// No description provided for @profilePrivacySection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Data we collect'**
+  String get profilePrivacySection1Title;
+
+  /// No description provided for @profilePrivacySection1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name, phone number, email, partner-store order details, claim evidence you upload, and your location if you allow access.'**
+  String get profilePrivacySection1Body;
+
+  /// No description provided for @profilePrivacySection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'How we use it'**
+  String get profilePrivacySection2Title;
+
+  /// No description provided for @profilePrivacySection2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'We use it to activate shipment protection, track delivery, review claims, issue compensation, and improve your app experience.'**
+  String get profilePrivacySection2Body;
+
+  /// No description provided for @profilePrivacySection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Who we share it with'**
+  String get profilePrivacySection3Title;
+
+  /// No description provided for @profilePrivacySection3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'We share only what is needed with the store, carrier, and insurance partner to serve your request. We do not sell your data.'**
+  String get profilePrivacySection3Body;
+
+  /// No description provided for @profilePrivacySection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'How we protect it'**
+  String get profilePrivacySection4Title;
+
+  /// No description provided for @profilePrivacySection4Body.
+  ///
+  /// In en, this message translates to:
+  /// **'We store your data using encryption and limit which team members can access it.'**
+  String get profilePrivacySection4Body;
+
+  /// No description provided for @profilePrivacySection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your rights and choices'**
+  String get profilePrivacySection5Title;
+
+  /// No description provided for @profilePrivacySection5Body.
+  ///
+  /// In en, this message translates to:
+  /// **'You can view, update, or request deletion of your data. You can also turn off location sharing in settings at any time.'**
+  String get profilePrivacySection5Body;
+
+  /// No description provided for @profilePrivacySection6Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact us'**
+  String get profilePrivacySection6Title;
+
+  /// No description provided for @profilePrivacySection6Body.
+  ///
+  /// In en, this message translates to:
+  /// **'For privacy questions, open a support ticket from your account.'**
+  String get profilePrivacySection6Body;
+
+  /// No description provided for @profileProtectionSection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection coverage'**
+  String get profileProtectionSection1Title;
+
+  /// No description provided for @profileProtectionSection1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection covers shipment loss or damage during transit according to the plan selected for your order. See each shipment page for its specific coverage.'**
+  String get profileProtectionSection1Body;
+
+  /// No description provided for @profileProtectionSection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'What is not covered'**
+  String get profileProtectionSection2Title;
+
+  /// No description provided for @profileProtectionSection2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Misuse after delivery, manufacturing defects, and damage unrelated to transportation are not covered.'**
+  String get profileProtectionSection2Body;
+
+  /// No description provided for @profileProtectionSection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'When to submit a claim'**
+  String get profileProtectionSection3Title;
+
+  /// No description provided for @profileProtectionSection3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'After delivery, submit within two days of receipt. For a missing shipment, you can submit after the estimated delivery date.'**
+  String get profileProtectionSection3Body;
+
+  /// No description provided for @profileProtectionSection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Required evidence'**
+  String get profileProtectionSection4Title;
+
+  /// No description provided for @profileProtectionSection4Body.
+  ///
+  /// In en, this message translates to:
+  /// **'A photo of the package and tracking number, photos of the packaging and item, and a short video showing the damage.'**
+  String get profileProtectionSection4Body;
+
+  /// No description provided for @profileProtectionSection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Compensation'**
+  String get profileProtectionSection5Title;
+
+  /// No description provided for @profileProtectionSection5Body.
+  ///
+  /// In en, this message translates to:
+  /// **'If your claim is approved, compensation is returned to the original payment method within 3–5 business days.'**
+  String get profileProtectionSection5Body;
+
+  /// No description provided for @profileFaqSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a question...'**
+  String get profileFaqSearchHint;
+
+  /// No description provided for @profileFaqCategoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get profileFaqCategoryAll;
+
+  /// No description provided for @profileFaqCategoryShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get profileFaqCategoryShipments;
+
+  /// No description provided for @profileFaqCategoryProtection.
+  ///
+  /// In en, this message translates to:
+  /// **'Protection'**
+  String get profileFaqCategoryProtection;
+
+  /// No description provided for @profileFaqCategoryClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get profileFaqCategoryClaims;
+
+  /// No description provided for @profileFaqMostAsked.
+  ///
+  /// In en, this message translates to:
+  /// **'Most asked'**
+  String get profileFaqMostAsked;
+
+  /// No description provided for @profileFaqQuestion1.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I claim for a damaged or missing shipment?'**
+  String get profileFaqQuestion1;
+
+  /// No description provided for @profileFaqAnswer1.
+  ///
+  /// In en, this message translates to:
+  /// **'If your shipment has Haseen protection, you can submit a claim in a few steps:'**
+  String get profileFaqAnswer1;
+
+  /// No description provided for @profileFaqStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Open My shipments and select the affected shipment.'**
+  String get profileFaqStep1;
+
+  /// No description provided for @profileFaqStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap Submit a claim and choose what happened.'**
+  String get profileFaqStep2;
+
+  /// No description provided for @profileFaqStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Photograph the label and item, add a short video, and send your request.'**
+  String get profileFaqStep3;
+
+  /// No description provided for @profileFaqAnswer1Note.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your claim under Claims. Compensation follows the protection terms for your shipment.'**
+  String get profileFaqAnswer1Note;
+
+  /// No description provided for @profileFaqQuestion2.
+  ///
+  /// In en, this message translates to:
+  /// **'What does shipment protection cover?'**
+  String get profileFaqQuestion2;
+
+  /// No description provided for @profileFaqAnswer2.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage depends on the plan shown at checkout. Open shipment details to review its coverage and exclusions.'**
+  String get profileFaqAnswer2;
+
+  /// No description provided for @profileFaqQuestion3.
+  ///
+  /// In en, this message translates to:
+  /// **'How can I track my shipment?'**
+  String get profileFaqQuestion3;
+
+  /// No description provided for @profileFaqAnswer3.
+  ///
+  /// In en, this message translates to:
+  /// **'Open My shipments to see the latest update and delivery status. If tracking is unavailable, contact us through support tickets.'**
+  String get profileFaqAnswer3;
+
+  /// No description provided for @profileFaqQuestion4.
+  ///
+  /// In en, this message translates to:
+  /// **'Which documents are needed for a claim?'**
+  String get profileFaqQuestion4;
+
+  /// No description provided for @profileFaqAnswer4.
+  ///
+  /// In en, this message translates to:
+  /// **'We usually need the tracking number, clear photos of the shipment, packaging and damage, and proof of the contents\' value.'**
+  String get profileFaqAnswer4;
+
+  /// No description provided for @profileFaqQuestion5.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I track my claim and compensation?'**
+  String get profileFaqQuestion5;
+
+  /// No description provided for @profileFaqAnswer5.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Claims to see the latest status. If approved, the compensation amount and transfer method will be shown there.'**
+  String get profileFaqAnswer5;
+
+  /// No description provided for @profileFaqEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No questions match your search.'**
+  String get profileFaqEmpty;
+
+  /// No description provided for @profileFaqSupportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Still need help?'**
+  String get profileFaqSupportTitle;
+
+  /// No description provided for @profileFaqSupportDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Our support team can help with shipments, protection, and claims.'**
+  String get profileFaqSupportDescription;
+
   /// No description provided for @profileSectionAccount.
   ///
   /// In en, this message translates to:
@@ -2059,6 +2515,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No notifications yet.'**
   String get notificationsEmpty;
+
+  /// No description provided for @notificationsHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your notifications'**
+  String get notificationsHeroTitle;
+
+  /// No description provided for @notificationsUnreadSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You have {count} unread notifications'**
+  String notificationsUnreadSubtitle(int count);
+
+  /// No description provided for @notificationsToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get notificationsToday;
+
+  /// No description provided for @notificationsYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get notificationsYesterday;
+
+  /// No description provided for @notificationsFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get notificationsFilterAll;
+
+  /// No description provided for @notificationsFilterUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread • {count}'**
+  String notificationsFilterUnread(int count);
+
+  /// No description provided for @notificationsFilterShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get notificationsFilterShipments;
+
+  /// No description provided for @notificationsFilterClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims'**
+  String get notificationsFilterClaims;
+
+  /// No description provided for @notificationsDemoClaimTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your claim'**
+  String get notificationsDemoClaimTitle;
+
+  /// No description provided for @notificationsDemoClaimMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Add product photos for claim HS-2048'**
+  String get notificationsDemoClaimMessage;
+
+  /// No description provided for @notificationsDemoShipmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shipment is on the way'**
+  String get notificationsDemoShipmentTitle;
+
+  /// No description provided for @notificationsDemoShipmentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order from Noon arrives today'**
+  String get notificationsDemoShipmentMessage;
+
+  /// No description provided for @notificationsDemoProtectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment protection activated'**
+  String get notificationsDemoProtectionTitle;
+
+  /// No description provided for @notificationsDemoProtectionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order from Madar is protected by Haseen'**
+  String get notificationsDemoProtectionMessage;
+
+  /// No description provided for @notificationsDemoApprovedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your claim was approved 🎉'**
+  String get notificationsDemoApprovedTitle;
+
+  /// No description provided for @notificationsDemoApprovedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 65 was sent to your card'**
+  String get notificationsDemoApprovedMessage;
+
+  /// No description provided for @notificationsDemoReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your claim is under review'**
+  String get notificationsDemoReviewTitle;
+
+  /// No description provided for @notificationsDemoReviewMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We will let you know when there is a decision'**
+  String get notificationsDemoReviewMessage;
+
+  /// No description provided for @notificationsTimeFiveMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'5 minutes ago'**
+  String get notificationsTimeFiveMinutes;
+
+  /// No description provided for @notificationsTimeThirtyMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'30 minutes ago'**
+  String get notificationsTimeThirtyMinutes;
+
+  /// No description provided for @notificationsTimeTodayExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, 10:40 AM'**
+  String get notificationsTimeTodayExample;
+
+  /// No description provided for @notificationsTimeYesterdaySix.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, 6:20 AM'**
+  String get notificationsTimeYesterdaySix;
+
+  /// No description provided for @notificationsTimeYesterdayNine.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, 9:15 AM'**
+  String get notificationsTimeYesterdayNine;
+
+  /// No description provided for @notificationsMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minutes ago'**
+  String notificationsMinutesAgo(int count);
+
+  /// No description provided for @notificationsTodayAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, {time}'**
+  String notificationsTodayAt(String time);
+
+  /// No description provided for @notificationsYesterdayAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, {time}'**
+  String notificationsYesterdayAt(String time);
 
   /// No description provided for @apiMonitorTitle.
   ///

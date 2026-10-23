@@ -896,6 +896,258 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileProtectionTerms => 'شروط الحماية';
 
   @override
+  String get profileTermsSubtitle => 'حقوقك والتزاماتك، بكل وضوح';
+
+  @override
+  String get profilePrivacySubtitle =>
+      'خصوصيتك تهمنا، وهذا كيف نتعامل مع بياناتك';
+
+  @override
+  String get profileProtectionSubtitle => 'حماية شحنتك، بوضوح';
+
+  @override
+  String get profileFaqSubtitle => 'جمعنا لك أكثر الأسئلة اللي تجينا';
+
+  @override
+  String get profileFaqHeroTitle => 'عندك سؤال؟';
+
+  @override
+  String get profileInformationDetails => 'التفاصيل';
+
+  @override
+  String get profileInformationVersion => 'النسخة';
+
+  @override
+  String get profileInformationCurrentVersion => 'أكتوبر 2026';
+
+  @override
+  String get profileInformationReadingTime => 'وقت القراءة';
+
+  @override
+  String get profileInformationScope => 'النطاق';
+
+  @override
+  String get profileInformationLanguage => 'اللغة';
+
+  @override
+  String get profileInformationArabic => 'العربية';
+
+  @override
+  String get profileInformationMinutes4 => '4 دقائق';
+
+  @override
+  String get profileInformationMinutes3 => '3 دقائق';
+
+  @override
+  String get profileInformationProtectionScope => 'الشحن والحماية';
+
+  @override
+  String get profileInformationProtectionIncludes => 'تشمل';
+
+  @override
+  String get profileInformationClaimPeriod => 'المدة';
+
+  @override
+  String get profileInformationLossDamage => 'التلف والفقدان';
+
+  @override
+  String get profileInformationTwoDays => 'خلال يومين';
+
+  @override
+  String get profileInformationSupportQuestion => 'عندك سؤال عن هالموضوع؟';
+
+  @override
+  String get profileInformationContactSupport => 'كلم الدعم';
+
+  @override
+  String get profileTermsSection1Title => 'حسابك ومسؤوليتك';
+
+  @override
+  String get profileTermsSection1Body =>
+      'قدّم بيانات صحيحة وحدّثها وقت الحاجة. حافظ على سرية بيانات دخولك، وبلّغنا لو لاحظت أي استخدام غريب لحسابك.';
+
+  @override
+  String get profileTermsSection2Title => 'حماية الشحنات';
+
+  @override
+  String get profileTermsSection2Body =>
+      'تشمل الحماية الشحنات اللي اخترت لها حماية حصين وقت الشراء من متجر شريك، حسب الخطة المرتبطة بطلبك.';
+
+  @override
+  String get profileTermsSection3Title => 'الطلبات والتعويض';
+
+  @override
+  String get profileTermsSection3Body =>
+      'تقدر تفتح مطالبة خلال المدة المحددة بعد الاستلام. نراجع الأدلة ونبلغك بالقرار، والتعويض يتحول بنفس طريقة الدفع.';
+
+  @override
+  String get profileTermsSection4Title => 'الاستخدام المقبول';
+
+  @override
+  String get profileTermsSection4Body =>
+      'ما يصير تستخدم التطبيق لأي غرض يخالف الأنظمة أو الملكية، أو تقدّم أدلة أو بيانات غير صحيحة.';
+
+  @override
+  String get profileTermsSection5Title => 'التعديلات على الشروط';
+
+  @override
+  String get profileTermsSection5Body =>
+      'ممكن نحدّث هالشروط من وقت لثاني، وبنعلمك قبل أي تغيير مهم يمسّك.';
+
+  @override
+  String get profilePrivacySection1Title => 'البيانات اللي نجمعها';
+
+  @override
+  String get profilePrivacySection1Body =>
+      'اسمك ورقم جوالك وإيميلك، وبيانات طلباتك من التجار الشريكة، والأدلة اللي ترفعها مع المطالبة، وموقعك لو سمحت لنا.';
+
+  @override
+  String get profilePrivacySection2Title => 'ليش نستخدمها';
+
+  @override
+  String get profilePrivacySection2Body =>
+      'عشان نفعل حماية شحناتك، ونتابع وصولها، ونراجع مطالباتك ونحول تعويضك، ونحسن تجربتك في التطبيق.';
+
+  @override
+  String get profilePrivacySection3Title => 'مع مين نشاركها';
+
+  @override
+  String get profilePrivacySection3Body =>
+      'نشارك اللي يلزم بس مع التاجر وشركة الشحن وشريك التأمين، عشان نخدم طلبك. وما نبيع بياناتك لأي أحد.';
+
+  @override
+  String get profilePrivacySection4Title => 'كيف نحميها';
+
+  @override
+  String get profilePrivacySection4Body =>
+      'نخزن بياناتك بشكل مشفر، ونحدد مين يقدر يوصل لها داخل الفريق.';
+
+  @override
+  String get profilePrivacySection5Title => 'حقوقك وخياراتك';
+
+  @override
+  String get profilePrivacySection5Body =>
+      'تقدر تطّلع على بياناتك، أو تعدلها أو تطلب حذفها، وتقدر توقف مشاركة موقعك بأي وقت من الإعدادات.';
+
+  @override
+  String get profilePrivacySection6Title => 'تواصل معنا';
+
+  @override
+  String get profilePrivacySection6Body =>
+      'لأي سؤال عن خصوصيتك، افتح تذكرة دعم من «حسابي».';
+
+  @override
+  String get profileProtectionSection1Title => 'نطاق الحماية';
+
+  @override
+  String get profileProtectionSection1Body =>
+      'تشمل حماية الشحنة حالات الفقدان أو التلف وقت النقل، حسب الخطة اللي اخترتها بطلبك. تقدر تشوف تفاصيل حماية كل شحنة من صفحتها.';
+
+  @override
+  String get profileProtectionSection2Title => 'وش ما تشمله الحماية';
+
+  @override
+  String get profileProtectionSection2Body =>
+      'سوء الاستخدام بعد الاستلام، والعيوب المصنعية، والأضرار اللي ما لها علاقة بالنقل.';
+
+  @override
+  String get profileProtectionSection3Title => 'متى تفتح مطالبة';
+
+  @override
+  String get profileProtectionSection3Body =>
+      'بعد ما توصلك الشحنة، وخلال يومين من الاستلام. لو ضاعت الشحنة، تقدر تفتحها بعد تاريخ التسليم المتوقع.';
+
+  @override
+  String get profileProtectionSection4Title => 'الأدلة المطلوبة';
+
+  @override
+  String get profileProtectionSection4Body =>
+      'صورة للصندوق ورقم التتبع، وصورة للتغليف والمنتج، وفيديو قصير يوضح الضرر.';
+
+  @override
+  String get profileProtectionSection5Title => 'التعويض';
+
+  @override
+  String get profileProtectionSection5Body =>
+      'لو انقبلت مطالبتك، يتحول التعويض لنفس طريقة الدفع خلال 3–5 أيام عمل.';
+
+  @override
+  String get profileFaqSearchHint => 'دور على سؤالك...';
+
+  @override
+  String get profileFaqCategoryAll => 'الكل';
+
+  @override
+  String get profileFaqCategoryShipments => 'الشحنات';
+
+  @override
+  String get profileFaqCategoryProtection => 'الحماية';
+
+  @override
+  String get profileFaqCategoryClaims => 'المطالبات';
+
+  @override
+  String get profileFaqMostAsked => 'الأكثر سؤالاً';
+
+  @override
+  String get profileFaqQuestion1 => 'كيف أفتح مطالبة لشحنة تالفة أو ضايعة؟';
+
+  @override
+  String get profileFaqAnswer1 =>
+      'لو شحنتك محمية مع حصين، تقدر تفتح مطالبة من التطبيق بخطوات بسيطة:';
+
+  @override
+  String get profileFaqStep1 => 'افتح «شحناتي» واختر الشحنة المتضررة.';
+
+  @override
+  String get profileFaqStep2 => 'اضغط «افتح مطالبة» وحدد وش صار.';
+
+  @override
+  String get profileFaqStep3 => 'صوّر الملصق والمنتج وفيديو قصير، وارسل الطلب.';
+
+  @override
+  String get profileFaqAnswer1Note =>
+      'وتتابع حالة مطالبتك من «المطالبات». التعويض حسب شروط الحماية الخاصة بشحنتك.';
+
+  @override
+  String get profileFaqQuestion2 => 'وش تشمل حماية الشحنة؟';
+
+  @override
+  String get profileFaqAnswer2 =>
+      'تختلف التغطية حسب الخطة الظاهرة عند الشراء. افتح تفاصيل الشحنة عشان تشوف وش تشمل الحماية والاستثناءات الخاصة فيها.';
+
+  @override
+  String get profileFaqQuestion3 => 'كيف أتابع وين وصلت شحنتي؟';
+
+  @override
+  String get profileFaqAnswer3 =>
+      'من صفحة «شحناتي» تقدر تشوف آخر تحديث وحالة التوصيل. إذا ما ظهرت معلومات التتبع، تواصل معنا من تذاكر الدعم.';
+
+  @override
+  String get profileFaqQuestion4 => 'وش المستندات المطلوبة للمطالبة؟';
+
+  @override
+  String get profileFaqAnswer4 =>
+      'غالباً نحتاج رقم التتبع، وصور واضحة للشحنة والتغليف والضرر، وأي مستند يثبت قيمة المحتويات.';
+
+  @override
+  String get profileFaqQuestion5 => 'كيف أتابع المطالبة والتعويض؟';
+
+  @override
+  String get profileFaqAnswer5 =>
+      'افتح صفحة «المطالبات» لمتابعة آخر حالة. وإذا انقبلت المطالبة، يظهر لك مبلغ التعويض وطريقة تحويله.';
+
+  @override
+  String get profileFaqEmpty => 'ما لقينا أسئلة تطابق بحثك.';
+
+  @override
+  String get profileFaqSupportTitle => 'ما لقيت جوابك؟';
+
+  @override
+  String get profileFaqSupportDescription =>
+      'فريق الدعم جاهز يساعدك في الشحنات والحماية والمطالبات.';
+
+  @override
   String get profileSectionAccount => 'الحساب';
 
   @override
@@ -1035,6 +1287,96 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notificationsEmpty => 'لا توجد إشعارات حتى الآن.';
+
+  @override
+  String get notificationsHeroTitle => 'إشعاراتك';
+
+  @override
+  String notificationsUnreadSubtitle(int count) {
+    return 'عندك $count إشعارات ما قريتها';
+  }
+
+  @override
+  String get notificationsToday => 'اليوم';
+
+  @override
+  String get notificationsYesterday => 'أمس';
+
+  @override
+  String get notificationsFilterAll => 'الكل';
+
+  @override
+  String notificationsFilterUnread(int count) {
+    return 'ما قريتها • $count';
+  }
+
+  @override
+  String get notificationsFilterShipments => 'الشحنات';
+
+  @override
+  String get notificationsFilterClaims => 'المطالبات';
+
+  @override
+  String get notificationsDemoClaimTitle => 'مطلوب منك تكمل المطالبة';
+
+  @override
+  String get notificationsDemoClaimMessage => 'أرفق صور المنتج لمطالبة HS-2048';
+
+  @override
+  String get notificationsDemoShipmentTitle => 'شحنتك بالطريق';
+
+  @override
+  String get notificationsDemoShipmentMessage =>
+      'طلبك من متجر نون بيوصلك اليوم';
+
+  @override
+  String get notificationsDemoProtectionTitle => 'فعلنا حماية شحنتك';
+
+  @override
+  String get notificationsDemoProtectionMessage =>
+      'طلبك من متجر مدار محمي مع حصين';
+
+  @override
+  String get notificationsDemoApprovedTitle => 'انقبلت مطالبتك 🎉';
+
+  @override
+  String get notificationsDemoApprovedMessage => 'حولنا 65 رس لبطاقتك';
+
+  @override
+  String get notificationsDemoReviewTitle => 'مطالبتك قيد المراجعة';
+
+  @override
+  String get notificationsDemoReviewMessage => 'بنعلمك أول ما يطلع القرار';
+
+  @override
+  String get notificationsTimeFiveMinutes => 'قبل 5 دقايق';
+
+  @override
+  String get notificationsTimeThirtyMinutes => 'قبل 30 دقيقة';
+
+  @override
+  String get notificationsTimeTodayExample => 'اليوم، 10:40 ص';
+
+  @override
+  String get notificationsTimeYesterdaySix => 'أمس، 6:20 ص';
+
+  @override
+  String get notificationsTimeYesterdayNine => 'أمس، 9:15 ص';
+
+  @override
+  String notificationsMinutesAgo(int count) {
+    return 'قبل $count دقيقة';
+  }
+
+  @override
+  String notificationsTodayAt(String time) {
+    return 'اليوم، $time';
+  }
+
+  @override
+  String notificationsYesterdayAt(String time) {
+    return 'أمس، $time';
+  }
 
   @override
   String get apiMonitorTitle => 'مراقبة الشبكة';
@@ -2075,13 +2417,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get createSupportTicketCategoryLabel => 'التصنيف *';
 
   @override
-  String get createSupportTicketClaims => 'المطالبات';
+  String get createSupportTicketClaims => 'التعويضات';
 
   @override
   String get createSupportTicketShipments => 'الشحنات';
 
   @override
-  String get createSupportTicketAccount => 'حسابي';
+  String get createSupportTicketAccount => 'حماية الشحنات';
 
   @override
   String get createSupportTicketSubjectLabel => 'الموضوع *';
