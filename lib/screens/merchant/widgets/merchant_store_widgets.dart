@@ -93,7 +93,7 @@ class MerchantFeaturedCard extends StatelessWidget {
                     const SizedBox(width: AppSpacing.tokenM),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           AppText(
                             storeName,
@@ -173,7 +173,7 @@ class MerchantStoreTile extends StatelessWidget {
           const SizedBox(width: AppSpacing.tokenM),
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 AppText(
                   name,
@@ -189,7 +189,7 @@ class MerchantStoreTile extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.tokenXs),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
@@ -277,7 +277,7 @@ class MerchantJoinBanner extends StatelessWidget {
           AppText(
             title,
             variant: AppTextVariant.titleLarge,
-            textAlign: TextAlign.end,
+            textAlign: TextAlign.start,
             style:
                 AppTypography.buyerMobile.h5.toTextStyle(color: Colors.white),
           ),
@@ -285,12 +285,12 @@ class MerchantJoinBanner extends StatelessWidget {
           AppText(
             description,
             variant: AppTextVariant.bodySmall,
-            textAlign: TextAlign.end,
+            textAlign: TextAlign.start,
             style: const TextStyle(color: Color(0xFFD8D0FF)),
           ),
           const SizedBox(height: AppSpacing.tokenL),
           Align(
-            alignment: AlignmentDirectional.centerEnd,
+            alignment: AlignmentDirectional.centerStart,
             child: PrimaryButton(
               label: action,
               fullWidth: false,

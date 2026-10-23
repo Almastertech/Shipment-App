@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/app_text.dart';
+import '../../../components/inputs/app_text_field.dart';
 import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_images.dart';
 import '../../../core/resources/app_radius.dart';
@@ -52,7 +53,7 @@ class MerchantHeroHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Align(
-                  alignment: AlignmentDirectional.centerEnd,
+                  alignment: AlignmentDirectional.centerStart,
                   child: _CircleAction(
                     icon: Icons.notifications_none_rounded,
                     onPressed: () {},
@@ -65,7 +66,7 @@ class MerchantHeroHeader extends StatelessWidget {
                 AppText(
                   title,
                   variant: AppTextVariant.headlineLarge,
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   style: AppTypography.buyerMobile.h1.toTextStyle(
                     color: Colors.white,
                   ),
@@ -74,43 +75,47 @@ class MerchantHeroHeader extends StatelessWidget {
                 AppText(
                   subtitle,
                   variant: AppTextVariant.bodySmall,
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   style: const TextStyle(color: Color(0xFFEAE7FA)),
                   maxLines: 2,
                 ),
                 const SizedBox(height: AppSpacing.tokenS),
-                Container(
-                  height: 48,
-                  padding: const EdgeInsetsDirectional.only(
-                    start: AppSpacing.tokenL,
-                    end: AppSpacing.tokenM,
+                Theme(
+                  data: Theme.of(context).copyWith(
+                    inputDecorationTheme:
+                        Theme.of(context).inputDecorationTheme.copyWith(
+                              filled: false,
+                              fillColor: Colors.transparent,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.tokenM,
+                              ),
+                              hintStyle: const TextStyle(color: Colors.white70),
+                              prefixIconColor: Colors.white,
+                              border: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              focusedErrorBorder: InputBorder.none,
+                            ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: .19),
-                    borderRadius: BorderRadius.circular(AppRadius.tokenFull),
-                    border: Border.all(color: Colors.white24),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      const Icon(
+                  child: Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: .19),
+                      borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+                      border: Border.all(color: Colors.white24),
+                    ),
+                    child: AppTextField(
+                      hintText: searchHint,
+                      textInputAction: TextInputAction.search,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(color: Colors.white),
+                      prefixIcon: const Icon(
                         Icons.search_rounded,
                         color: Colors.white,
                         size: 23,
                       ),
-                      const SizedBox(width: AppSpacing.tokenS),
-                      Expanded(
-                        child: TextField(
-                          textAlign: TextAlign.end,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: searchHint,
-                            hintStyle: const TextStyle(color: Colors.white70),
-                            border: InputBorder.none,
-                            isDense: true,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],

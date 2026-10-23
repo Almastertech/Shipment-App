@@ -64,12 +64,12 @@ class MerchantTrustCard extends StatelessWidget {
               const SizedBox(width: AppSpacing.tokenM),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     AppText(
                       title,
                       variant: AppTextVariant.titleMedium,
-                      textAlign: TextAlign.end,
+                      textAlign: TextAlign.start,
                       style: AppTypography.buyerMobile.h6
                           .toTextStyle(color: Colors.white),
                     ),
@@ -77,7 +77,7 @@ class MerchantTrustCard extends StatelessWidget {
                     AppText(
                       description,
                       variant: AppTextVariant.bodySmall,
-                      textAlign: TextAlign.end,
+                      textAlign: TextAlign.start,
                       maxLines: 2,
                       style: const TextStyle(color: Color(0xFFD8D0FF)),
                     ),

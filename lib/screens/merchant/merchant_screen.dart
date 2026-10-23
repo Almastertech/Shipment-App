@@ -19,10 +19,11 @@ class MerchantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final background = AppColors.primitives.neutral.shade100;
-
+    const selectedNavigationIndex = 3;
     return Directionality(
       textDirection: WidgetsLocalizations.of(context).textDirection,
       child: Scaffold(
+        extendBody: true,
         backgroundColor: background,
         body: CustomScrollView(
           slivers: <Widget>[
@@ -116,6 +117,7 @@ class MerchantScreen extends StatelessWidget {
                     description: l10n.merchantJoinDescription,
                     action: l10n.merchantJoinAction,
                   ),
+                  const SizedBox(height: AppSpacing.token9Xl),
                   const SizedBox(height: AppSpacing.token2Xl),
                 ]),
               ),
@@ -130,7 +132,7 @@ class MerchantScreen extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 380),
                 child: CustomBottomNavBar(
-                  selectedIndex: 3,
+                  selectedIndex: selectedNavigationIndex,
                   onDestinationSelected: (index) {
                     switch (index) {
                       case 0:
