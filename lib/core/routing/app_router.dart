@@ -22,8 +22,10 @@ import '../../screens/profile/activity_screen.dart';
 import '../../screens/profile/create_support_ticket_screen.dart';
 import '../../screens/profile/delete_account_screen.dart';
 import '../../screens/profile/edit_profile_screen.dart';
+import '../../screens/profile/models/support_ticket.dart';
 import '../../screens/profile/notification_settings_screen.dart';
 import '../../screens/profile/profile_screen.dart';
+import '../../screens/profile/support_ticket_details_screen.dart';
 import '../../screens/profile/support_tickets_screen.dart';
 import '../../screens/sample_feature/sample_feature_details_screen.dart';
 import '../../screens/sample_feature/sample_feature_details_view_model.dart';
@@ -72,6 +74,7 @@ class AppRouter {
     AppRoutes.notificationSettings: RouteGuardType.authOrGuest,
     AppRoutes.activity: RouteGuardType.authOrGuest,
     AppRoutes.supportTickets: RouteGuardType.authOrGuest,
+    AppRoutes.supportTicketDetails: RouteGuardType.authOrGuest,
     AppRoutes.createSupportTicket: RouteGuardType.authOrGuest,
     AppRoutes.shipmentDetails: RouteGuardType.authOrGuest,
     AppRoutes.openDemands: RouteGuardType.authOrGuest,
@@ -254,6 +257,12 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.supportTickets,
         builder: (context, state) => const SupportTicketsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.supportTicketDetails,
+        builder: (context, state) => SupportTicketDetailsScreen(
+          ticket: state.extra! as SupportTicket,
+        ),
       ),
       GoRoute(
         path: AppRoutes.createSupportTicket,

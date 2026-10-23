@@ -46,6 +46,8 @@ class AppImages {
   static const String search = '$_svgBasePath/search.svg';
   static const String bell = '$_svgBasePath/bell.svg';
   static const String timeQuarterTo = '$_svgBasePath/time-quarter-to.svg';
+  static const String document = '$_svgBasePath/document.svg';
+  static const String send = '$_svgBasePath/send.svg';
   static const String mapMarkerCross = '$_svgBasePath/map-marker-cross.svg';
   static const String camera = '$_svgBasePath/camera.svg';
   static const String crossSmall = '$_svgBasePath/cross-small.svg';

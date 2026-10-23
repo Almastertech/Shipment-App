@@ -1836,6 +1836,53 @@ class AppLocalizationsEn extends AppLocalizations {
       'Ticket details are not available yet.';
 
   @override
+  String get supportTicketConversationTitle => 'Conversation';
+
+  @override
+  String supportTicketMessageCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supportTicketConversationDate => 'October 6, 2026';
+
+  @override
+  String get supportTicketCustomerMessage =>
+      'Hello, I still haven\'t received the compensation. Any updates?';
+
+  @override
+  String get supportTicketCustomerMetadata => 'Abdullah • 9:15 AM';
+
+  @override
+  String get supportTicketTeamName => 'Husain team';
+
+  @override
+  String get supportTicketTeamMessage =>
+      'Hello Abdullah, thank you for contacting us. We are reviewing your compensation request with the relevant team and will keep you updated here.';
+
+  @override
+  String get supportTicketReplySla =>
+      'The Husain team usually replies within 24 hours';
+
+  @override
+  String get supportTicketReplyHint => 'Write your reply here...';
+
+  @override
+  String get supportTicketAttachFile => 'Attach file';
+
+  @override
+  String get supportTicketSendReply => 'Send reply';
+
+  @override
+  String get supportTicketReplyUnavailable => 'Replies are not available yet.';
+
+  @override
   String get createSupportTicketTitle => 'New ticket';
 
   @override

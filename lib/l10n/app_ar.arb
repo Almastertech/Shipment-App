@@ -626,6 +626,23 @@
   "supportTicketsViewReply": "شوف ردّك",
   "supportTicketsCreateUnavailable": "فتح تذكرة جديدة غير متاح حالياً.",
   "supportTicketsDetailsUnavailable": "عرض تفاصيل التذكرة غير متاح حالياً.",
+  "supportTicketConversationTitle": "المحادثة",
+  "supportTicketMessageCount": "{count, plural, =1{رسالة واحدة} =2{رسالتين} other{{count} رسائل}}",
+  "@supportTicketMessageCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "supportTicketConversationDate": "6 أكتوبر 2026",
+  "supportTicketCustomerMessage": "السلام عليكم، للحين ما وصلني التعويض. وش آخر الأخبار؟",
+  "supportTicketCustomerMetadata": "عبدالله • 9:15 ص",
+  "supportTicketTeamName": "فريق حصين",
+  "supportTicketTeamMessage": "وعليكم السلام عبدالله، شكراً على تواصلك. نراجع طلب التعويض مع الفريق المختص، وبنعلمك بكل جديد هنا.",
+  "supportTicketReplySla": "فريق حصين يرد عادة خلال 24 ساعة",
+  "supportTicketReplyHint": "اكتب ردك هنا...",
+  "supportTicketAttachFile": "إرفاق ملف",
+  "supportTicketSendReply": "إرسال الرد",
+  "supportTicketReplyUnavailable": "إرسال الردود غير متاح حالياً.",
   "createSupportTicketTitle": "تذكرة جديدة",
   "createSupportTicketSubtitle": "قول لنا وش صار، ونرد عليك بأسرع وقت",
   "createSupportTicketRequiredNote": "الحقول اللي عليها * لازم تتعبّى",

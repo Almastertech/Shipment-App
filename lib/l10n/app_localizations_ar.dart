@@ -1797,6 +1797,53 @@ class AppLocalizationsAr extends AppLocalizations {
       'عرض تفاصيل التذكرة غير متاح حالياً.';
 
   @override
+  String get supportTicketConversationTitle => 'المحادثة';
+
+  @override
+  String supportTicketMessageCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count رسائل',
+      two: 'رسالتين',
+      one: 'رسالة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supportTicketConversationDate => '6 أكتوبر 2026';
+
+  @override
+  String get supportTicketCustomerMessage =>
+      'السلام عليكم، للحين ما وصلني التعويض. وش آخر الأخبار؟';
+
+  @override
+  String get supportTicketCustomerMetadata => 'عبدالله • 9:15 ص';
+
+  @override
+  String get supportTicketTeamName => 'فريق حصين';
+
+  @override
+  String get supportTicketTeamMessage =>
+      'وعليكم السلام عبدالله، شكراً على تواصلك. نراجع طلب التعويض مع الفريق المختص، وبنعلمك بكل جديد هنا.';
+
+  @override
+  String get supportTicketReplySla => 'فريق حصين يرد عادة خلال 24 ساعة';
+
+  @override
+  String get supportTicketReplyHint => 'اكتب ردك هنا...';
+
+  @override
+  String get supportTicketAttachFile => 'إرفاق ملف';
+
+  @override
+  String get supportTicketSendReply => 'إرسال الرد';
+
+  @override
+  String get supportTicketReplyUnavailable => 'إرسال الردود غير متاح حالياً.';
+
+  @override
   String get createSupportTicketTitle => 'تذكرة جديدة';
 
   @override

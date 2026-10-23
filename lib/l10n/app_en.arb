@@ -626,6 +626,23 @@
   "supportTicketsViewReply": "View reply",
   "supportTicketsCreateUnavailable": "Opening a new ticket is not available yet.",
   "supportTicketsDetailsUnavailable": "Ticket details are not available yet.",
+  "supportTicketConversationTitle": "Conversation",
+  "supportTicketMessageCount": "{count, plural, =1{1 message} other{{count} messages}}",
+  "@supportTicketMessageCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "supportTicketConversationDate": "October 6, 2026",
+  "supportTicketCustomerMessage": "Hello, I still haven't received the compensation. Any updates?",
+  "supportTicketCustomerMetadata": "Abdullah • 9:15 AM",
+  "supportTicketTeamName": "Husain team",
+  "supportTicketTeamMessage": "Hello Abdullah, thank you for contacting us. We are reviewing your compensation request with the relevant team and will keep you updated here.",
+  "supportTicketReplySla": "The Husain team usually replies within 24 hours",
+  "supportTicketReplyHint": "Write your reply here...",
+  "supportTicketAttachFile": "Attach file",
+  "supportTicketSendReply": "Send reply",
+  "supportTicketReplyUnavailable": "Replies are not available yet.",
   "createSupportTicketTitle": "New ticket",
   "createSupportTicketSubtitle": "Tell us what happened and we'll get back to you soon",
   "createSupportTicketRequiredNote": "Fields marked with * are required",

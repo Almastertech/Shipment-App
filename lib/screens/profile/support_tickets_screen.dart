@@ -10,6 +10,7 @@ import '../../core/resources/app_tap_target.dart';
 import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
+import 'models/support_ticket.dart';
 import 'widgets/activity_filter_chip.dart';
 import 'widgets/activity_stats_card.dart';
 import 'widgets/profile_hero.dart';
@@ -141,9 +142,9 @@ class _SupportTicketsScreenState extends State<SupportTicketsScreen> {
                       categoryLabel: l10n.supportTicketsCategory,
                       category: tickets[index].categoryLabel,
                       actionLabel: tickets[index].actionLabel,
-                      onAction: () => _showUnavailableMessage(
-                        context,
-                        l10n.supportTicketsDetailsUnavailable,
+                      onAction: () => context.push(
+                        AppRoutes.supportTicketDetails,
+                        extra: tickets[index],
                       ),
                     ),
                     if (index < tickets.length - 1)
@@ -158,16 +159,17 @@ class _SupportTicketsScreenState extends State<SupportTicketsScreen> {
     );
   }
 
-  bool _matchesFilter(_SupportTicket ticket) => switch (_filter) {
+  bool _matchesFilter(SupportTicket ticket) => switch (_filter) {
         _TicketFilter.all => true,
-        _TicketFilter.shipments => ticket.category == _TicketFilter.shipments,
+        _TicketFilter.shipments =>
+          ticket.category == SupportTicketCategory.shipment,
         _TicketFilter.compensations =>
-          ticket.category == _TicketFilter.compensations,
+          ticket.category == SupportTicketCategory.compensation,
       };
 
-  List<_SupportTicket> _tickets(AppLocalizations l10n) => <_SupportTicket>[
-        _SupportTicket(
-          category: _TicketFilter.compensations,
+  List<SupportTicket> _tickets(AppLocalizations l10n) => <SupportTicket>[
+        SupportTicket(
+          category: SupportTicketCategory.compensation,
           status: SupportTicketStatus.inProgress,
           statusLabel: l10n.supportTicketsStatusInProgress,
           title: l10n.supportTicketsCompensationTitle,
@@ -175,9 +177,22 @@ class _SupportTicketsScreenState extends State<SupportTicketsScreen> {
           lastUpdate: l10n.supportTicketsUpdateTwoHoursAgo,
           categoryLabel: l10n.supportTicketsCompensationCategory,
           actionLabel: l10n.supportTicketsViewTicket,
+          conversationDate: l10n.supportTicketConversationDate,
+          messages: <SupportTicketMessage>[
+            SupportTicketMessage(
+              author: SupportTicketMessageAuthor.customer,
+              body: l10n.supportTicketCustomerMessage,
+              metadata: l10n.supportTicketCustomerMetadata,
+            ),
+            SupportTicketMessage(
+              author: SupportTicketMessageAuthor.team,
+              body: l10n.supportTicketTeamMessage,
+              metadata: l10n.supportTicketsUpdateTwoHoursAgo,
+            ),
+          ],
         ),
-        _SupportTicket(
-          category: _TicketFilter.shipments,
+        SupportTicket(
+          category: SupportTicketCategory.shipment,
           status: SupportTicketStatus.awaitingReply,
           statusLabel: l10n.supportTicketsStatusWaiting,
           title: l10n.supportTicketsShipmentTitle,
@@ -185,14 +200,10 @@ class _SupportTicketsScreenState extends State<SupportTicketsScreen> {
           lastUpdate: l10n.supportTicketsUpdateYesterday,
           categoryLabel: l10n.supportTicketsShipmentCategory,
           actionLabel: l10n.supportTicketsViewReply,
+          conversationDate: '',
+          messages: const <SupportTicketMessage>[],
         ),
       ];
-
-  void _showUnavailableMessage(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
-  }
 
   void _goBack(BuildContext context) {
     if (context.canPop()) {
@@ -201,28 +212,6 @@ class _SupportTicketsScreenState extends State<SupportTicketsScreen> {
       context.go(AppRoutes.profile);
     }
   }
-}
-
-class _SupportTicket {
-  const _SupportTicket({
-    required this.category,
-    required this.status,
-    required this.statusLabel,
-    required this.title,
-    required this.subtitle,
-    required this.lastUpdate,
-    required this.categoryLabel,
-    required this.actionLabel,
-  });
-
-  final _TicketFilter category;
-  final SupportTicketStatus status;
-  final String statusLabel;
-  final String title;
-  final String subtitle;
-  final String lastUpdate;
-  final String categoryLabel;
-  final String actionLabel;
 }
 
 class _TicketFilters extends StatelessWidget {

@@ -3500,6 +3500,78 @@ abstract class AppLocalizations {
   /// **'Ticket details are not available yet.'**
   String get supportTicketsDetailsUnavailable;
 
+  /// No description provided for @supportTicketConversationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation'**
+  String get supportTicketConversationTitle;
+
+  /// No description provided for @supportTicketMessageCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 message} other{{count} messages}}'**
+  String supportTicketMessageCount(int count);
+
+  /// No description provided for @supportTicketConversationDate.
+  ///
+  /// In en, this message translates to:
+  /// **'October 6, 2026'**
+  String get supportTicketConversationDate;
+
+  /// No description provided for @supportTicketCustomerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, I still haven\'t received the compensation. Any updates?'**
+  String get supportTicketCustomerMessage;
+
+  /// No description provided for @supportTicketCustomerMetadata.
+  ///
+  /// In en, this message translates to:
+  /// **'Abdullah • 9:15 AM'**
+  String get supportTicketCustomerMetadata;
+
+  /// No description provided for @supportTicketTeamName.
+  ///
+  /// In en, this message translates to:
+  /// **'Husain team'**
+  String get supportTicketTeamName;
+
+  /// No description provided for @supportTicketTeamMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello Abdullah, thank you for contacting us. We are reviewing your compensation request with the relevant team and will keep you updated here.'**
+  String get supportTicketTeamMessage;
+
+  /// No description provided for @supportTicketReplySla.
+  ///
+  /// In en, this message translates to:
+  /// **'The Husain team usually replies within 24 hours'**
+  String get supportTicketReplySla;
+
+  /// No description provided for @supportTicketReplyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your reply here...'**
+  String get supportTicketReplyHint;
+
+  /// No description provided for @supportTicketAttachFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach file'**
+  String get supportTicketAttachFile;
+
+  /// No description provided for @supportTicketSendReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reply'**
+  String get supportTicketSendReply;
+
+  /// No description provided for @supportTicketReplyUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Replies are not available yet.'**
+  String get supportTicketReplyUnavailable;
+
   /// No description provided for @createSupportTicketTitle.
   ///
   /// In en, this message translates to:

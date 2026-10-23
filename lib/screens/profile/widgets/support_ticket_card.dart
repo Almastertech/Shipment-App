@@ -6,8 +6,7 @@ import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_radius.dart';
 import '../../../core/resources/app_spacing.dart';
 import '../../../core/resources/app_typography.dart';
-
-enum SupportTicketStatus { inProgress, awaitingReply }
+import '../models/support_ticket.dart';
 
 class SupportTicketCard extends StatelessWidget {
   const SupportTicketCard({
@@ -37,14 +36,12 @@ class SupportTicketCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
     final isWaiting = status == SupportTicketStatus.awaitingReply;
-    final badgeColor = isWaiting
-        ? colors.warning.shade100
-        : colors.primary.shade100;
-    final badgeTextColor = isWaiting
-        ? colors.warning.shade700
-        : colors.primary.shade500;
+    final badgeColor =
+        isWaiting ? colors.warning.shade100 : colors.primary.shade100;
+    final badgeTextColor =
+        isWaiting ? colors.warning.shade700 : colors.primary.shade500;
     final radius = BorderRadius.circular(AppRadius.token2Xl);
 
     return Container(
@@ -87,9 +84,11 @@ class SupportTicketCard extends StatelessWidget {
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     maxLines: 1,
-                    style: AppTypography.buyerMobile.labelSmall.toTextStyle(
-                      color: badgeTextColor,
-                    ).copyWith(fontWeight: FontWeight.w700),
+                    style: AppTypography.buyerMobile.labelSmall
+                        .toTextStyle(
+                          color: badgeTextColor,
+                        )
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -102,9 +101,11 @@ class SupportTicketCard extends StatelessWidget {
               textAlign: TextAlign.right,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
-                color: colors.neutral.shade900,
-              ).copyWith(fontWeight: FontWeight.w700),
+              style: AppTypography.buyerMobile.bodyMedium
+                  .toTextStyle(
+                    color: colors.neutral.shade900,
+                  )
+                  .copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: AppSpacing.token2Xs),
             AppText(
@@ -163,7 +164,7 @@ class _TicketMetadata extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -186,9 +187,11 @@ class _TicketMetadata extends StatelessWidget {
           textAlign: TextAlign.right,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: AppTypography.buyerMobile.labelSmall.toTextStyle(
-            color: colors.neutral.shade900,
-          ).copyWith(fontWeight: FontWeight.w700),
+          style: AppTypography.buyerMobile.labelSmall
+              .toTextStyle(
+                color: colors.neutral.shade900,
+              )
+              .copyWith(fontWeight: FontWeight.w700),
         ),
       ],
     );
@@ -222,9 +225,11 @@ class _TicketAction extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.right,
                 maxLines: 1,
-                style: AppTypography.buyerMobile.label.toTextStyle(
-                  color: color,
-                ).copyWith(fontWeight: FontWeight.w700),
+                style: AppTypography.buyerMobile.label
+                    .toTextStyle(
+                      color: color,
+                    )
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(width: AppSpacing.token2Xs),
               Icon(Icons.chevron_right_rounded, size: 16, color: color),
