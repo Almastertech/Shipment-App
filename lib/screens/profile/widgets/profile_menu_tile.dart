@@ -80,8 +80,8 @@ class ProfileMenuTile extends StatelessWidget {
               ),
               Icon(
                 isRtl
-                    ? Icons.chevron_right_rounded
-                    : Icons.chevron_left_rounded,
+                    ? Icons.chevron_left_rounded
+                    : Icons.chevron_right_rounded,
                 color: colors.neutral.shade600,
                 size: 20,
               ),

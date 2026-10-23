@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shipments/components/layout/custom_bottom_nav_bar.dart';
 import 'package:shipments/screens/profile/widgets/profile_footer.dart';
 import 'package:shipments/screens/profile/widgets/profile_hero.dart';
 import 'package:shipments/screens/profile/widgets/profile_logout_bottom_sheet.dart';
@@ -17,9 +18,16 @@ import '../../core/session/session_manager.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool _isNavigating = false;
+  int _selectedNavigationIndex = 4;
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -52,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   PositionedDirectional(
-                    top: heroHeight - 80,
+                    top: heroHeight - 60,
                     start: AppSpacing.tokenXl,
                     end: AppSpacing.tokenXl,
                     child: ProfileUserCard(
@@ -65,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
                       claimsValue: l10n.profileStatClaimsValue,
                       shipmentsLabel: l10n.profileStatShipments,
                       shipmentsValue: l10n.profileStatShipmentsValue,
-                      onEdit: () => context.push(AppRoutes.editProfile),
+                      onEdit: () => _openRoute(AppRoutes.editProfile),
                     ),
                   ),
                 ],
@@ -84,13 +92,12 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileActivity,
                         svgAsset: AppImages.chartBars,
-                        onTap: () => context.push(AppRoutes.activity),
+                        onTap: () => _openRoute(AppRoutes.activity),
                       ),
                       ProfileMenuItem(
                         label: l10n.profileNotifications,
                         svgAsset: AppImages.bell,
-                        onTap: () =>
-                            context.push(AppRoutes.notificationSettings),
+                        onTap: () => _openRoute(AppRoutes.notificationSettings),
                       ),
                     ],
                   ),
@@ -101,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileSupportTickets,
                         svgAsset: AppImages.receipt,
-                        onTap: () => context.push(AppRoutes.supportTickets),
+                        onTap: () => _openRoute(AppRoutes.supportTickets),
                       ),
                       ProfileMenuItem(
                         label: l10n.profileBlog,
@@ -111,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileFaq,
                         svgAsset: AppImages.interrogation,
-                        onTap: () {},
+                        onTap: () => _openRoute(AppRoutes.profileFaq),
                       ),
                     ],
                   ),
@@ -122,17 +129,18 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileTerms,
                         svgAsset: AppImages.receiptSolid,
-                        onTap: () {},
+                        onTap: () => _openRoute(AppRoutes.profileTerms),
                       ),
                       ProfileMenuItem(
                         label: l10n.profilePrivacy,
                         svgAsset: AppImages.lock,
-                        onTap: () {},
+                        onTap: () => _openRoute(AppRoutes.profilePrivacy),
                       ),
                       ProfileMenuItem(
                         label: l10n.profileProtectionTerms,
                         svgAsset: AppImages.shieldCheck,
-                        onTap: () {},
+                        onTap: () =>
+                            _openRoute(AppRoutes.profileProtectionTerms),
                       ),
                     ],
                   ),
@@ -143,13 +151,13 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuItem(
                         label: l10n.profileLogout,
                         svgAsset: AppImages.logout,
-                        onTap: () => _confirmLogout(context, l10n),
+                        onTap: () => _confirmLogout(l10n),
                       ),
                       ProfileMenuItem(
                         label: l10n.profileDeleteAccount,
                         svgAsset: AppImages.trash,
                         destructive: true,
-                        onTap: () => context.push(AppRoutes.deleteAccount),
+                        onTap: () => _openRoute(AppRoutes.deleteAccount),
                       ),
                     ],
                   ),
@@ -166,27 +174,70 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const AppShellBottomBar(
-        selectedIndex: BottomNavDestinations.profile,
-      ),
+     bottomNavigationBar: SafeArea(
+            top: false,
+            child: SizedBox(
+              height: 84,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 380),
+                  child: CustomBottomNavBar(
+                    selectedIndex: _selectedNavigationIndex,
+                    onDestinationSelected: (index) {
+                      if (index == 0) {
+                        context.go(AppRoutes.home);
+                        return;
+                      }
+                      if (index == 1) {
+                        context.go(AppRoutes.shipments);
+                        return;
+                      }
+                      if (index == 2) {
+                        context.go(AppRoutes.requests);
+                        return;
+                      }
+                      if (index == 3) {
+                        context.go(AppRoutes.merchant);
+                        return;
+                      }
+                      setState(() => _selectedNavigationIndex = index);
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
     );
   }
 
-  Future<void> _confirmLogout(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) async {
-    final confirmed = await ProfileLogoutBottomSheet.show(
-      context,
-      title: l10n.profileLogoutTitle,
-      message: l10n.profileLogoutMessage,
-      confirmLabel: l10n.profileLogoutConfirm,
-      cancelLabel: l10n.profileLogoutCancel,
-    );
-    if (!confirmed || !context.mounted) return;
+  Future<void> _openRoute(String route) async {
+    if (!mounted || _isNavigating) return;
+    _isNavigating = true;
+    try {
+      await context.push<void>(route);
+    } finally {
+      if (mounted) _isNavigating = false;
+    }
+  }
 
-    await getIt<SessionManager>().clearTokens();
-    if (!context.mounted) return;
-    context.go(AppRoutes.login);
+  Future<void> _confirmLogout(AppLocalizations l10n) async {
+    if (!mounted || _isNavigating) return;
+    _isNavigating = true;
+    try {
+      final confirmed = await ProfileLogoutBottomSheet.show(
+        context,
+        title: l10n.profileLogoutTitle,
+        message: l10n.profileLogoutMessage,
+        confirmLabel: l10n.profileLogoutConfirm,
+        cancelLabel: l10n.profileLogoutCancel,
+      );
+      if (!confirmed || !mounted) return;
+
+      await getIt<SessionManager>().clearTokens();
+      if (!mounted) return;
+      context.go(AppRoutes.login);
+    } finally {
+      if (mounted) _isNavigating = false;
+    }
   }
 }
