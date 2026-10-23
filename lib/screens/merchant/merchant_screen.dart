@@ -20,130 +20,134 @@ class MerchantScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final background = AppColors.primitives.neutral.shade100;
 
-    return Scaffold(
-      backgroundColor: background,
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 586,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: <Widget>[
-                  MerchantHeroHeader(
-                    title: l10n.merchantHeroTitle,
-                    subtitle: l10n.merchantHeroSubtitle,
-                    searchHint: l10n.merchantSearchHint,
-                  ),
-                  PositionedDirectional(
-                    top: 354,
-                    start: 0,
-                    end: 0,
-                    child: MerchantTrustCard(
-                      title: l10n.merchantTrustTitle,
-                      description: l10n.merchantTrustDescription,
-                      partnersLabel: l10n.merchantMetricPartners,
-                      categoriesLabel: l10n.merchantMetricCategories,
-                      daysLabel: l10n.merchantMetricDays,
-                      daysValue: l10n.merchantDaysValue,
-                      promise: l10n.merchantProtectionPromise,
+    return Directionality(
+      textDirection: WidgetsLocalizations.of(context).textDirection,
+      child: Scaffold(
+        backgroundColor: background,
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 586,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    MerchantHeroHeader(
+                      title: l10n.merchantHeroTitle,
+                      subtitle: l10n.merchantHeroSubtitle,
+                      searchHint: l10n.merchantSearchHint,
                     ),
-                  ),
-                ],
+                    PositionedDirectional(
+                      top: 354,
+                      start: 0,
+                      end: 0,
+                      child: MerchantTrustCard(
+                        title: l10n.merchantTrustTitle,
+                        description: l10n.merchantTrustDescription,
+                        partnersLabel: l10n.merchantMetricPartners,
+                        categoriesLabel: l10n.merchantMetricCategories,
+                        daysLabel: l10n.merchantMetricDays,
+                        daysValue: l10n.merchantDaysValue,
+                        promise: l10n.merchantProtectionPromise,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsetsDirectional.fromSTEB(
-              AppSpacing.appPageMargin,
-              AppSpacing.tokenL,
-              AppSpacing.appPageMargin,
-              0,
+            SliverPadding(
+              padding: const EdgeInsetsDirectional.fromSTEB(
+                AppSpacing.appPageMargin,
+                AppSpacing.tokenL,
+                AppSpacing.appPageMargin,
+                0,
+              ),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(<Widget>[
+                  _SectionHeading(
+                    title: l10n.merchantFeaturedTitle,
+                    action: l10n.merchantSeeAll,
+                    onTap: () {},
+                  ),
+                  const SizedBox(height: AppSpacing.tokenM),
+                  MerchantFeaturedCard(
+                    protectionLabel: l10n.merchantProtectionAvailable,
+                    storeName: l10n.merchantFeaturedStore,
+                    category: l10n.merchantFeaturedCategory,
+                    action: l10n.merchantShopNow,
+                  ),
+                  const SizedBox(height: AppSpacing.token3Xl),
+                  _SectionHeading(
+                    title: l10n.merchantAllStores,
+                    action: l10n.merchantStoreCount,
+                    onTap: () {},
+                    actionIsBadge: true,
+                  ),
+                  const SizedBox(height: AppSpacing.tokenM),
+                  MerchantStoreTile(
+                    name: l10n.merchantFashionStore,
+                    category: l10n.merchantFashionCategory,
+                    rating: '4.7',
+                    artwork: Icons.shopping_bag_outlined,
+                    artworkColor: const Color(0xFFBBA38A),
+                    protectionLabel: l10n.merchantProtectionAvailable,
+                  ),
+                  const SizedBox(height: AppSpacing.tokenM),
+                  MerchantStoreTile(
+                    name: l10n.merchantPerfumeStore,
+                    category: l10n.merchantPerfumeCategory,
+                    rating: '4.9',
+                    artwork: Icons.spa_outlined,
+                    artworkColor: const Color(0xFF77716D),
+                    protectionLabel: l10n.merchantProtectionAvailable,
+                  ),
+                  const SizedBox(height: AppSpacing.tokenM),
+                  MerchantStoreTile(
+                    name: l10n.merchantCafeStore,
+                    category: l10n.merchantCafeCategory,
+                    rating: '4.8',
+                    artwork: Icons.coffee_rounded,
+                    artworkColor: const Color(0xFF8F756D),
+                    protectionLabel: l10n.merchantProtectionAvailable,
+                  ),
+                  const SizedBox(height: AppSpacing.token3Xl),
+                  MerchantJoinBanner(
+                    title: l10n.merchantJoinTitle,
+                    description: l10n.merchantJoinDescription,
+                    action: l10n.merchantJoinAction,
+                  ),
+                  const SizedBox(height: AppSpacing.token2Xl),
+                ]),
+              ),
             ),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(<Widget>[
-                _SectionHeading(
-                  title: l10n.merchantFeaturedTitle,
-                  action: l10n.merchantSeeAll,
-                  onTap: () {},
+          ],
+        ),
+        bottomNavigationBar: SafeArea(
+          top: false,
+          child: SizedBox(
+            height: 84,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 380),
+                child: CustomBottomNavBar(
+                  selectedIndex: 3,
+                  onDestinationSelected: (index) {
+                    switch (index) {
+                      case 0:
+                        context.go(AppRoutes.home);
+                        return;
+                      case 1:
+                        context.go(AppRoutes.shipments);
+                        return;
+                      case 2:
+                        context.go(AppRoutes.requests);
+                        return;
+                      case 4:
+                        context.go(AppRoutes.profile);
+                        return;
+                    }
+                  },
                 ),
-                const SizedBox(height: AppSpacing.tokenM),
-                MerchantFeaturedCard(
-                  protectionLabel: l10n.merchantProtectionAvailable,
-                  storeName: l10n.merchantFeaturedStore,
-                  category: l10n.merchantFeaturedCategory,
-                  action: l10n.merchantShopNow,
-                ),
-                const SizedBox(height: AppSpacing.token3Xl),
-                _SectionHeading(
-                  title: l10n.merchantAllStores,
-                  action: l10n.merchantStoreCount,
-                  onTap: () {},
-                  actionIsBadge: true,
-                ),
-                const SizedBox(height: AppSpacing.tokenM),
-                MerchantStoreTile(
-                  name: l10n.merchantFashionStore,
-                  category: l10n.merchantFashionCategory,
-                  rating: '4.7',
-                  artwork: Icons.shopping_bag_outlined,
-                  artworkColor: const Color(0xFFBBA38A),
-                  protectionLabel: l10n.merchantProtectionAvailable,
-                ),
-                const SizedBox(height: AppSpacing.tokenM),
-                MerchantStoreTile(
-                  name: l10n.merchantPerfumeStore,
-                  category: l10n.merchantPerfumeCategory,
-                  rating: '4.9',
-                  artwork: Icons.spa_outlined,
-                  artworkColor: const Color(0xFF77716D),
-                  protectionLabel: l10n.merchantProtectionAvailable,
-                ),
-                const SizedBox(height: AppSpacing.tokenM),
-                MerchantStoreTile(
-                  name: l10n.merchantCafeStore,
-                  category: l10n.merchantCafeCategory,
-                  rating: '4.8',
-                  artwork: Icons.coffee_rounded,
-                  artworkColor: const Color(0xFF8F756D),
-                  protectionLabel: l10n.merchantProtectionAvailable,
-                ),
-                const SizedBox(height: AppSpacing.token3Xl),
-                MerchantJoinBanner(
-                  title: l10n.merchantJoinTitle,
-                  description: l10n.merchantJoinDescription,
-                  action: l10n.merchantJoinAction,
-                ),
-                const SizedBox(height: AppSpacing.token2Xl),
-              ]),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: SizedBox(
-          height: 84,
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 380),
-              child: CustomBottomNavBar(
-                selectedIndex: 3,
-                onDestinationSelected: (index) {
-                  switch (index) {
-                    case 0:
-                      context.go(AppRoutes.home);
-                      return;
-                    case 1:
-                      context.go(AppRoutes.shipments);
-                      return;
-                    case 2:
-                      context.go(AppRoutes.requests);
-                      return;
-                    case 4:
-                      break;
-                  }
-                },
               ),
             ),
           ),
@@ -169,6 +173,8 @@ class _SectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
         children: <Widget>[
+          AppText(title, variant: AppTextVariant.titleMedium),
+          const Spacer(),
           if (actionIsBadge)
             Container(
               padding: const EdgeInsetsDirectional.fromSTEB(10, 5, 10, 5),
@@ -195,8 +201,6 @@ class _SectionHeading extends StatelessWidget {
                 style: TextStyle(color: AppColors.primitives.primary.shade500),
               ),
             ),
-          const Spacer(),
-          AppText(title, variant: AppTextVariant.titleMedium),
         ],
       );
 }

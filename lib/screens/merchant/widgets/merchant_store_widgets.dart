@@ -237,7 +237,13 @@ class MerchantStoreTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: AppSpacing.tokenM),
-          Icon(Icons.chevron_left_rounded, color: purple, size: 22),
+          Icon(
+            Directionality.of(context) == TextDirection.rtl
+                ? Icons.chevron_left_rounded
+                : Icons.chevron_right_rounded,
+            color: purple,
+            size: 22,
+          ),
         ],
       ),
     );

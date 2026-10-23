@@ -52,13 +52,16 @@ class MerchantHeroHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Align(
-                  alignment: AlignmentDirectional.centerStart,
+                  alignment: AlignmentDirectional.centerEnd,
                   child: _CircleAction(
                     icon: Icons.notifications_none_rounded,
                     onPressed: () {},
                   ),
                 ),
-                const Spacer(),
+                // Keep the hero copy above the overlapping trust card. A flex
+                // spacer pushed it to the bottom of the header, where the card
+                // covered the title and subtitle on phone-sized layouts.
+                const SizedBox(height: AppSpacing.token8Xl),
                 AppText(
                   title,
                   variant: AppTextVariant.headlineLarge,
@@ -75,7 +78,7 @@ class MerchantHeroHeader extends StatelessWidget {
                   style: const TextStyle(color: Color(0xFFEAE7FA)),
                   maxLines: 2,
                 ),
-                const SizedBox(height: AppSpacing.tokenXl),
+                const SizedBox(height: AppSpacing.tokenS),
                 Container(
                   height: 48,
                   padding: const EdgeInsetsDirectional.only(
