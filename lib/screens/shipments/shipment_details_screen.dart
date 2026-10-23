@@ -40,7 +40,8 @@ class ShipmentDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
-              height: heroHeight + 145,
+              // Reserve space below the protection card before the timeline.
+              height: heroHeight + 205,
               child: Stack(
                 clipBehavior: Clip.none,
                 children: <Widget>[
