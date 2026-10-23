@@ -153,6 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         context.go(AppRoutes.merchant);
                         return;
                       }
+                      if (index == 4) {
+                        context.go(AppRoutes.profile);
+                        return;
+                      }
                       setState(() => _selectedNavigationIndex = index);
                     },
                   ),
