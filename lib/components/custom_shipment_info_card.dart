@@ -16,7 +16,7 @@ class CustomShipmentInfoCard extends StatelessWidget {
   const CustomShipmentInfoCard({
     super.key,
     required this.productTitle,
-    required this.merchantName,
+    required this.storeName,
     required this.price,
     required this.protectionLabel,
     required this.deliveryStatus,
@@ -30,7 +30,7 @@ class CustomShipmentInfoCard extends StatelessWidget {
   });
 
   final String productTitle;
-  final String merchantName;
+  final String storeName;
   final String price;
   final String protectionLabel;
   final String deliveryStatus;
@@ -84,7 +84,7 @@ class CustomShipmentInfoCard extends StatelessWidget {
                 children: [
                   _ProductHeader(
                     productTitle: productTitle,
-                    merchantName: merchantName,
+                    storeName: storeName,
                     price: price,
                     protectionLabel: protectionLabel,
                     deliveryStatus: deliveryStatus,
@@ -150,7 +150,7 @@ class CustomShipmentInfoCard extends StatelessWidget {
 class _ProductHeader extends StatelessWidget {
   const _ProductHeader({
     required this.productTitle,
-    required this.merchantName,
+    required this.storeName,
     required this.price,
     required this.protectionLabel,
     required this.deliveryStatus,
@@ -158,7 +158,7 @@ class _ProductHeader extends StatelessWidget {
   });
 
   final String productTitle;
-  final String merchantName;
+  final String storeName;
   final String price;
   final String protectionLabel;
   final String deliveryStatus;
@@ -191,7 +191,7 @@ class _ProductHeader extends StatelessWidget {
                 ),
               ),
               AppText(
-                '$merchantName · $price',
+                '$storeName · $price',
                 variant: AppTextVariant.bodySmall,
                 textAlign: TextAlign.start,
                 maxLines: 1,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import '../../components/ui_kit_showcase_screen.dart';
 import '../../core/permissions/permission_service.dart';
 import '../../features/notifications/presentation/notification_center_screen.dart';
@@ -74,7 +73,7 @@ class AppRouter {
     AppRoutes.otpSuccess: RouteGuardType.guestOnly,
     AppRoutes.welcome: RouteGuardType.guestOnly,
     AppRoutes.home: RouteGuardType.authOrGuest,
-    AppRoutes.merchant: RouteGuardType.authOrGuest,
+    AppRoutes.shops: RouteGuardType.authOrGuest,
     AppRoutes.storeProtectionOptions: RouteGuardType.authOrGuest,
     AppRoutes.shipments: RouteGuardType.authOrGuest,
     AppRoutes.profile: RouteGuardType.authOrGuest,
@@ -247,8 +246,8 @@ class AppRouter {
         builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
-        path: AppRoutes.merchant,
-        builder: (context, state) => const MerchantScreen(),
+        path: AppRoutes.shops,
+        builder: (context, state) => const ShopsScreen(),
       ),
       GoRoute(
         path: AppRoutes.storeProtectionOptions,

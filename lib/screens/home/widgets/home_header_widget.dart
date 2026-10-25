@@ -49,7 +49,7 @@ class HomeHeaderWidget extends StatelessWidget {
             height: cardHeight,
             child: _FeaturedShipmentCard(
               productTitle: l10n.homeShipmentProduct,
-              merchant: l10n.homeShipmentMerchant,
+              store: l10n.homeShipmentStore,
               price: l10n.homeShipmentPrice,
               protectionLabel: l10n.homeShipmentProtection,
               statusHeadline: l10n.homeShipmentStatusHeadline,
@@ -287,7 +287,7 @@ class _HomeBrandPattern extends StatelessWidget {
 class _FeaturedShipmentCard extends StatelessWidget {
   const _FeaturedShipmentCard({
     required this.productTitle,
-    required this.merchant,
+    required this.store,
     required this.price,
     required this.protectionLabel,
     required this.statusHeadline,
@@ -299,7 +299,7 @@ class _FeaturedShipmentCard extends StatelessWidget {
   });
 
   final String productTitle;
-  final String merchant;
+  final String store;
   final String price;
   final String protectionLabel;
   final String statusHeadline;
@@ -376,7 +376,7 @@ class _FeaturedShipmentCard extends StatelessWidget {
                                 ),
                               ),
                               AppText(
-                                '$merchant · $price',
+                                '$store · $price',
                                 variant: AppTextVariant.bodySmall,
                                 textAlign: TextAlign.start,
                                 maxLines: 1,

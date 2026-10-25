@@ -42,14 +42,14 @@ class _StoreProtectionOptionsScreenState
           slivers: <Widget>[
             SliverToBoxAdapter(
               child: _StoreHero(
-                storeName: l10n.merchantOptionsHeroTitle,
-                category: l10n.merchantOptionsCategory,
-                protectionLabel: l10n.merchantOptionsProtection,
-                protectionValue: l10n.merchantOptionsAvailable,
-                deliveryLabel: l10n.merchantOptionsDelivery,
-                deliveryValue: l10n.merchantOptionsDeliveryValue,
-                returnLabel: l10n.merchantOptionsReturn,
-                returnValue: l10n.merchantOptionsReturnValue,
+                storeName: l10n.shopsOptionsHeroTitle,
+                category: l10n.shopsOptionsCategory,
+                protectionLabel: l10n.shopsOptionsProtection,
+                protectionValue: l10n.shopsOptionsAvailable,
+                deliveryLabel: l10n.shopsOptionsDelivery,
+                deliveryValue: l10n.shopsOptionsDeliveryValue,
+                returnLabel: l10n.shopsOptionsReturn,
+                returnValue: l10n.shopsOptionsReturnValue,
                 onBack: () => context.pop(),
               ),
             ),
@@ -65,7 +65,7 @@ class _StoreProtectionOptionsScreenState
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     AppText(
-                      l10n.merchantOptionsQuestion,
+                      l10n.shopsOptionsQuestion,
                       variant: AppTextVariant.titleLarge,
                       textAlign: TextAlign.start,
                       style: AppTypography.buyerMobile.h5.toTextStyle(
@@ -74,7 +74,7 @@ class _StoreProtectionOptionsScreenState
                     ),
                     const SizedBox(height: AppSpacing.token2Xs),
                     AppText(
-                      l10n.merchantOptionsSubtitle,
+                      l10n.shopsOptionsSubtitle,
                       variant: AppTextVariant.bodyMedium,
                       textAlign: TextAlign.start,
                       style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
@@ -84,22 +84,22 @@ class _StoreProtectionOptionsScreenState
                     const SizedBox(height: AppSpacing.tokenL),
                     _ProtectionOptionCard(
                       selected: _protectionSelected,
-                      title: l10n.merchantOptionsProtectedTitle,
-                      description: l10n.merchantOptionsProtectedDescription,
+                      title: l10n.shopsOptionsProtectedTitle,
+                      description: l10n.shopsOptionsProtectedDescription,
                       icon: Icons.verified_user_outlined,
                       onTap: () => setState(() => _protectionSelected = true),
                     ),
                     const SizedBox(height: AppSpacing.tokenM),
                     _ProtectionOptionCard(
                       selected: !_protectionSelected,
-                      title: l10n.merchantOptionsUnprotectedTitle,
-                      description: l10n.merchantOptionsUnprotectedDescription,
+                      title: l10n.shopsOptionsUnprotectedTitle,
+                      description: l10n.shopsOptionsUnprotectedDescription,
                       icon: Icons.close_rounded,
                       onTap: () => setState(() => _protectionSelected = false),
                     ),
                     const SizedBox(height: AppSpacing.tokenL),
                     _ProtectionDisclaimer(
-                      message: l10n.merchantOptionsDisclaimer,
+                      message: l10n.shopsOptionsDisclaimer,
                     ),
                   ],
                 ),
@@ -117,7 +117,7 @@ class _StoreProtectionOptionsScreenState
               AppSpacing.tokenL,
             ),
             child: PrimaryButton(
-              label: l10n.merchantShopNow,
+              label: l10n.shopsShopNow,
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: colors.primary.shade500,
@@ -170,7 +170,7 @@ class _StoreHero extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.asset(AppImages.merchantHero, fit: BoxFit.cover),
+          Image.asset(AppImages.shopsHero, fit: BoxFit.cover),
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(

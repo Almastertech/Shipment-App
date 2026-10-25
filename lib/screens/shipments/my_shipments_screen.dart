@@ -42,9 +42,9 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
       productTitle: isActive
           ? l10n.homeShipmentProduct
           : l10n.homeCompactShipment2Product,
-      merchantName: isActive
-          ? l10n.homeCompactShipmentMerchant
-          : l10n.homeCompactShipment2Merchant,
+      storeName: isActive
+          ? l10n.homeCompactShipmentStore
+          : l10n.homeCompactShipment2Store,
       price: isActive
           ? l10n.homeCompactShipmentPrice
           : l10n.homeCompactShipment2Price,
@@ -131,7 +131,7 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
                   if (isActive) ...<Widget>[
                     CustomProductCardShipments(
                       productTitle: l10n.homeCompactShipmentProduct,
-                      merchantName: l10n.homeCompactShipmentMerchant,
+                      storeName: l10n.homeCompactShipmentStore,
                       price: l10n.homeCompactShipmentPrice,
                       protectionLabel: l10n.homeShipmentProtection,
                       statusLabel: l10n.homeCompactShipmentStatus,
@@ -172,7 +172,7 @@ class _MyShipmentsScreenState extends State<MyShipmentsScreen> {
                 onDestinationSelected: (index) {
                   if (index == 0) context.go(AppRoutes.home);
                   if (index == 2) context.go(AppRoutes.requests);
-                  if (index == 3) context.go(AppRoutes.merchant);
+                  if (index == 3) context.go(AppRoutes.shops);
                   if (index == 4) context.go(AppRoutes.profile);
                 },
               ),

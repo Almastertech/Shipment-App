@@ -206,7 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return;
                   }
                   if (index == 3) {
-                    context.go(AppRoutes.merchant);
+                    context.go(AppRoutes.shops);
                     return;
                   }
                   setState(() => _selectedNavigationIndex = index);

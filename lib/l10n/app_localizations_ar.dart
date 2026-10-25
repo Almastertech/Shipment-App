@@ -264,7 +264,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get accountNotFoundBody =>
-      'تأكد أنك تستخدم نفس الجوال أو الإيميل اللي حطيته وقت الشراء من التاجر.';
+      'تأكد أنك تستخدم نفس الجوال أو الإيميل اللي حطيته وقت الشراء من المتجر.';
 
   @override
   String get accountNotFoundPhone => 'رقم الجوال المستخدم عند الشراء';
@@ -273,7 +273,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get accountNotFoundEmail => 'الإيميل المستخدم عند الشراء';
 
   @override
-  String get accountNotFoundCheckEmail => 'شيك على رسالة تأكيد الطلب من التاجر';
+  String get accountNotFoundCheckEmail => 'شيك على رسالة تأكيد الطلب من المتجر';
 
   @override
   String get accountNotFoundTryOtherMethod =>
@@ -322,7 +322,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get myShipmentsSubtitle =>
-      'تغطية للتلف والفقدان والتأخير في شحنات التاجر';
+      'تغطية للتلف والفقدان والتأخير في شحنات المتاجر';
 
   @override
   String get myShipmentsActiveTab => 'نشطة 2';
@@ -360,7 +360,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeSeeAllShipments => 'عرض الكل';
 
   @override
-  String get homeShipmentMerchant => 'متجر نون';
+  String get homeShipmentStore => 'متجر نون';
 
   @override
   String get homeShipmentProduct => 'ساعة ذكية - إصدار ذهبي';
@@ -408,7 +408,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeCompactShipmentProduct => 'سماعات لاسلكية';
 
   @override
-  String get homeCompactShipmentMerchant => 'متجر جرير';
+  String get homeCompactShipmentStore => 'متجر جرير';
 
   @override
   String get homeCompactShipmentPrice => '٣٢٠ ر.س';
@@ -429,7 +429,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeCompactShipment2Product => 'عطر رجالي 100 مل';
 
   @override
-  String get homeCompactShipment2Merchant => 'متجر المجد للعود';
+  String get homeCompactShipment2Store => 'متجر المجد للعود';
 
   @override
   String get homeCompactShipment2Price => '٦٥٠ ر.س';
@@ -524,7 +524,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shipmentDetailsExpectedDeliveryValue => 'الجمعة 1 أكتوبر';
 
   @override
-  String get shipmentDetailsMerchant => 'التاجر';
+  String get shipmentDetailsStore => 'المتجر';
 
   @override
   String get shipmentDetailsOrderDate => 'تاريخ الطلب';
@@ -727,7 +727,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get secondaryBannerDescription =>
-      'التلف والفقدان والتأخير في شحنات التاجر المؤهلة.';
+      'التلف والفقدان والتأخير في شحنات المتاجر المؤهلة.';
 
   @override
   String get secondaryBannerAction => 'اقرأ أكثر';
@@ -745,140 +745,140 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bottomNavClaims => 'المطالبات';
 
   @override
-  String get bottomNavStores => 'التاجر';
+  String get bottomNavStores => 'المتاجر';
 
   @override
-  String get merchantHeroTitle => 'متاجر تثق فيها';
+  String get shopsHeroTitle => 'متاجر تثق فيها';
 
   @override
-  String get merchantHeroSubtitle =>
+  String get shopsHeroSubtitle =>
       'تسوق من شركائنا، وشحناتك محمية من الباب للباب.';
 
   @override
-  String get merchantSearchHint => 'دور على متجر...';
+  String get shopsSearchHint => 'دور على متجر...';
 
   @override
-  String get merchantTrustTitle => 'كل متاجرنا محمية بحصين';
+  String get shopsTrustTitle => 'كل متاجرنا محمية بحصين';
 
   @override
-  String get merchantTrustDescription =>
+  String get shopsTrustDescription =>
       'تسوق من أي متجر شريك، وخلي حماية شحنتك من صفحة الدفع.';
 
   @override
-  String get merchantMetricPartners => 'متجر شريك';
+  String get shopsMetricPartners => 'متجر شريك';
 
   @override
-  String get merchantMetricCategories => 'أقسام';
+  String get shopsMetricCategories => 'أقسام';
 
   @override
-  String get merchantMetricDays => 'لتقديم المطالبة';
+  String get shopsMetricDays => 'لتقديم المطالبة';
 
   @override
-  String get merchantDaysValue => 'يومين';
+  String get shopsDaysValue => 'يومين';
 
   @override
-  String get merchantProtectionPromise =>
+  String get shopsProtectionPromise =>
       'تلف، فقدان، أو تأخير مؤهل؟ مطالبتك من التطبيق مباشرة.';
 
   @override
-  String get merchantFeaturedTitle => 'متاجر مميزة';
+  String get shopsFeaturedTitle => 'متاجر مميزة';
 
   @override
-  String get merchantSeeAll => 'شوف الكل';
+  String get shopsSeeAll => 'شوف الكل';
 
   @override
-  String get merchantProtectionAvailable => 'الحماية متاحة';
+  String get shopsProtectionAvailable => 'الحماية متاحة';
 
   @override
-  String get merchantFeaturedStore => 'متجر مدار';
+  String get shopsFeaturedStore => 'متجر مدار';
 
   @override
-  String get merchantFeaturedCategory => 'إلكترونيات وإكسسوارات';
+  String get shopsFeaturedCategory => 'إلكترونيات وإكسسوارات';
 
   @override
-  String get merchantShopNow => 'تسوق من مدار';
+  String get shopsShopNow => 'تسوق من مدار';
 
   @override
-  String get merchantOptionsHeroTitle => 'متجر مدار';
+  String get shopsOptionsHeroTitle => 'متجر مدار';
 
   @override
-  String get merchantOptionsCategory => 'إلكترونيات وإكسسوارات • الرياض';
+  String get shopsOptionsCategory => 'إلكترونيات وإكسسوارات • الرياض';
 
   @override
-  String get merchantOptionsProtection => 'الحماية';
+  String get shopsOptionsProtection => 'الحماية';
 
   @override
-  String get merchantOptionsAvailable => 'متاحة ✓';
+  String get shopsOptionsAvailable => 'متاحة ✓';
 
   @override
-  String get merchantOptionsDelivery => 'التوصيل';
+  String get shopsOptionsDelivery => 'التوصيل';
 
   @override
-  String get merchantOptionsDeliveryValue => '2–4 أيام';
+  String get shopsOptionsDeliveryValue => '2–4 أيام';
 
   @override
-  String get merchantOptionsReturn => 'الإرجاع';
+  String get shopsOptionsReturn => 'الإرجاع';
 
   @override
-  String get merchantOptionsReturnValue => 'خلال 7 أيام';
+  String get shopsOptionsReturnValue => 'خلال 7 أيام';
 
   @override
-  String get merchantOptionsQuestion => 'وش تبي لشحنتك؟';
+  String get shopsOptionsQuestion => 'وش تبي لشحنتك؟';
 
   @override
-  String get merchantOptionsSubtitle => 'اختار الحماية وانت تدفع في المتجر';
+  String get shopsOptionsSubtitle => 'اختار الحماية وانت تدفع في المتجر';
 
   @override
-  String get merchantOptionsProtectedTitle => 'مع حماية حصين';
+  String get shopsOptionsProtectedTitle => 'مع حماية حصين';
 
   @override
-  String get merchantOptionsProtectedDescription =>
+  String get shopsOptionsProtectedDescription =>
       'تلف أو فقدان وقت النقل، حسب شروط الحماية';
 
   @override
-  String get merchantOptionsUnprotectedTitle => 'بدون حماية';
+  String get shopsOptionsUnprotectedTitle => 'بدون حماية';
 
   @override
-  String get merchantOptionsUnprotectedDescription =>
+  String get shopsOptionsUnprotectedDescription =>
       'أي ضرر يصير للشحنة تتحمله أنت';
 
   @override
-  String get merchantOptionsDisclaimer =>
+  String get shopsOptionsDisclaimer =>
       'بيانات توضيحية؛ ما تعني وجود شراكة أو تأمين فعلي مع المتجر.';
 
   @override
-  String get merchantAllStores => 'كل المتاجر';
+  String get shopsAllStores => 'كل المتاجر';
 
   @override
-  String get merchantStoreCount => '+40 متجر';
+  String get shopsStoreCount => '+40 متجر';
 
   @override
-  String get merchantFashionStore => 'متجر خطى';
+  String get shopsFashionStore => 'متجر خطى';
 
   @override
-  String get merchantFashionCategory => 'أزياء ومنتجات يومية';
+  String get shopsFashionCategory => 'أزياء ومنتجات يومية';
 
   @override
-  String get merchantPerfumeStore => 'دار العود';
+  String get shopsPerfumeStore => 'دار العود';
 
   @override
-  String get merchantPerfumeCategory => 'عطور وبخور';
+  String get shopsPerfumeCategory => 'عطور وبخور';
 
   @override
-  String get merchantCafeStore => 'محمصة الديرة';
+  String get shopsCafeStore => 'محمصة الديرة';
 
   @override
-  String get merchantCafeCategory => 'قهوة ومحامص مختصة';
+  String get shopsCafeCategory => 'قهوة ومحامص مختصة';
 
   @override
-  String get merchantJoinTitle => 'عندك متجر؟ خلّ عملاءك يشترون بثقة';
+  String get shopsJoinTitle => 'عندك متجر؟ خلّ عملاءك يشترون بثقة';
 
   @override
-  String get merchantJoinDescription =>
+  String get shopsJoinDescription =>
       'أضف حصين لتجارتك، وقدّم حماية شحن لعملائك بدون أي تعقيد.';
 
   @override
-  String get merchantJoinAction => 'أضف حصين لمتجرك';
+  String get shopsJoinAction => 'أضف حصين لمتجرك';
 
   @override
   String get bottomNavProfile => 'حسابي';
@@ -1076,7 +1076,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profilePrivacySection3Body =>
-      'نشارك اللي يلزم بس مع التاجر وشركة الشحن وشريك التأمين، عشان نخدم طلبك. وما نبيع بياناتك لأي أحد.';
+      'نشارك اللي يلزم بس مع المتاجر وشركة الشحن وشريك التأمين، عشان نخدم طلبك. وما نبيع بياناتك لأي أحد.';
 
   @override
   String get profilePrivacySection4Title => 'كيف نحميها';

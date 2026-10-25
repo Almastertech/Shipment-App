@@ -19,7 +19,7 @@ class ShipmentCardWidget extends StatelessWidget {
     super.key,
     required this.deliveryStatus,
     required this.protectionLabel,
-    required this.merchantAndItem,
+    required this.storeAndItem,
     required this.title,
     required this.progressSteps,
     required this.activeStepIndex,
@@ -38,7 +38,7 @@ class ShipmentCardWidget extends StatelessWidget {
 
   final String deliveryStatus;
   final String protectionLabel;
-  final String merchantAndItem;
+  final String storeAndItem;
   final String title;
 
   /// Ordered from the logical start to end (RTL Arabic order: right to left).
@@ -108,7 +108,7 @@ class ShipmentCardWidget extends StatelessWidget {
                     ),
                     const Spacer(),
                     AppText(
-                      merchantAndItem,
+                      storeAndItem,
                       variant: AppTextVariant.bodySmall,
                       textAlign: TextAlign.start,
                       maxLines: 1,
@@ -277,7 +277,7 @@ class ShipmentCardWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.tokenS),
                 AppText(
-                  '$merchantAndItem · $trackingNumber',
+                  '$storeAndItem · $trackingNumber',
                   variant: AppTextVariant.bodySmall,
                   textAlign: TextAlign.end,
                   maxLines: 1,

@@ -16,7 +16,7 @@ class CustomProductCardShipments extends StatelessWidget {
   const CustomProductCardShipments({
     super.key,
     required this.productTitle,
-    required this.merchantName,
+    required this.storeName,
     required this.price,
     required this.protectionLabel,
     required this.statusLabel,
@@ -34,7 +34,7 @@ class CustomProductCardShipments extends StatelessWidget {
   });
 
   final String productTitle;
-  final String merchantName;
+  final String storeName;
   final String price;
   final String protectionLabel;
   final String statusLabel;
@@ -107,7 +107,7 @@ class CustomProductCardShipments extends StatelessWidget {
                       ),
                       const SizedBox(width: AppSpacing.tokenS),
 
-                      // Title, Merchant • Price, and Protection Pill
+                      // Title, shops • Price, and Protection Pill
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,7 +126,7 @@ class CustomProductCardShipments extends StatelessWidget {
                             ),
                             const SizedBox(height: AppSpacing.token3Xs),
                             AppText(
-                              '$merchantName • $price',
+                              '$storeName • $price',
                               variant: AppTextVariant.bodySmall,
                               textAlign: TextAlign.start,
                               maxLines: 1,

@@ -36,7 +36,7 @@ void main() {
             padding: const EdgeInsets.all(16),
             child: CustomProductCardShipments(
               productTitle: 'ساعة ذكية — إصدار ذهبي',
-              merchantName: 'متجر جرير',
+              storeName: 'متجر جرير',
               price: '320 ر.س',
               protectionLabel: 'محمية بحصين',
               statusLabel: 'بالطريق',

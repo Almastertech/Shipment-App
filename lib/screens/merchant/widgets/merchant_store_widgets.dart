@@ -10,8 +10,8 @@ import '../../../core/resources/app_radius.dart';
 import '../../../core/resources/app_spacing.dart';
 import '../../../core/resources/app_typography.dart';
 
-class MerchantFeaturedCard extends StatelessWidget {
-  const MerchantFeaturedCard({
+class ShopsFeaturedCard extends StatelessWidget {
+  const ShopsFeaturedCard({
     super.key,
     required this.protectionLabel,
     required this.storeName,
@@ -41,7 +41,7 @@ class MerchantFeaturedCard extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: <Widget>[
-                Image.asset(AppImages.merchantHero, fit: BoxFit.cover),
+                Image.asset(AppImages.shopsHero, fit: BoxFit.cover),
                 PositionedDirectional(
                   top: AppSpacing.tokenM,
                   end: AppSpacing.tokenM,
@@ -137,8 +137,8 @@ class MerchantFeaturedCard extends StatelessWidget {
   }
 }
 
-class MerchantStoreTile extends StatelessWidget {
-  const MerchantStoreTile({
+class ShopsStoreTile extends StatelessWidget {
+  const ShopsStoreTile({
     super.key,
     required this.name,
     required this.category,
@@ -251,8 +251,8 @@ class MerchantStoreTile extends StatelessWidget {
   }
 }
 
-class MerchantJoinBanner extends StatelessWidget {
-  const MerchantJoinBanner({
+class ShopsJoinBanner extends StatelessWidget {
+  const ShopsJoinBanner({
     super.key,
     required this.title,
     required this.description,

@@ -281,7 +281,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accountNotFoundCheckEmail =>
-      'Check the order confirmation email from the merchant';
+      'Check the order confirmation email from the store';
 
   @override
   String get accountNotFoundTryOtherMethod =>
@@ -331,7 +331,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get myShipmentsSubtitle =>
-      'Coverage for damage, loss and delays on merchant shipments';
+      'Coverage for damage, loss and delays on shipments from partner stores';
 
   @override
   String get myShipmentsActiveTab => 'Active 2';
@@ -370,7 +370,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeSeeAllShipments => 'See all';
 
   @override
-  String get homeShipmentMerchant => 'Noon store';
+  String get homeShipmentStore => 'Noon store';
 
   @override
   String get homeShipmentProduct => 'Smart watch - Gold Edition';
@@ -418,7 +418,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeCompactShipmentProduct => 'Wireless headphones';
 
   @override
-  String get homeCompactShipmentMerchant => 'Jarir store';
+  String get homeCompactShipmentStore => 'Jarir store';
 
   @override
   String get homeCompactShipmentPrice => 'SAR 320';
@@ -439,7 +439,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeCompactShipment2Product => 'Men\'s fragrance, 100 ml';
 
   @override
-  String get homeCompactShipment2Merchant => 'Al Majd Oud store';
+  String get homeCompactShipment2Store => 'Al Majd Oud store';
 
   @override
   String get homeCompactShipment2Price => 'SAR 650';
@@ -535,7 +535,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shipmentDetailsExpectedDeliveryValue => 'Friday, October 1';
 
   @override
-  String get shipmentDetailsMerchant => 'Merchant';
+  String get shipmentDetailsStore => 'Store';
 
   @override
   String get shipmentDetailsOrderDate => 'Order date';
@@ -743,7 +743,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get secondaryBannerDescription =>
-      'Damage, loss, and delays on eligible merchant shipments.';
+      'Damage, loss, and delays on eligible shipments from partner stores.';
 
   @override
   String get secondaryBannerAction => 'Read more';
@@ -761,143 +761,143 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavClaims => 'Claims';
 
   @override
-  String get bottomNavStores => 'Merchant';
+  String get bottomNavStores => 'Shops';
 
   @override
-  String get merchantHeroTitle => 'Stores you can trust';
+  String get shopsHeroTitle => 'Stores you can trust';
 
   @override
-  String get merchantHeroSubtitle =>
+  String get shopsHeroSubtitle =>
       'Shop from our partners with shipment protection from door to door.';
 
   @override
-  String get merchantSearchHint => 'Search for a store...';
+  String get shopsSearchHint => 'Search for a store...';
 
   @override
-  String get merchantTrustTitle => 'Every store is protected by Haseen';
+  String get shopsTrustTitle => 'Every store is protected by Haseen';
 
   @override
-  String get merchantTrustDescription =>
+  String get shopsTrustDescription =>
       'Shop from trusted stores and get shipment protection from checkout to delivery.';
 
   @override
-  String get merchantMetricPartners => 'Partner stores';
+  String get shopsMetricPartners => 'Partner stores';
 
   @override
-  String get merchantMetricCategories => 'Categories';
+  String get shopsMetricCategories => 'Categories';
 
   @override
-  String get merchantMetricDays => 'To file a claim';
+  String get shopsMetricDays => 'To file a claim';
 
   @override
-  String get merchantDaysValue => '2 days';
+  String get shopsDaysValue => '2 days';
 
   @override
-  String get merchantProtectionPromise =>
+  String get shopsProtectionPromise =>
       'Lost, damaged, or delayed? File a claim right in the app.';
 
   @override
-  String get merchantFeaturedTitle => 'Featured stores';
+  String get shopsFeaturedTitle => 'Featured stores';
 
   @override
-  String get merchantSeeAll => 'See all';
+  String get shopsSeeAll => 'See all';
 
   @override
-  String get merchantProtectionAvailable => 'Protection available';
+  String get shopsProtectionAvailable => 'Protection available';
 
   @override
-  String get merchantFeaturedStore => 'Madar Store';
+  String get shopsFeaturedStore => 'Madar Store';
 
   @override
-  String get merchantFeaturedCategory => 'Electronics and accessories';
+  String get shopsFeaturedCategory => 'Electronics and accessories';
 
   @override
-  String get merchantShopNow => 'Shop Madar';
+  String get shopsShopNow => 'Shop Madar';
 
   @override
-  String get merchantOptionsHeroTitle => 'Madar Store';
+  String get shopsOptionsHeroTitle => 'Madar Store';
 
   @override
-  String get merchantOptionsCategory => 'Electronics and accessories • Riyadh';
+  String get shopsOptionsCategory => 'Electronics and accessories • Riyadh';
 
   @override
-  String get merchantOptionsProtection => 'Protection';
+  String get shopsOptionsProtection => 'Protection';
 
   @override
-  String get merchantOptionsAvailable => 'Available ✓';
+  String get shopsOptionsAvailable => 'Available ✓';
 
   @override
-  String get merchantOptionsDelivery => 'Delivery';
+  String get shopsOptionsDelivery => 'Delivery';
 
   @override
-  String get merchantOptionsDeliveryValue => '2–4 days';
+  String get shopsOptionsDeliveryValue => '2–4 days';
 
   @override
-  String get merchantOptionsReturn => 'Returns';
+  String get shopsOptionsReturn => 'Returns';
 
   @override
-  String get merchantOptionsReturnValue => 'Within 7 days';
+  String get shopsOptionsReturnValue => 'Within 7 days';
 
   @override
-  String get merchantOptionsQuestion =>
+  String get shopsOptionsQuestion =>
       'How would you like your shipment protected?';
 
   @override
-  String get merchantOptionsSubtitle =>
+  String get shopsOptionsSubtitle =>
       'Choose protection before paying at the store';
 
   @override
-  String get merchantOptionsProtectedTitle => 'With Haseen protection';
+  String get shopsOptionsProtectedTitle => 'With Haseen protection';
 
   @override
-  String get merchantOptionsProtectedDescription =>
+  String get shopsOptionsProtectedDescription =>
       'Damage or loss during transit, subject to protection terms';
 
   @override
-  String get merchantOptionsUnprotectedTitle => 'Without protection';
+  String get shopsOptionsUnprotectedTitle => 'Without protection';
 
   @override
-  String get merchantOptionsUnprotectedDescription =>
+  String get shopsOptionsUnprotectedDescription =>
       'You are responsible for any damage to the shipment';
 
   @override
-  String get merchantOptionsDisclaimer =>
+  String get shopsOptionsDisclaimer =>
       'Details are illustrative and do not indicate an actual partnership or insurance with the store.';
 
   @override
-  String get merchantAllStores => 'All stores';
+  String get shopsAllStores => 'All stores';
 
   @override
-  String get merchantStoreCount => '+40 stores';
+  String get shopsStoreCount => '+40 stores';
 
   @override
-  String get merchantFashionStore => 'Style Store';
+  String get shopsFashionStore => 'Style Store';
 
   @override
-  String get merchantFashionCategory => 'Fashion and everyday items';
+  String get shopsFashionCategory => 'Fashion and everyday items';
 
   @override
-  String get merchantPerfumeStore => 'Dar Al Oud';
+  String get shopsPerfumeStore => 'Dar Al Oud';
 
   @override
-  String get merchantPerfumeCategory => 'Perfumes and incense';
+  String get shopsPerfumeCategory => 'Perfumes and incense';
 
   @override
-  String get merchantCafeStore => 'Al Deera Roastery';
+  String get shopsCafeStore => 'Al Deera Roastery';
 
   @override
-  String get merchantCafeCategory => 'Coffee and specialty roasts';
+  String get shopsCafeCategory => 'Coffee and specialty roasts';
 
   @override
-  String get merchantJoinTitle =>
+  String get shopsJoinTitle =>
       'Have a store? Let your customers shop with confidence.';
 
   @override
-  String get merchantJoinDescription =>
+  String get shopsJoinDescription =>
       'Add your store to Haseen and offer shipment protection with every order.';
 
   @override
-  String get merchantJoinAction => 'Add your store to Haseen';
+  String get shopsJoinAction => 'Add your store to Haseen';
 
   @override
   String get bottomNavProfile => 'Profile';

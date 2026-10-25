@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: AppSpacing.tokenM),
                       CustomHomeInfoCard(
                         productTitle: l10n.homeCompactShipmentProduct,
-                        merchantName: l10n.homeCompactShipmentMerchant,
+                        storeName: l10n.homeCompactShipmentStore,
                         price: l10n.homeCompactShipmentPrice,
                         statusLabel: l10n.homeCompactShipmentStatus,
                         deliveryLabel: l10n.homeCompactShipmentDelivery,
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: AppSpacing.tokenS),
                       CustomHomeInfoCard(
                         productTitle: l10n.homeCompactShipment2Product,
-                        merchantName: l10n.homeCompactShipment2Merchant,
+                        storeName: l10n.homeCompactShipment2Store,
                         price: l10n.homeCompactShipment2Price,
                         statusLabel: l10n.homeCompactShipment2Status,
                         deliveryLabel: l10n.homeCompactShipment2Delivery,
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         return;
                       }
                       if (index == 3) {
-                        context.go(AppRoutes.merchant);
+                        context.go(AppRoutes.shops);
                         return;
                       }
                       if (index == 4) {

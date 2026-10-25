@@ -15,7 +15,7 @@ class CustomHomeInfoCard extends StatelessWidget {
   const CustomHomeInfoCard({
     super.key,
     required this.productTitle,
-    required this.merchantName,
+    required this.storeName,
     required this.price,
     required this.statusLabel,
     required this.deliveryLabel,
@@ -26,7 +26,7 @@ class CustomHomeInfoCard extends StatelessWidget {
   });
 
   final String productTitle;
-  final String merchantName;
+  final String storeName;
   final String price;
   final String statusLabel;
   final String deliveryLabel;
@@ -105,7 +105,7 @@ class CustomHomeInfoCard extends StatelessWidget {
                           ),
                         ),
                         AppText(
-                          '$merchantName · $price',
+                          '$storeName · $price',
                           variant: AppTextVariant.bodySmall,
                           textAlign: TextAlign.start,
                           maxLines: 1,

@@ -7,8 +7,8 @@ class AppRoutes {
   static const String otpSuccess = '/otp-success';
   static const String welcome = '/welcome';
   static const String home = '/home';
-  static const String merchant = '/merchant';
-  static const String storeProtectionOptions = '/merchant/madar/protection';
+  static const String shops = '/shops';
+  static const String storeProtectionOptions = '/shops/madar/protection';
   static const String shipments = '/shipments';
   static const String profile = '/profile';
   static const String deleteAccount = '/profile/delete-account';

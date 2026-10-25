@@ -6,8 +6,8 @@ import '../../../core/resources/app_radius.dart';
 import '../../../core/resources/app_spacing.dart';
 import '../../../core/resources/app_typography.dart';
 
-class MerchantTrustCard extends StatelessWidget {
-  const MerchantTrustCard({
+class ShopsTrustCard extends StatelessWidget {
+  const ShopsTrustCard({
     super.key,
     required this.title,
     required this.description,

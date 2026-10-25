@@ -10,8 +10,8 @@ import '../../../core/resources/app_radius.dart';
 import '../../../core/resources/app_spacing.dart';
 import '../../../core/resources/app_typography.dart';
 
-class MerchantHeroHeader extends StatelessWidget {
-  const MerchantHeroHeader({
+class ShopsHeroHeader extends StatelessWidget {
+  const ShopsHeroHeader({
     super.key,
     required this.title,
     required this.subtitle,
@@ -30,7 +30,7 @@ class MerchantHeroHeader extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.asset(AppImages.merchantHero, fit: BoxFit.cover),
+          Image.asset(AppImages.shopsHero, fit: BoxFit.cover),
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(

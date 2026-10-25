@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../components/app_text.dart';
 import '../../components/layout/custom_bottom_nav_bar.dart';
 import '../../core/resources/app_colors.dart';
@@ -12,8 +11,8 @@ import 'widgets/merchant_hero_header.dart';
 import 'widgets/merchant_store_widgets.dart';
 import 'widgets/merchant_trust_card.dart';
 
-class MerchantScreen extends StatelessWidget {
-  const MerchantScreen({super.key});
+class ShopsScreen extends StatelessWidget {
+  const ShopsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +32,23 @@ class MerchantScreen extends StatelessWidget {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
-                    MerchantHeroHeader(
-                      title: l10n.merchantHeroTitle,
-                      subtitle: l10n.merchantHeroSubtitle,
-                      searchHint: l10n.merchantSearchHint,
+                    ShopsHeroHeader(
+                      title: l10n.shopsHeroTitle,
+                      subtitle: l10n.shopsHeroSubtitle,
+                      searchHint: l10n.shopsSearchHint,
                     ),
                     PositionedDirectional(
                       top: 320,
                       start: 0,
                       end: 0,
-                      child: MerchantTrustCard(
-                        title: l10n.merchantTrustTitle,
-                        description: l10n.merchantTrustDescription,
-                        partnersLabel: l10n.merchantMetricPartners,
-                        categoriesLabel: l10n.merchantMetricCategories,
-                        daysLabel: l10n.merchantMetricDays,
-                        daysValue: l10n.merchantDaysValue,
-                        promise: l10n.merchantProtectionPromise,
+                      child: ShopsTrustCard(
+                        title: l10n.shopsTrustTitle,
+                        description: l10n.shopsTrustDescription,
+                        partnersLabel: l10n.shopsMetricPartners,
+                        categoriesLabel: l10n.shopsMetricCategories,
+                        daysLabel: l10n.shopsMetricDays,
+                        daysValue: l10n.shopsDaysValue,
+                        promise: l10n.shopsProtectionPromise,
                       ),
                     ),
                   ],
@@ -66,58 +65,58 @@ class MerchantScreen extends StatelessWidget {
               sliver: SliverList(
                 delegate: SliverChildListDelegate(<Widget>[
                   _SectionHeading(
-                    title: l10n.merchantFeaturedTitle,
-                    action: l10n.merchantSeeAll,
+                    title: l10n.shopsFeaturedTitle,
+                    action: l10n.shopsSeeAll,
                     onTap: () {},
                   ),
                   const SizedBox(height: AppSpacing.tokenM),
-                  MerchantFeaturedCard(
-                    protectionLabel: l10n.merchantProtectionAvailable,
-                    storeName: l10n.merchantFeaturedStore,
-                    category: l10n.merchantFeaturedCategory,
-                    action: l10n.merchantShopNow,
+                  ShopsFeaturedCard(
+                    protectionLabel: l10n.shopsProtectionAvailable,
+                    storeName: l10n.shopsFeaturedStore,
+                    category: l10n.shopsFeaturedCategory,
+                    action: l10n.shopsShopNow,
                     onShopNow: () =>
                         context.push(AppRoutes.storeProtectionOptions),
                   ),
                   const SizedBox(height: AppSpacing.tokenXl),
                   _SectionHeading(
-                    title: l10n.merchantAllStores,
-                    action: l10n.merchantStoreCount,
+                    title: l10n.shopsAllStores,
+                    action: l10n.shopsStoreCount,
                     onTap: () {},
                     actionIsBadge: true,
                   ),
                   const SizedBox(height: AppSpacing.tokenM),
-                  MerchantStoreTile(
-                    name: l10n.merchantFashionStore,
-                    category: l10n.merchantFashionCategory,
+                  ShopsStoreTile(
+                    name: l10n.shopsFashionStore,
+                    category: l10n.shopsFashionCategory,
                     rating: '4.7',
                     artwork: Icons.shopping_bag_outlined,
                     artworkColor: const Color(0xFFBBA38A),
-                    protectionLabel: l10n.merchantProtectionAvailable,
+                    protectionLabel: l10n.shopsProtectionAvailable,
                   ),
                   const SizedBox(height: AppSpacing.tokenM),
-                  MerchantStoreTile(
-                    name: l10n.merchantPerfumeStore,
-                    category: l10n.merchantPerfumeCategory,
+                  ShopsStoreTile(
+                    name: l10n.shopsPerfumeStore,
+                    category: l10n.shopsPerfumeCategory,
                     rating: '4.9',
                     artwork: Icons.spa_outlined,
                     artworkColor: const Color(0xFF77716D),
-                    protectionLabel: l10n.merchantProtectionAvailable,
+                    protectionLabel: l10n.shopsProtectionAvailable,
                   ),
                   const SizedBox(height: AppSpacing.tokenM),
-                  MerchantStoreTile(
-                    name: l10n.merchantCafeStore,
-                    category: l10n.merchantCafeCategory,
+                  ShopsStoreTile(
+                    name: l10n.shopsCafeStore,
+                    category: l10n.shopsCafeCategory,
                     rating: '4.8',
                     artwork: Icons.coffee_rounded,
                     artworkColor: const Color(0xFF8F756D),
-                    protectionLabel: l10n.merchantProtectionAvailable,
+                    protectionLabel: l10n.shopsProtectionAvailable,
                   ),
                   const SizedBox(height: AppSpacing.token3Xl),
-                  MerchantJoinBanner(
-                    title: l10n.merchantJoinTitle,
-                    description: l10n.merchantJoinDescription,
-                    action: l10n.merchantJoinAction,
+                  ShopsJoinBanner(
+                    title: l10n.shopsJoinTitle,
+                    description: l10n.shopsJoinDescription,
+                    action: l10n.shopsJoinAction,
                   ),
                   const SizedBox(height: AppSpacing.token9Xl),
                   const SizedBox(height: AppSpacing.token2Xl),

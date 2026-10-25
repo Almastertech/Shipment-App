@@ -53,7 +53,7 @@ class ShipmentDetailsScreen extends StatelessWidget {
                     child: ShipmentCardWidget(
                       deliveryStatus: l10n.shipmentDetailsInTransitLabel,
                       protectionLabel: l10n.homeShipmentProtection,
-                      merchantAndItem: l10n.homeShipmentMerchant,
+                      storeAndItem: l10n.homeShipmentStore,
                       title: l10n.homeShipmentProduct,
                       progressSteps: <String>[
                         l10n.homeShipmentStepOrdered,
@@ -131,8 +131,8 @@ class ShipmentDetailsScreen extends StatelessWidget {
                         value: l10n.homeShipmentTrackingNumber,
                       ),
                       ShipmentDetailEntry(
-                        label: l10n.shipmentDetailsMerchant,
-                        value: l10n.homeShipmentMerchant,
+                        label: l10n.shipmentDetailsStore,
+                        value: l10n.homeShipmentStore,
                       ),
                       ShipmentDetailEntry(
                         label: l10n.shipmentDetailsProduct,
@@ -182,7 +182,7 @@ class ShipmentDetailsScreen extends StatelessWidget {
                   if (index == 0) context.go(AppRoutes.home);
                   if (index == 1) context.go(AppRoutes.shipments);
                   if (index == 2) context.go(AppRoutes.requests);
-                  if (index == 3) context.go(AppRoutes.merchant);
+                  if (index == 3) context.go(AppRoutes.shops);
                 },
               ),
             ),

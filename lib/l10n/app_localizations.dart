@@ -587,7 +587,7 @@ abstract class AppLocalizations {
   /// No description provided for @accountNotFoundCheckEmail.
   ///
   /// In en, this message translates to:
-  /// **'Check the order confirmation email from the merchant'**
+  /// **'Check the order confirmation email from the store'**
   String get accountNotFoundCheckEmail;
 
   /// No description provided for @accountNotFoundTryOtherMethod.
@@ -677,7 +677,7 @@ abstract class AppLocalizations {
   /// No description provided for @myShipmentsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Coverage for damage, loss and delays on merchant shipments'**
+  /// **'Coverage for damage, loss and delays on shipments from partner stores'**
   String get myShipmentsSubtitle;
 
   /// No description provided for @myShipmentsActiveTab.
@@ -746,11 +746,11 @@ abstract class AppLocalizations {
   /// **'See all'**
   String get homeSeeAllShipments;
 
-  /// No description provided for @homeShipmentMerchant.
+  /// No description provided for @homeShipmentStore.
   ///
   /// In en, this message translates to:
   /// **'Noon store'**
-  String get homeShipmentMerchant;
+  String get homeShipmentStore;
 
   /// No description provided for @homeShipmentProduct.
   ///
@@ -842,11 +842,11 @@ abstract class AppLocalizations {
   /// **'Wireless headphones'**
   String get homeCompactShipmentProduct;
 
-  /// No description provided for @homeCompactShipmentMerchant.
+  /// No description provided for @homeCompactShipmentStore.
   ///
   /// In en, this message translates to:
   /// **'Jarir store'**
-  String get homeCompactShipmentMerchant;
+  String get homeCompactShipmentStore;
 
   /// No description provided for @homeCompactShipmentPrice.
   ///
@@ -884,11 +884,11 @@ abstract class AppLocalizations {
   /// **'Men\'s fragrance, 100 ml'**
   String get homeCompactShipment2Product;
 
-  /// No description provided for @homeCompactShipment2Merchant.
+  /// No description provided for @homeCompactShipment2Store.
   ///
   /// In en, this message translates to:
   /// **'Al Majd Oud store'**
-  String get homeCompactShipment2Merchant;
+  String get homeCompactShipment2Store;
 
   /// No description provided for @homeCompactShipment2Price.
   ///
@@ -1070,11 +1070,11 @@ abstract class AppLocalizations {
   /// **'Friday, October 1'**
   String get shipmentDetailsExpectedDeliveryValue;
 
-  /// No description provided for @shipmentDetailsMerchant.
+  /// No description provided for @shipmentDetailsStore.
   ///
   /// In en, this message translates to:
-  /// **'Merchant'**
-  String get shipmentDetailsMerchant;
+  /// **'Store'**
+  String get shipmentDetailsStore;
 
   /// No description provided for @shipmentDetailsOrderDate.
   ///
@@ -1469,7 +1469,7 @@ abstract class AppLocalizations {
   /// No description provided for @secondaryBannerDescription.
   ///
   /// In en, this message translates to:
-  /// **'Damage, loss, and delays on eligible merchant shipments.'**
+  /// **'Damage, loss, and delays on eligible shipments from partner stores.'**
   String get secondaryBannerDescription;
 
   /// No description provided for @secondaryBannerAction.
@@ -1505,260 +1505,260 @@ abstract class AppLocalizations {
   /// No description provided for @bottomNavStores.
   ///
   /// In en, this message translates to:
-  /// **'Merchant'**
+  /// **'Shops'**
   String get bottomNavStores;
 
-  /// No description provided for @merchantHeroTitle.
+  /// No description provided for @shopsHeroTitle.
   ///
   /// In en, this message translates to:
   /// **'Stores you can trust'**
-  String get merchantHeroTitle;
+  String get shopsHeroTitle;
 
-  /// No description provided for @merchantHeroSubtitle.
+  /// No description provided for @shopsHeroSubtitle.
   ///
   /// In en, this message translates to:
   /// **'Shop from our partners with shipment protection from door to door.'**
-  String get merchantHeroSubtitle;
+  String get shopsHeroSubtitle;
 
-  /// No description provided for @merchantSearchHint.
+  /// No description provided for @shopsSearchHint.
   ///
   /// In en, this message translates to:
   /// **'Search for a store...'**
-  String get merchantSearchHint;
+  String get shopsSearchHint;
 
-  /// No description provided for @merchantTrustTitle.
+  /// No description provided for @shopsTrustTitle.
   ///
   /// In en, this message translates to:
   /// **'Every store is protected by Haseen'**
-  String get merchantTrustTitle;
+  String get shopsTrustTitle;
 
-  /// No description provided for @merchantTrustDescription.
+  /// No description provided for @shopsTrustDescription.
   ///
   /// In en, this message translates to:
   /// **'Shop from trusted stores and get shipment protection from checkout to delivery.'**
-  String get merchantTrustDescription;
+  String get shopsTrustDescription;
 
-  /// No description provided for @merchantMetricPartners.
+  /// No description provided for @shopsMetricPartners.
   ///
   /// In en, this message translates to:
   /// **'Partner stores'**
-  String get merchantMetricPartners;
+  String get shopsMetricPartners;
 
-  /// No description provided for @merchantMetricCategories.
+  /// No description provided for @shopsMetricCategories.
   ///
   /// In en, this message translates to:
   /// **'Categories'**
-  String get merchantMetricCategories;
+  String get shopsMetricCategories;
 
-  /// No description provided for @merchantMetricDays.
+  /// No description provided for @shopsMetricDays.
   ///
   /// In en, this message translates to:
   /// **'To file a claim'**
-  String get merchantMetricDays;
+  String get shopsMetricDays;
 
-  /// No description provided for @merchantDaysValue.
+  /// No description provided for @shopsDaysValue.
   ///
   /// In en, this message translates to:
   /// **'2 days'**
-  String get merchantDaysValue;
+  String get shopsDaysValue;
 
-  /// No description provided for @merchantProtectionPromise.
+  /// No description provided for @shopsProtectionPromise.
   ///
   /// In en, this message translates to:
   /// **'Lost, damaged, or delayed? File a claim right in the app.'**
-  String get merchantProtectionPromise;
+  String get shopsProtectionPromise;
 
-  /// No description provided for @merchantFeaturedTitle.
+  /// No description provided for @shopsFeaturedTitle.
   ///
   /// In en, this message translates to:
   /// **'Featured stores'**
-  String get merchantFeaturedTitle;
+  String get shopsFeaturedTitle;
 
-  /// No description provided for @merchantSeeAll.
+  /// No description provided for @shopsSeeAll.
   ///
   /// In en, this message translates to:
   /// **'See all'**
-  String get merchantSeeAll;
+  String get shopsSeeAll;
 
-  /// No description provided for @merchantProtectionAvailable.
+  /// No description provided for @shopsProtectionAvailable.
   ///
   /// In en, this message translates to:
   /// **'Protection available'**
-  String get merchantProtectionAvailable;
+  String get shopsProtectionAvailable;
 
-  /// No description provided for @merchantFeaturedStore.
+  /// No description provided for @shopsFeaturedStore.
   ///
   /// In en, this message translates to:
   /// **'Madar Store'**
-  String get merchantFeaturedStore;
+  String get shopsFeaturedStore;
 
-  /// No description provided for @merchantFeaturedCategory.
+  /// No description provided for @shopsFeaturedCategory.
   ///
   /// In en, this message translates to:
   /// **'Electronics and accessories'**
-  String get merchantFeaturedCategory;
+  String get shopsFeaturedCategory;
 
-  /// No description provided for @merchantShopNow.
+  /// No description provided for @shopsShopNow.
   ///
   /// In en, this message translates to:
   /// **'Shop Madar'**
-  String get merchantShopNow;
+  String get shopsShopNow;
 
-  /// No description provided for @merchantOptionsHeroTitle.
+  /// No description provided for @shopsOptionsHeroTitle.
   ///
   /// In en, this message translates to:
   /// **'Madar Store'**
-  String get merchantOptionsHeroTitle;
+  String get shopsOptionsHeroTitle;
 
-  /// No description provided for @merchantOptionsCategory.
+  /// No description provided for @shopsOptionsCategory.
   ///
   /// In en, this message translates to:
   /// **'Electronics and accessories • Riyadh'**
-  String get merchantOptionsCategory;
+  String get shopsOptionsCategory;
 
-  /// No description provided for @merchantOptionsProtection.
+  /// No description provided for @shopsOptionsProtection.
   ///
   /// In en, this message translates to:
   /// **'Protection'**
-  String get merchantOptionsProtection;
+  String get shopsOptionsProtection;
 
-  /// No description provided for @merchantOptionsAvailable.
+  /// No description provided for @shopsOptionsAvailable.
   ///
   /// In en, this message translates to:
   /// **'Available ✓'**
-  String get merchantOptionsAvailable;
+  String get shopsOptionsAvailable;
 
-  /// No description provided for @merchantOptionsDelivery.
+  /// No description provided for @shopsOptionsDelivery.
   ///
   /// In en, this message translates to:
   /// **'Delivery'**
-  String get merchantOptionsDelivery;
+  String get shopsOptionsDelivery;
 
-  /// No description provided for @merchantOptionsDeliveryValue.
+  /// No description provided for @shopsOptionsDeliveryValue.
   ///
   /// In en, this message translates to:
   /// **'2–4 days'**
-  String get merchantOptionsDeliveryValue;
+  String get shopsOptionsDeliveryValue;
 
-  /// No description provided for @merchantOptionsReturn.
+  /// No description provided for @shopsOptionsReturn.
   ///
   /// In en, this message translates to:
   /// **'Returns'**
-  String get merchantOptionsReturn;
+  String get shopsOptionsReturn;
 
-  /// No description provided for @merchantOptionsReturnValue.
+  /// No description provided for @shopsOptionsReturnValue.
   ///
   /// In en, this message translates to:
   /// **'Within 7 days'**
-  String get merchantOptionsReturnValue;
+  String get shopsOptionsReturnValue;
 
-  /// No description provided for @merchantOptionsQuestion.
+  /// No description provided for @shopsOptionsQuestion.
   ///
   /// In en, this message translates to:
   /// **'How would you like your shipment protected?'**
-  String get merchantOptionsQuestion;
+  String get shopsOptionsQuestion;
 
-  /// No description provided for @merchantOptionsSubtitle.
+  /// No description provided for @shopsOptionsSubtitle.
   ///
   /// In en, this message translates to:
   /// **'Choose protection before paying at the store'**
-  String get merchantOptionsSubtitle;
+  String get shopsOptionsSubtitle;
 
-  /// No description provided for @merchantOptionsProtectedTitle.
+  /// No description provided for @shopsOptionsProtectedTitle.
   ///
   /// In en, this message translates to:
   /// **'With Haseen protection'**
-  String get merchantOptionsProtectedTitle;
+  String get shopsOptionsProtectedTitle;
 
-  /// No description provided for @merchantOptionsProtectedDescription.
+  /// No description provided for @shopsOptionsProtectedDescription.
   ///
   /// In en, this message translates to:
   /// **'Damage or loss during transit, subject to protection terms'**
-  String get merchantOptionsProtectedDescription;
+  String get shopsOptionsProtectedDescription;
 
-  /// No description provided for @merchantOptionsUnprotectedTitle.
+  /// No description provided for @shopsOptionsUnprotectedTitle.
   ///
   /// In en, this message translates to:
   /// **'Without protection'**
-  String get merchantOptionsUnprotectedTitle;
+  String get shopsOptionsUnprotectedTitle;
 
-  /// No description provided for @merchantOptionsUnprotectedDescription.
+  /// No description provided for @shopsOptionsUnprotectedDescription.
   ///
   /// In en, this message translates to:
   /// **'You are responsible for any damage to the shipment'**
-  String get merchantOptionsUnprotectedDescription;
+  String get shopsOptionsUnprotectedDescription;
 
-  /// No description provided for @merchantOptionsDisclaimer.
+  /// No description provided for @shopsOptionsDisclaimer.
   ///
   /// In en, this message translates to:
   /// **'Details are illustrative and do not indicate an actual partnership or insurance with the store.'**
-  String get merchantOptionsDisclaimer;
+  String get shopsOptionsDisclaimer;
 
-  /// No description provided for @merchantAllStores.
+  /// No description provided for @shopsAllStores.
   ///
   /// In en, this message translates to:
   /// **'All stores'**
-  String get merchantAllStores;
+  String get shopsAllStores;
 
-  /// No description provided for @merchantStoreCount.
+  /// No description provided for @shopsStoreCount.
   ///
   /// In en, this message translates to:
   /// **'+40 stores'**
-  String get merchantStoreCount;
+  String get shopsStoreCount;
 
-  /// No description provided for @merchantFashionStore.
+  /// No description provided for @shopsFashionStore.
   ///
   /// In en, this message translates to:
   /// **'Style Store'**
-  String get merchantFashionStore;
+  String get shopsFashionStore;
 
-  /// No description provided for @merchantFashionCategory.
+  /// No description provided for @shopsFashionCategory.
   ///
   /// In en, this message translates to:
   /// **'Fashion and everyday items'**
-  String get merchantFashionCategory;
+  String get shopsFashionCategory;
 
-  /// No description provided for @merchantPerfumeStore.
+  /// No description provided for @shopsPerfumeStore.
   ///
   /// In en, this message translates to:
   /// **'Dar Al Oud'**
-  String get merchantPerfumeStore;
+  String get shopsPerfumeStore;
 
-  /// No description provided for @merchantPerfumeCategory.
+  /// No description provided for @shopsPerfumeCategory.
   ///
   /// In en, this message translates to:
   /// **'Perfumes and incense'**
-  String get merchantPerfumeCategory;
+  String get shopsPerfumeCategory;
 
-  /// No description provided for @merchantCafeStore.
+  /// No description provided for @shopsCafeStore.
   ///
   /// In en, this message translates to:
   /// **'Al Deera Roastery'**
-  String get merchantCafeStore;
+  String get shopsCafeStore;
 
-  /// No description provided for @merchantCafeCategory.
+  /// No description provided for @shopsCafeCategory.
   ///
   /// In en, this message translates to:
   /// **'Coffee and specialty roasts'**
-  String get merchantCafeCategory;
+  String get shopsCafeCategory;
 
-  /// No description provided for @merchantJoinTitle.
+  /// No description provided for @shopsJoinTitle.
   ///
   /// In en, this message translates to:
   /// **'Have a store? Let your customers shop with confidence.'**
-  String get merchantJoinTitle;
+  String get shopsJoinTitle;
 
-  /// No description provided for @merchantJoinDescription.
+  /// No description provided for @shopsJoinDescription.
   ///
   /// In en, this message translates to:
   /// **'Add your store to Haseen and offer shipment protection with every order.'**
-  String get merchantJoinDescription;
+  String get shopsJoinDescription;
 
-  /// No description provided for @merchantJoinAction.
+  /// No description provided for @shopsJoinAction.
   ///
   /// In en, this message translates to:
   /// **'Add your store to Haseen'**
-  String get merchantJoinAction;
+  String get shopsJoinAction;
 
   /// No description provided for @bottomNavProfile.
   ///
