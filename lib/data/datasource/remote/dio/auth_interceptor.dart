@@ -28,6 +28,8 @@ class NoopTokenRefresher implements TokenRefresher {
 }
 
 class AuthInterceptor extends Interceptor {
+  static const String sessionGenerationExtraKey = 'auth_session_generation';
+
   AuthInterceptor({
     required Dio dio,
     required SessionManager sessionManager,
@@ -44,7 +46,8 @@ class AuthInterceptor extends Interceptor {
   final TokenRefresher _tokenRefresher;
   final SessionExpiryHandler _sessionExpiryHandler;
 
-  Completer<_RefreshAttempt>? _refreshCompleter;
+  final Map<int, Completer<_RefreshAttempt>> _refreshCompleters =
+      <int, Completer<_RefreshAttempt>>{};
 
   @override
   Future<void> onRequest(
@@ -53,14 +56,32 @@ class AuthInterceptor extends Interceptor {
   ) async {
     final requiresAuth = options.extra['requiresAuth'] != false;
 
-    if (!requiresAuth ||
-        options.headers.containsKey('Authorization') ||
-        options.extra['isRefreshCall'] == true) {
+    if (!requiresAuth || options.extra['isRefreshCall'] == true) {
       handler.next(options);
       return;
     }
 
-    final accessToken = await _sessionManager.getAccessToken();
+    final session = await _sessionManager.getSnapshot();
+    final expectedGeneration = options.extra[sessionGenerationExtraKey] as int?;
+    if (expectedGeneration != null &&
+        expectedGeneration != session.generation) {
+      handler.reject(
+        DioException(
+          requestOptions: options,
+          type: DioExceptionType.cancel,
+          message: 'Session changed before the request was sent.',
+        ),
+      );
+      return;
+    }
+
+    options.extra[sessionGenerationExtraKey] = session.generation;
+    if (options.headers.containsKey('Authorization')) {
+      handler.next(options);
+      return;
+    }
+
+    final accessToken = session.accessToken;
     if (accessToken != null && accessToken.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $accessToken';
     }
@@ -78,16 +99,35 @@ class AuthInterceptor extends Interceptor {
     }
 
     err.requestOptions.extra['suppressMonitoringFailure'] = true;
-    final refreshToken = await _sessionManager.getRefreshToken();
-    if (refreshToken == null || refreshToken.isEmpty) {
-      err.requestOptions.extra['auth_retry'] = true;
+    final session = await _sessionManager.getSnapshot();
+    final requestGeneration =
+        err.requestOptions.extra[sessionGenerationExtraKey] as int? ??
+            session.generation;
+    if (requestGeneration != session.generation) {
       err.requestOptions.extra['suppressMonitoringFailure'] = false;
-      await _handleExpiredSession();
       handler.next(err);
       return;
     }
 
-    final refreshAttempt = await _refreshOnce(refreshToken);
+    final refreshToken = session.refreshToken;
+    if (refreshToken == null || refreshToken.isEmpty) {
+      err.requestOptions.extra['auth_retry'] = true;
+      err.requestOptions.extra['suppressMonitoringFailure'] = false;
+      await _handleExpiredSession(requestGeneration);
+      handler.next(err);
+      return;
+    }
+
+    final refreshAttempt = await _refreshOnce(
+      refreshToken,
+      expectedGeneration: requestGeneration,
+    );
+    if (refreshAttempt.error is _SessionChangedDuringRefresh) {
+      err.requestOptions.extra['suppressMonitoringFailure'] = false;
+      handler.next(err);
+      return;
+    }
+
     if (refreshAttempt.error != null) {
       final error = refreshAttempt.error!;
       final stackTrace = refreshAttempt.stackTrace;
@@ -99,7 +139,7 @@ class AuthInterceptor extends Interceptor {
       );
 
       if (_shouldExpireSessionOnRefreshFailure(error)) {
-        await _handleExpiredSession();
+        await _handleExpiredSession(requestGeneration);
       }
       err.requestOptions.extra['auth_retry'] = true;
       err.requestOptions.extra['suppressMonitoringFailure'] = false;
@@ -111,7 +151,7 @@ class AuthInterceptor extends Interceptor {
     if (refreshed == null) {
       err.requestOptions.extra['auth_retry'] = true;
       err.requestOptions.extra['suppressMonitoringFailure'] = false;
-      await _handleExpiredSession();
+      await _handleExpiredSession(requestGeneration);
       handler.next(err);
       return;
     }
@@ -124,11 +164,27 @@ class AuthInterceptor extends Interceptor {
       return;
     }
 
+    final generationAfterRefresh = refreshAttempt.sessionGeneration;
+    if (generationAfterRefresh == null ||
+        (await _sessionManager.getSnapshot()).generation !=
+            generationAfterRefresh) {
+      err.requestOptions.extra['suppressMonitoringFailure'] = false;
+      handler.next(err);
+      return;
+    }
+
     requestOptions.extra['auth_retry'] = true;
+    requestOptions.extra[sessionGenerationExtraKey] = generationAfterRefresh;
     requestOptions.headers['Authorization'] = 'Bearer ${refreshed.accessToken}';
 
     try {
       final response = await _dio.fetch<dynamic>(requestOptions);
+      if ((await _sessionManager.getSnapshot()).generation !=
+          generationAfterRefresh) {
+        err.requestOptions.extra['suppressMonitoringFailure'] = false;
+        handler.next(err);
+        return;
+      }
       handler.resolve(response);
     } on DioException catch (replayError, replayStackTrace) {
       AppLogger.warning(
@@ -136,7 +192,7 @@ class AuthInterceptor extends Interceptor {
         category: AppLogCategory.auth,
       );
       if (_shouldExpireSessionOnReplayFailure(replayError)) {
-        await _handleExpiredSession();
+        await _handleExpiredSession(generationAfterRefresh);
       }
       AppLogger.debug(
         'Replay failure stackTrace=$replayStackTrace',
@@ -173,23 +229,44 @@ class AuthInterceptor extends Interceptor {
     return true;
   }
 
-  Future<_RefreshAttempt> _refreshOnce(String refreshToken) async {
-    if (_refreshCompleter != null) {
-      return _refreshCompleter!.future;
+  Future<_RefreshAttempt> _refreshOnce(
+    String refreshToken, {
+    required int expectedGeneration,
+  }) async {
+    final existing = _refreshCompleters[expectedGeneration];
+    if (existing != null) {
+      return existing.future;
     }
 
     final completer = Completer<_RefreshAttempt>();
-    _refreshCompleter = completer;
+    _refreshCompleters[expectedGeneration] = completer;
 
     try {
       final result = await _tokenRefresher.refreshToken(refreshToken);
       if (result != null) {
-        await _sessionManager.saveTokens(
+        final savedSession = await _sessionManager.saveTokensIfGeneration(
+          expectedGeneration: expectedGeneration,
           accessToken: result.accessToken,
           refreshToken: result.refreshToken,
         );
+        if (savedSession == null) {
+          completer.complete(const _RefreshAttempt.sessionChanged());
+        } else {
+          completer.complete(
+            _RefreshAttempt.success(
+              result,
+              sessionGeneration: savedSession.generation,
+            ),
+          );
+        }
+      } else {
+        completer.complete(
+          _RefreshAttempt.success(
+            null,
+            sessionGeneration: expectedGeneration,
+          ),
+        );
       }
-      completer.complete(_RefreshAttempt.success(result));
     } catch (error, stackTrace) {
       completer.complete(
         _RefreshAttempt.failure(
@@ -198,15 +275,18 @@ class AuthInterceptor extends Interceptor {
         ),
       );
     } finally {
-      _refreshCompleter = null;
+      if (identical(_refreshCompleters[expectedGeneration], completer)) {
+        _refreshCompleters.remove(expectedGeneration);
+      }
     }
 
     return completer.future;
   }
 
-  Future<void> _handleExpiredSession() async {
-    await _sessionManager.clearTokens();
-    await _sessionExpiryHandler.onSessionExpired();
+  Future<void> _handleExpiredSession(int expectedGeneration) async {
+    final cleared =
+        await _sessionManager.clearTokensIfGeneration(expectedGeneration);
+    if (cleared) await _sessionExpiryHandler.onSessionExpired();
   }
 
   bool _shouldExpireSessionOnRefreshFailure(Object error) {
@@ -249,16 +329,30 @@ class AuthInterceptor extends Interceptor {
 }
 
 class _RefreshAttempt {
-  const _RefreshAttempt.success(this.result)
-      : error = null,
+  const _RefreshAttempt.success(
+    this.result, {
+    required this.sessionGeneration,
+  })  : error = null,
         stackTrace = null;
+
+  const _RefreshAttempt.sessionChanged()
+      : result = null,
+        error = const _SessionChangedDuringRefresh(),
+        stackTrace = null,
+        sessionGeneration = null;
 
   const _RefreshAttempt.failure({
     required this.error,
     required this.stackTrace,
-  }) : result = null;
+  })  : result = null,
+        sessionGeneration = null;
 
   final TokenRefreshResult? result;
   final Object? error;
   final StackTrace? stackTrace;
+  final int? sessionGeneration;
+}
+
+class _SessionChangedDuringRefresh implements Exception {
+  const _SessionChangedDuringRefresh();
 }

@@ -225,6 +225,7 @@ Future<void> _initInternal() async {
         loggingInterceptor: getIt<LoggingInterceptor>(),
         retryInterceptor: getIt<RetryInterceptor>(),
         rateLimitInterceptor: getIt<RateLimitInterceptor>(),
+        sessionManager: getIt<SessionManager>(),
         deduplicator: getIt<RequestDeduplicator>(),
       ),
     );

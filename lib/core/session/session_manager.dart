@@ -13,6 +13,18 @@ class SessionTokens {
   final String? refreshToken;
 }
 
+class SessionSnapshot {
+  const SessionSnapshot({
+    required this.accessToken,
+    required this.refreshToken,
+    required this.generation,
+  });
+
+  final String? accessToken;
+  final String? refreshToken;
+  final int generation;
+}
+
 class SessionManager extends ChangeNotifier {
   SessionManager({
     required SecureStorage secureStorage,
@@ -28,6 +40,9 @@ class SessionManager extends ChangeNotifier {
   String? _accessToken;
   String? _refreshToken;
   bool _isGuest = false;
+  int _generation = 0;
+
+  int get generation => _generation;
 
   bool get isAuthenticated {
     final accessToken = _accessToken;
@@ -47,10 +62,29 @@ class SessionManager extends ChangeNotifier {
     required String accessToken,
     String? refreshToken,
   }) async {
+    await _saveTokens(accessToken: accessToken, refreshToken: refreshToken);
+  }
+
+  Future<SessionSnapshot?> saveTokensIfGeneration({
+    required int expectedGeneration,
+    required String accessToken,
+    String? refreshToken,
+  }) async {
+    await _hydrate();
+    if (_generation != expectedGeneration) return null;
+
+    return _saveTokens(accessToken: accessToken, refreshToken: refreshToken);
+  }
+
+  Future<SessionSnapshot> _saveTokens({
+    required String accessToken,
+    String? refreshToken,
+  }) async {
     _accessToken = accessToken;
     _refreshToken = refreshToken ?? _refreshToken;
     _isGuest = false;
     _hydrated = true;
+    final generation = ++_generation;
 
     await _secureStorage.write(
       key: AppConstants.authTokenStorageKey,
@@ -67,6 +101,11 @@ class SessionManager extends ChangeNotifier {
     await _secureStorage.delete(key: AppConstants.guestSessionStorageKey);
 
     notifyListeners();
+    return SessionSnapshot(
+      accessToken: _accessToken,
+      refreshToken: _refreshToken,
+      generation: generation,
+    );
   }
 
   Future<void> startGuestSession() async {
@@ -74,6 +113,7 @@ class SessionManager extends ChangeNotifier {
     _refreshToken = null;
     _isGuest = true;
     _hydrated = true;
+    _generation++;
 
     await _secureStorage.delete(key: AppConstants.authTokenStorageKey);
     await _secureStorage.delete(key: AppConstants.refreshTokenStorageKey);
@@ -88,6 +128,15 @@ class SessionManager extends ChangeNotifier {
   Future<String?> getAccessToken() async {
     await _hydrate();
     return _accessToken;
+  }
+
+  Future<SessionSnapshot> getSnapshot() async {
+    await _hydrate();
+    return SessionSnapshot(
+      accessToken: _accessToken,
+      refreshToken: _refreshToken,
+      generation: _generation,
+    );
   }
 
   Future<String?> getRefreshToken() async {
@@ -108,10 +157,22 @@ class SessionManager extends ChangeNotifier {
   }
 
   Future<void> clearTokens() async {
+    await _clearTokens();
+  }
+
+  Future<bool> clearTokensIfGeneration(int expectedGeneration) async {
+    await _hydrate();
+    if (_generation != expectedGeneration) return false;
+    await _clearTokens();
+    return true;
+  }
+
+  Future<void> _clearTokens() async {
     _accessToken = null;
     _refreshToken = null;
     _isGuest = false;
     _hydrated = true;
+    _generation++;
 
     await _secureStorage.delete(key: AppConstants.authTokenStorageKey);
     await _secureStorage.delete(key: AppConstants.refreshTokenStorageKey);

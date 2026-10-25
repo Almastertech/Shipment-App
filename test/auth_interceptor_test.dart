@@ -1,12 +1,13 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:shipments/core/session/session_expiry_handler.dart';
 import 'package:shipments/core/session/session_manager.dart';
 import 'package:shipments/core/session/session_scoped_data_purger.dart';
 import 'package:shipments/core/storage/secure_storage.dart';
 import 'package:shipments/data/datasource/remote/dio/auth_interceptor.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('AuthInterceptor', () {
@@ -198,6 +199,91 @@ void main() {
       expect(await sessionManager.getAccessToken(), isNull);
       expect(await sessionManager.getRefreshToken(), isNull);
     });
+
+    test('does not restore tokens when logout occurs during token refresh',
+        () async {
+      final sessionManager = SessionManager(
+        secureStorage: InMemorySecureStorage(),
+      );
+      await sessionManager.saveTokens(
+        accessToken: 'account_a_access',
+        refreshToken: 'account_a_refresh',
+      );
+      final refresher = _CompletingTokenRefresher();
+      final adapter = _UnauthorizedAdapterWithRequestCount();
+      final dio = Dio(BaseOptions(baseUrl: 'https://example.com'))
+        ..httpClientAdapter = adapter;
+      dio.interceptors.add(
+        AuthInterceptor(
+          dio: dio,
+          sessionManager: sessionManager,
+          tokenRefresher: refresher,
+        ),
+      );
+
+      final request = dio.get<dynamic>('/secure');
+      await refresher.started.future;
+      await sessionManager.clearTokens();
+      refresher.complete(
+        const TokenRefreshResult(
+          accessToken: 'account_a_refreshed',
+          refreshToken: 'account_a_refresh_2',
+        ),
+      );
+
+      await expectLater(request, throwsA(isA<DioException>()));
+      expect(await sessionManager.getAccessToken(), isNull);
+      expect(await sessionManager.getRefreshToken(), isNull);
+      expect(
+        adapter.requestCount,
+        1,
+        reason: 'stale requests are not replayed',
+      );
+    });
+
+    test('does not overwrite a new account when an old refresh completes',
+        () async {
+      final sessionManager = SessionManager(
+        secureStorage: InMemorySecureStorage(),
+      );
+      await sessionManager.saveTokens(
+        accessToken: 'account_a_access',
+        refreshToken: 'account_a_refresh',
+      );
+      final refresher = _CompletingTokenRefresher();
+      final adapter = _UnauthorizedAdapterWithRequestCount();
+      final dio = Dio(BaseOptions(baseUrl: 'https://example.com'))
+        ..httpClientAdapter = adapter;
+      dio.interceptors.add(
+        AuthInterceptor(
+          dio: dio,
+          sessionManager: sessionManager,
+          tokenRefresher: refresher,
+        ),
+      );
+
+      final request = dio.get<dynamic>('/secure');
+      await refresher.started.future;
+      await sessionManager.saveTokens(
+        accessToken: 'account_b_access',
+        refreshToken: 'account_b_refresh',
+      );
+      refresher.complete(
+        const TokenRefreshResult(
+          accessToken: 'account_a_refreshed',
+          refreshToken: 'account_a_refresh_2',
+        ),
+      );
+
+      await expectLater(request, throwsA(isA<DioException>()));
+      expect(await sessionManager.getAccessToken(), 'account_b_access');
+      expect(await sessionManager.getRefreshToken(), 'account_b_refresh');
+      expect(
+        adapter.requestCount,
+        1,
+        reason: 'stale requests are not replayed',
+      );
+    });
   });
 }
 
@@ -242,6 +328,43 @@ class _UnauthorizedAdapter implements HttpClientAdapter {
 
   @override
   void close({bool force = false}) {}
+}
+
+class _UnauthorizedAdapterWithRequestCount implements HttpClientAdapter {
+  int requestCount = 0;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    requestCount++;
+    return ResponseBody.fromString(
+      '{"message":"unauthorized"}',
+      401,
+      headers: <String, List<String>>{
+        Headers.contentTypeHeader: <String>[Headers.jsonContentType],
+      },
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
+}
+
+class _CompletingTokenRefresher implements TokenRefresher {
+  final Completer<void> started = Completer<void>();
+  final Completer<TokenRefreshResult?> _result =
+      Completer<TokenRefreshResult?>();
+
+  void complete(TokenRefreshResult result) => _result.complete(result);
+
+  @override
+  Future<TokenRefreshResult?> refreshToken(String refreshToken) {
+    if (!started.isCompleted) started.complete();
+    return _result.future;
+  }
 }
 
 class _FakeSessionExpiryHandler implements SessionExpiryHandler {
