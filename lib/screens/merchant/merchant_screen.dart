@@ -29,7 +29,7 @@ class MerchantScreen extends StatelessWidget {
           slivers: <Widget>[
             SliverToBoxAdapter(
               child: SizedBox(
-                height: 586,
+                height: 570,
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
@@ -39,7 +39,7 @@ class MerchantScreen extends StatelessWidget {
                       searchHint: l10n.merchantSearchHint,
                     ),
                     PositionedDirectional(
-                      top: 354,
+                      top: 320,
                       start: 0,
                       end: 0,
                       child: MerchantTrustCard(
@@ -79,7 +79,7 @@ class MerchantScreen extends StatelessWidget {
                     onShopNow: () =>
                         context.push(AppRoutes.storeProtectionOptions),
                   ),
-                  const SizedBox(height: AppSpacing.token3Xl),
+                  const SizedBox(height: AppSpacing.tokenXl),
                   _SectionHeading(
                     title: l10n.merchantAllStores,
                     action: l10n.merchantStoreCount,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shipments/features/notifications/presentation/notification_bell_button.dart';
+import 'package:shipments/screens/shipments/widgets/shipments_dot_marks.dart';
 
 import '../../../components/app_text.dart';
 import '../../../components/inputs/app_text_field.dart';
@@ -53,16 +55,39 @@ class MerchantHeroHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: _CircleAction(
-                    icon: Icons.notifications_none_rounded,
-                    onPressed: () {},
+                  alignment: Directionality.of(context) == TextDirection.ltr
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: .16),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: .48),
+                      ),
+                    ),
+                    child: const SizedBox(
+                      width: 44,
+                      height: 44,
+                      child: IconTheme(
+                        data: IconThemeData(
+                          color: Colors.white,
+                          size: 21,
+                        ),
+                        child: NotificationBellButton(),
+                      ),
+                    ),
                   ),
+                ),
+                const Row(
+                  children: <Widget>[
+                    ShipmentDotsMark(),
+                  ],
                 ),
                 // Keep the hero copy above the overlapping trust card. A flex
                 // spacer pushed it to the bottom of the header, where the card
                 // covered the title and subtitle on phone-sized layouts.
-                const SizedBox(height: AppSpacing.token8Xl),
+                const SizedBox(height: AppSpacing.token4Xl),
                 AppText(
                   title,
                   variant: AppTextVariant.headlineLarge,
@@ -125,26 +150,4 @@ class MerchantHeroHeader extends StatelessWidget {
       ),
     );
   }
-}
-
-class _CircleAction extends StatelessWidget {
-  const _CircleAction({required this.icon, required this.onPressed});
-
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) => Material(
-        color: Colors.white.withValues(alpha: .15),
-        shape: const CircleBorder(),
-        child: InkWell(
-          customBorder: const CircleBorder(),
-          onTap: onPressed,
-          child: SizedBox(
-            width: 42,
-            height: 42,
-            child: Icon(icon, color: Colors.white, size: 23),
-          ),
-        ),
-      );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shipments/screens/shipments/widgets/shipments_dot_marks.dart';
 
 import '../../../components/app_card.dart';
 import '../../../components/app_text.dart';
@@ -240,9 +241,7 @@ class MerchantStoreTile extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.tokenM),
           Icon(
-            Directionality.of(context) == TextDirection.rtl
-                ? Icons.chevron_left_rounded
-                : Icons.chevron_right_rounded,
+            Icons.chevron_right_rounded,
             color: purple,
             size: 22,
           ),
@@ -276,6 +275,8 @@ class MerchantJoinBanner extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          const ShipmentDotsMark(),
+          const SizedBox(height: AppSpacing.tokenS),
           AppText(
             title,
             variant: AppTextVariant.titleLarge,

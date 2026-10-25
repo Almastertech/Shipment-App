@@ -76,38 +76,37 @@ class ShipmentsHero extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Directionality(
-                  textDirection: flipTopActions
-                      ? TextDirection.ltr
-                      : Directionality.of(context),
-                  child: Row(
-                    children: <Widget>[
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: .16),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: .48),
-                          ),
-                        ),
-                        child: const SizedBox(
-                          width: 44,
-                          height: 44,
-                          child: IconTheme(
-                            data: IconThemeData(
-                              color: Colors.white,
-                              size: 21,
-                            ),
-                            child: NotificationBellButton(),
-                          ),
-                        ),
+                Align(
+                  alignment: Directionality.of(context) == TextDirection.ltr
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: .16),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: .48),
                       ),
-                      const Spacer(),
-                      const ShipmentDotsMark(),
-                    ],
+                    ),
+                    child: const SizedBox(
+                      width: 44,
+                      height: 44,
+                      child: IconTheme(
+                        data: IconThemeData(
+                          color: Colors.white,
+                          size: 21,
+                        ),
+                        child: NotificationBellButton(),
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(height: AppSpacing.token3Xl),
+                const Row(
+                  children: <Widget>[
+                    ShipmentDotsMark(),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.tokenXl),
                 AppText(
                   title,
                   variant: AppTextVariant.headlineMedium,

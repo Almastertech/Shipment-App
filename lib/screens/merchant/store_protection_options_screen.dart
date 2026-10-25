@@ -190,7 +190,7 @@ class _StoreHero extends StatelessWidget {
             child: _HeroBackButton(onPressed: onBack, isRtl: isRtl),
           ),
           PositionedDirectional(
-            top: safeTop + 116,
+            top: safeTop + 90,
             start: AppSpacing.token2Xl,
             end: AppSpacing.token2Xl,
             child: Column(
@@ -223,7 +223,7 @@ class _StoreHero extends StatelessWidget {
           PositionedDirectional(
             start: AppSpacing.token2Xl,
             end: AppSpacing.token2Xl,
-            bottom: AppSpacing.tokenL,
+            bottom: AppSpacing.token4Xl,
             child: _StoreSummary(
               protectionLabel: protectionLabel,
               protectionValue: protectionValue,
@@ -253,12 +253,12 @@ class _HeroBackButton extends StatelessWidget {
           customBorder: const CircleBorder(),
           onTap: onPressed,
           child: const SizedBox(
-            width: 52,
-            height: 52,
+            width: 42,
+            height: 42,
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.white,
-              size: 26,
+              size: 22,
             ),
           ),
         ),
