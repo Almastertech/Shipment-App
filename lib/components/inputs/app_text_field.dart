@@ -31,6 +31,7 @@ class AppTextField extends StatelessWidget {
     this.clearFocusOnTapOutside = true,
     this.textDirection,
     this.textAlign,
+    this.textAlignVertical,
     this.style,
   });
 
@@ -61,6 +62,7 @@ class AppTextField extends StatelessWidget {
   final bool clearFocusOnTapOutside;
   final TextDirection? textDirection;
   final TextAlign? textAlign;
+  final TextAlignVertical? textAlignVertical;
   final TextStyle? style;
 
   @override
@@ -87,6 +89,7 @@ class AppTextField extends StatelessWidget {
       maxLengthEnforcement: maxLengthEnforcement,
       textDirection: textDirection,
       textAlign: textAlign ?? TextAlign.start,
+      textAlignVertical: textAlignVertical,
       style: style,
       onTapOutside: onTapOutside ??
           (clearFocusOnTapOutside

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:shipments/components/app_scaffold.dart';
 import 'package:shipments/components/app_text.dart';
 import 'package:shipments/components/buttons/icon_circle_button.dart';
 import 'package:shipments/components/buttons/primary_button.dart';
 import 'package:shipments/components/feedback/status_banner.dart';
+import 'package:shipments/components/inputs/app_text_field.dart';
 import 'package:shipments/components/layout/adaptive_two_pane.dart';
 import 'package:shipments/components/layout/app_bottom_sheet.dart';
 import 'package:shipments/components/layout/app_section_card.dart';
 import 'package:shipments/l10n/app_localizations.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 Widget _testApp(Widget child) {
   return MaterialApp(
@@ -42,6 +43,24 @@ void main() {
       final textWidget = tester.widget<Text>(find.text('Hello UI Kit'));
       expect(textWidget.style, isNotNull);
       expect(textWidget.style?.fontSize, isNotNull);
+    });
+
+    testWidgets('AppTextField supports vertical text alignment', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _testApp(
+          const AppTextField(
+            hintText: 'Search',
+            textAlign: TextAlign.start,
+            textAlignVertical: TextAlignVertical.center,
+          ),
+        ),
+      );
+
+      final textField = tester.widget<TextField>(find.byType(TextField));
+      expect(textField.textAlign, TextAlign.start);
+      expect(textField.textAlignVertical, TextAlignVertical.center);
     });
 
     testWidgets('AppText.localized resolves localized value', (tester) async {
