@@ -16,6 +16,7 @@ class ProfileMenuItem {
     this.icon,
     this.destructive = false,
     this.filledLeading = false,
+    this.trailing,
   });
 
   final String label;
@@ -24,6 +25,7 @@ class ProfileMenuItem {
   final IconData? icon;
   final bool destructive;
   final bool filledLeading;
+  final Widget? trailing;
 }
 
 class ProfileMenuSection extends StatelessWidget {
@@ -54,11 +56,13 @@ class ProfileMenuSection extends StatelessWidget {
             title,
             variant: AppTextVariant.titleSmall,
             textAlign: TextAlign.start,
-            style: AppTypography.buyerMobile.h6.toTextStyle(
-              color: text.primary,
-            ).copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTypography.buyerMobile.h6
+                .toTextStyle(
+                  color: text.primary,
+                )
+                .copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
           ),
         ),
         DecoratedBox(
@@ -85,6 +89,7 @@ class ProfileMenuSection extends StatelessWidget {
                     icon: items[index].icon,
                     destructive: items[index].destructive,
                     filledLeading: items[index].filledLeading,
+                    trailing: items[index].trailing,
                   ),
                   if (index != items.length - 1)
                     AppDivider(

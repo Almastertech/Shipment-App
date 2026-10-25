@@ -940,6 +940,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileNotifications => 'Notifications';
 
   @override
+  String get profileLanguage => 'Language';
+
+  @override
+  String get profileLanguageArabic => 'العربية';
+
+  @override
+  String get profileLanguageEnglish => 'English';
+
+  @override
+  String get profileLanguageAr => 'عربي';
+
+  @override
+  String get profileLanguageEn => 'EN';
+
+  @override
   String get profileSectionSupport => 'Help & support';
 
   @override

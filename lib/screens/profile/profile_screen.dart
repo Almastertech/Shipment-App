@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:shipments/components/layout/custom_bottom_nav_bar.dart';
 import 'package:shipments/screens/profile/widgets/profile_footer.dart';
 import 'package:shipments/screens/profile/widgets/profile_hero.dart';
+import 'package:shipments/screens/profile/widgets/profile_language_switcher.dart';
 import 'package:shipments/screens/profile/widgets/profile_logout_bottom_sheet.dart';
 import 'package:shipments/screens/profile/widgets/profile_menu_section.dart';
 import 'package:shipments/screens/profile/widgets/profile_user_card.dart';
 
 import '../../components/app_scaffold.dart';
-import '../../components/layout/app_shell_bottom_bar.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
-import '../../core/routing/bottom_nav_destinations.dart';
 import '../../core/session/session_manager.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
+import '../../localization/controllers/localization_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -99,6 +100,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         svgAsset: AppImages.bell,
                         onTap: () => _openRoute(AppRoutes.notificationSettings),
                       ),
+                      ProfileMenuItem(
+                        label: l10n.profileLanguage,
+                        icon: Icons.language_rounded,
+                        trailing: const ProfileLanguageSwitcher(),
+                        onTap: () => context
+                            .read<LocalizationController>()
+                            .toggleLanguage(),
+                      ),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.tokenL),
@@ -174,39 +183,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-     bottomNavigationBar: SafeArea(
-            top: false,
-            child: SizedBox(
-              height: 84,
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 380),
-                  child: CustomBottomNavBar(
-                    selectedIndex: _selectedNavigationIndex,
-                    onDestinationSelected: (index) {
-                      if (index == 0) {
-                        context.go(AppRoutes.home);
-                        return;
-                      }
-                      if (index == 1) {
-                        context.go(AppRoutes.shipments);
-                        return;
-                      }
-                      if (index == 2) {
-                        context.go(AppRoutes.requests);
-                        return;
-                      }
-                      if (index == 3) {
-                        context.go(AppRoutes.merchant);
-                        return;
-                      }
-                      setState(() => _selectedNavigationIndex = index);
-                    },
-                  ),
-                ),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: SizedBox(
+          height: 84,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 380),
+              child: CustomBottomNavBar(
+                selectedIndex: _selectedNavigationIndex,
+                onDestinationSelected: (index) {
+                  if (index == 0) {
+                    context.go(AppRoutes.home);
+                    return;
+                  }
+                  if (index == 1) {
+                    context.go(AppRoutes.shipments);
+                    return;
+                  }
+                  if (index == 2) {
+                    context.go(AppRoutes.requests);
+                    return;
+                  }
+                  if (index == 3) {
+                    context.go(AppRoutes.merchant);
+                    return;
+                  }
+                  setState(() => _selectedNavigationIndex = index);
+                },
               ),
             ),
           ),
+        ),
+      ),
     );
   }
 

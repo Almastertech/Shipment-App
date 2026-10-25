@@ -920,6 +920,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileNotifications => 'الإشعارات';
 
   @override
+  String get profileLanguage => 'اللغة';
+
+  @override
+  String get profileLanguageArabic => 'العربية';
+
+  @override
+  String get profileLanguageEnglish => 'English';
+
+  @override
+  String get profileLanguageAr => 'عربي';
+
+  @override
+  String get profileLanguageEn => 'EN';
+
+  @override
   String get profileSectionSupport => 'الدعم والمساعدة';
 
   @override

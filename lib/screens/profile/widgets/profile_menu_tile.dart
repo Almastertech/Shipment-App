@@ -16,6 +16,7 @@ class ProfileMenuTile extends StatelessWidget {
     this.icon,
     this.destructive = false,
     this.filledLeading = false,
+    this.trailing,
   }) : assert(svgAsset != null || icon != null);
 
   final String label;
@@ -24,6 +25,7 @@ class ProfileMenuTile extends StatelessWidget {
   final IconData? icon;
   final bool destructive;
   final bool filledLeading;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +80,14 @@ class ProfileMenuTile extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
-              Icon(
-                isRtl
-                    ? Icons.chevron_left_rounded
-                    : Icons.chevron_right_rounded,
-                color: colors.neutral.shade600,
-                size: 20,
-              ),
+              trailing ??
+                  Icon(
+                    isRtl
+                        ? Icons.chevron_left_rounded
+                        : Icons.chevron_right_rounded,
+                    color: colors.neutral.shade600,
+                    size: 20,
+                  ),
             ],
           ),
         ),

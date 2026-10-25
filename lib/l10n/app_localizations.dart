@@ -1838,6 +1838,36 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get profileNotifications;
 
+  /// No description provided for @profileLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get profileLanguage;
+
+  /// No description provided for @profileLanguageArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'العربية'**
+  String get profileLanguageArabic;
+
+  /// No description provided for @profileLanguageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get profileLanguageEnglish;
+
+  /// No description provided for @profileLanguageAr.
+  ///
+  /// In en, this message translates to:
+  /// **'عربي'**
+  String get profileLanguageAr;
+
+  /// No description provided for @profileLanguageEn.
+  ///
+  /// In en, this message translates to:
+  /// **'EN'**
+  String get profileLanguageEn;
+
   /// No description provided for @profileSectionSupport.
   ///
   /// In en, this message translates to:
