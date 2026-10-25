@@ -82,9 +82,7 @@ class ProfileMenuTile extends StatelessWidget {
               ),
               trailing ??
                   Icon(
-                    isRtl
-                        ? Icons.chevron_left_rounded
-                        : Icons.chevron_right_rounded,
+                    Icons.chevron_right_rounded,
                     color: colors.neutral.shade600,
                     size: 20,
                   ),
