@@ -107,14 +107,33 @@ class OnboardingPage extends StatelessWidget {
                   textAlign: TextAlign.start,
                   maxLines: 2,
                 ),
-                const SizedBox(height: AppSpacing.token5Xl),
                 Expanded(
                   child: Center(
-                    child: Transform.scale(
-                      scaleX: 1.18,
-                      scaleY: 1.36,
-                      child: Image.asset(
-                        AppImages.image(page.imagePath),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 420),
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                          AppSpacing.tokenXs,
+                          AppSpacing.tokenS,
+                          AppSpacing.tokenXs,
+                          AppSpacing.tokenM,
+                        ),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: AppColors.primitives.primary.shade100,
+                            borderRadius:
+                                BorderRadius.circular(AppRadius.token2Xl),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(AppSpacing.tokenS),
+                            child: Image.asset(
+                              AppImages.image(page.imagePath),
+                              fit: BoxFit.contain,
+                              width: double.infinity,
+                              height: double.infinity,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
