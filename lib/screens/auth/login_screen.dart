@@ -202,36 +202,53 @@ class _LoginScreenState extends State<LoginScreen> {
                 )
               else
                 // Keep the phone number and calling code in LTR order.
-                Row(
-                  textDirection: TextDirection.ltr,
-                  children: <Widget>[
-                    Expanded(
-                      child: _buildAppTextField(
-                        hint: fieldHint,
-                        keyboardType: TextInputType.phone,
-                        autofillHints: const <String>[
-                          AutofillHints.telephoneNumberNational,
-                        ],
-                        textInputAction: TextInputAction.done,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r'[0-9\u0660-\u0669\u06F0-\u06F9]'),
+                SizedBox(
+                  height: 56,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(AppRadius.tokenL),
+                      border: Border.all(color: primary.shade500),
+                    ),
+                    child: Row(
+                      textDirection: TextDirection.ltr,
+                      children: <Widget>[
+                        CountryCodePicker(
+                          initialCountryCode: 'SA',
+                          width: 82,
+                          embedded: true,
+                          onChanged: (country) {
+                            setState(() {
+                              _selectedCountry = country;
+                            });
+                          },
+                        ),
+                        Container(
+                          width: 1,
+                          height: 28,
+                          color: neutral.shade300,
+                        ),
+                        Expanded(
+                          child: _buildAppTextField(
+                            hint: fieldHint,
+                            keyboardType: TextInputType.phone,
+                            autofillHints: const <String>[
+                              AutofillHints.telephoneNumberNational,
+                            ],
+                            textInputAction: TextInputAction.done,
+                            borderless: true,
+                            alignLeft: true,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'[0-9\u0660-\u0669\u06F0-\u06F9]'),
+                              ),
+                              LengthLimitingTextInputFormatter(15),
+                            ],
                           ),
-                          LengthLimitingTextInputFormatter(15),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: AppSpacing.tokenS),
-                    CountryCodePicker(
-                      initialCountryCode: 'SA',
-                      width: 96,
-                      onChanged: (country) {
-                        setState(() {
-                          _selectedCountry = country;
-                        });
-                      },
-                    ),
-                  ],
+                  ),
                 ),
               const SizedBox(height: AppSpacing.tokenS),
               if (_inputController.text.trim().isNotEmpty && !isInputValid)
@@ -265,14 +282,16 @@ class _LoginScreenState extends State<LoginScreen> {
     required TextInputType keyboardType,
     required List<String> autofillHints,
     required TextInputAction textInputAction,
+    bool borderless = false,
+    bool alignLeft = false,
     List<TextInputFormatter>? inputFormatters,
   }) {
     final neutral = AppColors.primitives.neutral;
     final radius = BorderRadius.circular(AppRadius.tokenXl);
     final inputTheme = Theme.of(context).copyWith(
       inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: Colors.white,
+        filled: !borderless,
+        fillColor: borderless ? Colors.transparent : Colors.white,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.tokenM,
           vertical: AppSpacing.tokenM,
@@ -280,22 +299,32 @@ class _LoginScreenState extends State<LoginScreen> {
         hintStyle: AppTypography.buyerMobile.bodySmall.toTextStyle(
           color: neutral.shade500,
         ),
-        border: OutlineInputBorder(
-          borderRadius: radius,
-          borderSide: BorderSide(color: neutral.shade300),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: radius,
-          borderSide: BorderSide(color: neutral.shade300),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: radius,
-          borderSide: BorderSide(color: AppColors.primitives.primary.shade500),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: radius,
-          borderSide: BorderSide(color: AppColors.primitives.failure.shade500),
-        ),
+        border: borderless
+            ? InputBorder.none
+            : OutlineInputBorder(
+                borderRadius: radius,
+                borderSide: BorderSide(color: neutral.shade300),
+              ),
+        enabledBorder: borderless
+            ? InputBorder.none
+            : OutlineInputBorder(
+                borderRadius: radius,
+                borderSide: BorderSide(color: neutral.shade300),
+              ),
+        focusedBorder: borderless
+            ? InputBorder.none
+            : OutlineInputBorder(
+                borderRadius: radius,
+                borderSide:
+                    BorderSide(color: AppColors.primitives.primary.shade500),
+              ),
+        errorBorder: borderless
+            ? InputBorder.none
+            : OutlineInputBorder(
+                borderRadius: radius,
+                borderSide:
+                    BorderSide(color: AppColors.primitives.failure.shade500),
+              ),
       ),
     );
 
@@ -312,7 +341,8 @@ class _LoginScreenState extends State<LoginScreen> {
           autofillHints: autofillHints,
           inputFormatters: inputFormatters,
           // Email and phone values use Latin characters and digits.
-          textDirection: TextDirection.ltr,
+          textDirection: alignLeft ? TextDirection.ltr : null,
+          textAlign: alignLeft ? TextAlign.left : null,
           onChanged: (_) => setState(() {}),
         ),
       ),

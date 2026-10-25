@@ -61,9 +61,7 @@ class AuthHero extends StatelessWidget {
                     IconButton(
                       onPressed: onBack,
                       icon: Icon(
-                        Directionality.of(context) == TextDirection.rtl
-                            ? Icons.arrow_forward_rounded
-                            : Icons.arrow_back_rounded,
+                        Icons.arrow_back_rounded,
                       ),
                       color: Colors.white,
                       style: IconButton.styleFrom(
@@ -99,7 +97,7 @@ class AuthHero extends StatelessWidget {
           PositionedDirectional(
             start: AppSpacing.tokenL,
             end: AppSpacing.tokenL,
-            bottom: AppSpacing.token5Xl,
+            bottom: AppSpacing.tokenXl,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

@@ -14,11 +14,13 @@ class CountryCodePicker extends StatefulWidget {
     this.initialCountryCode = 'SA',
     required this.onChanged,
     this.width,
+    this.embedded = false,
   });
 
   final String initialCountryCode;
   final ValueChanged<Country> onChanged;
   final double? width;
+  final bool embedded;
 
   @override
   State<CountryCodePicker> createState() => _CountryCodePickerState();
@@ -73,7 +75,7 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
       button: true,
       label: '$selectedCountryName, +${_selectedCountry.phoneCode}',
       child: Material(
-        color: colors.surface.primary,
+        color: widget.embedded ? Colors.transparent : colors.surface.primary,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           onTap: _showCountryPicker,
@@ -84,7 +86,9 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.tokenS),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: colors.border.actionOutline),
+              border: widget.embedded
+                  ? null
+                  : Border.all(color: colors.border.actionOutline),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
