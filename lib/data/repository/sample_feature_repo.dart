@@ -26,6 +26,8 @@ abstract class SampleFeatureRepository {
 
 class SampleFeatureRepositoryImpl extends BaseRepository
     implements SampleFeatureRepository {
+  static const int _maxIndexedItems = 200;
+
   SampleFeatureRepositoryImpl(
     this._dataSource, {
     CacheStore? cacheStore,
@@ -110,7 +112,7 @@ class SampleFeatureRepositoryImpl extends BaseRepository
     // 3. Cache it if successful
     result.when(
       success: (item) {
-        _itemIndex[item.id] = item;
+        _indexItem(item);
       },
       failure: (_) {},
     );
@@ -120,7 +122,15 @@ class SampleFeatureRepositoryImpl extends BaseRepository
 
   void _indexItems(List<SampleItem> items) {
     for (final item in items) {
-      _itemIndex[item.id] = item;
+      _indexItem(item);
+    }
+  }
+
+  void _indexItem(SampleItem item) {
+    _itemIndex.remove(item.id);
+    _itemIndex[item.id] = item;
+    while (_itemIndex.length > _maxIndexedItems) {
+      _itemIndex.remove(_itemIndex.keys.first);
     }
   }
 

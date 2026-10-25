@@ -734,6 +734,8 @@
   "cameraGuideDamage": "A short video showing the damaged areas",
   "cameraGuideReady": "Ready, let’s take a photo",
   "cameraCapture": "Capture",
+  "cameraStartRecording": "Start recording",
+  "cameraStopRecording": "Stop recording",
   "cameraPhotoModeLabel": "Photo",
   "cameraVideoModeLabel": "Video",
   "cameraFramingHint": "Move closer and keep the whole label in frame",

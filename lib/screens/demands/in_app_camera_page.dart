@@ -737,27 +737,38 @@ class _InAppCameraPageState extends State<InAppCameraPage>
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  GestureDetector(
+                  Semantics(
+                    button: true,
+                    enabled: !_isCapturing,
+                    label: _isVideo
+                        ? _isRecording
+                            ? l10n.cameraStopRecording
+                            : l10n.cameraStartRecording
+                        : l10n.cameraCapture,
                     onTap: _isCapturing ? null : _onShutter,
-                    child: Container(
-                      width: 78,
-                      height: 78,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: _isRecording ? _accent : Colors.white,
-                          width: 3,
-                        ),
-                      ),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 150),
+                    child: GestureDetector(
+                      excludeFromSemantics: true,
+                      onTap: _isCapturing ? null : _onShutter,
+                      child: Container(
+                        width: 78,
+                        height: 78,
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: _isRecording
-                              ? const Color(0xFFE74D4D)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(
-                            _isRecording ? 12 : 34,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: _isRecording ? _accent : Colors.white,
+                            width: 3,
+                          ),
+                        ),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          decoration: BoxDecoration(
+                            color: _isRecording
+                                ? const Color(0xFFE74D4D)
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(
+                              _isRecording ? 12 : 34,
+                            ),
                           ),
                         ),
                       ),

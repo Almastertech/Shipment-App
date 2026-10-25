@@ -4034,6 +4034,18 @@ abstract class AppLocalizations {
   /// **'Capture'**
   String get cameraCapture;
 
+  /// No description provided for @cameraStartRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Start recording'**
+  String get cameraStartRecording;
+
+  /// No description provided for @cameraStopRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop recording'**
+  String get cameraStopRecording;
+
   /// No description provided for @cameraPhotoModeLabel.
   ///
   /// In en, this message translates to:

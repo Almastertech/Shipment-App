@@ -2108,6 +2108,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cameraCapture => 'التقاط';
 
   @override
+  String get cameraStartRecording => 'بدء التسجيل';
+
+  @override
+  String get cameraStopRecording => 'إيقاف التسجيل';
+
+  @override
   String get cameraPhotoModeLabel => 'صورة';
 
   @override

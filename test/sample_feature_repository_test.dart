@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:shipments/data/datasource/remote/exception/api_error.dart';
 import 'package:shipments/data/model/response/base/api_response.dart';
 import 'package:shipments/data/model/sample_item.dart';
 import 'package:shipments/data/repository/sample_feature_repo.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('SampleFeatureRepository', () {
@@ -35,6 +35,20 @@ void main() {
       expect(result, isA<ApiFailure<PaginatedSampleItems>>());
       final failure = result as ApiFailure<PaginatedSampleItems>;
       expect(failure.error.type, ApiErrorType.timeout);
+    });
+
+    test('keeps the in-memory item index bounded', () async {
+      final dataSource = _GrowingDataSource();
+      final repository = SampleFeatureRepositoryImpl(dataSource);
+
+      for (var page = 1; page <= 201; page++) {
+        await repository.fetchItems(page: page, pageSize: 1);
+      }
+
+      await repository.findItemById('1');
+      await repository.findItemById('201');
+
+      expect(dataSource.itemByIdRequests, <String>['1']);
     });
   });
 }
@@ -87,5 +101,40 @@ class _ThrowingDataSource implements SampleFeatureDataSource {
   @override
   Future<SampleItem> fetchItemById(String id) async {
     throw Exception('Error');
+  }
+}
+
+class _GrowingDataSource implements SampleFeatureDataSource {
+  final List<String> itemByIdRequests = <String>[];
+
+  @override
+  Future<PaginatedSampleItems> fetchItems({
+    required int page,
+    required int pageSize,
+    String query = '',
+  }) async {
+    return PaginatedSampleItems(
+      items: <SampleItem>[
+        SampleItem(
+          id: '$page',
+          title: 'Item $page',
+          subtitle: '',
+          description: '',
+        ),
+      ],
+      page: page,
+      hasMore: true,
+    );
+  }
+
+  @override
+  Future<SampleItem> fetchItemById(String id) async {
+    itemByIdRequests.add(id);
+    return SampleItem(
+      id: id,
+      title: 'Item $id',
+      subtitle: '',
+      description: '',
+    );
   }
 }

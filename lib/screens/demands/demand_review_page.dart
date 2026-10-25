@@ -438,7 +438,7 @@ class _LocationCard extends StatelessWidget {
   }
 }
 
-class _EvidenceTile extends StatelessWidget {
+class _EvidenceTile extends StatefulWidget {
   const _EvidenceTile({
     required this.evidence,
     required this.label,
@@ -454,13 +454,46 @@ class _EvidenceTile extends StatelessWidget {
   final bool isAddTile;
 
   @override
+  State<_EvidenceTile> createState() => _EvidenceTileState();
+}
+
+class _EvidenceTileState extends State<_EvidenceTile> {
+  Future<Uint8List>? _evidenceBytes;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadEvidence(widget.evidence, widget.video);
+  }
+
+  @override
+  void didUpdateWidget(covariant _EvidenceTile oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!_sameFile(oldWidget.evidence, widget.evidence) ||
+        oldWidget.video != widget.video) {
+      _loadEvidence(widget.evidence, widget.video);
+    }
+  }
+
+  bool _sameFile(XFile? first, XFile? second) {
+    if (identical(first, second)) return true;
+    final firstPath = first?.path;
+    final secondPath = second?.path;
+    return firstPath != null && firstPath.isNotEmpty && firstPath == secondPath;
+  }
+
+  void _loadEvidence(XFile? evidence, bool video) {
+    _evidenceBytes = evidence != null && !video ? evidence.readAsBytes() : null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     const colors = AppColors.primitives;
     return Semantics(
       button: true,
-      label: label,
+      label: widget.label,
       child: GestureDetector(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: SizedBox(
@@ -468,9 +501,9 @@ class _EvidenceTile extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: <Widget>[
-                if (evidence != null && !video)
+                if (widget.evidence != null && !widget.video)
                   FutureBuilder<Uint8List>(
-                    future: evidence!.readAsBytes(),
+                    future: _evidenceBytes,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Image.memory(snapshot.data!, fit: BoxFit.cover);
@@ -494,18 +527,18 @@ class _EvidenceTile extends StatelessWidget {
                   )
                 else
                   ColoredBox(
-                    color: video
+                    color: widget.video
                         ? colors.neutral.shade800
                         : colors.neutral.shade300,
                     child: Center(
                       child: Icon(
-                        isAddTile
+                        widget.isAddTile
                             ? Icons.add_rounded
-                            : video
+                            : widget.video
                                 ? Icons.play_arrow_rounded
                                 : Icons.image_outlined,
                         color: Colors.white,
-                        size: isAddTile ? 28 : 32,
+                        size: widget.isAddTile ? 28 : 32,
                       ),
                     ),
                   ),
@@ -516,7 +549,7 @@ class _EvidenceTile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     color: Colors.black.withValues(alpha: .68),
                     child: AppText(
-                      label,
+                      widget.label,
                       variant: AppTextVariant.labelSmall,
                       textAlign: TextAlign.center,
                       maxLines: 1,

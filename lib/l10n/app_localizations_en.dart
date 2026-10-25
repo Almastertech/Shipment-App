@@ -2153,6 +2153,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cameraCapture => 'Capture';
 
   @override
+  String get cameraStartRecording => 'Start recording';
+
+  @override
+  String get cameraStopRecording => 'Stop recording';
+
+  @override
   String get cameraPhotoModeLabel => 'Photo';
 
   @override

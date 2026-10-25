@@ -734,6 +734,8 @@
   "cameraGuideDamage": "فيديو قصير يوضح مناطق الضرر",
   "cameraGuideReady": "جاهز، يلا نصوّر",
   "cameraCapture": "التقاط",
+  "cameraStartRecording": "بدء التسجيل",
+  "cameraStopRecording": "إيقاف التسجيل",
   "cameraPhotoModeLabel": "صورة",
   "cameraVideoModeLabel": "فيديو",
   "cameraFramingHint": "قرّب شوي، وخَلّ الملصق كله داخل الإطار",
