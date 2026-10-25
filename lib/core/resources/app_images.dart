@@ -25,6 +25,7 @@ class AppImages {
   static const String riyadhCity = '$_pngBasePath/riyadhcity.png';
   static const String boxFocus = '$_pngBasePath/boxfocus.png';
   static const String merchantHero = '$_pngBasePath/merchant_hero.png';
+  static const String shopsHero = '$_pngBasePath/shops_hero.png';
   static const String logo = '$_svgBasePath/Logo.svg';
   static const String phoneIcon = '$_svgBasePath/phoneicon.svg';
   static const String wavesBackground = '$_svgBasePath/wavesbackground.svg';
