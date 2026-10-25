@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import '../../core/storage/local_storage.dart';
@@ -5,17 +7,22 @@ import '../../core/utils/app_constants.dart';
 import '../../data/datasource/remote/dio/dio_client.dart';
 import '../../l10n/app_localizations.dart';
 
-class LocalizationController extends ChangeNotifier {
+class LocalizationController extends ChangeNotifier
+    with WidgetsBindingObserver {
   LocalizationController({
     required LocalStorage storage,
     required DioClient dioClient,
+    WidgetsBinding? binding,
   })  : _storage = storage,
-        _dioClient = dioClient {
+        _dioClient = dioClient,
+        _binding = binding ?? WidgetsBinding.instance {
+    _binding?.addObserver(this);
     _loadSavedLocale();
   }
 
   final LocalStorage _storage;
   final DioClient _dioClient;
+  final WidgetsBinding? _binding;
 
   late Locale _locale;
 
@@ -29,11 +36,12 @@ class LocalizationController extends ChangeNotifier {
   bool get isLtr => textDirection == TextDirection.ltr;
 
   Future<void> setLanguage(String languageCode) async {
-    if (_locale.languageCode == languageCode) return;
+    final normalizedCode = _normalizeSupportedCode(languageCode);
+    if (_locale.languageCode == normalizedCode) return;
 
-    _locale = Locale(languageCode);
-    await _storage.setString(AppConstants.localeStorageKey, languageCode);
-    _dioClient.updateHeaders(languageCode: languageCode);
+    _locale = Locale(normalizedCode);
+    await _storage.setString(AppConstants.localeStorageKey, normalizedCode);
+    _dioClient.updateHeaders(languageCode: normalizedCode);
     notifyListeners();
   }
 
@@ -42,14 +50,66 @@ class LocalizationController extends ChangeNotifier {
     await setLanguage(nextLanguage);
   }
 
+  /// Handles system locale changes (from device OS settings or DevicePreview).
+  void handleSystemLocale(Locale systemLocale) {
+    handleSystemLocales(<Locale>[systemLocale]);
+  }
+
+  /// Resolves the first supported language candidate from device locales.
+  void handleSystemLocales(List<Locale>? locales) {
+    final resolved = _resolveSupportedLocale(locales);
+    if (_locale.languageCode == resolved.languageCode) return;
+
+    _locale = resolved;
+    _storage.setString(AppConstants.localeStorageKey, resolved.languageCode);
+    _dioClient.updateHeaders(languageCode: resolved.languageCode);
+    notifyListeners();
+  }
+
+  @override
+  void didChangeLocales(List<Locale>? locales) {
+    handleSystemLocales(locales);
+  }
+
   void _loadSavedLocale() {
-    final savedLanguageCode =
-        _storage.getString(AppConstants.localeStorageKey) ?? 'en';
+    final savedLanguageCode = _storage.getString(AppConstants.localeStorageKey);
+    if (savedLanguageCode != null) {
+      final isSupported = supportedLocales
+          .any((locale) => locale.languageCode == savedLanguageCode);
+      if (isSupported) {
+        _locale = Locale(savedLanguageCode);
+        _dioClient.updateHeaders(languageCode: _locale.languageCode);
+        return;
+      }
+    }
 
-    final isSupported = AppLocalizations.supportedLocales
-        .any((locale) => locale.languageCode == savedLanguageCode);
-
-    _locale = Locale(isSupported ? savedLanguageCode : 'en');
+    // No saved locale: detect system language from the mobile device
+    final systemLocales = _binding?.platformDispatcher.locales ??
+        ui.PlatformDispatcher.instance.locales;
+    _locale = _resolveSupportedLocale(systemLocales);
     _dioClient.updateHeaders(languageCode: _locale.languageCode);
+  }
+
+  Locale _resolveSupportedLocale(List<Locale>? locales) {
+    if (locales != null && locales.isNotEmpty) {
+      for (final candidate in locales) {
+        final code = candidate.languageCode.toLowerCase();
+        if (supportedLocales.any((l) => l.languageCode == code)) {
+          return Locale(code);
+        }
+      }
+    }
+    return const Locale('en');
+  }
+
+  String _normalizeSupportedCode(String code) {
+    final lower = code.toLowerCase();
+    return supportedLocales.any((l) => l.languageCode == lower) ? lower : 'en';
+  }
+
+  @override
+  void dispose() {
+    _binding?.removeObserver(this);
+    super.dispose();
   }
 }

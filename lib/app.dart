@@ -6,18 +6,57 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'components/connectivity_banner.dart';
+import 'core/storage/local_storage.dart';
+import 'core/utils/app_constants.dart';
 import 'injection.dart';
 import 'l10n/app_localizations.dart';
 import 'localization/controllers/localization_controller.dart';
 import 'themes/app_themes.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale? _lastDevicePreviewLocale;
+
+  void _syncWithDevicePreview(
+    BuildContext context,
+    LocalizationController localizationController,
+  ) {
+    final previewLocale = DevicePreview.locale(context);
+    if (previewLocale == null) return;
+
+    if (_lastDevicePreviewLocale == null) {
+      _lastDevicePreviewLocale = previewLocale;
+      // If there is no explicit saved preference, align with DevicePreview's initial system locale
+      final hasSaved =
+          getIt<LocalStorage>().getString(AppConstants.localeStorageKey) !=
+              null;
+      if (!hasSaved) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+          localizationController.handleSystemLocale(previewLocale);
+        });
+      }
+    } else if (_lastDevicePreviewLocale != previewLocale) {
+      _lastDevicePreviewLocale = previewLocale;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        localizationController.handleSystemLocale(previewLocale);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final localizationController = context.watch<LocalizationController>();
     final router = getIt<GoRouter>();
+
+    _syncWithDevicePreview(context, localizationController);
 
     return ScreenUtilInit(
       designSize: const Size(390, 844),
@@ -28,8 +67,7 @@ class MyApp extends StatelessWidget {
           onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
           debugShowCheckedModeBanner: false,
           routerConfig: router,
-          locale:
-              DevicePreview.locale(context) ?? localizationController.locale,
+          locale: localizationController.locale,
           supportedLocales: localizationController.supportedLocales,
           localizationsDelegates: const [
             AppLocalizations.delegate,
