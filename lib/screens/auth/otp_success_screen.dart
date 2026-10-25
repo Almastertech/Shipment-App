@@ -22,6 +22,7 @@ class OtpSuccessScreen extends StatefulWidget {
 class _OtpSuccessScreenState extends State<OtpSuccessScreen>
     with TickerProviderStateMixin {
   late final AnimationController _circleController;
+  late final AnimationController _dotsController;
   Timer? _completionTimer;
 
   @override
@@ -31,7 +32,12 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
       vsync: this,
       duration: const Duration(milliseconds: 700),
     )..forward();
+    _dotsController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    )..repeat();
     _completionTimer = Timer(const Duration(seconds: 3), () {
+      _dotsController.stop();
       if (mounted) widget.onComplete?.call();
     });
   }
@@ -40,6 +46,7 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
   void dispose() {
     _completionTimer?.cancel();
     _circleController.dispose();
+    _dotsController.dispose();
     super.dispose();
   }
 
@@ -154,24 +161,32 @@ class _OtpSuccessScreenState extends State<OtpSuccessScreen>
                   ],
                 ),
                 const SizedBox(height: AppSpacing.token5Xl),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (var index = 0; index < 3; index++)
-                      Container(
-                        width: 9,
-                        height: 9,
-                        margin: const EdgeInsetsDirectional.symmetric(
-                          horizontal: AppSpacing.tokenXs,
-                        ),
-                        decoration: BoxDecoration(
-                          color: index == 0
-                              ? yellow
-                              : AppColors.primitives.neutral.shade500,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                  ],
+                AnimatedBuilder(
+                  animation: _dotsController,
+                  builder: (context, _) {
+                    final activeDot = (_dotsController.value * 3).floor() % 3;
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var index = 0; index < 3; index++)
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 120),
+                            curve: Curves.easeInOut,
+                            width: 9,
+                            height: 9,
+                            margin: const EdgeInsetsDirectional.symmetric(
+                              horizontal: AppSpacing.tokenXs,
+                            ),
+                            decoration: BoxDecoration(
+                              color: index == activeDot
+                                  ? yellow
+                                  : AppColors.primitives.neutral.shade500,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),
