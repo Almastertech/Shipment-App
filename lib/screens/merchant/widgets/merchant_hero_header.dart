@@ -133,7 +133,7 @@ class MerchantHeroHeader extends StatelessWidget {
                     child: AppTextField(
                       hintText: searchHint,
                       textInputAction: TextInputAction.search,
-                      textAlign: TextAlign.start,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(color: Colors.white),
                       prefixIcon: const Icon(
                         Icons.search_rounded,
