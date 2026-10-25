@@ -63,6 +63,8 @@ class _InAppCameraPageState extends State<InAppCameraPage>
   String? _error;
   int _recordingSeconds = 0;
   Timer? _recordingTimer;
+  int _cameraInitializationGeneration = 0;
+  Future<void> _cameraInitializationQueue = Future<void>.value();
 
   bool get _isVideo => widget.mediaType == app_camera.CameraMediaType.video;
   bool get _hasCapturedMedia =>
@@ -79,8 +81,10 @@ class _InAppCameraPageState extends State<InAppCameraPage>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _cameraInitializationGeneration++;
     _recordingTimer?.cancel();
-    _controller?.dispose();
+    final controller = _controller;
+    if (controller != null) unawaited(_disposeCameraController(controller));
     _videoPlayerController?.dispose();
     super.dispose();
   }
@@ -103,6 +107,7 @@ class _InAppCameraPageState extends State<InAppCameraPage>
   }
 
   Future<void> _pauseCamera() async {
+    _cameraInitializationGeneration++;
     _recordingTimer?.cancel();
     _recordingTimer = null;
     final videoPlayer = _videoPlayerController;
@@ -122,12 +127,27 @@ class _InAppCameraPageState extends State<InAppCameraPage>
     }
     if (controller != null) {
       await WidgetsBinding.instance.endOfFrame;
-      await controller.dispose();
+      await _disposeCameraController(controller);
     }
   }
 
-  Future<void> _initializeCamera({int? index}) async {
-    if (!mounted) return;
+  Future<void> _initializeCamera({int? index}) {
+    if (!mounted) return Future<void>.value();
+
+    final generation = ++_cameraInitializationGeneration;
+    final initialization = _cameraInitializationQueue.then(
+      (_) => _initializeCameraOnce(index: index, generation: generation),
+    );
+    _cameraInitializationQueue = initialization.catchError((Object _) {});
+    return initialization;
+  }
+
+  Future<void> _initializeCameraOnce({
+    required int? index,
+    required int generation,
+  }) async {
+    if (!_isCurrentCameraInitialization(generation)) return;
+
     final oldController = _controller;
     setState(() {
       _controller = null;
@@ -136,13 +156,14 @@ class _InAppCameraPageState extends State<InAppCameraPage>
     });
     if (oldController != null) {
       await WidgetsBinding.instance.endOfFrame;
-      await oldController.dispose();
+      await _disposeCameraController(oldController);
     }
-    if (!mounted || !_isAppResumed) return;
+    if (!_isCurrentCameraInitialization(generation)) return;
 
+    CameraController? initializingController;
     try {
       _cameras = await availableCameras();
-      if (!mounted || !_isAppResumed) return;
+      if (!_isCurrentCameraInitialization(generation)) return;
       if (_cameras.isEmpty) throw CameraException('NoCameraAvailable', '');
       if (index != null) _cameraIndex = index;
       if (_cameraIndex >= _cameras.length) _cameraIndex = 0;
@@ -157,26 +178,49 @@ class _InAppCameraPageState extends State<InAppCameraPage>
         ResolutionPreset.medium,
         enableAudio: false,
       );
+      initializingController = controller;
       await controller.initialize();
-      if (!mounted || !_isAppResumed) {
-        await controller.dispose();
+      if (!_isCurrentCameraInitialization(generation)) {
+        await _disposeCameraController(controller);
+        initializingController = null;
+        return;
+      }
+      await widget.cameraCaptureService.saveCameraPermissionGranted();
+      if (!_isCurrentCameraInitialization(generation)) {
+        await _disposeCameraController(controller);
+        initializingController = null;
         return;
       }
       _controller = controller;
-      await widget.cameraCaptureService.saveCameraPermissionGranted();
+      initializingController = null;
       setState(() => _isInitializing = false);
     } on CameraException catch (error) {
-      if (!mounted) return;
+      final controller = initializingController;
+      if (controller != null) await _disposeCameraController(controller);
+      if (!_isCurrentCameraInitialization(generation)) return;
       setState(() {
         _isInitializing = false;
         _error = error.code;
       });
     } catch (error) {
-      if (!mounted) return;
+      final controller = initializingController;
+      if (controller != null) await _disposeCameraController(controller);
+      if (!_isCurrentCameraInitialization(generation)) return;
       setState(() {
         _isInitializing = false;
         _error = error.toString();
       });
+    }
+  }
+
+  bool _isCurrentCameraInitialization(int generation) =>
+      mounted && _isAppResumed && generation == _cameraInitializationGeneration;
+
+  Future<void> _disposeCameraController(CameraController controller) async {
+    try {
+      await controller.dispose();
+    } catch (error) {
+      debugPrint('Unable to dispose camera controller: $error');
     }
   }
 
