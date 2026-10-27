@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
 import '../../components/ui_kit_showcase_screen.dart';
 import '../../core/permissions/permission_service.dart';
 import '../../features/notifications/presentation/notification_center_screen.dart';
@@ -17,8 +18,6 @@ import '../../screens/demands/demand_details_page.dart';
 import '../../screens/demands/in_app_camera_page.dart';
 import '../../screens/demands/open_demands_page.dart';
 import '../../screens/home/home_screen.dart';
-import '../../screens/merchant/merchant_screen.dart';
-import '../../screens/merchant/store_protection_options_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
 import '../../screens/profile/activity_screen.dart';
 import '../../screens/profile/create_support_ticket_screen.dart';
@@ -39,6 +38,8 @@ import '../../screens/sample_feature/sample_feature_list_screen.dart';
 import '../../screens/sample_feature/sample_feature_view_model.dart';
 import '../../screens/shipments/my_shipments_screen.dart';
 import '../../screens/shipments/shipment_details_screen.dart';
+import '../../screens/shops/shops_screen.dart';
+import '../../screens/shops/store_protection_options_screen.dart';
 import '../../screens/splash/splash_screen.dart';
 import '../camera/camera_capture_service.dart';
 import '../config/app_environment.dart';

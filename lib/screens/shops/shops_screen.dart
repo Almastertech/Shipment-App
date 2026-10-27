@@ -7,9 +7,9 @@ import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
-import 'widgets/merchant_hero_header.dart';
-import 'widgets/merchant_store_widgets.dart';
-import 'widgets/merchant_trust_card.dart';
+import 'widgets/shops_hero_header.dart';
+import 'widgets/shops_store_widgets.dart';
+import 'widgets/shops_trust_card.dart';
 
 class ShopsScreen extends StatelessWidget {
   const ShopsScreen({super.key});

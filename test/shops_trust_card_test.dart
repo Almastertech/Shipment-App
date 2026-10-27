@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shipments/screens/merchant/widgets/merchant_trust_card.dart';
+import 'package:shipments/screens/shops/widgets/shops_trust_card.dart';
 
 void main() {
   Widget buildCard({double textScaleFactor = 1.0}) {
