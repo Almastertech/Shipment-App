@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../core/resources/app_spacing.dart';
 
@@ -19,6 +20,8 @@ class AppScaffold extends StatelessWidget {
     this.drawer,
     this.endDrawer,
     this.scrollable = false,
+    this.isLoading = false,
+    this.loadingLabel,
   });
 
   final PreferredSizeWidget? appBar;
@@ -35,6 +38,8 @@ class AppScaffold extends StatelessWidget {
   final Widget? drawer;
   final Widget? endDrawer;
   final bool scrollable;
+  final bool isLoading;
+  final String? loadingLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +69,30 @@ class AppScaffold extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: appBar,
-      body: content,
-      backgroundColor: backgroundColor,
-      bottomNavigationBar: bottomNavigationBar,
-      floatingActionButton: floatingActionButton,
-      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      extendBody: extendBody,
-      drawer: drawer,
-      endDrawer: endDrawer,
+    return Skeletonizer(
+      enabled: isLoading,
+      child: Semantics(
+        liveRegion: isLoading,
+        label: isLoading ? loadingLabel ?? 'Loading' : null,
+        child: ExcludeSemantics(
+          excluding: isLoading,
+          child: IgnorePointer(
+            key: const Key('app-scaffold-loading-interaction-blocker'),
+            ignoring: isLoading,
+            child: Scaffold(
+              appBar: appBar,
+              body: content,
+              backgroundColor: backgroundColor,
+              bottomNavigationBar: bottomNavigationBar,
+              floatingActionButton: floatingActionButton,
+              resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+              extendBody: extendBody,
+              drawer: drawer,
+              endDrawer: endDrawer,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
