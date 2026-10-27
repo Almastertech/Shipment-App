@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 
 import '../../core/storage/local_storage.dart';
@@ -24,7 +22,7 @@ class LocalizationController extends ChangeNotifier
   final DioClient _dioClient;
   final WidgetsBinding? _binding;
 
-  late Locale _locale;
+  Locale _locale = AppConstants.defaultLocale;
 
   Locale get locale => _locale;
 
@@ -83,10 +81,8 @@ class LocalizationController extends ChangeNotifier
       }
     }
 
-    // No saved locale: detect system language from the mobile device
-    final systemLocales = _binding?.platformDispatcher.locales ??
-        ui.PlatformDispatcher.instance.locales;
-    _locale = _resolveSupportedLocale(systemLocales);
+    // Default to Arabic when no preference is saved
+    _locale = AppConstants.defaultLocale;
     _dioClient.updateHeaders(languageCode: _locale.languageCode);
   }
 
@@ -99,12 +95,14 @@ class LocalizationController extends ChangeNotifier
         }
       }
     }
-    return const Locale('en');
+    return AppConstants.defaultLocale;
   }
 
   String _normalizeSupportedCode(String code) {
     final lower = code.toLowerCase();
-    return supportedLocales.any((l) => l.languageCode == lower) ? lower : 'en';
+    return supportedLocales.any((l) => l.languageCode == lower)
+        ? lower
+        : AppConstants.defaultLanguageCode;
   }
 
   @override

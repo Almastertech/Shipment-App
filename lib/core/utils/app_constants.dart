@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 class AppConstants {
+  static const String defaultLanguageCode = 'ar';
+  static const Locale defaultLocale = Locale('ar');
   static const String localeStorageKey = 'app_locale';
   static const String themeModeStorageKey = 'theme_mode';
   static const String onboardingCompletedStorageKey = 'onboarding_completed';

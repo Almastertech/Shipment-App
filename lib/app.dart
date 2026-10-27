@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'components/connectivity_banner.dart';
-import 'core/storage/local_storage.dart';
 import 'core/utils/app_constants.dart';
 import 'injection.dart';
 import 'l10n/app_localizations.dart';
@@ -32,16 +31,6 @@ class _MyAppState extends State<MyApp> {
 
     if (_lastDevicePreviewLocale == null) {
       _lastDevicePreviewLocale = previewLocale;
-      // If there is no explicit saved preference, align with DevicePreview's initial system locale
-      final hasSaved =
-          getIt<LocalStorage>().getString(AppConstants.localeStorageKey) !=
-              null;
-      if (!hasSaved) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (!mounted) return;
-          localizationController.handleSystemLocale(previewLocale);
-        });
-      }
     } else if (_lastDevicePreviewLocale != previewLocale) {
       _lastDevicePreviewLocale = previewLocale;
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -69,6 +58,16 @@ class _MyAppState extends State<MyApp> {
           routerConfig: router,
           locale: localizationController.locale,
           supportedLocales: localizationController.supportedLocales,
+          localeResolutionCallback: (locale, supportedLocales) {
+            if (locale != null) {
+              for (final supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale.languageCode) {
+                  return supportedLocale;
+                }
+              }
+            }
+            return AppConstants.defaultLocale;
+          },
           localizationsDelegates: const [
             AppLocalizations.delegate,
             CountryLocalizations.delegate,

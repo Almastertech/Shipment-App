@@ -75,6 +75,11 @@ void main() {
     );
   });
 
+  test('starts with Arabic as default language when no locale is stored', () {
+    expect(controller.locale.languageCode, equals('ar'));
+    expect(controller.textDirection, equals(TextDirection.rtl));
+  });
+
   testWidgets('renders Arabic and English segments', (tester) async {
     await tester.pumpWidget(
       _buildTestApp(

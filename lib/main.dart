@@ -19,6 +19,7 @@ Future<void> main() async {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
+      data: const DevicePreviewData(locale: 'ar'),
       builder: (context) => const GenerateMultiProvider(child: MyApp()),
     ),
   );
