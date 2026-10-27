@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -111,6 +112,7 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedPhoto = photo;
     final fallback = Image.asset(
       AppImages.profileAvatar,
       width: 80,
@@ -121,15 +123,23 @@ class _Avatar extends StatelessWidget {
       child: SizedBox(
         width: 80,
         height: 80,
-        child: photo == null
+        child: selectedPhoto == null
             ? fallback
-            : Image.file(
-                File(photo!.path),
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => fallback,
-              ),
+            : kIsWeb
+                ? Image.network(
+                    selectedPhoto.path,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => fallback,
+                  )
+                : Image.file(
+                    File(selectedPhoto.path),
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => fallback,
+                  ),
       ),
     );
   }
@@ -178,4 +188,3 @@ class _CameraButton extends StatelessWidget {
     );
   }
 }
-
