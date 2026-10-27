@@ -1,20 +1,21 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shipments/components/app_scaffold.dart';
-import 'package:shipments/components/app_text.dart';
-import 'package:shipments/components/buttons/primary_button.dart';
-import 'package:shipments/components/custom_claim_shipment_card.dart';
-import 'package:shipments/core/location/location_coordinates.dart';
-import 'package:shipments/core/resources/app_colors.dart';
-import 'package:shipments/core/resources/app_images.dart';
-import 'package:shipments/core/resources/app_spacing.dart';
-import 'package:shipments/core/resources/app_typography.dart';
-import 'package:shipments/l10n/app_localizations.dart';
-import 'package:shipments/screens/demands/widgets/demand_evidence_header.dart';
-import 'package:shipments/screens/demands/widgets/demand_loading_state.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../components/app_scaffold.dart';
+import '../../components/app_text.dart';
+import '../../components/buttons/primary_button.dart';
+import '../../components/custom_claim_shipment_card.dart';
+import '../../core/location/location_coordinates.dart';
+import '../../core/resources/app_colors.dart';
+import '../../core/resources/app_images.dart';
+import '../../core/resources/app_spacing.dart';
+import '../../core/resources/app_typography.dart';
+import '../../l10n/app_localizations.dart';
+import 'widgets/demand_evidence_header.dart';
+import 'widgets/demand_loading_state.dart';
+import 'widgets/demand_review_description_input.dart';
+import 'widgets/demand_review_evidence_grid.dart';
+import 'widgets/demand_review_location_card.dart';
 
 class DemandReviewPage extends StatefulWidget {
   const DemandReviewPage({
@@ -51,6 +52,12 @@ class _DemandReviewPageState extends State<DemandReviewPage> {
   void dispose() {
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  String _formatLocation(LocationCoordinates? location) {
+    if (location == null) return '';
+    return '${location.latitude.toStringAsFixed(4)}, '
+        '${location.longitude.toStringAsFixed(4)}';
   }
 
   @override
@@ -130,7 +137,7 @@ class _DemandReviewPageState extends State<DemandReviewPage> {
                 children: <Widget>[
                   _SectionHeading(l10n.demandReviewLocationTitle),
                   const SizedBox(height: AppSpacing.tokenS),
-                  _LocationCard(
+                  DemandReviewLocationCard(
                     unavailable: widget.locationUnavailable,
                     title: widget.locationUnavailable
                         ? l10n.demandReviewLocationMissing
@@ -172,110 +179,18 @@ class _DemandReviewPageState extends State<DemandReviewPage> {
                     ],
                   ),
                   const SizedBox(height: AppSpacing.tokenS),
-                  Row(
-                    children: <Widget>[
-                      for (var index = 0; index < 3; index++) ...<Widget>[
-                        if (index > 0)
-                          const SizedBox(width: AppSpacing.tokenXs),
-                        Expanded(
-                          child: _EvidenceTile(
-                            evidence: widget.evidence[index],
-                            video: index == 2,
-                            label: switch (index) {
-                              0 => l10n.demandReviewLabelPhoto,
-                              1 => l10n.demandReviewPackagingPhoto,
-                              _ => l10n.demandReviewVideo,
-                            },
-                            onTap: () => widget.onRetakeEvidence(index),
-                          ),
-                        ),
-                      ],
-                      const SizedBox(width: AppSpacing.tokenXs),
-                      Expanded(
-                        child: _EvidenceTile(
-                          evidence: widget.optionalPhotos.isEmpty
-                              ? null
-                              : widget.optionalPhotos.first,
-                          label: l10n.demandReviewAdditionalPhoto,
-                          onTap: () => widget.onAddOptionalPhoto(
-                            widget.optionalPhotos.indexWhere(
-                                      (photo) => photo == null,
-                                    ) ==
-                                    -1
-                                ? 0
-                                : widget.optionalPhotos.indexWhere(
-                                    (photo) => photo == null,
-                                  ),
-                          ),
-                          isAddTile: widget.optionalPhotos.isEmpty ||
-                              widget.optionalPhotos.first == null,
-                        ),
-                      ),
-                    ],
+                  DemandReviewEvidenceGrid(
+                    evidence: widget.evidence,
+                    optionalPhotos: widget.optionalPhotos,
+                    onRetakeEvidence: widget.onRetakeEvidence,
+                    onAddOptionalPhoto: widget.onAddOptionalPhoto,
                   ),
                   const SizedBox(height: AppSpacing.tokenL),
                   _SectionHeading(l10n.demandReviewDescriptionTitle),
                   const SizedBox(height: AppSpacing.tokenS),
-                  Container(
-                    height: 118,
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                      AppSpacing.tokenM,
-                      AppSpacing.tokenS,
-                      AppSpacing.tokenM,
-                      AppSpacing.tokenXs,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: _descriptionController.text.isEmpty
-                            ? colors.neutral.shade300
-                            : colors.primary.shade500,
-                        width: _descriptionController.text.isEmpty ? 1 : 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Expanded(
-                          child: TextField(
-                            controller: _descriptionController,
-                            maxLength: 300,
-                            maxLines: null,
-                            expands: true,
-                            textAlign: TextAlign.start,
-                            textAlignVertical: TextAlignVertical.top,
-                            style: AppTypography.buyerMobile.bodySmall
-                                .toTextStyle(color: colors.neutral.shade900),
-                            decoration: InputDecoration(
-                              hintText: l10n.demandReviewDescriptionHint,
-                              hintStyle: AppTypography.buyerMobile.bodySmall
-                                  .toTextStyle(color: colors.neutral.shade500),
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              counterText: '',
-                              isDense: true,
-                              contentPadding: EdgeInsets.zero,
-                            ),
-                            onChanged: (_) => setState(() {}),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: AppText(
-                            l10n.demandReviewCharacterCount(
-                              _descriptionController.text.length,
-                            ),
-                            variant: AppTextVariant.labelSmall,
-                            style:
-                                AppTypography.buyerMobile.caption.toTextStyle(
-                              color: colors.neutral.shade600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  DemandReviewDescriptionInput(
+                    controller: _descriptionController,
+                    onChanged: (_) => setState(() {}),
                   ),
                 ],
               ),
@@ -312,12 +227,6 @@ class _DemandReviewPageState extends State<DemandReviewPage> {
       child: content,
     );
   }
-
-  String _formatLocation(LocationCoordinates? location) {
-    if (location == null) return '';
-    return '${location.latitude.toStringAsFixed(4)}, '
-        '${location.longitude.toStringAsFixed(4)}';
-  }
 }
 
 class _SectionHeading extends StatelessWidget {
@@ -334,236 +243,6 @@ class _SectionHeading extends StatelessWidget {
       textAlign: TextAlign.start,
       style: AppTypography.buyerMobile.h4.toTextStyle(
         color: colors.neutral.shade900,
-      ),
-    );
-  }
-}
-
-class _LocationCard extends StatelessWidget {
-  const _LocationCard({
-    required this.unavailable,
-    required this.title,
-    required this.description,
-    this.actionLabel,
-  });
-
-  final bool unavailable;
-  final String title;
-  final String description;
-  final String? actionLabel;
-
-  @override
-  Widget build(BuildContext context) {
-    const colors = AppColors.primitives;
-    return Container(
-      constraints: const BoxConstraints(minHeight: 84),
-      padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 12, 12),
-      decoration: BoxDecoration(
-        color: unavailable ? colors.warning.shade100 : Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: unavailable
-            ? null
-            : const <BoxShadow>[
-                BoxShadow(
-                  color: Color(0x12000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 3),
-                ),
-              ],
-      ),
-      child: Row(
-        children: <Widget>[
-          Container(
-            width: 46,
-            height: 46,
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              unavailable ? Icons.warning_amber_rounded : Icons.place_outlined,
-              color: unavailable
-                  ? colors.warning.shade700
-                  : colors.primary.shade500,
-              size: 23,
-            ),
-          ),
-          const SizedBox(width: AppSpacing.tokenS),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                AppText(
-                  title,
-                  variant: AppTextVariant.labelLarge,
-                  style: AppTypography.buyerMobile.label.toTextStyle(
-                    color: colors.neutral.shade900,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.token2Xs),
-                AppText(
-                  description,
-                  variant: AppTextVariant.bodySmall,
-                  style: AppTypography.buyerMobile.caption.toTextStyle(
-                    color: colors.neutral.shade600,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          if (actionLabel != null) ...<Widget>[
-            const SizedBox(width: AppSpacing.tokenS),
-            AppText(
-              actionLabel!,
-              variant: AppTextVariant.labelMedium,
-              style: AppTypography.buyerMobile.labelSmall.toTextStyle(
-                color: colors.primary.shade500,
-              ),
-            ),
-          ] else ...<Widget>[
-            const SizedBox(width: AppSpacing.tokenS),
-            Icon(
-              Icons.edit_outlined,
-              color: colors.primary.shade500,
-              size: 21,
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-class _EvidenceTile extends StatefulWidget {
-  const _EvidenceTile({
-    required this.evidence,
-    required this.label,
-    required this.onTap,
-    this.video = false,
-    this.isAddTile = false,
-  });
-
-  final XFile? evidence;
-  final String label;
-  final VoidCallback onTap;
-  final bool video;
-  final bool isAddTile;
-
-  @override
-  State<_EvidenceTile> createState() => _EvidenceTileState();
-}
-
-class _EvidenceTileState extends State<_EvidenceTile> {
-  Future<Uint8List>? _evidenceBytes;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadEvidence(widget.evidence, widget.video);
-  }
-
-  @override
-  void didUpdateWidget(covariant _EvidenceTile oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (!_sameFile(oldWidget.evidence, widget.evidence) ||
-        oldWidget.video != widget.video) {
-      _loadEvidence(widget.evidence, widget.video);
-    }
-  }
-
-  bool _sameFile(XFile? first, XFile? second) {
-    if (identical(first, second)) return true;
-    final firstPath = first?.path;
-    final secondPath = second?.path;
-    return firstPath != null && firstPath.isNotEmpty && firstPath == secondPath;
-  }
-
-  void _loadEvidence(XFile? evidence, bool video) {
-    _evidenceBytes = evidence != null && !video ? evidence.readAsBytes() : null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const colors = AppColors.primitives;
-    return Semantics(
-      button: true,
-      label: widget.label,
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: SizedBox(
-            height: 92,
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                if (widget.evidence != null && !widget.video)
-                  FutureBuilder<Uint8List>(
-                    future: _evidenceBytes,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Image.memory(snapshot.data!, fit: BoxFit.cover);
-                      }
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Skeletonizer(
-                          enabled: true,
-                          child: ColoredBox(color: colors.neutral.shade300),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        return ColoredBox(
-                          color: colors.neutral.shade300,
-                          child: const Center(
-                            child: Icon(Icons.broken_image_outlined),
-                          ),
-                        );
-                      }
-                      return ColoredBox(color: colors.neutral.shade300);
-                    },
-                  )
-                else
-                  ColoredBox(
-                    color: widget.video
-                        ? colors.neutral.shade800
-                        : colors.neutral.shade300,
-                    child: Center(
-                      child: Icon(
-                        widget.isAddTile
-                            ? Icons.add_rounded
-                            : widget.video
-                                ? Icons.play_arrow_rounded
-                                : Icons.image_outlined,
-                        color: Colors.white,
-                        size: widget.isAddTile ? 28 : 32,
-                      ),
-                    ),
-                  ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    color: Colors.black.withValues(alpha: .68),
-                    child: AppText(
-                      widget.label,
-                      variant: AppTextVariant.labelSmall,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTypography.buyerMobile.caption.toTextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

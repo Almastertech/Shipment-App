@@ -2,24 +2,22 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shipments/screens/demands/widgets/claim_location_header.dart';
-import 'package:shipments/screens/demands/widgets/skipped_location_warning_sheet.dart';
 
 import '../../components/app_scaffold.dart';
-import '../../components/app_text.dart';
-import '../../components/buttons/primary_button.dart';
-import '../../components/buttons/text_link_button.dart';
 import '../../components/layout/app_bottom_sheet.dart';
 import '../../core/location/location_service.dart';
 import '../../core/permissions/app_permission.dart';
 import '../../core/permissions/permission_service.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_spacing.dart';
-import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/claim_location_header.dart';
 import 'widgets/demand_loading_state.dart';
+import 'widgets/location_benefits_section.dart';
+import 'widgets/location_bottom_actions.dart';
 import 'widgets/location_illustration.dart';
+import 'widgets/skipped_location_warning_sheet.dart';
 
 class OpenDemandsPage extends StatefulWidget {
   const OpenDemandsPage({
@@ -161,10 +159,17 @@ class _OpenDemandsPageState extends State<OpenDemandsPage>
     }
   }
 
+  void _onBack() {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(AppRoutes.shipments);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    const colors = AppColors.primitives;
     final width = MediaQuery.sizeOf(context).width;
     final heroHeight = (width * .8).clamp(300.0, 350.0);
     const locationCardHeight = 205.0;
@@ -177,136 +182,72 @@ class _OpenDemandsPageState extends State<OpenDemandsPage>
       safeArea: false,
       body: Column(
         children: <Widget>[
-          SizedBox(
-            height: introHeight,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: <Widget>[
-                PositionedDirectional(
-                  top: 0,
-                  start: 0,
-                  end: 0,
-                  height: heroHeight,
-                  child: ClaimLocationHeader(
-                    title: l10n.openDemandsTitle,
-                    heading: l10n.openDemandsLocationHeading,
-                    description: l10n.openDemandsLocationDescription,
-                    steps: <String>[
-                      l10n.openDemandsStepLocation,
-                      l10n.openDemandsStepEvidence,
-                      l10n.openDemandsStepReview,
-                    ],
-                    onBack: () {
-                      if (context.canPop()) {
-                        context.pop();
-                      } else {
-                        context.go(AppRoutes.shipments);
-                      }
-                    },
-                    backTooltip: l10n.navigationBack,
-                  ),
-                ),
-                PositionedDirectional(
-                  top: heroHeight - locationCardOverlap,
-                  start: AppSpacing.tokenM,
-                  end: AppSpacing.tokenM,
-                  height: locationCardHeight,
-                  child: LocationIllustration(
-                    shadowProgress: _shadowProgress,
-                  ),
-                ),
-              ],
-            ),
-          ),
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.tokenXl,
-                AppSpacing.tokenL,
-                AppSpacing.tokenXl,
-                AppSpacing.tokenM,
-              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  AppText(
-                    l10n.openDemandsWhyLocationHeading,
-                    variant: AppTextVariant.titleLarge,
-                    textAlign: TextAlign.start,
-                    style: AppTypography.buyerMobile.h4.toTextStyle(
-                      color: colors.neutral.shade900,
+                  SizedBox(
+                    height: introHeight,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: <Widget>[
+                        PositionedDirectional(
+                          top: 0,
+                          start: 0,
+                          end: 0,
+                          height: heroHeight,
+                          child: ClaimLocationHeader(
+                            title: l10n.openDemandsTitle,
+                            heading: l10n.openDemandsLocationHeading,
+                            description: l10n.openDemandsLocationDescription,
+                            steps: <String>[
+                              l10n.openDemandsStepLocation,
+                              l10n.openDemandsStepEvidence,
+                              l10n.openDemandsStepReview,
+                            ],
+                            onBack: _onBack,
+                            backTooltip: l10n.navigationBack,
+                          ),
+                        ),
+                        PositionedDirectional(
+                          top: heroHeight - locationCardOverlap,
+                          start: AppSpacing.tokenM,
+                          end: AppSpacing.tokenM,
+                          height: locationCardHeight,
+                          child: LocationIllustration(
+                            shadowProgress: _shadowProgress,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.tokenS),
-                  for (final benefit in <String>[
-                    l10n.openDemandsLocationBenefitOne,
-                    l10n.openDemandsLocationBenefitTwo,
-                    l10n.openDemandsLocationBenefitThree,
-                  ])
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.tokenXs,
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: AppText(
-                              benefit,
-                              variant: AppTextVariant.bodyMedium,
-                              textAlign: TextAlign.start,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTypography.buyerMobile.bodyMedium
-                                  .toTextStyle(color: colors.neutral.shade900),
-                            ),
-                          ),
-                          const SizedBox(width: AppSpacing.tokenS),
-                          Icon(
-                            Icons.check_rounded,
-                            size: 20,
-                            color: colors.primary.shade500,
-                          ),
-                        ],
-                      ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                      AppSpacing.tokenXl,
+                      AppSpacing.tokenL,
+                      AppSpacing.tokenXl,
+                      AppSpacing.tokenM,
                     ),
+                    child: LocationBenefitsSection(
+                      heading: l10n.openDemandsWhyLocationHeading,
+                      benefits: <String>[
+                        l10n.openDemandsLocationBenefitOne,
+                        l10n.openDemandsLocationBenefitTwo,
+                        l10n.openDemandsLocationBenefitThree,
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          SafeArea(
-            top: false,
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.tokenXl,
-                AppSpacing.tokenXs,
-                AppSpacing.tokenXl,
-                AppSpacing.tokenXs,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  PrimaryButton(
-                    label: l10n.openDemandsAllowLocation,
-                    onPressed: _requestLocation,
-                    isLoading: _isRequestingLocation,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colors.primary.shade500,
-                      foregroundColor: colors.neutral.shade100,
-                      disabledBackgroundColor: colors.primary.shade400,
-                      elevation: 0,
-                      minimumSize: const Size.fromHeight(52),
-                      shape: const StadiumBorder(),
-                      textStyle: AppTypography.buyerMobile.button.toTextStyle(),
-                    ),
-                  ),
-                  TextLinkButton(
-                    label: l10n.openDemandsNotNow,
-                    onPressed: _showSkippedLocationWarning,
-                    foregroundColor: colors.primary.shade500,
-                  ),
-                ],
-              ),
-            ),
+          LocationBottomActions(
+            allowLocationLabel: l10n.openDemandsAllowLocation,
+            notNowLabel: l10n.openDemandsNotNow,
+            onAllowLocation: _requestLocation,
+            onNotNow: _showSkippedLocationWarning,
+            isLoading: _isRequestingLocation,
           ),
         ],
       ),
