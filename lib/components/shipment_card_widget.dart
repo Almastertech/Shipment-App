@@ -242,7 +242,7 @@ class ShipmentCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Align(
-                  alignment: AlignmentDirectional.centerEnd,
+                  alignment: AlignmentDirectional.centerStart,
                   child: _Pill(
                     color: colors.accent01.shade300,
                     child: Row(
@@ -268,7 +268,7 @@ class ShipmentCardWidget extends StatelessWidget {
                 AppText(
                   title,
                   variant: AppTextVariant.headlineSmall,
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypography.buyerMobile.h2.toTextStyle(
@@ -279,7 +279,7 @@ class ShipmentCardWidget extends StatelessWidget {
                 AppText(
                   '$storeAndItem · $trackingNumber',
                   variant: AppTextVariant.bodySmall,
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypography.buyerMobile.bodySmall.toTextStyle(

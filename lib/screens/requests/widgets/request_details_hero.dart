@@ -9,11 +9,12 @@ import 'package:shipments/core/resources/app_typography.dart';
 import 'package:shipments/l10n/app_localizations.dart';
 
 class RequestDetailsHero extends StatelessWidget {
-  const RequestDetailsHero(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.status});
+  const RequestDetailsHero({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.status,
+  });
 
   final String title;
   final String subtitle;
@@ -21,16 +22,20 @@ class RequestDetailsHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
     final l10n = AppLocalizations.of(context)!;
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(AppRadius.token2Xl)),
+        bottom: Radius.circular(AppRadius.token2Xl),
+      ),
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.asset(AppImages.boxFocus,
-              fit: BoxFit.cover, alignment: const Alignment(.25, -.3)),
+          Image.asset(
+            AppImages.boxFocus,
+            fit: BoxFit.cover,
+            alignment: const Alignment(.25, -.3),
+          ),
           ColoredBox(color: colors.primary.shade900.withValues(alpha: .42)),
           DecoratedBox(
             decoration: BoxDecoration(
@@ -39,7 +44,7 @@ class RequestDetailsHero extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: <Color>[
                   colors.primary.shade900.withValues(alpha: .14),
-                  colors.primary.shade900.withValues(alpha: .88)
+                  colors.primary.shade900.withValues(alpha: .88),
                 ],
               ),
             ),
@@ -58,13 +63,15 @@ class RequestDetailsHero extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     _HeroAction(
-                        icon: Icons.chevron_left_rounded,
-                        label: l10n.navigationBack,
-                        onTap: () => context.pop()),
+                      icon: Icons.chevron_left_rounded,
+                      label: l10n.navigationBack,
+                      onTap: () => context.pop(),
+                    ),
                     _HeroAction(
-                        icon: Icons.ios_share_rounded,
-                        label: l10n.navigationBack,
-                        onTap: () {}),
+                      icon: Icons.ios_share_rounded,
+                      label: l10n.navigationBack,
+                      onTap: () {},
+                    ),
                   ],
                 ),
                 const Spacer(),
@@ -72,40 +79,51 @@ class RequestDetailsHero extends StatelessWidget {
                   alignment: AlignmentDirectional.centerStart,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.tokenS,
-                        vertical: AppSpacing.token2Xs),
+                      horizontal: AppSpacing.tokenS,
+                      vertical: AppSpacing.token2Xs,
+                    ),
                     decoration: BoxDecoration(
-                        color: colors.success.shade100,
-                        borderRadius:
-                            BorderRadius.circular(AppRadius.tokenFull)),
+                      color: colors.success.shade100,
+                      borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+                    ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(Icons.inventory_2_outlined,
-                            size: 16, color: colors.success.shade700),
+                        Icon(
+                          Icons.inventory_2_outlined,
+                          size: 16,
+                          color: colors.success.shade700,
+                        ),
                         const SizedBox(width: AppSpacing.token2Xs),
-                        AppText(status,
-                            variant: AppTextVariant.labelSmall,
-                            style: AppTypography.buyerMobile.caption
-                                .toTextStyle(color: colors.success.shade700)),
+                        AppText(
+                          status,
+                          variant: AppTextVariant.labelSmall,
+                          style: AppTypography.buyerMobile.caption
+                              .toTextStyle(color: colors.success.shade700),
+                        ),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.tokenS),
-                AppText(title,
-                    variant: AppTextVariant.headlineMedium,
-                    textAlign: TextAlign.start,
-                    style: AppTypography.buyerMobile.h2
-                        .toTextStyle(color: Colors.white)),
+                AppText(
+                  title,
+                  variant: AppTextVariant.headlineMedium,
+                  textAlign: TextAlign.start,
+                  style: AppTypography.buyerMobile.h2
+                      .toTextStyle(color: Colors.white),
+                ),
                 const SizedBox(height: AppSpacing.token2Xs),
-                AppText(subtitle,
-                    variant: AppTextVariant.bodySmall,
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTypography.buyerMobile.bodySmall.toTextStyle(
-                        color: Colors.white.withValues(alpha: .82))),
+                AppText(
+                  subtitle,
+                  variant: AppTextVariant.bodySmall,
+                  textAlign: TextAlign.start,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                    color: Colors.white.withValues(alpha: .82),
+                  ),
+                ),
                 const SizedBox(height: AppSpacing.token2Xl),
               ],
             ),
@@ -117,8 +135,11 @@ class RequestDetailsHero extends StatelessWidget {
 }
 
 class _HeroAction extends StatelessWidget {
-  const _HeroAction(
-      {required this.icon, required this.label, required this.onTap});
+  const _HeroAction({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
   final IconData icon;
   final String label;
   final VoidCallback onTap;
@@ -133,9 +154,12 @@ class _HeroAction extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: .16),
-                border: Border.all(color: Colors.white.withValues(alpha: .45))),
+              shape: BoxShape.circle,
+              color: Colors.white.withValues(alpha: .16),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: .45),
+              ),
+            ),
             child: Icon(icon, color: Colors.white, size: 21),
           ),
         ),
