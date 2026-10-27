@@ -11,7 +11,7 @@ import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
-import 'widgets/profile_information_widgets.dart';
+import 'widgets/profile_legal_widgets.dart';
 import 'widgets/profile_subpage_hero.dart';
 
 enum _ProfileLegalPageKind { terms, privacy, protection }
@@ -147,15 +147,15 @@ class ProfileLegalPageScreen extends StatelessWidget {
           ],
           sections: <_ProfileLegalSection>[
             _ProfileLegalSection(
-                l10n.profileTermsSection1Title, l10n.profileTermsSection1Body),
+                l10n.profileTermsSection1Title, l10n.profileTermsSection1Body,),
             _ProfileLegalSection(
-                l10n.profileTermsSection2Title, l10n.profileTermsSection2Body),
+                l10n.profileTermsSection2Title, l10n.profileTermsSection2Body,),
             _ProfileLegalSection(
-                l10n.profileTermsSection3Title, l10n.profileTermsSection3Body),
+                l10n.profileTermsSection3Title, l10n.profileTermsSection3Body,),
             _ProfileLegalSection(
-                l10n.profileTermsSection4Title, l10n.profileTermsSection4Body),
+                l10n.profileTermsSection4Title, l10n.profileTermsSection4Body,),
             _ProfileLegalSection(
-                l10n.profileTermsSection5Title, l10n.profileTermsSection5Body),
+                l10n.profileTermsSection5Title, l10n.profileTermsSection5Body,),
           ],
         ),
       _ProfileLegalPageKind.privacy => _ProfileLegalContent(
@@ -177,17 +177,17 @@ class ProfileLegalPageScreen extends StatelessWidget {
           ],
           sections: <_ProfileLegalSection>[
             _ProfileLegalSection(l10n.profilePrivacySection1Title,
-                l10n.profilePrivacySection1Body),
+                l10n.profilePrivacySection1Body,),
             _ProfileLegalSection(l10n.profilePrivacySection2Title,
-                l10n.profilePrivacySection2Body),
+                l10n.profilePrivacySection2Body,),
             _ProfileLegalSection(l10n.profilePrivacySection3Title,
-                l10n.profilePrivacySection3Body),
+                l10n.profilePrivacySection3Body,),
             _ProfileLegalSection(l10n.profilePrivacySection4Title,
-                l10n.profilePrivacySection4Body),
+                l10n.profilePrivacySection4Body,),
             _ProfileLegalSection(l10n.profilePrivacySection5Title,
-                l10n.profilePrivacySection5Body),
+                l10n.profilePrivacySection5Body,),
             _ProfileLegalSection(l10n.profilePrivacySection6Title,
-                l10n.profilePrivacySection6Body),
+                l10n.profilePrivacySection6Body,),
           ],
         ),
       _ProfileLegalPageKind.protection => _ProfileLegalContent(
@@ -205,15 +205,15 @@ class ProfileLegalPageScreen extends StatelessWidget {
           ],
           sections: <_ProfileLegalSection>[
             _ProfileLegalSection(l10n.profileProtectionSection1Title,
-                l10n.profileProtectionSection1Body),
+                l10n.profileProtectionSection1Body,),
             _ProfileLegalSection(l10n.profileProtectionSection2Title,
-                l10n.profileProtectionSection2Body),
+                l10n.profileProtectionSection2Body,),
             _ProfileLegalSection(l10n.profileProtectionSection3Title,
-                l10n.profileProtectionSection3Body),
+                l10n.profileProtectionSection3Body,),
             _ProfileLegalSection(l10n.profileProtectionSection4Title,
-                l10n.profileProtectionSection4Body),
+                l10n.profileProtectionSection4Body,),
             _ProfileLegalSection(l10n.profileProtectionSection5Title,
-                l10n.profileProtectionSection5Body),
+                l10n.profileProtectionSection5Body,),
           ],
         ),
     };

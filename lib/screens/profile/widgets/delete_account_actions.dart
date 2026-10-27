@@ -24,7 +24,7 @@ class DeleteAccountActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shipments/components/app_text.dart';
-
 import '../../components/app_card.dart';
 import '../../components/app_scaffold.dart';
+import '../../components/app_text.dart';
 import '../../components/inputs/app_search_field.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_radius.dart';
@@ -11,7 +10,7 @@ import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
-import 'widgets/profile_information_widgets.dart';
+import 'widgets/profile_faq_widgets.dart';
 import 'widgets/profile_subpage_hero.dart';
 
 enum _FaqCategory { all, shipments, protection, claims }
@@ -198,7 +197,7 @@ class _ProfileFaqScreenState extends State<ProfileFaqScreen> {
   }
 
   ThemeData _searchTheme(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.tokenFull),
       borderSide: BorderSide.none,

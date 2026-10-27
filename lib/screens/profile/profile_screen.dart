@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shipments/components/layout/custom_bottom_nav_bar.dart';
-import 'package:shipments/screens/profile/widgets/profile_footer.dart';
-import 'package:shipments/screens/profile/widgets/profile_hero.dart';
-import 'package:shipments/screens/profile/widgets/profile_language_switcher.dart';
-import 'package:shipments/screens/profile/widgets/profile_logout_bottom_sheet.dart';
-import 'package:shipments/screens/profile/widgets/profile_menu_section.dart';
-import 'package:shipments/screens/profile/widgets/profile_user_card.dart';
-
 import '../../components/app_scaffold.dart';
+import '../../components/layout/custom_bottom_nav_bar.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
@@ -18,6 +11,12 @@ import '../../core/session/session_manager.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 import '../../localization/controllers/localization_controller.dart';
+import 'widgets/profile_footer.dart';
+import 'widgets/profile_hero.dart';
+import 'widgets/profile_language_switcher.dart';
+import 'widgets/profile_logout_bottom_sheet.dart';
+import 'widgets/profile_menu_section.dart';
+import 'widgets/profile_user_card.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

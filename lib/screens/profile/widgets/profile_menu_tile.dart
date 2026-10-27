@@ -29,7 +29,7 @@ class ProfileMenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
     final text = AppColors.semantic.text;
     final iconColor = filledLeading
         ? Colors.white
@@ -82,7 +82,9 @@ class ProfileMenuTile extends StatelessWidget {
               ),
               trailing ??
                   Icon(
-                    Icons.chevron_right_rounded,
+                    isRtl
+                        ? Icons.chevron_left_rounded
+                        : Icons.chevron_right_rounded,
                     color: colors.neutral.shade600,
                     size: 20,
                   ),

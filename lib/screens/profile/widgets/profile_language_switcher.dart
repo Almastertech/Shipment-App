@@ -19,7 +19,7 @@ class ProfileLanguageSwitcher extends StatelessWidget {
     final currentLanguageCode = localizationController.locale.languageCode;
     final isArabic = currentLanguageCode == 'ar';
     final l10n = AppLocalizations.of(context)!;
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
 
     return Container(
       height: 32,
@@ -67,7 +67,7 @@ class _LanguageSegment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
 
     return Semantics(
       button: true,

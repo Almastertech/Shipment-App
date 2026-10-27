@@ -40,7 +40,7 @@ class ProfileMenuSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
     final text = AppColors.semantic.text;
 
     return Column(

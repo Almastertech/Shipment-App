@@ -31,7 +31,7 @@ class ProfileLogoutBottomSheet {
       topPadding: AppSpacing.tokenS,
       handleBottomSpacing: AppSpacing.tokenXl,
       maxWidth: 440,
-      padding: EdgeInsets.fromLTRB(
+      padding: const EdgeInsets.fromLTRB(
         AppSpacing.token2Xl,
         0,
         AppSpacing.token2Xl,
@@ -64,7 +64,7 @@ class _ProfileLogoutContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.primitives;
+    const colors = AppColors.primitives;
     final text = AppColors.semantic.text;
 
     return Column(

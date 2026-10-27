@@ -8,8 +8,8 @@ import '../../core/routing/app_routes.dart';
 import '../../l10n/app_localizations.dart';
 import 'widgets/delete_account_actions.dart';
 import 'widgets/delete_account_card.dart';
-import 'widgets/profile_subpage_hero.dart';
 import 'widgets/profile_hero.dart';
+import 'widgets/profile_subpage_hero.dart';
 
 class DeleteAccountScreen extends StatelessWidget {
   const DeleteAccountScreen({super.key});
@@ -27,7 +27,7 @@ class DeleteAccountScreen extends StatelessWidget {
     final heroHeight =
         ProfileHero.heightForWidth(MediaQuery.sizeOf(context).width);
     final bottomInset = MediaQuery.paddingOf(context).bottom;
-    final actionsHeight = _actionHeight * 2 + _actionGap;
+    const actionsHeight = _actionHeight * 2 + _actionGap;
     final bottomReservedSpace = bottomInset +
         _actionsBottomSpacing +
         actionsHeight +

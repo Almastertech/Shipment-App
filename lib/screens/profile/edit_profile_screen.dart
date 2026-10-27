@@ -5,7 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
-import '../../components/inputs/app_text_field.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
@@ -15,6 +14,7 @@ import '../../core/validation/app_validators.dart';
 import '../../core/validation/validation_message_mapper.dart';
 import '../../l10n/app_localizations.dart';
 import 'widgets/profile_edit_avatar_card.dart';
+import 'widgets/profile_edit_field.dart';
 import 'widgets/profile_hero.dart';
 import 'widgets/profile_subpage_hero.dart';
 
@@ -59,7 +59,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final heroHeight = ProfileHero.heightForWidth(width);
     final bottomInset = MediaQuery.paddingOf(context).bottom;
     final keyboardInset = MediaQuery.viewInsetsOf(context).bottom;
-    final horizontalInset = AppSpacing.token2Xl;
+    const horizontalInset = AppSpacing.token2Xl;
     final inputTheme = Theme.of(context).copyWith(
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -136,7 +136,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         onChangePhoto: _pickPhoto,
                       ),
                       const SizedBox(height: AppSpacing.token2Xl),
-                      _EditField(
+                      ProfileEditField(
                         label: l10n.profileEditFullNameLabel,
                         controller: _nameController,
                         textDirection: TextDirection.rtl,
@@ -151,7 +151,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         },
                       ),
                       const SizedBox(height: AppSpacing.token2Xl),
-                      _EditField(
+                      ProfileEditField(
                         label: l10n.profileEditPhoneLabel,
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
@@ -184,7 +184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                       const SizedBox(height: AppSpacing.token2Xl),
-                      _EditField(
+                      ProfileEditField(
                         label: l10n.profileEditEmailLabel,
                         controller: _emailController,
                         hintText: l10n.profileEditEmailHint,
@@ -264,56 +264,5 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     } else {
       context.go(AppRoutes.profile);
     }
-  }
-}
-
-class _EditField extends StatelessWidget {
-  const _EditField({
-    required this.label,
-    required this.controller,
-    required this.textDirection,
-    this.hintText,
-    this.keyboardType,
-    this.validator,
-  });
-
-  final String label;
-  final TextEditingController controller;
-  final TextDirection textDirection;
-  final String? hintText;
-  final TextInputType? keyboardType;
-  final FormFieldValidator<String>? validator;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(bottom: AppSpacing.tokenS),
-          child: AppText(
-            label,
-            variant: AppTextVariant.labelMedium,
-            textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
-            style: AppTypography.buyerMobile.label.toTextStyle(
-              color: AppColors.primitives.neutral.shade900,
-            ),
-          ),
-        ),
-        AppTextField(
-          controller: controller,
-          hintText: hintText,
-          keyboardType: keyboardType,
-          textDirection: textDirection,
-          textAlign: TextAlign.right,
-          style: AppTypography.buyerMobile.bodyMedium.toTextStyle(
-            color: AppColors.primitives.neutral.shade900,
-          ).copyWith(fontWeight: FontWeight.w500),
-          validator: validator,
-          textInputAction: TextInputAction.next,
-        ),
-      ],
-    );
   }
 }
