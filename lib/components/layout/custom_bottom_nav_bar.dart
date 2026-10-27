@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -41,21 +39,11 @@ class CustomBottomNavBar extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 520),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              // Leave a small rounding margin for device preview constraints
-              // so the five segments never exceed the available row width.
-              final contentWidth = math.max(0.0, constraints.maxWidth - 4);
-              final selectedWidth = math.min(
-                contentWidth,
-                math.min(
-                  172.0,
-                  math.max(112.0, contentWidth * 0.34),
-                ),
-              );
-              final inactiveWidth = math.max(
-                0.0,
-                (contentWidth - selectedWidth) /
-                    (localizedDestinations.length - 1),
-              );
+              // Use flex allocation instead of fractional fixed widths. This
+              // keeps the segments inside the real constraint after padding,
+              // device preview rounding, and RTL layout are applied.
+              const selectedFlex = 68;
+              const inactiveFlex = 33;
               // Keep indexes in logical start-to-end order. The ambient
               // Directionality places the leading segment on the correct
               // side for both Arabic and English.
@@ -68,25 +56,28 @@ class CustomBottomNavBar extends StatelessWidget {
                 final segmentIndices = indices.toList(growable: false);
                 if (segmentIndices.isEmpty) return const SizedBox.shrink();
 
-                return Container(
-                  height: 68,
-                  decoration: BoxDecoration(
-                    color: primary,
-                    borderRadius: BorderRadius.circular(AppRadius.tokenFull),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: segmentIndices.map((logicalIndex) {
-                      final destination = localizedDestinations[logicalIndex];
-                      return _InactiveNavDestination(
-                        key: ValueKey<int>(logicalIndex),
-                        label: destination.label,
-                        iconAsset: destination.iconAsset,
-                        width: inactiveWidth,
-                        iconColor: selectedBackground,
-                        onTap: () => onDestinationSelected(logicalIndex),
-                      );
-                    }).toList(growable: false),
+                return Expanded(
+                  flex: segmentIndices.length * inactiveFlex,
+                  child: Container(
+                    height: 68,
+                    decoration: BoxDecoration(
+                      color: primary,
+                      borderRadius: BorderRadius.circular(AppRadius.tokenFull),
+                    ),
+                    child: Row(
+                      children: segmentIndices.map((logicalIndex) {
+                        final destination = localizedDestinations[logicalIndex];
+                        return Expanded(
+                          child: _InactiveNavDestination(
+                            key: ValueKey<int>(logicalIndex),
+                            label: destination.label,
+                            iconAsset: destination.iconAsset,
+                            iconColor: selectedBackground,
+                            onTap: () => onDestinationSelected(logicalIndex),
+                          ),
+                        );
+                      }).toList(growable: false),
+                    ),
                   ),
                 );
               }
@@ -96,13 +87,16 @@ class CustomBottomNavBar extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     buildBlueSegment(leadingIndices),
-                    _SelectedNavDestination(
-                      label: localizedDestinations[selectedIndex].label,
-                      iconAsset: localizedDestinations[selectedIndex].iconAsset,
-                      width: selectedWidth,
-                      primaryColor: primary,
-                      backgroundColor: selectedBackground,
-                      onTap: () => onDestinationSelected(selectedIndex),
+                    Expanded(
+                      flex: selectedFlex,
+                      child: _SelectedNavDestination(
+                        label: localizedDestinations[selectedIndex].label,
+                        iconAsset:
+                            localizedDestinations[selectedIndex].iconAsset,
+                        primaryColor: primary,
+                        backgroundColor: selectedBackground,
+                        onTap: () => onDestinationSelected(selectedIndex),
+                      ),
                     ),
                     buildBlueSegment(trailingIndices),
                   ],
@@ -121,14 +115,12 @@ class _InactiveNavDestination extends StatelessWidget {
     super.key,
     required this.label,
     required this.iconAsset,
-    required this.width,
     required this.iconColor,
     required this.onTap,
   });
 
   final String label;
   final String iconAsset;
-  final double width;
   final Color iconColor;
   final VoidCallback onTap;
 
@@ -142,7 +134,6 @@ class _InactiveNavDestination extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: SizedBox(
-          width: width,
           height: 68,
           child: Center(
             child: _NavIcon(
@@ -161,7 +152,6 @@ class _SelectedNavDestination extends StatelessWidget {
   const _SelectedNavDestination({
     required this.label,
     required this.iconAsset,
-    required this.width,
     required this.primaryColor,
     required this.backgroundColor,
     required this.onTap,
@@ -169,7 +159,6 @@ class _SelectedNavDestination extends StatelessWidget {
 
   final String label;
   final String iconAsset;
-  final double width;
   final Color primaryColor;
   final Color backgroundColor;
   final VoidCallback onTap;
@@ -188,7 +177,6 @@ class _SelectedNavDestination extends StatelessWidget {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 360),
           curve: Curves.easeInOutCubic,
-          width: width,
           height: 68,
           decoration: BoxDecoration(
             color: backgroundColor,
