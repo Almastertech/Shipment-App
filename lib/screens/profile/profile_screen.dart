@@ -19,7 +19,9 @@ import 'widgets/profile_menu_section.dart';
 import 'widgets/profile_user_card.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -27,6 +29,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool _isNavigating = false;
+  bool _isSigningOut = false;
   int _selectedNavigationIndex = 4;
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final heroHeight = ProfileHero.heightForWidth(width);
 
     return AppScaffold(
+      isLoading: widget.isLoading || _isSigningOut,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       safeAreaBottom: false,
@@ -241,11 +246,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
       if (!confirmed || !mounted) return;
 
+      setState(() => _isSigningOut = true);
       await getIt<SessionManager>().clearTokens();
       if (!mounted) return;
       context.go(AppRoutes.login);
     } finally {
-      if (mounted) _isNavigating = false;
+      if (mounted) {
+        setState(() => _isSigningOut = false);
+        _isNavigating = false;
+      }
     }
   }
 }

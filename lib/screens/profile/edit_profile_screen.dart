@@ -19,7 +19,9 @@ import 'widgets/profile_hero.dart';
 import 'widgets/profile_subpage_hero.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -33,6 +35,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _imagePicker = ImagePicker();
   XFile? _photo;
   bool _initialized = false;
+  bool _isPickingPhoto = false;
 
   @override
   void didChangeDependencies() {
@@ -95,6 +98,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
 
     return AppScaffold(
+      isLoading: widget.isLoading || _isPickingPhoto,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,
@@ -232,6 +237,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Future<void> _pickPhoto() async {
+    if (_isPickingPhoto) return;
+    setState(() => _isPickingPhoto = true);
     try {
       final selected = await _imagePicker.pickImage(
         source: ImageSource.gallery,
@@ -243,6 +250,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       if (!mounted) return;
       final l10n = AppLocalizations.of(context)!;
       _showMessage(l10n.profileEditPhotoUnavailable);
+    } finally {
+      if (mounted) setState(() => _isPickingPhoto = false);
     }
   }
 

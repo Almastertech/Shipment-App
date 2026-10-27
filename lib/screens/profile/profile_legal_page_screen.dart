@@ -17,16 +17,17 @@ import 'widgets/profile_subpage_hero.dart';
 enum _ProfileLegalPageKind { terms, privacy, protection }
 
 class ProfileLegalPageScreen extends StatelessWidget {
-  const ProfileLegalPageScreen.terms({super.key})
+  const ProfileLegalPageScreen.terms({super.key, this.isLoading = false})
       : _kind = _ProfileLegalPageKind.terms;
 
-  const ProfileLegalPageScreen.privacy({super.key})
+  const ProfileLegalPageScreen.privacy({super.key, this.isLoading = false})
       : _kind = _ProfileLegalPageKind.privacy;
 
-  const ProfileLegalPageScreen.protection({super.key})
+  const ProfileLegalPageScreen.protection({super.key, this.isLoading = false})
       : _kind = _ProfileLegalPageKind.protection;
 
   final _ProfileLegalPageKind _kind;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class ProfileLegalPageScreen extends StatelessWidget {
     final page = _content(l10n);
 
     return AppScaffold(
+      isLoading: isLoading,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,

@@ -12,7 +12,9 @@ import 'widgets/profile_hero.dart';
 import 'widgets/profile_subpage_hero.dart';
 
 class DeleteAccountScreen extends StatelessWidget {
-  const DeleteAccountScreen({super.key});
+  const DeleteAccountScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   static const double _cardTop = 220;
   static const double _cardHorizontalMargin = AppSpacing.tokenXl;
@@ -34,6 +36,8 @@ class DeleteAccountScreen extends StatelessWidget {
         AppSpacing.tokenL;
 
     return AppScaffold(
+      isLoading: isLoading,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,

@@ -20,7 +20,9 @@ import 'widgets/support_ticket_card.dart';
 enum _TicketFilter { all, shipments, compensations }
 
 class SupportTicketsScreen extends StatefulWidget {
-  const SupportTicketsScreen({super.key});
+  const SupportTicketsScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   @override
   State<SupportTicketsScreen> createState() => _SupportTicketsScreenState();
@@ -42,6 +44,8 @@ class _SupportTicketsScreenState extends State<SupportTicketsScreen> {
         _newestFirst ? filteredTickets : filteredTickets.reversed.toList();
 
     return AppScaffold(
+      isLoading: widget.isLoading,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,

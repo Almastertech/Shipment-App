@@ -20,7 +20,9 @@ import 'widgets/create_support_ticket_widgets.dart';
 import 'widgets/profile_subpage_hero.dart';
 
 class CreateSupportTicketScreen extends StatefulWidget {
-  const CreateSupportTicketScreen({super.key});
+  const CreateSupportTicketScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   @override
   State<CreateSupportTicketScreen> createState() =>
@@ -39,6 +41,7 @@ class _CreateSupportTicketScreenState extends State<CreateSupportTicketScreen> {
   final List<PlatformFile> _attachments = <PlatformFile>[];
 
   TicketCategory _category = TicketCategory.claim;
+  bool _isPickingAttachments = false;
 
   @override
   void dispose() {
@@ -58,6 +61,8 @@ class _CreateSupportTicketScreenState extends State<CreateSupportTicketScreen> {
     final inputTheme = _inputTheme(context);
 
     return AppScaffold(
+      isLoading: widget.isLoading || _isPickingAttachments,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,
@@ -290,7 +295,9 @@ class _CreateSupportTicketScreenState extends State<CreateSupportTicketScreen> {
   }
 
   Future<void> _pickAttachments() async {
+    if (_isPickingAttachments) return;
     final l10n = AppLocalizations.of(context)!;
+    setState(() => _isPickingAttachments = true);
     try {
       final result = await FilePicker.pickFiles(
         type: FileType.custom,
@@ -317,6 +324,8 @@ class _CreateSupportTicketScreenState extends State<CreateSupportTicketScreen> {
     } catch (_) {
       if (!mounted) return;
       _showMessage(l10n.createSupportTicketPickerError);
+    } finally {
+      if (mounted) setState(() => _isPickingAttachments = false);
     }
   }
 

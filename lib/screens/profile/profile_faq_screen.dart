@@ -32,7 +32,9 @@ class _FaqItem {
 }
 
 class ProfileFaqScreen extends StatefulWidget {
-  const ProfileFaqScreen({super.key});
+  const ProfileFaqScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   @override
   State<ProfileFaqScreen> createState() => _ProfileFaqScreenState();
@@ -66,6 +68,8 @@ class _ProfileFaqScreenState extends State<ProfileFaqScreen> {
     }).toList();
 
     return AppScaffold(
+      isLoading: widget.isLoading,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,

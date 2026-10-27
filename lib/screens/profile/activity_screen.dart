@@ -17,7 +17,9 @@ import 'widgets/profile_subpage_hero.dart';
 enum _ActivityFilter { all, shipments, claims }
 
 class ActivityScreen extends StatefulWidget {
-  const ActivityScreen({super.key});
+  const ActivityScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   @override
   State<ActivityScreen> createState() => _ActivityScreenState();
@@ -46,6 +48,8 @@ class _ActivityScreenState extends State<ActivityScreen> {
     }
 
     return AppScaffold(
+      isLoading: widget.isLoading,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,

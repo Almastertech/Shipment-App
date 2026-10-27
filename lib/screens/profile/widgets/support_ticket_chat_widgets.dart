@@ -361,12 +361,14 @@ class ReplyComposer extends StatefulWidget {
     required this.attachLabel,
     required this.sendLabel,
     required this.onSend,
+    this.onLoadingChanged,
   });
 
   final String hint;
   final String attachLabel;
   final String sendLabel;
   final VoidCallback onSend;
+  final ValueChanged<bool>? onLoadingChanged;
 
   @override
   State<ReplyComposer> createState() => _ReplyComposerState();
@@ -375,6 +377,7 @@ class ReplyComposer extends StatefulWidget {
 class _ReplyComposerState extends State<ReplyComposer> {
   final _controller = TextEditingController();
   PlatformFile? _attachment;
+  bool _isPickingAttachment = false;
 
   @override
   void dispose() {
@@ -494,9 +497,22 @@ class _ReplyComposerState extends State<ReplyComposer> {
   }
 
   Future<void> _pickAttachment() async {
-    final result = await FilePicker.pickFiles();
-    if (result == null || !mounted || result.files.isEmpty) return;
-    setState(() => _attachment = result.files.first);
+    if (_isPickingAttachment) return;
+    setState(() => _isPickingAttachment = true);
+    widget.onLoadingChanged?.call(true);
+    try {
+      final result = await FilePicker.pickFiles();
+      if (result != null && mounted && result.files.isNotEmpty) {
+        setState(() => _attachment = result.files.first);
+      }
+    } catch (_) {
+      // Keep the composer available if the platform picker is unavailable.
+    } finally {
+      if (mounted) {
+        setState(() => _isPickingAttachment = false);
+        widget.onLoadingChanged?.call(false);
+      }
+    }
   }
 }
 

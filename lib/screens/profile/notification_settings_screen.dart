@@ -16,7 +16,9 @@ import 'widgets/profile_hero.dart';
 import 'widgets/profile_subpage_hero.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {
-  const NotificationSettingsScreen({super.key});
+  const NotificationSettingsScreen({super.key, this.isLoading = false});
+
+  final bool isLoading;
 
   @override
   State<NotificationSettingsScreen> createState() =>
@@ -34,6 +36,8 @@ class _NotificationSettingsScreenState
 
   late Map<String, bool> _preferences =
       Map<String, bool>.of(_defaultPreferences);
+  bool _isLoadingPreferences = true;
+  int _pendingPreferenceWrites = 0;
 
   @override
   void initState() {
@@ -71,6 +75,10 @@ class _NotificationSettingsScreenState
     ];
 
     return AppScaffold(
+      isLoading: widget.isLoading ||
+          _isLoadingPreferences ||
+          _pendingPreferenceWrites > 0,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       backgroundColor: AppColors.semantic.background.primary,
@@ -144,16 +152,23 @@ class _NotificationSettingsScreenState
       if (mounted) setState(() => _preferences = preferences);
     } catch (_) {
       // Keep the reference defaults available when local storage is unavailable.
+    } finally {
+      if (mounted) setState(() => _isLoadingPreferences = false);
     }
   }
 
   Future<void> _setPreference(String key, bool value) async {
-    setState(() => _preferences = <String, bool>{..._preferences, key: value});
+    setState(() {
+      _preferences = <String, bool>{..._preferences, key: value};
+      _pendingPreferenceWrites++;
+    });
     try {
       final storage = await SharedPreferences.getInstance();
       await storage.setBool(key, value);
     } catch (_) {
       // The setting remains active for the current screen session.
+    } finally {
+      if (mounted) setState(() => _pendingPreferenceWrites--);
     }
   }
 

@@ -14,9 +14,14 @@ import 'widgets/profile_subpage_hero.dart';
 import 'widgets/support_ticket_chat_widgets.dart';
 
 class SupportTicketDetailsScreen extends StatefulWidget {
-  const SupportTicketDetailsScreen({required this.ticket, super.key});
+  const SupportTicketDetailsScreen({
+    required this.ticket,
+    super.key,
+    this.isLoading = false,
+  });
 
   final SupportTicket ticket;
+  final bool isLoading;
 
   @override
   State<SupportTicketDetailsScreen> createState() =>
@@ -25,6 +30,8 @@ class SupportTicketDetailsScreen extends StatefulWidget {
 
 class _SupportTicketDetailsScreenState
     extends State<SupportTicketDetailsScreen> {
+  bool _isLoadingReply = false;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -32,6 +39,8 @@ class _SupportTicketDetailsScreenState
         ProfileHero.heightForWidth(MediaQuery.sizeOf(context).width);
 
     return AppScaffold(
+      isLoading: widget.isLoading || _isLoadingReply,
+      loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
       dismissKeyboardOnTap: false,
@@ -41,6 +50,9 @@ class _SupportTicketDetailsScreenState
         attachLabel: l10n.supportTicketAttachFile,
         sendLabel: l10n.supportTicketSendReply,
         onSend: () => _showReplyUnavailable(context, l10n),
+        onLoadingChanged: (isLoading) {
+          if (mounted) setState(() => _isLoadingReply = isLoading);
+        },
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
