@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../components/app_text.dart';
 import '../../../core/resources/app_colors.dart';
-import '../../../core/resources/app_radius.dart';
 import '../../../core/resources/app_typography.dart';
 
 class ActivityFilterChip extends StatelessWidget {

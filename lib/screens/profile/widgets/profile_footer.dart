@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../components/app_text.dart';
 import '../../../core/resources/app_colors.dart';
-import '../../../core/resources/app_images.dart';
-import '../../../core/resources/app_spacing.dart';
 import '../../../core/resources/app_typography.dart';
 
 class ProfileFooter extends StatelessWidget {
@@ -31,27 +27,27 @@ class ProfileFooter extends StatelessWidget {
             color: text.tertiary,
           ),
         ),
-        const SizedBox(height: AppSpacing.token2Xs),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          textDirection: TextDirection.rtl,
-          children: <Widget>[
-            AppText(
-              creditsLabel,
-              variant: AppTextVariant.bodySmall,
-              textAlign: TextAlign.center,
-              style: AppTypography.buyerMobile.caption.toTextStyle(
-                color: text.tertiary,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.token2Xs),
-            SvgPicture.asset(
-              AppImages.alMaster,
-              width: 8,
-              height: 9,
-            ),
-          ],
-        ),
+        // const SizedBox(height: AppSpacing.token2Xs),
+        // Row(
+        //   mainAxisSize: MainAxisSize.min,
+        //   textDirection: TextDirection.rtl,
+        //   children: <Widget>[
+        //     AppText(
+        //       creditsLabel,
+        //       variant: AppTextVariant.bodySmall,
+        //       textAlign: TextAlign.center,
+        //       style: AppTypography.buyerMobile.caption.toTextStyle(
+        //         color: text.tertiary,
+        //       ),
+        //     ),
+        //     const SizedBox(width: AppSpacing.token2Xs),
+        //     SvgPicture.asset(
+        //       AppImages.alMaster,
+        //       width: 8,
+        //       height: 9,
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }

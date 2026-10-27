@@ -143,8 +143,7 @@ class _ActivityIconAppearance {
     required this.background,
     required this.foreground,
     this.svgAsset,
-    this.icon,
-  });
+  }) : icon = null;
 
   final Color background;
   final Color foreground;

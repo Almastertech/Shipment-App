@@ -34,7 +34,8 @@ class ProfileSubpageHero extends StatelessWidget {
         const ProfileHeroBackground(),
         Positioned(
           top: topInset + AppSpacing.token2Xs,
-          right: AppSpacing.tokenXl,
+          right:Directionality.of(context) == TextDirection.rtl ? AppSpacing.tokenXl : null,
+          left: Directionality.of(context) == TextDirection.ltr ? AppSpacing.tokenXl : null,
           child: _GlassBackButton(onPressed: onBack, label: backLabel),
         ),
         Positioned(
