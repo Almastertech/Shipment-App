@@ -87,14 +87,17 @@ class ShopsTrustCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.tokenL),
-          Row(
-            children: <Widget>[
-              Expanded(child: _Metric(value: '+40', label: partnersLabel)),
-              const SizedBox(width: AppSpacing.tokenS),
-              Expanded(child: _Metric(value: '6', label: categoriesLabel)),
-              const SizedBox(width: AppSpacing.tokenS),
-              Expanded(child: _Metric(value: daysValue, label: daysLabel)),
-            ],
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Expanded(child: _Metric(value: '+40', label: partnersLabel)),
+                const SizedBox(width: AppSpacing.tokenS),
+                Expanded(child: _Metric(value: '6', label: categoriesLabel)),
+                const SizedBox(width: AppSpacing.tokenS),
+                Expanded(child: _Metric(value: daysValue, label: daysLabel)),
+              ],
+            ),
           ),
           const SizedBox(height: AppSpacing.tokenM),
           Row(
@@ -124,25 +127,37 @@ class _Metric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: 62,
+        constraints: const BoxConstraints(minHeight: 62),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.tokenXs,
+          vertical: AppSpacing.tokenS,
+        ),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: .12),
           borderRadius: BorderRadius.circular(AppRadius.tokenXl),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            AppText(
-              value,
-              variant: AppTextVariant.titleMedium,
-              style:
-                  AppTypography.buyerMobile.h6.toTextStyle(color: Colors.white),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: AppText(
+                value,
+                variant: AppTextVariant.titleMedium,
+                style: AppTypography.buyerMobile.h6
+                    .toTextStyle(color: Colors.white),
+              ),
             ),
-            AppText(
-              label,
-              variant: AppTextVariant.labelSmall,
-              style: const TextStyle(color: Color(0xFFD8D0FF)),
-              maxLines: 1,
+            const SizedBox(height: AppSpacing.token2Xs),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: AppText(
+                label,
+                variant: AppTextVariant.labelSmall,
+                style: const TextStyle(color: Color(0xFFD8D0FF)),
+                maxLines: 1,
+              ),
             ),
           ],
         ),
