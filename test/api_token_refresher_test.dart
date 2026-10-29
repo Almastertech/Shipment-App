@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:shipments/core/device/device_id_service.dart';
+import 'package:shipments/core/storage/secure_storage.dart';
 import 'package:shipments/data/app_urls/app_url.dart';
 import 'package:shipments/data/datasource/remote/dio/api_token_refresher.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +20,10 @@ void main() {
             },
           },
         );
-      final refresher = ApiTokenRefresher(dio: dio);
+      final refresher = ApiTokenRefresher(
+        dio: dio,
+        deviceIdService: DeviceIdService(InMemorySecureStorage()),
+      );
 
       final result = await refresher.refreshToken('old_refresh');
 
@@ -34,7 +39,10 @@ void main() {
             'data': <String, dynamic>{'refreshToken': 'new_refresh'},
           },
         );
-      final refresher = ApiTokenRefresher(dio: dio);
+      final refresher = ApiTokenRefresher(
+        dio: dio,
+        deviceIdService: DeviceIdService(InMemorySecureStorage()),
+      );
 
       final result = await refresher.refreshToken('old_refresh');
 
@@ -59,9 +67,18 @@ class _StaticResponseAdapter implements HttpClientAdapter {
     expect(options.extra['requiresAuth'], isFalse);
     expect(options.extra['retryable'], isFalse);
     expect(options.extra['skipRateLimit'], isTrue);
+    expect(options.headers['x-device-id'], isNotEmpty);
+    expect(options.contentType, Headers.jsonContentType);
+
+    final requestBody =
+        jsonDecode(options.data as String) as Map<String, dynamic>;
+    expect(requestBody, <String, dynamic>{
+      'principal_type': 'CUSTOMER',
+      'refresh_token': 'old_refresh',
+    });
 
     return ResponseBody.fromString(
-      jsonEncode(body),
+      jsonEncode(this.body),
       200,
       headers: <String, List<String>>{
         Headers.contentTypeHeader: <String>[Headers.jsonContentType],

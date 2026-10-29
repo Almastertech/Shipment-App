@@ -11,6 +11,7 @@ class AppConstants {
   static const String cameraGuideSeenStorageKey = 'camera_capture_guide_seen';
   static const String authTokenStorageKey = 'auth_token';
   static const String refreshTokenStorageKey = 'refresh_token';
+  static const String deviceIdStorageKey = 'device_id';
   static const String guestSessionStorageKey = 'guest_session';
   static const String inAppNotificationsStorageKey = 'in_app_notifications';
   static const String searchHistoryStorageKey = 'search_history_queries';

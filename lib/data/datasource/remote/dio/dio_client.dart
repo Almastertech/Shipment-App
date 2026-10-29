@@ -129,6 +129,23 @@ class DioClient {
     );
   }
 
+  Future<Response<dynamic>> patch(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+  }) async {
+    final requestOptions = await _optionsForCurrentSession(options);
+    return _dio.patch<dynamic>(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: requestOptions,
+      cancelToken: cancelToken,
+    );
+  }
+
   Future<Response<dynamic>> delete(
     String path, {
     Object? data,

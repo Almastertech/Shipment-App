@@ -9,6 +9,7 @@ import 'components/layout/bottom_sheet_service.dart';
 import 'core/cache/cache_store.dart';
 import 'core/config/app_environment.dart';
 import 'core/config/app_remote_config.dart';
+import 'core/device/device_id_service.dart';
 import 'core/camera/image_picker_camera_service.dart';
 import 'core/camera/camera_capture_service.dart';
 import 'core/monitoring/api_monitoring_service.dart';
@@ -34,6 +35,9 @@ import 'core/storage/local_storage.dart';
 import 'core/storage/prefs_storage.dart';
 import 'core/storage/secure_storage.dart';
 import 'core/utils/app_constants.dart';
+import 'data/datasource/remote/auth_data_source.dart';
+import 'data/datasource/remote/customer_account_data_source.dart';
+import 'data/datasource/remote/customer_activity_data_source.dart';
 import 'data/datasource/remote/dio/api_monitoring_interceptor.dart';
 import 'data/datasource/remote/dio/api_token_refresher.dart';
 import 'data/datasource/remote/dio/auth_interceptor.dart';
@@ -42,11 +46,16 @@ import 'data/datasource/remote/dio/logging_interceptor.dart';
 import 'data/datasource/remote/dio/rate_limit_interceptor.dart';
 import 'data/datasource/remote/dio/retry_interceptor.dart';
 import 'data/datasource/remote/sample_feature_data_source.dart';
+import 'data/repository/auth_repository.dart';
+import 'data/repository/customer_account_repository.dart';
+import 'data/repository/customer_activity_repository.dart';
 import 'data/repository/sample_feature_repo.dart';
 import 'features/notifications/application/in_app_notification_center.dart';
 import 'localization/controllers/localization_controller.dart';
 import 'screens/sample_feature/sample_feature_details_view_model.dart';
 import 'screens/sample_feature/sample_feature_view_model.dart';
+import 'screens/profile/profile_view_model.dart';
+import 'screens/profile/activity_view_model.dart';
 import 'themes/theme_controller.dart';
 
 final getIt = GetIt.instance;
@@ -91,6 +100,9 @@ Future<void> _initInternal() async {
       () => PrefsStorage(getIt<SharedPreferences>()),
     );
     getIt.registerLazySingleton<SecureStorage>(FlutterSecureStorageService.new);
+    getIt.registerLazySingleton<DeviceIdService>(
+      () => DeviceIdService(getIt<SecureStorage>()),
+    );
     getIt.registerLazySingleton<SearchHistoryService>(
       () => SearchHistoryService(
         storage: getIt<LocalStorage>(),
@@ -188,7 +200,10 @@ Future<void> _initInternal() async {
 
     getIt.registerLazySingleton<Dio>(Dio.new);
     getIt.registerLazySingleton<TokenRefresher>(
-      () => ApiTokenRefresher(dio: getIt<Dio>()),
+      () => ApiTokenRefresher(
+        dio: getIt<Dio>(),
+        deviceIdService: getIt<DeviceIdService>(),
+      ),
     );
     getIt.registerLazySingleton<AuthInterceptor>(
       () => AuthInterceptor(
@@ -261,6 +276,31 @@ Future<void> _initInternal() async {
     await getIt<PushNotificationHandler>().initialize();
 
     // Data layer
+    getIt.registerLazySingleton<AuthDataSource>(
+      () => NetworkAuthDataSource(getIt<DioClient>()),
+    );
+    getIt.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(getIt<AuthDataSource>()),
+    );
+    getIt.registerLazySingleton<CustomerAccountDataSource>(
+      () => CustomerAccountDataSource(getIt<DioClient>()),
+    );
+    getIt.registerLazySingleton<CustomerAccountRepository>(
+      () => CustomerAccountRepository(getIt<CustomerAccountDataSource>()),
+    );
+    getIt.registerFactory<ProfileViewModel>(
+      () => ProfileViewModel(getIt<CustomerAccountRepository>()),
+    );
+    getIt.registerLazySingleton<CustomerActivityDataSource>(
+      () => CustomerActivityDataSource(getIt<DioClient>()),
+    );
+    getIt.registerLazySingleton<CustomerActivityRepository>(
+      () => CustomerActivityRepository(getIt<CustomerActivityDataSource>()),
+    );
+    getIt.registerFactory<ActivityViewModel>(
+      () => ActivityViewModel(getIt<CustomerActivityRepository>()),
+    );
+
     getIt.registerLazySingleton<SampleFeatureDataSource>(() {
       final environment = AppEnvironment.instance;
       final allowMockDataSource =

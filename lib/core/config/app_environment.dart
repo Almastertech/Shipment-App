@@ -50,7 +50,7 @@ class AppEnvironment {
     };
 
     final fallbackBaseUrl = switch (flavor) {
-      AppFlavor.dev => 'https://dev.example.com/api',
+      AppFlavor.dev => 'https://shipment-protection-platform.onrender.com',
       AppFlavor.staging => 'https://staging.example.com/api',
       AppFlavor.prod => 'https://example.com/api',
     };
