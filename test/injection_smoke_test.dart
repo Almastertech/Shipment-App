@@ -3,6 +3,7 @@ import 'package:shipments/core/config/app_environment.dart';
 import 'package:shipments/core/push/push_notification_handler.dart';
 import 'package:shipments/core/routing/app_routes.dart';
 import 'package:shipments/core/startup/startup_flow.dart';
+import 'package:shipments/core/utils/app_constants.dart';
 import 'package:shipments/injection.dart';
 import 'package:shipments/screens/sample_feature/sample_feature_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,7 +21,9 @@ void main() {
   final fakeSecureStorage = <String, String>{};
 
   setUp(() async {
-    SharedPreferences.setMockInitialValues(<String, Object>{});
+    SharedPreferences.setMockInitialValues(<String, Object>{
+      AppConstants.onboardingCompletedStorageKey: true,
+    });
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(secureStorageChannel, (call) async {
       final args =

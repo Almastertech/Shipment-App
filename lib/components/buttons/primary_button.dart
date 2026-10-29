@@ -43,11 +43,13 @@ class PrimaryButton extends StatelessWidget {
                 icon!,
                 const SizedBox(width: AppSpacing.xs),
               ],
-              Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                ),
               ),
               if (icon != null && iconOnTrailing) ...<Widget>[
                 const SizedBox(width: AppSpacing.xs),

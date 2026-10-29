@@ -14,12 +14,14 @@ import '../../components/layout/custom_bottom_nav_bar.dart';
 import '../../components/screen_state_layout.dart';
 import '../../components/skeleton/app_list_skeleton.dart';
 import '../../core/config/app_environment.dart';
+import '../../core/device/device_id_service.dart';
 import '../../core/refresh/pull_to_refresh_contract.dart';
 import '../../core/resources/app_icon_size.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/session/auth_action_guard.dart';
 import '../../core/session/session_manager.dart';
+import '../../data/repository/auth_repository.dart';
 import '../../data/model/sample_item.dart';
 import '../../features/notifications/presentation/notification_bell_button.dart';
 import '../../injection.dart';
@@ -148,7 +150,14 @@ class _SampleFeatureListScreenState extends State<SampleFeatureListScreen> {
           IconButton(
             tooltip: l10n.logout,
             onPressed: () async {
-              await getIt<SessionManager>().clearTokens();
+              try {
+                final deviceId = await getIt<DeviceIdService>().getOrCreate();
+                await getIt<AuthRepository>().logout(deviceId: deviceId);
+              } on Object {
+                // Local logout must still complete if the server is unreachable.
+              } finally {
+                await getIt<SessionManager>().clearTokens();
+              }
               if (!context.mounted) return;
               context.go(AppRoutes.login);
             },
