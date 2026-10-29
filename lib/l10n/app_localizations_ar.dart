@@ -303,6 +303,56 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeHeroDescription => 'وحنا معك خطوة خطوة لين توصل باب بيتك';
 
   @override
+  String get homeFeaturedShipment => 'الشحنة المميزة';
+
+  @override
+  String get homeNoFeaturedShipment => 'ما فيه شحنة مميزة حالياً';
+
+  @override
+  String get homeNoShipmentDetails => 'تفاصيل الشحنة غير متاحة حالياً.';
+
+  @override
+  String get homeNoShipmentStatus => 'الحالة غير متاحة';
+
+  @override
+  String get homeNoDeliveryEstimate => 'غير متاح';
+
+  @override
+  String get homeExpectedDelivery => 'التوصيل المتوقع';
+
+  @override
+  String get homeOrderNumber => 'الطلب';
+
+  @override
+  String get homeTrackingNumber => 'رقم التتبع';
+
+  @override
+  String get homeNoOtherShipments => 'ما عندك شحنات نشطة ثانية.';
+
+  @override
+  String get homeNoActiveClaims => 'ما عندك مطالبات نشطة.';
+
+  @override
+  String get homeClaim => 'مطالبة';
+
+  @override
+  String get homeTicketNumber => 'رقم التذكرة';
+
+  @override
+  String get homeClaimedAmount => 'المبلغ المطالب به (ر.س)';
+
+  @override
+  String homePartnerStoreCount(int count) {
+    return '$count متجر شريك';
+  }
+
+  @override
+  String get homeActionRequired => 'فيه إجراء بانتظارك.';
+
+  @override
+  String get homeLoadError => 'ما قدرنا نحمل الصفحة الرئيسية.';
+
+  @override
   String get homeHeroShipmentDelivery => 'توصلك الجمعة، ١ أكتوبر';
 
   @override

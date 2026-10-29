@@ -5,4 +5,5 @@ class AppUrl {
   static const String verifyOtp = '/v1/auth/otp/verify';
   static const String logout = '/v1/auth/logout';
   static const String customerAccount = '/v1/customer/account';
+  static const String customerHome = '/v1/customer/home';
 }

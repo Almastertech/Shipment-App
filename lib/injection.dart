@@ -7,20 +7,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'components/feedback/toast_service.dart';
 import 'components/layout/bottom_sheet_service.dart';
 import 'core/cache/cache_store.dart';
+import 'core/camera/camera_capture_service.dart';
+import 'core/camera/image_picker_camera_service.dart';
 import 'core/config/app_environment.dart';
 import 'core/config/app_remote_config.dart';
 import 'core/device/device_id_service.dart';
-import 'core/camera/image_picker_camera_service.dart';
-import 'core/camera/camera_capture_service.dart';
-import 'core/monitoring/api_monitoring_service.dart';
-import 'core/monitoring/in_memory_api_monitoring_service.dart';
 import 'core/location/geolocator_location_service.dart';
 import 'core/location/location_service.dart';
+import 'core/monitoring/api_monitoring_service.dart';
+import 'core/monitoring/in_memory_api_monitoring_service.dart';
 import 'core/network/network_rate_limiter.dart';
 import 'core/network/request_deduplicator.dart';
 import 'core/network_info.dart';
-import 'core/permissions/permission_service.dart';
 import 'core/permissions/geolocator_permission_service.dart';
+import 'core/permissions/permission_service.dart';
 import 'core/push/noop_push_notification_service.dart';
 import 'core/push/push_notification_handler.dart';
 import 'core/push/push_notification_service.dart';
@@ -38,6 +38,7 @@ import 'core/utils/app_constants.dart';
 import 'data/datasource/remote/auth_data_source.dart';
 import 'data/datasource/remote/customer_account_data_source.dart';
 import 'data/datasource/remote/customer_activity_data_source.dart';
+import 'data/datasource/remote/customer_home_data_source.dart';
 import 'data/datasource/remote/dio/api_monitoring_interceptor.dart';
 import 'data/datasource/remote/dio/api_token_refresher.dart';
 import 'data/datasource/remote/dio/auth_interceptor.dart';
@@ -49,13 +50,15 @@ import 'data/datasource/remote/sample_feature_data_source.dart';
 import 'data/repository/auth_repository.dart';
 import 'data/repository/customer_account_repository.dart';
 import 'data/repository/customer_activity_repository.dart';
+import 'data/repository/customer_home_repository.dart';
 import 'data/repository/sample_feature_repo.dart';
 import 'features/notifications/application/in_app_notification_center.dart';
 import 'localization/controllers/localization_controller.dart';
+import 'screens/home/home_view_model.dart';
+import 'screens/profile/activity_view_model.dart';
+import 'screens/profile/profile_view_model.dart';
 import 'screens/sample_feature/sample_feature_details_view_model.dart';
 import 'screens/sample_feature/sample_feature_view_model.dart';
-import 'screens/profile/profile_view_model.dart';
-import 'screens/profile/activity_view_model.dart';
 import 'themes/theme_controller.dart';
 
 final getIt = GetIt.instance;
@@ -290,6 +293,15 @@ Future<void> _initInternal() async {
     );
     getIt.registerFactory<ProfileViewModel>(
       () => ProfileViewModel(getIt<CustomerAccountRepository>()),
+    );
+    getIt.registerLazySingleton<CustomerHomeDataSource>(
+      () => CustomerHomeDataSource(getIt<DioClient>()),
+    );
+    getIt.registerLazySingleton<CustomerHomeRepository>(
+      () => CustomerHomeRepository(getIt<CustomerHomeDataSource>()),
+    );
+    getIt.registerFactory<HomeViewModel>(
+      () => HomeViewModel(getIt<CustomerHomeRepository>()),
     );
     getIt.registerLazySingleton<CustomerActivityDataSource>(
       () => CustomerActivityDataSource(getIt<DioClient>()),

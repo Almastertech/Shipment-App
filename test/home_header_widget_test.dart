@@ -3,13 +3,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:shipments/core/storage/local_storage.dart';
+import 'package:shipments/data/model/customer_home.dart';
 import 'package:shipments/features/notifications/application/in_app_notification_center.dart';
 import 'package:shipments/l10n/app_localizations.dart';
 import 'package:shipments/screens/home/widgets/home_header_widget.dart';
 
 void main() {
-  testWidgets(
-      'HomeHeaderWidget renders without overflow and shows arrival date text',
+  testWidgets('HomeHeaderWidget renders backend shipment data without overflow',
       (tester) async {
     tester.view.physicalSize = const Size(390 * 3, 844 * 3);
     tester.view.devicePixelRatio = 3.0;
@@ -41,7 +41,15 @@ void main() {
           ],
           home: Scaffold(
             body: SingleChildScrollView(
-              child: HomeHeaderWidget(),
+              child: HomeHeaderWidget(
+                customerName: 'Maha',
+                featuredShipment: CustomerHomeShipment(
+                  packageId: 'package-1',
+                  productName: 'Camera',
+                  storeName: 'Camera Store',
+                  status: 'in_transit',
+                ),
+              ),
             ),
           ),
         ),
@@ -51,7 +59,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(HomeHeaderWidget), findsOneWidget);
-    expect(find.textContaining('توصلك الجمعة'), findsOneWidget);
+    expect(find.text('Camera'), findsOneWidget);
+    expect(find.text('In Transit'), findsOneWidget);
   });
 }
 

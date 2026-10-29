@@ -2,32 +2,42 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 import '../../../components/app_text.dart';
-import '../../../components/buttons/primary_button.dart';
 import '../../../components/images/app_network_image.dart';
 import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_images.dart';
 import '../../../core/resources/app_radius.dart';
 import '../../../core/resources/app_spacing.dart';
 import '../../../core/resources/app_typography.dart';
+import '../../../data/model/customer_home.dart';
 import '../../../features/notifications/presentation/notification_bell_button.dart';
 import '../../../l10n/app_localizations.dart';
 
-/// Full-width image header with the overlapping featured shipment card.
+/// Home hero with the latest shipment returned by the home endpoint.
 class HomeHeaderWidget extends StatelessWidget {
-  const HomeHeaderWidget({super.key, this.customerName, this.avatarUrl});
+  const HomeHeaderWidget({
+    super.key,
+    this.customerName,
+    this.avatarUrl,
+    this.heroState,
+    this.featuredShipment,
+    this.onShipmentTap,
+  });
 
   final String? customerName;
   final String? avatarUrl;
+  final String? heroState;
+  final CustomerHomeShipment? featuredShipment;
+  final VoidCallback? onShipmentTap;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final width = MediaQuery.sizeOf(context).width;
-    final headerHeight = width * 1.07;
     final cardTop = width * .84;
-    final cardHeight = math.max(280.0, width * .68).toDouble();
+    final cardHeight = math.max(220.0, width * .58).toDouble();
 
     return SizedBox(
       height: cardTop + cardHeight,
@@ -38,7 +48,7 @@ class HomeHeaderWidget extends StatelessWidget {
             top: 0,
             start: 0,
             end: 0,
-            height: headerHeight,
+            height: width * 1.07,
             child: _HomeImageHeader(
               greeting: l10n.homeHeroGreeting,
               name: customerName ?? '',
@@ -53,20 +63,9 @@ class HomeHeaderWidget extends StatelessWidget {
             end: AppSpacing.tokenXl,
             height: cardHeight,
             child: _FeaturedShipmentCard(
-              productTitle: l10n.homeShipmentProduct,
-              store: l10n.homeShipmentStore,
-              price: l10n.homeShipmentPrice,
-              protectionLabel: l10n.homeShipmentProtection,
-              statusHeadline: l10n.homeShipmentStatusHeadline,
-              steps: <String>[
-                l10n.homeShipmentStepOrdered,
-                l10n.homeShipmentStepInTransit,
-                l10n.homeShipmentStepDelivered,
-              ],
-              activeStepIndex: 1,
-              arrivalDate: l10n.homeHeroShipmentDelivery,
-              actionLabel: l10n.homeHeroShipmentAction,
-              onAction: () {},
+              shipment: featuredShipment,
+              heroState: heroState,
+              onTap: onShipmentTap,
             ),
           ),
         ],
@@ -94,33 +93,22 @@ class _HomeImageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final primary = AppColors.primitives.primary;
     final topInset = MediaQuery.paddingOf(context).top;
-
     return ClipRect(
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.asset(
-            AppImages.splash,
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
-          ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: primary.shade900.withValues(alpha: .26),
-            ),
-          ),
+          Image.asset(AppImages.splash, fit: BoxFit.cover),
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: <Color>[
-                  primary.shade900.withValues(alpha: .32),
-                  primary.shade900.withValues(alpha: .06),
+                  primary.shade900.withValues(alpha: .45),
                   primary.shade800.withValues(alpha: .30),
                   primary.shade900.withValues(alpha: .98),
                 ],
-                stops: const <double>[0, .35, .72, 1],
+                stops: const <double>[0, .55, 1],
               ),
             ),
           ),
@@ -195,74 +183,45 @@ class _HomeImageHeader extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: AppSpacing.tokenS),
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: <Widget>[
-                        Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: .16),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: .45),
-                            ),
-                          ),
-                          child: const IconTheme(
-                            data: IconThemeData(color: Colors.white, size: 22),
-                            child: NotificationBellButton(),
-                          ),
-                        ),
-                        PositionedDirectional(
-                          end: 7,
-                          top: 5,
-                          child: Container(
-                            width: 9,
-                            height: 9,
-                            decoration: BoxDecoration(
-                              color: AppColors.primitives.accent01.shade300,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                      ],
+                    const SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: IconTheme(
+                        data: IconThemeData(color: Colors.white, size: 22),
+                        child: NotificationBellButton(),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: AppSpacing.token6Xl),
-                Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: SizedBox(
-                    width: MediaQuery.sizeOf(context).width * .58,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        const _HomeBrandPattern(),
-                        const SizedBox(height: AppSpacing.tokenL),
-                        AppText(
-                          title,
-                          variant: AppTextVariant.headlineMedium,
-                          textAlign: TextAlign.start,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTypography.buyerMobile.h1.toTextStyle(
-                            color: Colors.white,
-                          ),
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width * .58,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      const _HomeBrandPattern(),
+                      const SizedBox(height: AppSpacing.tokenL),
+                      AppText(
+                        title,
+                        variant: AppTextVariant.headlineMedium,
+                        textAlign: TextAlign.start,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.buyerMobile.h1
+                            .toTextStyle(color: Colors.white),
+                      ),
+                      const SizedBox(height: AppSpacing.tokenXs),
+                      AppText(
+                        description,
+                        variant: AppTextVariant.bodyMedium,
+                        textAlign: TextAlign.start,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.buyerMobile.bodySmall.toTextStyle(
+                          color: Colors.white.withValues(alpha: .92),
                         ),
-                        const SizedBox(height: AppSpacing.tokenXs),
-                        AppText(
-                          description,
-                          variant: AppTextVariant.bodyMedium,
-                          textAlign: TextAlign.start,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              AppTypography.buyerMobile.bodySmall.toTextStyle(
-                            color: Colors.white.withValues(alpha: .92),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -278,58 +237,52 @@ class _HomeBrandPattern extends StatelessWidget {
   const _HomeBrandPattern();
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: List<Widget>.generate(10, (index) {
-        final isAccent = index.isEven;
-        return Padding(
-          padding: const EdgeInsetsDirectional.only(end: AppSpacing.token2Xs),
-          child: Transform.rotate(
-            angle: math.pi / 4,
-            child: Container(
-              width: 7,
-              height: 7,
-              color: isAccent
-                  ? AppColors.primitives.accent01.shade300
-                  : Colors.white.withValues(alpha: .7),
+  Widget build(BuildContext context) => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: List<Widget>.generate(10, (index) {
+          return Padding(
+            padding: const EdgeInsetsDirectional.only(end: AppSpacing.token2Xs),
+            child: Transform.rotate(
+              angle: math.pi / 4,
+              child: Container(
+                width: 7,
+                height: 7,
+                color: index.isEven
+                    ? AppColors.primitives.accent01.shade300
+                    : Colors.white.withValues(alpha: .7),
+              ),
             ),
-          ),
-        );
-      }),
-    );
-  }
+          );
+        }),
+      );
 }
 
 class _FeaturedShipmentCard extends StatelessWidget {
   const _FeaturedShipmentCard({
-    required this.productTitle,
-    required this.store,
-    required this.price,
-    required this.protectionLabel,
-    required this.statusHeadline,
-    required this.steps,
-    required this.activeStepIndex,
-    required this.arrivalDate,
-    required this.actionLabel,
-    required this.onAction,
+    required this.shipment,
+    required this.heroState,
+    required this.onTap,
   });
 
-  final String productTitle;
-  final String store;
-  final String price;
-  final String protectionLabel;
-  final String statusHeadline;
-  final List<String> steps;
-  final int activeStepIndex;
-  final String arrivalDate;
-  final String actionLabel;
-  final VoidCallback onAction;
+  final CustomerHomeShipment? shipment;
+  final String? heroState;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     const colors = AppColors.primitives;
+    final status = _displayStatus(shipment?.status ?? heroState);
+    final expected = shipment?.expectedDeliveryAt;
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    final shipmentDetails = <String>[
+      if (shipment?.storeName != null) shipment!.storeName!,
+      if (shipment?.orderNumber != null)
+        '${l10n.homeOrderNumber} ${shipment!.orderNumber}',
+    ].join(' · ');
+    final delivery = expected == null
+        ? l10n.homeNoDeliveryEstimate
+        : DateFormat.yMMMd(locale).format(expected.toLocal());
 
     return Container(
       decoration: BoxDecoration(
@@ -344,340 +297,96 @@ class _FeaturedShipmentCard extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppRadius.token2Xl),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: AlignmentDirectional.topStart,
-              end: AlignmentDirectional.bottomEnd,
-              colors: <Color>[colors.primary.shade600, colors.primary.shade700],
-            ),
-          ),
-          child: Stack(
-            children: <Widget>[
-              PositionedDirectional(
-                end: -46,
-                top: -40,
-                child: Container(
-                  width: 190,
-                  height: 190,
-                  decoration: BoxDecoration(
-                    color: colors.primary.shade500.withValues(alpha: .55),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(AppSpacing.tokenM),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Align(
-                                alignment: AlignmentDirectional.centerStart,
-                                child: _ProtectionPill(label: protectionLabel),
-                              ),
-                              const SizedBox(height: AppSpacing.tokenS),
-                              AppText(
-                                productTitle,
-                                variant: AppTextVariant.titleMedium,
-                                textAlign: TextAlign.start,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style:
-                                    AppTypography.buyerMobile.label.toTextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              AppText(
-                                '$store · $price',
-                                variant: AppTextVariant.bodySmall,
-                                textAlign: TextAlign.start,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTypography.buyerMobile.caption
-                                    .toTextStyle(
-                                  color: colors.primary.shade200,
-                                ),
-                              ),
-                            ],
-                          ),
+        child: Material(
+          color: colors.primary.shade700,
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.tokenM),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.inventory_2_outlined,
+                        color: colors.accent01.shade300,
+                      ),
+                      const SizedBox(width: AppSpacing.tokenS),
+                      Expanded(
+                        child: Text(
+                          shipment?.productName ??
+                              (shipment == null
+                                  ? l10n.homeNoFeaturedShipment
+                                  : l10n.homeFeaturedShipment),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTypography.buyerMobile.label
+                              .toTextStyle(color: Colors.white),
                         ),
-                        const SizedBox(width: AppSpacing.tokenS),
-                        ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.tokenXl),
-                          child: Image.asset(
-                            AppImages.shipmentBackground,
-                            width: 82,
-                            height: 82,
-                            fit: BoxFit.cover,
-                            alignment: const Alignment(-.4, 0),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: AppSpacing.tokenL),
-                    Row(
-                      children: <Widget>[
+                      ),
+                      if (onTap != null)
                         Icon(
-                          Icons.inventory_2_outlined,
-                          size: 19,
+                          Icons.chevron_right_rounded,
                           color: colors.accent01.shade300,
                         ),
-                        const SizedBox(width: AppSpacing.tokenXs),
-                        Expanded(
-                          child: AppText(
-                            statusHeadline,
-                            variant: AppTextVariant.titleMedium,
-                            textAlign: TextAlign.start,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTypography.buyerMobile.h6.toTextStyle(
-                              color: colors.accent01.shade300,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: AppSpacing.tokenM),
-                    _FeaturedShipmentProgress(
-                      steps: steps,
-                      activeStepIndex: activeStepIndex,
-                    ),
-                    const Spacer(),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional.centerStart,
-                            child: _ArrivalPill(date: arrivalDate),
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.tokenS),
-                        PrimaryButton(
-                          label: actionLabel,
-                          onPressed: onAction,
-                          fullWidth: false,
-                          iconOnTrailing: true,
-                          icon: Icon(
-                            Icons.chevron_right_rounded,
-                            size: 20,
-                            color: colors.neutral.shade900,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: colors.accent01.shade300,
-                            foregroundColor: colors.neutral.shade900,
-                            minimumSize: const Size(0, 40),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.tokenM,
-                            ),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            elevation: 0,
-                            shape: const StadiumBorder(),
-                            textStyle: AppTypography.buyerMobile.button
-                                .toTextStyle(color: colors.neutral.shade900),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ProtectionPill extends StatelessWidget {
-  const _ProtectionPill({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    const colors = AppColors.primitives;
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: colors.accent01.shade300,
-        borderRadius: BorderRadius.circular(AppRadius.tokenFull),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.tokenS,
-          vertical: AppSpacing.token2Xs,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Flexible(
-              child: AppText(
-                label,
-                variant: AppTextVariant.labelSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppTypography.buyerMobile.caption.toTextStyle(
-                  color: colors.neutral.shade900,
-                ),
-              ),
-            ),
-            const SizedBox(width: AppSpacing.token2Xs),
-            SvgPicture.asset(
-              AppImages.shieldCheck,
-              width: 15,
-              height: 15,
-              colorFilter: ColorFilter.mode(
-                colors.neutral.shade900,
-                BlendMode.srcIn,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _FeaturedShipmentProgress extends StatelessWidget {
-  const _FeaturedShipmentProgress({
-    required this.steps,
-    required this.activeStepIndex,
-  });
-
-  final List<String> steps;
-  final int activeStepIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    const colors = AppColors.primitives;
-    final activeColor = colors.accent01.shade300;
-    final inactiveColor = colors.primary.shade400.withValues(alpha: .45);
-
-    return Row(
-      children: <Widget>[
-        for (var index = 0; index < steps.length; index++)
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: 18,
-                  child: Stack(
-                    alignment: Alignment.center,
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.tokenXs),
+                  Text(
+                    shipmentDetails.isEmpty
+                        ? l10n.homeNoShipmentDetails
+                        : shipmentDetails,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.buyerMobile.caption
+                        .toTextStyle(color: colors.primary.shade100),
+                  ),
+                  const Spacer(),
+                  Text(
+                    status ?? l10n.homeNoShipmentStatus,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.buyerMobile.h6
+                        .toTextStyle(color: colors.accent01.shade300),
+                  ),
+                  const SizedBox(height: AppSpacing.tokenXs),
+                  Row(
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: index == 0
-                                ? const SizedBox.shrink()
-                                : Container(
-                                    height: 3.5,
-                                    color: (index - 1) < activeStepIndex
-                                        ? activeColor
-                                        : inactiveColor,
-                                  ),
-                          ),
-                          Expanded(
-                            child: index == steps.length - 1
-                                ? const SizedBox.shrink()
-                                : Container(
-                                    height: 3.5,
-                                    color: index < activeStepIndex
-                                        ? activeColor
-                                        : inactiveColor,
-                                  ),
-                          ),
-                        ],
+                      Icon(
+                        Icons.schedule_outlined,
+                        size: 16,
+                        color: colors.primary.shade100,
                       ),
-                      Container(
-                        width: 18,
-                        height: 18,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: index <= activeStepIndex
-                              ? activeColor
-                              : inactiveColor,
+                      const SizedBox(width: AppSpacing.tokenXs),
+                      Expanded(
+                        child: Text(
+                          '${l10n.homeExpectedDelivery}: $delivery',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTypography.buyerMobile.caption
+                              .toTextStyle(color: colors.primary.shade100),
                         ),
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: AppSpacing.tokenXs),
-                AppText(
-                  steps[index],
-                  variant: AppTextVariant.labelSmall,
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTypography.buyerMobile.caption.toTextStyle(
-                    color: index <= activeStepIndex
-                        ? Colors.white
-                        : colors.primary.shade200,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-      ],
+        ),
+      ),
     );
   }
 }
 
-class _ArrivalPill extends StatelessWidget {
-  const _ArrivalPill({required this.date});
-
-  final String date;
-
-  @override
-  Widget build(BuildContext context) {
-    const colors = AppColors.primitives;
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: .14),
-        borderRadius: BorderRadius.circular(AppRadius.tokenFull),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.tokenS,
-          vertical: AppSpacing.tokenXs,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            SvgPicture.asset(
-              AppImages.timeQuarterTo,
-              width: 15,
-              height: 15,
-              colorFilter: ColorFilter.mode(
-                colors.neutral.shade100,
-                BlendMode.srcIn,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.tokenXs),
-            Flexible(
-              child: AppText(
-                date,
-                variant: AppTextVariant.labelSmall,
-                textAlign: TextAlign.start,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppTypography.buyerMobile.caption.toTextStyle(
-                  color: colors.neutral.shade100,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+String? _displayStatus(String? raw) {
+  if (raw == null || raw.trim().isEmpty) return null;
+  return raw
+      .trim()
+      .replaceAll(RegExp(r'[_-]+'), ' ')
+      .split(' ')
+      .where((part) => part.isNotEmpty)
+      .map((part) => '${part[0].toUpperCase()}${part.substring(1)}')
+      .join(' ');
 }

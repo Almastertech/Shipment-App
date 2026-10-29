@@ -312,6 +312,56 @@ class AppLocalizationsEn extends AppLocalizations {
       'We are with you every step of the way until it reaches your door.';
 
   @override
+  String get homeFeaturedShipment => 'Featured shipment';
+
+  @override
+  String get homeNoFeaturedShipment => 'No featured shipment yet';
+
+  @override
+  String get homeNoShipmentDetails => 'Shipment details are not available yet.';
+
+  @override
+  String get homeNoShipmentStatus => 'Status unavailable';
+
+  @override
+  String get homeNoDeliveryEstimate => 'Not available';
+
+  @override
+  String get homeExpectedDelivery => 'Expected delivery';
+
+  @override
+  String get homeOrderNumber => 'Order';
+
+  @override
+  String get homeTrackingNumber => 'Tracking number';
+
+  @override
+  String get homeNoOtherShipments => 'You have no other active shipments.';
+
+  @override
+  String get homeNoActiveClaims => 'You have no active claims.';
+
+  @override
+  String get homeClaim => 'Claim';
+
+  @override
+  String get homeTicketNumber => 'Ticket';
+
+  @override
+  String get homeClaimedAmount => 'Claimed amount (SAR)';
+
+  @override
+  String homePartnerStoreCount(int count) {
+    return '$count partner stores';
+  }
+
+  @override
+  String get homeActionRequired => 'There is an action waiting for you.';
+
+  @override
+  String get homeLoadError => 'We could not load your home screen.';
+
+  @override
   String get homeHeroShipmentDelivery => 'Arrives Friday, October 1';
 
   @override

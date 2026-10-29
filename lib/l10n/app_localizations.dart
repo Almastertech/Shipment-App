@@ -638,6 +638,102 @@ abstract class AppLocalizations {
   /// **'We are with you every step of the way until it reaches your door.'**
   String get homeHeroDescription;
 
+  /// No description provided for @homeFeaturedShipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured shipment'**
+  String get homeFeaturedShipment;
+
+  /// No description provided for @homeNoFeaturedShipment.
+  ///
+  /// In en, this message translates to:
+  /// **'No featured shipment yet'**
+  String get homeNoFeaturedShipment;
+
+  /// No description provided for @homeNoShipmentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment details are not available yet.'**
+  String get homeNoShipmentDetails;
+
+  /// No description provided for @homeNoShipmentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status unavailable'**
+  String get homeNoShipmentStatus;
+
+  /// No description provided for @homeNoDeliveryEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available'**
+  String get homeNoDeliveryEstimate;
+
+  /// No description provided for @homeExpectedDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected delivery'**
+  String get homeExpectedDelivery;
+
+  /// No description provided for @homeOrderNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get homeOrderNumber;
+
+  /// No description provided for @homeTrackingNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking number'**
+  String get homeTrackingNumber;
+
+  /// No description provided for @homeNoOtherShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no other active shipments.'**
+  String get homeNoOtherShipments;
+
+  /// No description provided for @homeNoActiveClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no active claims.'**
+  String get homeNoActiveClaims;
+
+  /// No description provided for @homeClaim.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim'**
+  String get homeClaim;
+
+  /// No description provided for @homeTicketNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket'**
+  String get homeTicketNumber;
+
+  /// No description provided for @homeClaimedAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Claimed amount (SAR)'**
+  String get homeClaimedAmount;
+
+  /// No description provided for @homePartnerStoreCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} partner stores'**
+  String homePartnerStoreCount(int count);
+
+  /// No description provided for @homeActionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'There is an action waiting for you.'**
+  String get homeActionRequired;
+
+  /// No description provided for @homeLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not load your home screen.'**
+  String get homeLoadError;
+
   /// No description provided for @homeHeroShipmentDelivery.
   ///
   /// In en, this message translates to:
