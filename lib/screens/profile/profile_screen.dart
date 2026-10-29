@@ -3,24 +3,25 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../components/app_scaffold.dart';
 import '../../components/layout/custom_bottom_nav_bar.dart';
+import '../../core/device/device_id_service.dart';
+import '../../core/push/customer_device_registration_service.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/session/session_manager.dart';
-import '../../core/device/device_id_service.dart';
-import '../../data/repository/auth_repository.dart';
 import '../../data/model/customer_account.dart';
+import '../../data/repository/auth_repository.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 import '../../localization/controllers/localization_controller.dart';
+import 'profile_view_model.dart';
 import 'widgets/profile_footer.dart';
 import 'widgets/profile_hero.dart';
 import 'widgets/profile_language_switcher.dart';
 import 'widgets/profile_logout_bottom_sheet.dart';
 import 'widgets/profile_menu_section.dart';
 import 'widgets/profile_user_card.dart';
-import 'profile_view_model.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, this.isLoading = false});
@@ -270,8 +271,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _profile.updateAccount(result);
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
-          ..showSnackBar(SnackBar(
-              content: Text(AppLocalizations.of(context)!.profileEditSaved)));
+          ..showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.profileEditSaved),
+            ),
+          );
       }
       if (mounted && route == AppRoutes.editProfile && result == null) {
         await _profile.load();
@@ -296,6 +300,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       setState(() => _isSigningOut = true);
       try {
+        await getIt<CustomerDeviceRegistrationService>()
+            .unregisterCurrentDevice();
         final deviceId = await getIt<DeviceIdService>().getOrCreate();
         await getIt<AuthRepository>().logout(deviceId: deviceId);
       } on Object {

@@ -11,6 +11,9 @@ class NoopPushNotificationService implements PushNotificationService {
   Future<void> initialize() async {}
 
   @override
+  Stream<String> get onDeviceTokenChanged => const Stream<String>.empty();
+
+  @override
   Stream<PushMessage> get onMessageOpenedApp => const Stream.empty();
 
   @override

@@ -15,14 +15,15 @@ import '../../components/screen_state_layout.dart';
 import '../../components/skeleton/app_list_skeleton.dart';
 import '../../core/config/app_environment.dart';
 import '../../core/device/device_id_service.dart';
+import '../../core/push/customer_device_registration_service.dart';
 import '../../core/refresh/pull_to_refresh_contract.dart';
 import '../../core/resources/app_icon_size.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/session/auth_action_guard.dart';
 import '../../core/session/session_manager.dart';
-import '../../data/repository/auth_repository.dart';
 import '../../data/model/sample_item.dart';
+import '../../data/repository/auth_repository.dart';
 import '../../features/notifications/presentation/notification_bell_button.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
@@ -151,6 +152,8 @@ class _SampleFeatureListScreenState extends State<SampleFeatureListScreen> {
             tooltip: l10n.logout,
             onPressed: () async {
               try {
+                await getIt<CustomerDeviceRegistrationService>()
+                    .unregisterCurrentDevice();
                 final deviceId = await getIt<DeviceIdService>().getOrCreate();
                 await getIt<AuthRepository>().logout(deviceId: deviceId);
               } on Object {

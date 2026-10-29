@@ -6,4 +6,6 @@ class AppUrl {
   static const String logout = '/v1/auth/logout';
   static const String customerAccount = '/v1/customer/account';
   static const String customerHome = '/v1/customer/home';
+  static const String customerDevices = '/v1/customer/devices';
+  static const String currentCustomerDevice = '/v1/customer/devices/current';
 }

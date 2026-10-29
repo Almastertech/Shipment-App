@@ -21,6 +21,7 @@ import 'core/network/request_deduplicator.dart';
 import 'core/network_info.dart';
 import 'core/permissions/geolocator_permission_service.dart';
 import 'core/permissions/permission_service.dart';
+import 'core/push/customer_device_registration_service.dart';
 import 'core/push/noop_push_notification_service.dart';
 import 'core/push/push_notification_handler.dart';
 import 'core/push/push_notification_service.dart';
@@ -38,6 +39,7 @@ import 'core/utils/app_constants.dart';
 import 'data/datasource/remote/auth_data_source.dart';
 import 'data/datasource/remote/customer_account_data_source.dart';
 import 'data/datasource/remote/customer_activity_data_source.dart';
+import 'data/datasource/remote/customer_devices_data_source.dart';
 import 'data/datasource/remote/customer_home_data_source.dart';
 import 'data/datasource/remote/dio/api_monitoring_interceptor.dart';
 import 'data/datasource/remote/dio/api_token_refresher.dart';
@@ -50,6 +52,7 @@ import 'data/datasource/remote/sample_feature_data_source.dart';
 import 'data/repository/auth_repository.dart';
 import 'data/repository/customer_account_repository.dart';
 import 'data/repository/customer_activity_repository.dart';
+import 'data/repository/customer_devices_repository.dart';
 import 'data/repository/customer_home_repository.dart';
 import 'data/repository/sample_feature_repo.dart';
 import 'features/notifications/application/in_app_notification_center.dart';
@@ -269,15 +272,6 @@ Future<void> _initInternal() async {
     getIt.registerLazySingleton<AppBottomSheetService>(
       () => BottomSheetService(navigatorKey: rootNavigatorKey),
     );
-    getIt.registerLazySingleton<PushNotificationHandler>(
-      () => PushNotificationHandler(
-        service: getIt<PushNotificationService>(),
-        router: getIt<GoRouter>(),
-        notificationCenter: getIt<InAppNotificationCenter>(),
-      ),
-    );
-    await getIt<PushNotificationHandler>().initialize();
-
     // Data layer
     getIt.registerLazySingleton<AuthDataSource>(
       () => NetworkAuthDataSource(getIt<DioClient>()),
@@ -311,6 +305,20 @@ Future<void> _initInternal() async {
     );
     getIt.registerFactory<ActivityViewModel>(
       () => ActivityViewModel(getIt<CustomerActivityRepository>()),
+    );
+    getIt.registerLazySingleton<CustomerDevicesDataSource>(
+      () => CustomerDevicesDataSource(getIt<DioClient>()),
+    );
+    getIt.registerLazySingleton<CustomerDevicesRepository>(
+      () => CustomerDevicesRepository(getIt<CustomerDevicesDataSource>()),
+    );
+    getIt.registerLazySingleton<CustomerDeviceRegistrationService>(
+      () => CustomerDeviceRegistrationService(
+        deviceApi: getIt<CustomerDevicesRepository>(),
+        deviceIdService: getIt<DeviceIdService>(),
+        pushService: getIt<PushNotificationService>(),
+        sessionManager: getIt<SessionManager>(),
+      ),
     );
 
     getIt.registerLazySingleton<SampleFeatureDataSource>(() {
@@ -359,6 +367,16 @@ Future<void> _initInternal() async {
         itemId: itemId,
       ),
     );
+    getIt.registerLazySingleton<PushNotificationHandler>(
+      () => PushNotificationHandler(
+        service: getIt<PushNotificationService>(),
+        router: getIt<GoRouter>(),
+        notificationCenter: getIt<InAppNotificationCenter>(),
+        sessionManager: getIt<SessionManager>(),
+        deviceRegistrationService: getIt<CustomerDeviceRegistrationService>(),
+      ),
+    );
+    await getIt<PushNotificationHandler>().initialize();
     _initialized = true;
   } catch (error) {
     _initialized = false;

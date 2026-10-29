@@ -5,6 +5,8 @@ abstract class PushNotificationService {
 
   Future<String?> getDeviceToken();
 
+  Stream<String> get onDeviceTokenChanged;
+
   Stream<PushMessage> get onMessageReceived;
 
   Stream<PushMessage> get onMessageOpenedApp;

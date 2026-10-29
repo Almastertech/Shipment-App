@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shipments/core/push/push_message.dart';
 import 'package:shipments/core/push/push_notification_handler.dart';
 import 'package:shipments/core/push/push_notification_service.dart';
 import 'package:shipments/core/storage/local_storage.dart';
 import 'package:shipments/features/notifications/application/in_app_notification_center.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -129,6 +129,9 @@ class _FakePushService implements PushNotificationService {
 
   @override
   Future<void> initialize() async {}
+
+  @override
+  Stream<String> get onDeviceTokenChanged => const Stream<String>.empty();
 
   @override
   Stream<PushMessage> get onMessageOpenedApp => _opened.stream;
