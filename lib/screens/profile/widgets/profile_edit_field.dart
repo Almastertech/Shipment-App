@@ -15,6 +15,8 @@ class ProfileEditField extends StatelessWidget {
     this.hintText,
     this.keyboardType,
     this.validator,
+    this.readOnly = false,
+    this.onChanged,
   });
 
   final String label;
@@ -23,6 +25,8 @@ class ProfileEditField extends StatelessWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final FormFieldValidator<String>? validator;
+  final bool readOnly;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +47,8 @@ class ProfileEditField extends StatelessWidget {
         ),
         AppTextField(
           controller: controller,
+          readOnly: readOnly,
+          onChanged: onChanged,
           hintText: hintText,
           keyboardType: keyboardType,
           textDirection: textDirection,

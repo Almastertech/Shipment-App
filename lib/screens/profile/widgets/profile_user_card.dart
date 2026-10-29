@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../components/app_text.dart';
+import '../../../components/images/app_network_image.dart';
 import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_images.dart';
 import '../../../core/resources/app_radius.dart';
@@ -20,6 +21,7 @@ class ProfileUserCard extends StatelessWidget {
     required this.shipmentsLabel,
     required this.shipmentsValue,
     this.avatarAsset,
+    this.avatarUrl,
     this.onEdit,
   });
 
@@ -32,6 +34,7 @@ class ProfileUserCard extends StatelessWidget {
   final String shipmentsLabel;
   final String shipmentsValue;
   final String? avatarAsset;
+  final String? avatarUrl;
   final VoidCallback? onEdit;
 
   @override
@@ -75,7 +78,8 @@ class ProfileUserCard extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        _ProfileAvatar(avatarAsset: avatarAsset),
+                        _ProfileAvatar(
+                            avatarAsset: avatarAsset, avatarUrl: avatarUrl),
                         const SizedBox(width: AppSpacing.tokenS),
                         Expanded(
                           child: Column(
@@ -152,15 +156,16 @@ class ProfileUserCard extends StatelessWidget {
 }
 
 class _ProfileAvatar extends StatelessWidget {
-  const _ProfileAvatar({this.avatarAsset});
+  const _ProfileAvatar({this.avatarAsset, this.avatarUrl});
 
   final String? avatarAsset;
+  final String? avatarUrl;
 
   @override
   Widget build(BuildContext context) {
     final colors = AppColors.primitives.primary;
 
-    final image = avatarAsset ?? AppImages.profileAvatar;
+    final image = avatarAsset;
 
     return Container(
       width: 64,
@@ -171,18 +176,29 @@ class _ProfileAvatar extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       alignment: Alignment.center,
-      child: Image.asset(
-        image,
-        fit: BoxFit.cover,
-        width: 64,
-        height: 64,
-        errorBuilder: (context, error, stackTrace) => SvgPicture.asset(
-          AppImages.user,
-          width: 24,
-          height: 24,
-          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        ),
-      ),
+      child: avatarUrl != null && avatarUrl!.isNotEmpty
+          ? AppNetworkImage(
+              imageUrl: avatarUrl!,
+              width: 64,
+              height: 64,
+              error: (_) => const Icon(Icons.person, color: Colors.white),
+            )
+          : image == null
+              ? const Icon(Icons.person, color: Colors.white, size: 32)
+              : Image.asset(
+                  image,
+                  fit: BoxFit.cover,
+                  width: 64,
+                  height: 64,
+                  errorBuilder: (context, error, stackTrace) =>
+                      SvgPicture.asset(
+                    AppImages.user,
+                    width: 24,
+                    height: 24,
+                    colorFilter:
+                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  ),
+                ),
     );
   }
 }
@@ -258,9 +274,11 @@ class _ProfileStat extends StatelessWidget {
           textAlign: TextAlign.center,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: AppTypography.buyerMobile.h5.toTextStyle(
-            color: valueColor ?? Colors.white,
-          ).copyWith(fontWeight: FontWeight.w700),
+          style: AppTypography.buyerMobile.h5
+              .toTextStyle(
+                color: valueColor ?? Colors.white,
+              )
+              .copyWith(fontWeight: FontWeight.w700),
         ),
       ],
     );

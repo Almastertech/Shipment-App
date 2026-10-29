@@ -4250,6 +4250,102 @@ abstract class AppLocalizations {
   /// **'Save changes'**
   String get profileEditSave;
 
+  /// No description provided for @profileEditPhoneReadOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number changes are not available here.'**
+  String get profileEditPhoneReadOnly;
+
+  /// No description provided for @profileEditAvatarUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo changes are not available yet.'**
+  String get profileEditAvatarUnavailable;
+
+  /// No description provided for @profileEditEmailCannotRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Email removal is not available here.'**
+  String get profileEditEmailCannotRemove;
+
+  /// No description provided for @profileEditSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile has been updated.'**
+  String get profileEditSaved;
+
+  /// No description provided for @phoneChangeSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send verification code'**
+  String get phoneChangeSend;
+
+  /// No description provided for @phoneChangeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change phone number'**
+  String get phoneChangeTitle;
+
+  /// No description provided for @phoneChangeCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current phone number'**
+  String get phoneChangeCurrent;
+
+  /// No description provided for @phoneChangeNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New phone number'**
+  String get phoneChangeNew;
+
+  /// No description provided for @phoneChangeNewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'05XXXXXXXX'**
+  String get phoneChangeNewHint;
+
+  /// No description provided for @phoneChangeVerifyFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify the new phone number before saving.'**
+  String get phoneChangeVerifyFirst;
+
+  /// No description provided for @phoneChangeInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid Saudi mobile number.'**
+  String get phoneChangeInvalid;
+
+  /// No description provided for @phoneChangeSame.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a different phone number.'**
+  String get phoneChangeSame;
+
+  /// No description provided for @phoneChangeSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the four-digit code sent to {phone}.'**
+  String phoneChangeSent(String phone);
+
+  /// No description provided for @phoneChangeVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number updated.'**
+  String get phoneChangeVerified;
+
+  /// No description provided for @phoneChangeResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get phoneChangeResend;
+
+  /// No description provided for @phoneChangeWait.
+  ///
+  /// In en, this message translates to:
+  /// **'You can request another code in {seconds} seconds.'**
+  String phoneChangeWait(int seconds);
+
   /// No description provided for @profileEditSaveUnavailable.
   ///
   /// In en, this message translates to:

@@ -7,6 +7,7 @@ import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
 import '../../components/buttons/primary_button.dart';
+import '../../components/feedback/toast_service.dart';
 import '../../components/inputs/app_text_field.dart';
 import '../../components/inputs/country_code_picker.dart';
 import '../../components/layout/auth_hero.dart';
@@ -17,6 +18,9 @@ import '../../core/resources/app_spacing.dart';
 import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/validation/app_validators.dart';
+import '../../data/datasource/remote/exception/api_error.dart';
+import '../../data/repository/auth_repository.dart';
+import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController _inputController;
   late final FocusNode _inputFocusNode;
   late Country _selectedCountry;
+  bool _isRequestingOtp = false;
 
   bool get _isEmail => widget.initialMethod == 'email';
 
@@ -94,9 +99,45 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _continue() {
+  Future<void> _continue() async {
+    if (_isRequestingOtp || !_isInputValid) return;
+
     _inputFocusNode.unfocus();
-    context.push(AppRoutes.otp, extra: _normalizedContact);
+    final contact = _normalizedContact;
+    if (contact == null) return;
+
+    setState(() => _isRequestingOtp = true);
+
+    final result = await getIt<AuthRepository>().requestOtp(
+      channel: _isEmail ? 'email' : 'phone',
+      phone: _isEmail ? null : contact,
+      email: _isEmail ? contact : null,
+    );
+
+    if (!mounted) return;
+    setState(() => _isRequestingOtp = false);
+
+    result.when(
+      success: (otpResponse) {
+        context.push(AppRoutes.otp, extra: otpResponse);
+      },
+      failure: (error) {
+        if (error.code == 'ERR_NO_PROTECTION_FOUND') {
+          context.go(AppRoutes.accountNotFound);
+          return;
+        }
+
+        getIt<ToastService>().error(_errorMessage(error));
+      },
+    );
+  }
+
+  String _errorMessage(ApiError error) {
+    final retryAfter = error.retryAfter;
+    if (retryAfter != null && retryAfter > 0) {
+      return '${error.message} ($retryAfter s)';
+    }
+    return error.message;
   }
 
   @override
@@ -135,7 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               PrimaryButton(
                 label: l10n.loginSendCode,
-                onPressed: isInputValid ? _continue : null,
+                onPressed: isInputValid && !_isRequestingOtp ? _continue : null,
+                isLoading: _isRequestingOtp,
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       isInputValid ? primary.shade500 : neutral.shade300,

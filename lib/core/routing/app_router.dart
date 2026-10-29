@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 
 import '../../components/ui_kit_showcase_screen.dart';
 import '../../core/permissions/permission_service.dart';
+import '../../data/model/auth/otp_models.dart';
 import '../../features/notifications/presentation/notification_center_screen.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
+import '../../screens/auth/account_not_found_screen.dart';
 import '../../screens/auth/login_method_screen.dart';
 import '../../screens/auth/login_screen.dart';
 import '../../screens/auth/otp_success_screen.dart';
@@ -23,6 +25,7 @@ import '../../screens/profile/activity_screen.dart';
 import '../../screens/profile/create_support_ticket_screen.dart';
 import '../../screens/profile/delete_account_screen.dart';
 import '../../screens/profile/edit_profile_screen.dart';
+import '../../screens/profile/change_phone_screen.dart';
 import '../../screens/profile/models/support_ticket.dart';
 import '../../screens/profile/notification_settings_screen.dart';
 import '../../screens/profile/profile_faq_screen.dart';
@@ -70,6 +73,7 @@ class AppRouter {
     AppRoutes.onboarding: RouteGuardType.none,
     AppRoutes.loginMethod: RouteGuardType.none,
     AppRoutes.login: RouteGuardType.guestOnly,
+    AppRoutes.accountNotFound: RouteGuardType.guestOnly,
     AppRoutes.otp: RouteGuardType.guestOnly,
     AppRoutes.otpSuccess: RouteGuardType.guestOnly,
     AppRoutes.welcome: RouteGuardType.guestOnly,
@@ -78,11 +82,13 @@ class AppRouter {
     AppRoutes.storeProtectionOptions: RouteGuardType.authOrGuest,
     AppRoutes.shipments: RouteGuardType.authOrGuest,
     AppRoutes.profile: RouteGuardType.authOrGuest,
-    AppRoutes.deleteAccount: RouteGuardType.authOrGuest,
-    AppRoutes.editProfile: RouteGuardType.authOrGuest,
+    AppRoutes.deleteAccount: RouteGuardType.authOnly,
+    AppRoutes.editProfile: RouteGuardType.authOnly,
+    AppRoutes.changePhone: RouteGuardType.authOnly,
+    AppRoutes.changePhoneOtp: RouteGuardType.authOnly,
     AppRoutes.notificationSettings: RouteGuardType.authOrGuest,
     AppRoutes.notificationsCenter: RouteGuardType.authOrGuest,
-    AppRoutes.activity: RouteGuardType.authOrGuest,
+    AppRoutes.activity: RouteGuardType.authOnly,
     AppRoutes.supportTickets: RouteGuardType.authOrGuest,
     AppRoutes.supportTicketDetails: RouteGuardType.authOrGuest,
     AppRoutes.createSupportTicket: RouteGuardType.authOrGuest,
@@ -227,10 +233,18 @@ class AppRouter {
         ),
       ),
       GoRoute(
+        path: AppRoutes.accountNotFound,
+        builder: (context, state) => const AccountNotFoundScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.otp,
-        builder: (context, state) => OtpVerificationScreen(
-          contact: state.extra as String?,
-        ),
+        builder: (context, state) {
+          final extra = state.extra;
+          return OtpVerificationScreen(
+            request: extra is OtpRequestResponse ? extra : null,
+            contact: extra is String ? extra : null,
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.otpSuccess,
@@ -269,6 +283,22 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.editProfile,
         builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.changePhone,
+        builder: (context, state) => ChangePhoneScreen(
+          currentPhone: state.extra is String ? state.extra! as String : null,
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.changePhoneOtp,
+        builder: (context, state) {
+          final challenge = state.extra;
+          if (challenge is! OtpRequestResponse) {
+            return const ChangePhoneScreen();
+          }
+          return OtpVerificationScreen(request: challenge, phoneChange: true);
+        },
       ),
       GoRoute(
         path: AppRoutes.notificationSettings,

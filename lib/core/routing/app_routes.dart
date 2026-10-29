@@ -3,6 +3,7 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String loginMethod = '/login-method';
   static const String login = '/login';
+  static const String accountNotFound = '/account-not-found';
   static const String otp = '/otp';
   static const String otpSuccess = '/otp-success';
   static const String welcome = '/welcome';
@@ -13,6 +14,8 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String deleteAccount = '/profile/delete-account';
   static const String editProfile = '/profile/edit';
+  static const String changePhone = '/profile/change-phone';
+  static const String changePhoneOtp = '/profile/change-phone/verify';
   static const String notificationSettings = '/profile/notifications';
   static const String notificationsCenter = '/notifications';
   static const String activity = '/profile/activity';

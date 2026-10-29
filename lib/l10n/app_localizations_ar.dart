@@ -2219,6 +2219,60 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileEditSave => 'احفظ التعديلات';
 
   @override
+  String get profileEditPhoneReadOnly => 'تغيير رقم الجوال غير متاح من هنا.';
+
+  @override
+  String get profileEditAvatarUnavailable =>
+      'تغيير الصورة الشخصية غير متاح حالياً.';
+
+  @override
+  String get profileEditEmailCannotRemove =>
+      'حذف البريد الإلكتروني غير متاح من هنا.';
+
+  @override
+  String get profileEditSaved => 'تم تحديث ملفك الشخصي.';
+
+  @override
+  String get phoneChangeSend => 'إرسال رمز التحقق';
+
+  @override
+  String get phoneChangeTitle => 'تغيير رقم الجوال';
+
+  @override
+  String get phoneChangeCurrent => 'رقم الجوال الحالي';
+
+  @override
+  String get phoneChangeNew => 'رقم الجوال الجديد';
+
+  @override
+  String get phoneChangeNewHint => '05XXXXXXXX';
+
+  @override
+  String get phoneChangeVerifyFirst => 'تحقق من رقم الجوال الجديد قبل الحفظ.';
+
+  @override
+  String get phoneChangeInvalid => 'أدخل رقم جوال سعودي صحيحًا.';
+
+  @override
+  String get phoneChangeSame => 'أدخل رقم جوال مختلفًا.';
+
+  @override
+  String phoneChangeSent(String phone) {
+    return 'أدخل رمز التحقق المكون من أربعة أرقام المرسل إلى $phone.';
+  }
+
+  @override
+  String get phoneChangeVerified => 'تم تحديث رقم الجوال.';
+
+  @override
+  String get phoneChangeResend => 'إعادة إرسال الرمز';
+
+  @override
+  String phoneChangeWait(int seconds) {
+    return 'يمكنك طلب رمز آخر بعد $seconds ثانية.';
+  }
+
+  @override
   String get profileEditSaveUnavailable => 'حفظ التعديلات غير متاح حالياً.';
 
   @override

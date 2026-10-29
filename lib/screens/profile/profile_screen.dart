@@ -8,6 +8,9 @@ import '../../core/resources/app_images.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/session/session_manager.dart';
+import '../../core/device/device_id_service.dart';
+import '../../data/repository/auth_repository.dart';
+import '../../data/model/customer_account.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 import '../../localization/controllers/localization_controller.dart';
@@ -17,6 +20,7 @@ import 'widgets/profile_language_switcher.dart';
 import 'widgets/profile_logout_bottom_sheet.dart';
 import 'widgets/profile_menu_section.dart';
 import 'widgets/profile_user_card.dart';
+import 'profile_view_model.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, this.isLoading = false});
@@ -31,14 +35,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isNavigating = false;
   bool _isSigningOut = false;
   int _selectedNavigationIndex = 4;
+  late final ProfileViewModel _profile;
+
+  @override
+  void initState() {
+    super.initState();
+    _profile = getIt<ProfileViewModel>()..addListener(_onProfileChanged);
+    if (getIt<SessionManager>().isAuthenticated) _profile.load();
+  }
+
+  void _onProfileChanged() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _profile
+      ..removeListener(_onProfileChanged)
+      ..dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final width = MediaQuery.sizeOf(context).width;
     final heroHeight = ProfileHero.heightForWidth(width);
+    final account = _profile.account;
+    final isGuest = getIt<SessionManager>().isGuest;
 
     return AppScaffold(
-      isLoading: widget.isLoading || _isSigningOut,
+      isLoading: widget.isLoading || _isSigningOut || _profile.loading,
       loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
@@ -69,16 +96,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     start: AppSpacing.tokenXl,
                     end: AppSpacing.tokenXl,
                     child: ProfileUserCard(
-                      name: l10n.homeUserName,
-                      phone: l10n.profilePhone,
-                      avatarAsset: AppImages.profileAvatar,
+                      name: account?.fullName ??
+                          (isGuest ? l10n.continueAsGuest : '—'),
+                      phone: account?.phone ?? account?.email ?? '—',
+                      avatarUrl: account?.avatarUrl,
                       compensationsLabel: l10n.profileStatCompensations,
-                      compensationsValue: l10n.profileStatCompensationsValue,
+                      compensationsValue: account == null
+                          ? '—'
+                          : '${account.compensationRiyals} ${Localizations.localeOf(context).languageCode == 'ar' ? 'ر.س' : 'SAR'}',
                       claimsLabel: l10n.profileStatClaims,
-                      claimsValue: l10n.profileStatClaimsValue,
+                      claimsValue: account?.claimsCount.toString() ?? '—',
                       shipmentsLabel: l10n.profileStatShipments,
-                      shipmentsValue: l10n.profileStatShipmentsValue,
-                      onEdit: () => _openRoute(AppRoutes.editProfile),
+                      shipmentsValue: account?.shipmentsCount.toString() ?? '—',
+                      onEdit: isGuest
+                          ? () => context.go(AppRoutes.login)
+                          : () => _openRoute(AppRoutes.editProfile),
                     ),
                   ),
                 ],
@@ -91,6 +123,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
+                  if (_profile.error != null)
+                    TextButton.icon(
+                      onPressed: _profile.load,
+                      icon: const Icon(Icons.refresh),
+                      label: Text('${l10n.errorGenericMessage} ${l10n.retry}'),
+                    ),
                   ProfileMenuSection(
                     title: l10n.profileSectionGeneral,
                     items: <ProfileMenuItem>[
@@ -227,7 +265,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (!mounted || _isNavigating) return;
     _isNavigating = true;
     try {
-      await context.push<void>(route);
+      final result = await context.push<Object?>(route);
+      if (mounted && result is CustomerAccount) {
+        _profile.updateAccount(result);
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(SnackBar(
+              content: Text(AppLocalizations.of(context)!.profileEditSaved)));
+      }
+      if (mounted && route == AppRoutes.editProfile && result == null) {
+        await _profile.load();
+      }
     } finally {
       if (mounted) _isNavigating = false;
     }
@@ -247,7 +295,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (!confirmed || !mounted) return;
 
       setState(() => _isSigningOut = true);
-      await getIt<SessionManager>().clearTokens();
+      try {
+        final deviceId = await getIt<DeviceIdService>().getOrCreate();
+        await getIt<AuthRepository>().logout(deviceId: deviceId);
+      } on Object {
+        // Local logout must still complete if the server is unreachable.
+      } finally {
+        await getIt<SessionManager>().clearTokens();
+      }
       if (!mounted) return;
       context.go(AppRoutes.login);
     } finally {

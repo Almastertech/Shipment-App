@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,16 +7,28 @@ import '../../components/app_scaffold.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
+import '../../core/session/session_manager.dart';
+import '../../data/model/response/base/api_response.dart';
+import '../../data/repository/auth_repository.dart';
+import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 import 'widgets/delete_account_actions.dart';
 import 'widgets/delete_account_card.dart';
 import 'widgets/profile_hero.dart';
 import 'widgets/profile_subpage_hero.dart';
 
-class DeleteAccountScreen extends StatelessWidget {
+class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({super.key, this.isLoading = false});
 
   final bool isLoading;
+
+  @override
+  State<DeleteAccountScreen> createState() => _DeleteAccountScreenState();
+}
+
+class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
+  bool _deleting = false;
+  String? _idempotencyKey;
 
   static const double _cardTop = 220;
   static const double _cardHorizontalMargin = AppSpacing.tokenXl;
@@ -30,13 +44,11 @@ class DeleteAccountScreen extends StatelessWidget {
         ProfileHero.heightForWidth(MediaQuery.sizeOf(context).width);
     final bottomInset = MediaQuery.paddingOf(context).bottom;
     const actionsHeight = _actionHeight * 2 + _actionGap;
-    final bottomReservedSpace = bottomInset +
-        _actionsBottomSpacing +
-        actionsHeight +
-        AppSpacing.tokenL;
+    final bottomReservedSpace =
+        bottomInset + _actionsBottomSpacing + actionsHeight + AppSpacing.tokenL;
 
     return AppScaffold(
-      isLoading: isLoading,
+      isLoading: widget.isLoading || _deleting,
       loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
@@ -79,7 +91,7 @@ class DeleteAccountScreen extends StatelessWidget {
             child: DeleteAccountActions(
               confirmLabel: l10n.profileDeleteConfirm,
               cancelLabel: l10n.profileDeleteCancel,
-              onConfirm: () => _showDeleteUnavailable(context, l10n),
+              onConfirm: _deleteAccount,
               onCancel: () => _goBack(context),
             ),
           ),
@@ -88,10 +100,39 @@ class DeleteAccountScreen extends StatelessWidget {
     );
   }
 
-  void _showDeleteUnavailable(BuildContext context, AppLocalizations l10n) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(l10n.profileDeleteUnavailable)));
+  Future<void> _deleteAccount() async {
+    if (_deleting) return;
+    setState(() => _deleting = true);
+    try {
+      final key = _idempotencyKey ??= _newIdempotencyKey();
+      final result = await getIt<AuthRepository>().deleteAccount(
+        idempotencyKey: key,
+      );
+      if (result is ApiFailure<void>) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(SnackBar(content: Text(result.error.message)));
+        return;
+      }
+
+      await getIt<SessionManager>().clearTokens();
+      if (mounted) context.go(AppRoutes.login);
+    } finally {
+      if (mounted) setState(() => _deleting = false);
+    }
+  }
+
+  String _newIdempotencyKey() {
+    final random = Random.secure();
+    final bytes = List<int>.generate(16, (_) => random.nextInt(256));
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    final hex =
+        bytes.map((value) => value.toRadixString(16).padLeft(2, '0')).join();
+    return '${hex.substring(0, 8)}-${hex.substring(8, 12)}-'
+        '${hex.substring(12, 16)}-${hex.substring(16, 20)}-'
+        '${hex.substring(20)}';
   }
 
   void _goBack(BuildContext context) {

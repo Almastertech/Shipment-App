@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
@@ -12,7 +11,12 @@ import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/validation/app_validators.dart';
 import '../../core/validation/validation_message_mapper.dart';
+import '../../data/datasource/remote/exception/api_error.dart';
+import '../../data/model/customer_account.dart';
+import '../../data/model/response/base/api_response.dart';
+import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
+import 'profile_view_model.dart';
 import 'widgets/profile_edit_avatar_card.dart';
 import 'widgets/profile_edit_field.dart';
 import 'widgets/profile_hero.dart';
@@ -32,23 +36,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
-  final _imagePicker = ImagePicker();
-  XFile? _photo;
   bool _initialized = false;
-  bool _isPickingPhoto = false;
+  bool _phoneUpdated = false;
+  final Map<String, String> _serverErrors = <String, String>{};
+  late final ProfileViewModel _profile;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_initialized) return;
-    final l10n = AppLocalizations.of(context)!;
-    _nameController.text = l10n.profileEditFullName;
-    _phoneController.text = l10n.profilePhone;
-    _initialized = true;
+  void initState() {
+    super.initState();
+    _profile = getIt<ProfileViewModel>()..addListener(_onProfileChanged);
+    _profile.load();
+  }
+
+  void _onProfileChanged() {
+    final account = _profile.account;
+    if (!_initialized && account != null) {
+      _nameController.text = account.fullName ?? '';
+      _phoneController.text = account.phone ?? '';
+      _emailController.text = account.email ?? '';
+      _initialized = true;
+    }
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
+    _profile
+      ..removeListener(_onProfileChanged)
+      ..dispose();
     _nameController.dispose();
     _phoneController.dispose();
     _emailController.dispose();
@@ -98,7 +113,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
 
     return AppScaffold(
-      isLoading: widget.isLoading || _isPickingPhoto,
+      isLoading: widget.isLoading || _profile.loading || _profile.saving,
       loadingLabel: l10n.loading,
       padding: EdgeInsets.zero,
       safeArea: false,
@@ -134,18 +149,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
+                      if (_profile.error != null)
+                        TextButton.icon(
+                          onPressed: _profile.load,
+                          icon: const Icon(Icons.refresh),
+                          label:
+                              Text('${l10n.errorGenericMessage} ${l10n.retry}'),
+                        ),
                       ProfileEditAvatarCard(
-                        photo: _photo,
+                        photo: null,
+                        avatarUrl: _profile.account?.avatarUrl,
                         photoLabel: l10n.profileEditPhoto,
                         cameraLabel: l10n.profileEditPhoto,
-                        onChangePhoto: _pickPhoto,
+                        onChangePhoto: () =>
+                            _showMessage(l10n.profileEditAvatarUnavailable),
                       ),
                       const SizedBox(height: AppSpacing.token2Xl),
                       ProfileEditField(
                         label: l10n.profileEditFullNameLabel,
                         controller: _nameController,
+                        onChanged: (_) => _clearFieldError('full_name'),
                         textDirection: TextDirection.rtl,
                         validator: (value) {
+                          if (_serverErrors['full_name'] != null) {
+                            return _serverErrors['full_name'];
+                          }
                           final failure = AppValidators.required()(value);
                           return failure == null
                               ? null
@@ -156,27 +184,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         },
                       ),
                       const SizedBox(height: AppSpacing.token2Xl),
-                      ProfileEditField(
-                        label: l10n.profileEditPhoneLabel,
-                        controller: _phoneController,
-                        keyboardType: TextInputType.phone,
-                        textDirection: TextDirection.ltr,
-                        validator: (value) {
-                          final normalized = value?.replaceAll(
-                            RegExp(r'[\s()-]'),
-                            '',
-                          );
-                          final requiredFailure =
-                              AppValidators.required()(normalized);
-                          final failure = requiredFailure ??
-                              AppValidators.phone()(normalized);
-                          return failure == null
+                      Semantics(
+                        button: true,
+                        label: l10n.phoneChangeTitle,
+                        child: InkWell(
+                          onTap: _profile.account == null
                               ? null
-                              : ValidationMessageMapper.toMessage(
-                                  failure,
-                                  l10n,
-                                );
-                        },
+                              : _openPhoneChange,
+                          child: IgnorePointer(
+                            child: ProfileEditField(
+                              label: l10n.profileEditPhoneLabel,
+                              controller: _phoneController,
+                              readOnly: true,
+                              textDirection: TextDirection.ltr,
+                            ),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: AppSpacing.tokenS),
                       AppText(
@@ -192,10 +215,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ProfileEditField(
                         label: l10n.profileEditEmailLabel,
                         controller: _emailController,
+                        onChanged: (_) => _clearFieldError('email'),
                         hintText: l10n.profileEditEmailHint,
                         keyboardType: TextInputType.emailAddress,
                         textDirection: TextDirection.rtl,
                         validator: (value) {
+                          if (_serverErrors['email'] != null) {
+                            return _serverErrors['email'];
+                          }
+                          if ((value?.trim().isEmpty ?? true) &&
+                              _profile.account?.email != null) {
+                            return l10n.profileEditEmailCannotRemove;
+                          }
                           final failure = AppValidators.email()(value);
                           return failure == null
                               ? null
@@ -217,7 +248,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             bottom: keyboardInset + bottomInset + AppSpacing.tokenXl,
             child: PrimaryButton(
               label: l10n.profileEditSave,
-              onPressed: () => _save(l10n),
+              onPressed: _profile.account == null ? null : () => _save(l10n),
               semanticLabel: l10n.profileEditSave,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primitives.primary.shade500,
@@ -236,29 +267,58 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Future<void> _pickPhoto() async {
-    if (_isPickingPhoto) return;
-    setState(() => _isPickingPhoto = true);
-    try {
-      final selected = await _imagePicker.pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 85,
-        maxWidth: 1200,
-      );
-      if (selected != null && mounted) setState(() => _photo = selected);
-    } catch (_) {
-      if (!mounted) return;
-      final l10n = AppLocalizations.of(context)!;
-      _showMessage(l10n.profileEditPhotoUnavailable);
-    } finally {
-      if (mounted) setState(() => _isPickingPhoto = false);
+  void _clearFieldError(String field) {
+    if (_serverErrors.remove(field) != null) {
+      _formKey.currentState?.validate();
     }
   }
 
-  void _save(AppLocalizations l10n) {
+  Future<void> _save(AppLocalizations l10n) async {
+    if (_profile.saving) return;
     FocusScope.of(context).unfocus();
+    _serverErrors.clear();
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    _showMessage(l10n.profileEditSaveUnavailable);
+    final email = _emailController.text.trim();
+    final result = await _profile.save(
+      fullName: _nameController.text.trim(),
+      email: email.isEmpty ? null : email,
+      preferredLanguage: _profile.account?.preferredLanguage ??
+          Localizations.localeOf(context).languageCode,
+    );
+    if (!mounted) return;
+    if (result is ApiFailure<CustomerAccount>) {
+      for (final param
+          in result.error.invalidParams ?? const <ApiInvalidParam>[]) {
+        if ((param.name == 'full_name' || param.name == 'email') &&
+            param.reason.isNotEmpty) {
+          _serverErrors[param.name] = param.reason;
+        }
+      }
+      if (_serverErrors.isNotEmpty) _formKey.currentState?.validate();
+      _showMessage(result.error.message);
+      return;
+    }
+    final account = (result as ApiSuccess<CustomerAccount>).data;
+    if (context.canPop()) {
+      context.pop(account);
+    } else {
+      context.go(AppRoutes.profile);
+    }
+  }
+
+  Future<void> _openPhoneChange() async {
+    FocusScope.of(context).unfocus();
+    final verifiedPhone = await context.push<String>(
+      AppRoutes.changePhone,
+      extra: _profile.account?.phone ?? '',
+    );
+    if (!mounted || verifiedPhone == null) return;
+    final account = _profile.account;
+    if (account != null)
+      _profile.updateAccount(account.withPhone(verifiedPhone));
+    _phoneController.text = verifiedPhone;
+    _phoneUpdated = true;
+    _showMessage(AppLocalizations.of(context)!.phoneChangeVerified);
   }
 
   void _showMessage(String message) {
@@ -269,7 +329,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _goBack(BuildContext context) {
     if (context.canPop()) {
-      context.pop();
+      context.pop(_phoneUpdated ? _profile.account : null);
     } else {
       context.go(AppRoutes.profile);
     }

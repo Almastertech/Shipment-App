@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../components/app_scaffold.dart';
 import '../../components/app_text.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_spacing.dart';
-import '../../core/resources/app_typography.dart';
 import '../../core/routing/app_routes.dart';
+import '../../data/model/customer_activity.dart';
+import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
+import 'activity_view_model.dart';
+import 'profile_view_model.dart';
 import 'widgets/activity_entry_card.dart';
 import 'widgets/activity_filter_chip.dart';
 import 'widgets/activity_stats_card.dart';
 import 'widgets/profile_hero.dart';
 import 'widgets/profile_subpage_hero.dart';
 
-enum _ActivityFilter { all, shipments, claims }
-
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key, this.isLoading = false});
-
   final bool isLoading;
 
   @override
@@ -26,25 +27,46 @@ class ActivityScreen extends StatefulWidget {
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
-  _ActivityFilter _filter = _ActivityFilter.all;
-  bool _newestFirst = true;
-  bool _showOlder = false;
+  late final ActivityViewModel _activity;
+  late final ProfileViewModel _profile;
+
+  @override
+  void initState() {
+    super.initState();
+    _activity = getIt<ActivityViewModel>()..addListener(_changed);
+    _profile = getIt<ProfileViewModel>()..addListener(_changed);
+    _activity.load();
+    _profile.load();
+  }
+
+  void _changed() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _activity
+      ..removeListener(_changed)
+      ..dispose();
+    _profile
+      ..removeListener(_changed)
+      ..dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).toString();
     final heroHeight =
         ProfileHero.heightForWidth(MediaQuery.sizeOf(context).width);
-    final orderedEntries = _activityEntries(l10n, includeOlder: _showOlder)
-        .where(_matchesFilter)
-        .toList();
-    final entries = _newestFirst
-        ? orderedEntries
-        : orderedEntries.reversed.toList();
-
-    final grouped = <int, List<ActivityEntry>>{};
-    for (final entry in entries) {
-      grouped.putIfAbsent(entry.day, () => <ActivityEntry>[]).add(entry);
+    final account = _profile.account;
+    final grouped = <DateTime, List<CustomerActivity>>{};
+    for (final item in _activity.items) {
+      final local = item.occurredAt.toLocal();
+      grouped
+          .putIfAbsent(DateTime(local.year, local.month, local.day), () => [])
+          .add(item);
     }
 
     return AppScaffold(
@@ -55,267 +77,132 @@ class _ActivityScreenState extends State<ActivityScreen> {
       backgroundColor: AppColors.semantic.background.primary,
       body: SingleChildScrollView(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.paddingOf(context).bottom + AppSpacing.token2Xl,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            SizedBox(
-              height: heroHeight + ActivityStatsCard.height - _statsOverlap,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: <Widget>[
-                  PositionedDirectional(
-                    top: 0,
-                    start: 0,
-                    end: 0,
-                    height: heroHeight,
-                    child: ProfileSubpageHero(
+            bottom: MediaQuery.paddingOf(context).bottom + AppSpacing.token2Xl),
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          SizedBox(
+            height: heroHeight + ActivityStatsCard.height - AppSpacing.tokenXl,
+            child: Stack(clipBehavior: Clip.none, children: [
+              PositionedDirectional(
+                  top: 0,
+                  start: 0,
+                  end: 0,
+                  height: heroHeight,
+                  child: ProfileSubpageHero(
                       title: l10n.activityTitle,
                       subtitle: l10n.activitySubtitle,
                       backLabel: l10n.navigationBack,
-                      onBack: () => _goBack(context),
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.token2Xl),
-                  PositionedDirectional(
-                    top: heroHeight - _statsOverlap,
-                    start: AppSpacing.tokenXl,
-                    end: AppSpacing.tokenXl,
-                    child: ActivityStatsCard(
-                      stats: <ActivityStat>[
-                        ActivityStat(
-                          label: l10n.profileStatShipments,
-                          value: l10n.profileStatShipmentsValue,
-                        ),
-                        ActivityStat(
-                          label: l10n.profileStatClaims,
-                          value: l10n.profileStatClaimsValue,
-                        ),
-                        ActivityStat(
-                          label: l10n.profileStatCompensations,
-                          value: l10n.profileStatCompensationsValue,
-                          valueColor: AppColors.primitives.mint.shade400,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.tokenXl,
-              ),
-              child: Column(
+                      onBack: _goBack)),
+              PositionedDirectional(
+                  top: heroHeight - AppSpacing.tokenXl,
+                  start: AppSpacing.tokenXl,
+                  end: AppSpacing.tokenXl,
+                  child: ActivityStatsCard(stats: [
+                    ActivityStat(
+                        label: l10n.profileStatShipments,
+                        value: account?.shipmentsCount.toString() ?? '—'),
+                    ActivityStat(
+                        label: l10n.profileStatClaims,
+                        value: account?.claimsCount.toString() ?? '—'),
+                    ActivityStat(
+                        label: l10n.profileStatCompensations,
+                        value: account == null
+                            ? '—'
+                            : '${account.compensationRiyals} ${locale.startsWith('ar') ? 'ر.س' : 'SAR'}',
+                        valueColor: AppColors.primitives.mint.shade400),
+                  ])),
+            ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.tokenXl),
+            child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
+                children: [
                   const SizedBox(height: AppSpacing.token2Xl),
-                  _ActivityFilters(
-                    filter: _filter,
-                    newestFirst: _newestFirst,
-                    onFilterChanged: (filter) =>
-                        setState(() => _filter = filter),
-                    onSortChanged: () =>
-                        setState(() => _newestFirst = !_newestFirst),
-                  ),
+                  Wrap(
+                      spacing: AppSpacing.tokenS,
+                      runSpacing: AppSpacing.tokenS,
+                      children: [
+                        for (final filter in <(String, String)>[
+                          ('all', l10n.activityFilterAll),
+                          ('shipments', l10n.activityFilterShipments),
+                          ('claims', l10n.activityFilterClaims)
+                        ])
+                          ActivityFilterChip(
+                              label: filter.$2,
+                              selected: _activity.type == filter.$1,
+                              onTap: () => _activity.selectType(filter.$1)),
+                      ]),
                   const SizedBox(height: AppSpacing.token2Xl),
-                  for (final entry in grouped.entries) ...<Widget>[
-                    AppText(
-                      _dayLabel(entry.key, l10n),
-                      variant: AppTextVariant.labelMedium,
-                      textDirection: TextDirection.rtl,
-                      textAlign: TextAlign.right,
-                      style: AppTypography.buyerMobile.label.toTextStyle(
-                        color: AppColors.primitives.neutral.shade700,
-                      ).copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: AppSpacing.tokenS),
-                    for (var index = 0;
-                        index < entry.value.length;
-                        index++) ...<Widget>[
-                      ActivityEntryCard(entry: entry.value[index]),
-                      if (index < entry.value.length - 1)
+                  if (_profile.error != null)
+                    TextButton(
+                        onPressed: _profile.load,
+                        child:
+                            Text('${l10n.errorGenericMessage} ${l10n.retry}')),
+                  if (_activity.loading)
+                    const Center(child: CircularProgressIndicator())
+                  else if (_activity.error != null && _activity.items.isEmpty)
+                    TextButton(
+                        onPressed: _activity.load,
+                        child:
+                            Text('${l10n.errorGenericMessage} ${l10n.retry}'))
+                  else if (_activity.items.isEmpty)
+                    Center(child: Text(l10n.noItemsTitle))
+                  else ...[
+                    for (final day in grouped.entries) ...[
+                      AppText(DateFormat.yMMMd(locale).format(day.key),
+                          variant: AppTextVariant.labelMedium),
+                      const SizedBox(height: AppSpacing.tokenS),
+                      for (final item in day.value) ...[
+                        ActivityEntryCard(entry: _entry(item, locale)),
                         const SizedBox(height: AppSpacing.tokenS),
+                      ],
+                      const SizedBox(height: AppSpacing.tokenL),
                     ],
-                    const SizedBox(height: AppSpacing.token2Xl),
+                    if (_activity.error != null)
+                      TextButton(
+                          onPressed: _activity.loadMore,
+                          child:
+                              Text('${l10n.errorGenericMessage} ${l10n.retry}'))
+                    else if (_activity.loadingMore)
+                      const Center(child: CircularProgressIndicator())
+                    else if (_activity.hasMore)
+                      TextButton(
+                          onPressed: _activity.loadMore,
+                          child: Text(l10n.activityShowOlder)),
                   ],
-                  Center(
-                    child: TextButton(
-                      onPressed: () => setState(() => _showOlder = !_showOlder),
-                      style: TextButton.styleFrom(
-                        foregroundColor: AppColors.primitives.primary.shade500,
-                        padding: EdgeInsets.zero,
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        textStyle: AppTypography.buyerMobile.label.toTextStyle(
-                          color: AppColors.primitives.primary.shade500,
-                        ).copyWith(fontWeight: FontWeight.w700),
-                      ),
-                      child: Text(
-                        _showOlder
-                            ? l10n.activityShowLess
-                            : l10n.activityShowOlder,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                ]),
+          ),
+        ]),
       ),
     );
   }
 
-  static const double _statsOverlap =
-      AppSpacing.tokenXl;
-
-  bool _matchesFilter(ActivityEntry entry) {
-    return switch (_filter) {
-      _ActivityFilter.all => true,
-      _ActivityFilter.shipments =>
-        entry.filter == ActivityEntryFilter.shipment,
-      _ActivityFilter.claims => entry.filter == ActivityEntryFilter.claim,
-    };
+  ActivityEntry _entry(CustomerActivity item, String locale) {
+    final isClaim = item.type == 'claims';
+    final details = [
+      item.storeName,
+      item.productName,
+      item.orderNumber ?? item.trackingNumber
+    ].whereType<String>().join(' • ');
+    return ActivityEntry(
+      day: item.occurredAt.toLocal().day,
+      time: DateFormat.jm(locale).format(item.occurredAt.toLocal()),
+      title:
+          item.event.isNotEmpty ? item.event : (isClaim ? 'Claim' : 'Shipment'),
+      description: details,
+      kind:
+          isClaim ? ActivityEntryKind.pendingClaim : ActivityEntryKind.shipment,
+      filter:
+          isClaim ? ActivityEntryFilter.claim : ActivityEntryFilter.shipment,
+    );
   }
 
-  List<ActivityEntry> _activityEntries(
-    AppLocalizations l10n, {
-    required bool includeOlder,
-  }) {
-    final entries = <ActivityEntry>[
-      ActivityEntry(
-        day: 6,
-        time: l10n.activityTime1040,
-        title: l10n.activityShipmentOutTitle,
-        description: l10n.activityShipmentOutDescription,
-        kind: ActivityEntryKind.shipment,
-        filter: ActivityEntryFilter.shipment,
-      ),
-      ActivityEntry(
-        day: 6,
-        time: l10n.activityTime0915,
-        title: l10n.activityClaimReviewTitle,
-        description: l10n.activityClaimReviewDescription,
-        kind: ActivityEntryKind.pendingClaim,
-        filter: ActivityEntryFilter.claim,
-      ),
-      ActivityEntry(
-        day: 5,
-        time: l10n.activityTime0420,
-        title: l10n.activityCompensationTitle,
-        description: l10n.activityCompensationDescription,
-        kind: ActivityEntryKind.compensation,
-        filter: ActivityEntryFilter.claim,
-      ),
-      ActivityEntry(
-        day: 3,
-        time: l10n.activityTime0210,
-        title: l10n.activityClaimSubmittedTitle,
-        description: l10n.activityClaimSubmittedDescription,
-        kind: ActivityEntryKind.submittedClaim,
-        filter: ActivityEntryFilter.claim,
-      ),
-    ];
-
-    if (includeOlder) {
-      entries.addAll(<ActivityEntry>[
-        ActivityEntry(
-          day: 2,
-          time: l10n.activityTime1130,
-          title: l10n.activityShipmentDeliveredTitle,
-          description: l10n.activityShipmentOutDescription,
-          kind: ActivityEntryKind.shipment,
-          filter: ActivityEntryFilter.shipment,
-        ),
-        ActivityEntry(
-          day: 1,
-          time: l10n.activityTime0805,
-          title: l10n.activityClaimReviewTitle,
-          description: l10n.activityClaimReviewDescription,
-          kind: ActivityEntryKind.pendingClaim,
-          filter: ActivityEntryFilter.claim,
-        ),
-      ]);
-    }
-
-    return entries;
-  }
-
-  String _dayLabel(int day, AppLocalizations l10n) => switch (day) {
-        6 => l10n.activityToday,
-        5 => l10n.activityYesterday,
-        3 => l10n.activityOctoberThird,
-        2 => l10n.activityOctoberSecond,
-        _ => l10n.activityOctoberFirst,
-      };
-
-  void _goBack(BuildContext context) {
+  void _goBack() {
     if (context.canPop()) {
       context.pop();
     } else {
       context.go(AppRoutes.profile);
     }
-  }
-}
-
-class _ActivityFilters extends StatelessWidget {
-  const _ActivityFilters({
-    required this.filter,
-    required this.newestFirst,
-    required this.onFilterChanged,
-    required this.onSortChanged,
-  });
-
-  final _ActivityFilter filter;
-  final bool newestFirst;
-  final ValueChanged<_ActivityFilter> onFilterChanged;
-  final VoidCallback onSortChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return Row(
-      textDirection: TextDirection.rtl,
-      children: <Widget>[
-        ActivityFilterChip(
-          label: l10n.activityFilterAll,
-          selected: filter == _ActivityFilter.all,
-          onTap: () => onFilterChanged(_ActivityFilter.all),
-        ),
-        const SizedBox(width: AppSpacing.tokenS),
-        ActivityFilterChip(
-          label: l10n.activityFilterShipments,
-          selected: filter == _ActivityFilter.shipments,
-          onTap: () => onFilterChanged(_ActivityFilter.shipments),
-        ),
-        const SizedBox(width: AppSpacing.tokenS),
-        ActivityFilterChip(
-          label: l10n.activityFilterClaims,
-          selected: filter == _ActivityFilter.claims,
-          onTap: () => onFilterChanged(_ActivityFilter.claims),
-        ),
-        const Spacer(),
-        Semantics(
-          button: true,
-          label: newestFirst
-              ? l10n.activityLatestFirst
-              : l10n.activityOldestFirst,
-          child: GestureDetector(
-            onTap: onSortChanged,
-            child: AppText(
-              newestFirst ? l10n.activityLatestFirst : l10n.activityOldestFirst,
-              variant: AppTextVariant.labelSmall,
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.left,
-              style: AppTypography.buyerMobile.labelSmall.toTextStyle(
-                color: AppColors.primitives.primary.shade500,
-              ).copyWith(fontWeight: FontWeight.w700),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }

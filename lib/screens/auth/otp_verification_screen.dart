@@ -16,16 +16,32 @@ import '../../core/resources/app_colors.dart';
 import '../../core/resources/app_radius.dart';
 import '../../core/resources/app_spacing.dart';
 import '../../core/routing/app_routes.dart';
+import '../../core/device/device_id_service.dart';
+import '../../core/session/session_manager.dart';
 import '../../core/validation/app_validators.dart';
 import '../../core/validation/validation_message_mapper.dart';
+import '../../data/datasource/remote/exception/api_error.dart';
+import '../../data/datasource/remote/exception/api_error_handler.dart';
+import '../../data/model/response/base/api_response.dart';
+import '../../data/model/auth/otp_models.dart';
+import '../../data/repository/auth_repository.dart';
+import '../../data/repository/customer_account_repository.dart';
 import '../../injection.dart';
 import '../../l10n/app_localizations.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key, this.contact, this.onVerify});
+  const OtpVerificationScreen({
+    super.key,
+    this.contact,
+    this.request,
+    this.onVerify,
+    this.phoneChange = false,
+  });
 
   final String? contact;
+  final OtpRequestResponse? request;
   final Future<bool> Function(String code)? onVerify;
+  final bool phoneChange;
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -39,8 +55,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   int _resendSeconds = 45;
   _OtpResultState _resultState = _OtpResultState.idle;
   bool _isVerifying = false;
+  bool _isResending = false;
+  String? _verificationError;
+  late OtpRequestResponse? _challenge;
 
-  bool get _isEmail => widget.contact?.contains('@') ?? false;
+  bool get _isEmail =>
+      _challenge?.channel == 'email' || widget.contact?.contains('@') == true;
+  String? get _destination => _challenge?.destination ?? widget.contact;
+  String get _channel => _challenge?.channel ?? (_isEmail ? 'email' : 'phone');
   static const int _codeLength = 4;
   static const int _numericLimit = 9999;
 
@@ -49,6 +71,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     super.initState();
     _pinController = TextEditingController();
     _pinFocusNode = FocusNode();
+    _challenge = widget.request;
     _smsRetriever = _SmartAuthSmsRetriever(SmartAuth.instance);
     _startResendCountdown();
   }
@@ -86,32 +109,148 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
 
     setState(() => _isVerifying = true);
-    var accepted = true;
-    try {
-      accepted =
-          await widget.onVerify?.call(_pinController.text.trim()) ?? true;
-    } on Object {
-      accepted = false;
+
+    if (widget.phoneChange) {
+      final destination = _destination;
+      if (destination == null || destination.isEmpty) {
+        _finishVerificationWithError(const ApiError(
+            type: ApiErrorType.validation, message: 'Missing phone number.'));
+        return;
+      }
+      final response =
+          await getIt<CustomerAccountRepository>().verifyPhoneChange(
+        phone: destination,
+        code: _pinController.text.trim(),
+      );
+      if (!mounted) return;
+      if (response is ApiFailure<String>) {
+        _finishVerificationWithError(response.error);
+      } else if (response is ApiSuccess<String>) {
+        context.pop(response.data);
+      }
+      return;
     }
+
+    if (widget.onVerify != null) {
+      var accepted = false;
+      try {
+        accepted = await widget.onVerify!.call(_pinController.text.trim());
+      } on Object {
+        accepted = false;
+      }
+      if (!mounted) return;
+      setState(() {
+        _isVerifying = false;
+        _resultState =
+            accepted ? _OtpResultState.success : _OtpResultState.failure;
+      });
+      if (accepted) context.go(AppRoutes.otpSuccess);
+      return;
+    }
+
+    await _verifyAgainstApi();
+  }
+
+  Future<void> _verifyAgainstApi() async {
+    final destination = _destination;
+    if (destination == null || destination.isEmpty) {
+      _finishVerificationWithError(
+        const ApiError(
+          type: ApiErrorType.validation,
+          message: 'A verification destination is missing.',
+        ),
+      );
+      return;
+    }
+
+    try {
+      final deviceId = await getIt<DeviceIdService>().getOrCreate();
+      final result = await getIt<AuthRepository>().verifyOtp(
+        deviceId: deviceId,
+        channel: _channel,
+        code: _pinController.text.trim(),
+        phone: _isEmail ? null : destination,
+        email: _isEmail ? destination : null,
+      );
+
+      if (!mounted) return;
+      if (result is ApiFailure<OtpVerifyResponse>) {
+        _finishVerificationWithError(result.error);
+        return;
+      }
+
+      final response = (result as ApiSuccess<OtpVerifyResponse>).data;
+      if (response.accessToken.isEmpty || response.refreshToken.isEmpty) {
+        _finishVerificationWithError(
+          const ApiError(
+            type: ApiErrorType.unknown,
+            message:
+                'The verification response did not include session tokens.',
+          ),
+        );
+        return;
+      }
+
+      await getIt<SessionManager>().saveTokens(
+        accessToken: response.accessToken,
+        refreshToken: response.refreshToken,
+      );
+      if (!mounted) return;
+      setState(() {
+        _isVerifying = false;
+        _resultState = _OtpResultState.success;
+      });
+      context.go(AppRoutes.home);
+    } on Object catch (error) {
+      _finishVerificationWithError(ApiErrorHandler.map(error));
+    }
+  }
+
+  void _finishVerificationWithError(ApiError error) {
     if (!mounted) return;
     setState(() {
       _isVerifying = false;
-      _resultState =
-          accepted ? _OtpResultState.success : _OtpResultState.failure;
+      _resultState = _OtpResultState.failure;
+      _verificationError = _errorMessage(error);
     });
-    if (accepted) context.go(AppRoutes.otpSuccess);
+    getIt<ToastService>().error(_errorMessage(error));
   }
 
-  void _resendCode() {
+  String _errorMessage(ApiError error) {
+    final retryAfter = error.retryAfter;
+    if (retryAfter != null && retryAfter > 0) {
+      return '${error.message} ($retryAfter s)';
+    }
+    return error.message;
+  }
+
+  Future<void> _resendCode() async {
+    if (widget.phoneChange) {
+      final destination = _destination;
+      if (_isResending || destination == null || destination.isEmpty) return;
+      setState(() => _isResending = true);
+      final result = await getIt<CustomerAccountRepository>()
+          .requestPhoneChange(destination);
+      if (!mounted) return;
+      setState(() => _isResending = false);
+      if (result is ApiFailure<OtpRequestResponse>) {
+        if ((result.error.retryAfter ?? 0) > 0)
+          _startResendCountdown(result.error.retryAfter);
+        getIt<ToastService>().error(_errorMessage(result.error));
+        return;
+      }
+      _challenge = (result as ApiSuccess<OtpRequestResponse>).data;
+    }
     _pinController.clear();
     _startResendCountdown();
     setState(() => _resultState = _OtpResultState.idle);
     _pinFocusNode.requestFocus();
   }
 
-  void _startResendCountdown() {
+  void _startResendCountdown([int? seconds]) {
     _resendTimer?.cancel();
-    _resendSeconds = _isEmail ? 18 : 45;
+    _resendSeconds =
+        seconds ?? _challenge?.retryAfterSeconds ?? (_isEmail ? 18 : 45);
     _resendTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
@@ -127,12 +266,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   String _formatCountdown() =>
-      '00:${_resendSeconds.toString().padLeft(2, '0')}';
+      '${(_resendSeconds ~/ 60).toString().padLeft(2, '0')}:${(_resendSeconds % 60).toString().padLeft(2, '0')}';
 
   void _handleCodeChanged(String value) {
     setState(() {
       if (_resultState != _OtpResultState.idle) {
         _resultState = _OtpResultState.idle;
+        _verificationError = null;
       }
     });
   }
@@ -172,7 +312,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         ? AppColors.primitives.success.shade100
         : AppColors.primitives.failure.shade100;
     final pinTheme = PinTheme(
-      width: isEmail ? 44 : 78,
+      width: 78,
       height: 56,
       textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
             color: isSuccess || isFailure ? resultColor : colors.text.primary,
@@ -188,11 +328,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             : Border.all(color: AppColors.primitives.neutral.shade200),
       ),
     );
-    final destination = widget.contact == null
+    final destination = _destination == null
         ? l10n.otpSubtitle
         : isEmail
-            ? l10n.otpEmailDestination(_maskedContact(widget.contact!))
-            : l10n.otpPhoneDestination(_maskedContact(widget.contact!));
+            ? l10n.otpEmailDestination(_maskedContact(_destination!))
+            : l10n.otpPhoneDestination(_maskedContact(_destination!));
 
     return AppScaffold(
       safeArea: false,
@@ -265,7 +405,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     borderRadius: BorderRadius.circular(AppRadius.tokenL),
                   ),
                   child: AppText(
-                    l10n.otpVerificationFailed,
+                    _verificationError ?? l10n.otpVerificationFailed,
                     variant: AppTextVariant.bodySmall,
                     textAlign: TextAlign.start,
                     style: TextStyle(color: resultColor),
@@ -296,7 +436,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   : Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: TextButton.icon(
-                        onPressed: _resendCode,
+                        onPressed:
+                            _isResending || _isVerifying ? null : _resendCode,
                         icon: Icon(
                           Icons.refresh_rounded,
                           size: 18,
@@ -380,9 +521,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () => context.go(AppRoutes.login),
+                onPressed: () {
+                  if (widget.phoneChange) {
+                    context.pop();
+                  } else {
+                    context.go(AppRoutes.login,
+                        extra: isEmail ? 'email' : 'phone');
+                  }
+                },
                 child: AppText(
-                  l10n.otpChangePhone,
+                  isEmail ? l10n.otpChangeEmail : l10n.otpChangePhone,
                   variant: AppTextVariant.bodyMedium,
                   style:
                       TextStyle(color: AppColors.primitives.primary.shade500),

@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../components/app_text.dart';
 import '../../../components/buttons/primary_button.dart';
+import '../../../components/images/app_network_image.dart';
 import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_images.dart';
 import '../../../core/resources/app_radius.dart';
@@ -15,7 +16,10 @@ import '../../../l10n/app_localizations.dart';
 
 /// Full-width image header with the overlapping featured shipment card.
 class HomeHeaderWidget extends StatelessWidget {
-  const HomeHeaderWidget({super.key});
+  const HomeHeaderWidget({super.key, this.customerName, this.avatarUrl});
+
+  final String? customerName;
+  final String? avatarUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,8 @@ class HomeHeaderWidget extends StatelessWidget {
             height: headerHeight,
             child: _HomeImageHeader(
               greeting: l10n.homeHeroGreeting,
-              name: l10n.homeUserName,
+              name: customerName ?? '',
+              avatarUrl: avatarUrl,
               title: l10n.homeTitle,
               description: l10n.homeHeroDescription,
             ),
@@ -76,12 +81,14 @@ class _HomeImageHeader extends StatelessWidget {
     required this.name,
     required this.title,
     required this.description,
+    this.avatarUrl,
   });
 
   final String greeting;
   final String name;
   final String title;
   final String description;
+  final String? avatarUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -140,15 +147,26 @@ class _HomeImageHeader extends StatelessWidget {
                         ),
                       ),
                       alignment: Alignment.center,
-                      child: SvgPicture.asset(
-                        AppImages.user,
-                        width: 22,
-                        height: 22,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
-                        ),
-                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: avatarUrl != null && avatarUrl!.isNotEmpty
+                          ? AppNetworkImage(
+                              imageUrl: avatarUrl!,
+                              width: 44,
+                              height: 44,
+                              error: (_) => const Icon(
+                                Icons.person_outline,
+                                color: Colors.white,
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              AppImages.user,
+                              width: 22,
+                              height: 22,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                     ),
                     const SizedBox(width: AppSpacing.tokenS),
                     Expanded(

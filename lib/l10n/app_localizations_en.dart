@@ -2266,6 +2266,62 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileEditSave => 'Save changes';
 
   @override
+  String get profileEditPhoneReadOnly =>
+      'Phone number changes are not available here.';
+
+  @override
+  String get profileEditAvatarUnavailable =>
+      'Profile photo changes are not available yet.';
+
+  @override
+  String get profileEditEmailCannotRemove =>
+      'Email removal is not available here.';
+
+  @override
+  String get profileEditSaved => 'Your profile has been updated.';
+
+  @override
+  String get phoneChangeSend => 'Send verification code';
+
+  @override
+  String get phoneChangeTitle => 'Change phone number';
+
+  @override
+  String get phoneChangeCurrent => 'Current phone number';
+
+  @override
+  String get phoneChangeNew => 'New phone number';
+
+  @override
+  String get phoneChangeNewHint => '05XXXXXXXX';
+
+  @override
+  String get phoneChangeVerifyFirst =>
+      'Verify the new phone number before saving.';
+
+  @override
+  String get phoneChangeInvalid => 'Enter a valid Saudi mobile number.';
+
+  @override
+  String get phoneChangeSame => 'Enter a different phone number.';
+
+  @override
+  String phoneChangeSent(String phone) {
+    return 'Enter the four-digit code sent to $phone.';
+  }
+
+  @override
+  String get phoneChangeVerified => 'Phone number updated.';
+
+  @override
+  String get phoneChangeResend => 'Resend code';
+
+  @override
+  String phoneChangeWait(int seconds) {
+    return 'You can request another code in $seconds seconds.';
+  }
+
+  @override
   String get profileEditSaveUnavailable =>
       'Saving profile changes is not available yet.';
 

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../components/app_text.dart';
+import '../../../components/images/app_network_image.dart';
 import '../../../core/resources/app_colors.dart';
 import '../../../core/resources/app_images.dart';
 import '../../../core/resources/app_radius.dart';
@@ -19,12 +20,14 @@ class ProfileEditAvatarCard extends StatelessWidget {
     required this.photoLabel,
     required this.cameraLabel,
     required this.onChangePhoto,
+    this.avatarUrl,
   });
 
   final XFile? photo;
   final String photoLabel;
   final String cameraLabel;
   final VoidCallback onChangePhoto;
+  final String? avatarUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ class ProfileEditAvatarCard extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      _Avatar(photo: photo),
+                      _Avatar(photo: photo, avatarUrl: avatarUrl),
                       const SizedBox(height: AppSpacing.tokenL),
                       AppText(
                         photoLabel,
@@ -106,25 +109,31 @@ class ProfileEditAvatarCard extends StatelessWidget {
 }
 
 class _Avatar extends StatelessWidget {
-  const _Avatar({required this.photo});
+  const _Avatar({required this.photo, this.avatarUrl});
 
   final XFile? photo;
+  final String? avatarUrl;
 
   @override
   Widget build(BuildContext context) {
     final selectedPhoto = photo;
-    final fallback = Image.asset(
-      AppImages.profileAvatar,
-      width: 80,
-      height: 80,
-      fit: BoxFit.cover,
+    const fallback = ColoredBox(
+      color: Color(0xFF6750A4),
+      child: Icon(Icons.person, color: Colors.white, size: 40),
     );
     return ClipOval(
       child: SizedBox(
         width: 80,
         height: 80,
         child: selectedPhoto == null
-            ? fallback
+            ? (avatarUrl == null || avatarUrl!.isEmpty
+                ? fallback
+                : AppNetworkImage(
+                    imageUrl: avatarUrl!,
+                    width: 80,
+                    height: 80,
+                    error: (_) => fallback,
+                  ))
             : kIsWeb
                 ? Image.network(
                     selectedPhoto.path,
